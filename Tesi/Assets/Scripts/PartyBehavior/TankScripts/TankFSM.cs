@@ -26,11 +26,13 @@ public class TankFSM : MonoBehaviour
         Defend.enterActions.Add(ActiveSpecial);
 
         // Define transitions
-        FSMTransition t1 = new FSMTransition(DefToAttk);
+        FSMTransition t1 = new FSMTransition(DefToAttk);//CleaningFSM.Update
         FSMTransition t2 = new FSMTransition(DefToSpec);
         FSMTransition t3 = new FSMTransition(DefToChase); // different from t1
         FSMTransition t4 = new FSMTransition(SpecToChase);
         FSMTransition t5 = new FSMTransition(SpecToAttk);
+
+        FSMTransition t6 = new FSMTransition(AttackTreeDecision);
 
         // Link states with transitions
         Defend.AddTransition(t1, Attack);
@@ -40,7 +42,10 @@ public class TankFSM : MonoBehaviour
         Special.AddTransition(t4, Chase);
         Special.AddTransition(t5, Attack);
 
-
+        Attack.AddTransition(t6, Attack);
+        Attack.AddTransition(t6, Defend);
+        Attack.AddTransition(t6, Special);
+        Attack.AddTransition(t6, Chase);
 
         // Setup a FSA at initial state
         fsm = new FSM(Chase);
@@ -82,6 +87,11 @@ public class TankFSM : MonoBehaviour
     }
 
     public bool SpecToAttk()
+    {
+        return true;
+    }
+
+    public bool AttackTreeDecision()
     {
         return true;
     }

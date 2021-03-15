@@ -40,11 +40,6 @@ public class TankBehavior : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // Take decision every interval, run forever
     public IEnumerator Fight()
