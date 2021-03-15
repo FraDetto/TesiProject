@@ -1,0 +1,153 @@
+Using pre-set license
+Built from '2020.2/release' branch; Version is '2020.2.2f1 (068178b99f32) revision 426360'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 18363.1440; Version 1909; 64bit' Language: 'it' Physical Memory: 16242 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.2.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/ProgettoTesi/Tesi
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+51002
+Successfully changed project path to: D:/ProgettoTesi/Tesi
+D:/ProgettoTesi/Tesi
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 57.34 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.2.2f1 (068178b99f32)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/ProgettoTesi/Tesi/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1be1)
+    Vendor:   
+    VRAM:     8081 MB
+    Driver:   27.21.14.5687
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56940
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002458 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 31.75 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.508 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.000744 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.284 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.29 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1108 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 56.9 MB.
+System memory in use after: 56.9 MB.
+
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 1549.
+Total: 1.716900 ms (FindLiveObjects: 0.127300 ms CreateObjectMapping: 0.039600 ms MarkObjects: 1.455700 ms  DeleteObjects: 0.093200 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankFSM.cs
+  artifactKey: Guid(b37c1a8f2ba46da4bb0e9ad89d9dc819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankFSM.cs using Guid(b37c1a8f2ba46da4bb0e9ad89d9dc819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da26a6ccafb3180b92f79ea4115ad04f') in 0.052738 seconds
+  Import took 0.054851 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.387980 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankBehavior.cs
+  artifactKey: Guid(5be09d14d1f85be4096887627389ffc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankBehavior.cs using Guid(5be09d14d1f85be4096887627389ffc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce9d8214e01a639d903d140708f5fdc0') in 0.003704 seconds
+  Import took 0.005714 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3047.285788 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankTrees.cs
+  artifactKey: Guid(20405f6ab91d6cb4fb8b7a0d19ecf6da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankTrees.cs using Guid(20405f6ab91d6cb4fb8b7a0d19ecf6da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be20152adeae4f5b3de60106ffba6903') in 0.005901 seconds
+  Import took 0.012248 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000790 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.41 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.476 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.37 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1104 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.0 MB.
+System memory in use after: 57.1 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1552.
+Total: 3.240500 ms (FindLiveObjects: 0.222900 ms CreateObjectMapping: 0.071300 ms MarkObjects: 2.803700 ms  DeleteObjects: 0.140700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000693 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.38 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.245 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.22 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1104 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.2 MB.
+System memory in use after: 57.2 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1554.
+Total: 1.635700 ms (FindLiveObjects: 0.157900 ms CreateObjectMapping: 0.046100 ms MarkObjects: 1.383300 ms  DeleteObjects: 0.047300 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1904.266010 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankTrees.cs
+  artifactKey: Guid(20405f6ab91d6cb4fb8b7a0d19ecf6da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankTrees.cs using Guid(20405f6ab91d6cb4fb8b7a0d19ecf6da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eeb8829dbe482517740cfec6d3e2bcf0') in 0.003034 seconds
+  Import took 0.004555 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
