@@ -56,6 +56,7 @@ public class BruiserBehavior : MonoBehaviour
         FSMTransition t5 = new FSMTransition(HealToAttk); // different from t1
         FSMTransition t6 = new FSMTransition(HealToSpec);
         FSMTransition t7 = new FSMTransition(SpecToAttk);
+        FSMTransition t8 = new FSMTransition(SpecToHeal);
 
 
         // Link states with transitions
@@ -66,7 +67,8 @@ public class BruiserBehavior : MonoBehaviour
         Heal.AddTransition(t5, Attack);
         Heal.AddTransition(t6, Special);
 
-        Special.AddTransition(t7, Heal);
+        Special.AddTransition(t7, Attack);
+        Special.AddTransition(t8, Heal);
 
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
@@ -144,6 +146,11 @@ public class BruiserBehavior : MonoBehaviour
     }
 
     public bool SpecToAttk()
+    {
+        return true;
+    }
+
+    public bool SpecToHeal()
     {
         return true;
     }
