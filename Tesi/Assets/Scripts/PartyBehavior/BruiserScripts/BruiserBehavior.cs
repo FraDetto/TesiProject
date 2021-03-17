@@ -43,8 +43,8 @@ public class BruiserBehavior : MonoBehaviour
         Attack.enterActions.Add(AttackBoss);
         Attack.stayActions.Add(AttackBoss);
 
-        FSMState Heal = new FSMState();
-        Heal.enterActions.Add(HealFromAttack);
+        FSMState HealHimself = new FSMState();
+        HealHimself.enterActions.Add(Heal);
 
         FSMState Special = new FSMState();
         Special.enterActions.Add(ActiveSpecial);
@@ -61,14 +61,14 @@ public class BruiserBehavior : MonoBehaviour
 
         // Link states with transitions
         Attack.AddTransition(t3, Special);
-        Attack.AddTransition(t4, Heal);
+        Attack.AddTransition(t4, HealHimself);
 
 
-        Heal.AddTransition(t5, Attack);
-        Heal.AddTransition(t6, Special);
+        HealHimself.AddTransition(t5, Attack);
+        HealHimself.AddTransition(t6, Special);
 
         Special.AddTransition(t7, Attack);
-        Special.AddTransition(t8, Heal);
+        Special.AddTransition(t8, HealHimself);
 
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
@@ -163,7 +163,7 @@ public class BruiserBehavior : MonoBehaviour
 
     }
 
-    public void HealFromAttack()
+    public void Heal()
     {
 
     }
