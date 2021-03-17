@@ -4,102 +4,172 @@ using UnityEngine;
 
 public class TankBehavior : MonoBehaviour
 {
-    [Range(0.5f, 1.5f)] public float waitTime = 1f;
-    public float reactionTime = 3f;
-    private Rigidbody myRigidbody;
-    private DecisionTree dt;
+    private FSM fsmMain;
+    private FSM fsmCombact;
+
+    public float reactionTime = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
-        // Define actions
-        DTAction a1 = new DTAction(moveToBoss);
-        DTAction a2 = new DTAction(attackTheBoss);
-        DTAction a3 = new DTAction(defendFromTheBoss);
-        DTAction a4 = new DTAction(useSpecial);
-
-        // Define decisions
-        DTDecision d1 = new DTDecision(checkBossPosition);
-        DTDecision d2 = new DTDecision(attackOrDefend);
-        DTDecision d3 = new DTDecision(timeForSpecial);
+        ////////// MAIN FSM ///////////////////
+        FSMState Chase = new FSMState();
+        Chase.enterActions.Add(ChaseBoos);
+        Chase.stayActions.Add(ChaseBoos);
 
 
-        // Link action with decisions
-        d1.AddLink(false, d2);
-        d1.AddLink(true, a1);
+        FSMState Combact = new FSMState();
+        Combact.enterActions.Add(fsmCombact.Update);
+        Combact.stayActions.Add(fsmCombact.Update);
 
-        d2.AddLink(true, a2);
-        d2.AddLink(false, d3);
+        // Define transitions
+        FSMTransition t1 = new FSMTransition(ChaseToCombact);
+        FSMTransition t2 = new FSMTransition(CombactToChase);
 
-        d3.AddLink(true, a3);
-        d3.AddLink(false, a4);
 
-        // Setup my DecisionTree at the root node
-        dt = new DecisionTree(d1);
-        myRigidbody = GetComponent<Rigidbody>();
+        // Link states with transitions
+        Chase.AddTransition(t1, Combact);
+        Combact.AddTransition(t2, Chase);
+
+
+        // Setup a FSA at initial state
+        fsmMain = new FSM(Chase);
+
+
+
+
+
+        //////////// COMBACT FSM /////////////////
+        FSMState Attack = new FSMState();
+        Attack.enterActions.Add(AttackBoss);
+        Attack.stayActions.Add(AttackBoss);
+
+        FSMState Defend = new FSMState();
+        Defend.enterActions.Add(DefendFromAttack);
+
+        FSMState Special = new FSMState();
+        Special.enterActions.Add(ActiveSpecial);
+
+        // Define transitions
+
+        FSMTransition t3 = new FSMTransition(AttkToSpec);
+        FSMTransition t4 = new FSMTransition(AttkToDef);
+        FSMTransition t5 = new FSMTransition(DefToAttk); // different from t1
+        FSMTransition t6 = new FSMTransition(DefToSpec);
+        FSMTransition t7 = new FSMTransition(SpecToAttk);
+        FSMTransition t8 = new FSMTransition(SpecToDef);
+
+
+        // Link states with transitions
+        Attack.AddTransition(t3, Special);
+        Attack.AddTransition(t4, Defend);
+
+
+        Defend.AddTransition(t5, Attack);
+        Defend.AddTransition(t6, Special);
+
+        Special.AddTransition(t7, Attack);
+        Special.AddTransition(t8, Defend);
+
+        // Setup a FSA at initial state
+        fsmCombact = new FSM(Attack);
+
+        // Start monitoring
         StartCoroutine(Fight());
-        
     }
 
 
-    // Take decision every interval, run forever
+
+
+    // Periodic update, run forever
     public IEnumerator Fight()
     {
         while (true)
         {
-            dt.walk();
+            fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);
         }
     }
 
 
-    public object checkBossPosition(object o)//control if the boss is in range
+
+
+    /////////////////// MAIN FSM ////////////////////////////////
+
+    // CONDITIONS
+
+    public bool ChaseToCombact()
     {
-        if (reactionTime <= 0)
-        {
-            return false;
-        }
         return true;
     }
 
-    public object attackOrDefend(object o)//see if is time to attack or to def
+    public bool CombactToChase()
     {
-        if (reactionTime <= 0)
-        {
-            return false;
-        }
         return true;
     }
 
-    public object timeForSpecial(object o)//is time to use the special?
+    // ACTIONS
+
+    public void ChaseBoos()//avvicinati al boss
     {
-        if (reactionTime <= 0)
-        {
-            return false;
-        }
+
+    }
+
+
+
+
+
+
+
+    //////////////////// COMBACT FSM //////////////////////////////
+
+    // CONDITIONS
+
+
+    public bool AttkToDef()
+    {
+        return true;
+    }
+
+    public bool AttkToSpec()
+    {
+        return true;
+    }
+
+    public bool DefToAttk()
+    {
+        return true;
+    }
+
+    public bool DefToSpec()
+    {
+        return true;
+    }
+
+    public bool SpecToAttk()
+    {
+        return true;
+    }
+
+    public bool SpecToDef()
+    {
         return true;
     }
 
 
-    public object moveToBoss(object o)
+    // ACTIONS
+
+    public void AttackBoss()
     {
 
-        return null;
-    }
-    public object attackTheBoss(object o)
-    {
-
-        return null;
     }
 
-    public object defendFromTheBoss(object o)
+    public void DefendFromAttack()
     {
 
-        return null;
     }
 
-    public object useSpecial(object o)
+    public void ActiveSpecial()
     {
 
-        return null;
     }
 }

@@ -109,7 +109,7 @@ public class HealerBehavior : MonoBehaviour
 
     // ACTIONS
 
-    public void takSafeSpotFromBoss()//avvicinati al boss
+    public void takSafeSpotFromBoss()//allontanati dal boss
     {
 
     }
