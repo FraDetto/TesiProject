@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boss
+  - Tank
+  - Mage
+  - Bruiser
+  - Healer
   layers:
   - Default
   - TransparentFX
