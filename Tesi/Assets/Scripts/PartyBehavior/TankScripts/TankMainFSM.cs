@@ -50,16 +50,18 @@ public class TankMainFSM : MonoBehaviour
         Special.enterActions.Add(ActiveSpecial);
 
         // Define transitions
-        FSMTransition t3 = new FSMTransition(AttkToDef);//CleaningFSM.Update
-        FSMTransition t4 = new FSMTransition(AttkToSpec);
+        
+        FSMTransition t3 = new FSMTransition(AttkToSpec);
+        FSMTransition t4 = new FSMTransition(AttkToDef);
         FSMTransition t5 = new FSMTransition(DefToAttk); // different from t1
         FSMTransition t6 = new FSMTransition(DefToSpec);
         FSMTransition t7 = new FSMTransition(SpecToAttk);
 
 
         // Link states with transitions
-        Attack.AddTransition(t3, Defend);
-        Attack.AddTransition(t4, Special);
+        Attack.AddTransition(t3, Special);
+        Attack.AddTransition(t4, Defend);
+        
 
         Defend.AddTransition(t5, Attack);
         Defend.AddTransition(t6, Special);
@@ -70,18 +72,18 @@ public class TankMainFSM : MonoBehaviour
         fsmCombact = new FSM(Attack);
 
         // Start monitoring
-        StartCoroutine(Patrol());
+        StartCoroutine(Fight());
     }
 
 
 
 
     // Periodic update, run forever
-    public IEnumerator Patrol()
+    public IEnumerator Fight()
     {
         while (true)
         {
-        fsmMain.Update();
+            fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);
         }
     }
