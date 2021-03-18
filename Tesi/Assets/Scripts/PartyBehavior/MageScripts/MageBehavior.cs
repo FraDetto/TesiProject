@@ -7,7 +7,11 @@ public class MageBehavior : MonoBehaviour
     private FSM fsmMain;
     private FSM fsmCombact;
 
+    private GameObject boss;
+    private Rigidbody myRB;
+
     public float reactionTime = 2.0f;
+    public float distanceRange = 15.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +77,11 @@ public class MageBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
 
+
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        myRB = GetComponent<Rigidbody>();
+
+
         // Start monitoring
         StartCoroutine(Fight());
     }
@@ -99,12 +108,19 @@ public class MageBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        return true;
+        if ((boss.transform.position - myRB.transform.position).magnitude >= distanceRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool CombactToSafeSpot()
     {
-        return true;
+        return !safeSpotToCombact();
     }
 
     // ACTIONS

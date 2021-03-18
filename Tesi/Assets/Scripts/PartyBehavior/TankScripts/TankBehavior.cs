@@ -7,7 +7,11 @@ public class TankBehavior : MonoBehaviour
     private FSM fsmMain;
     private FSM fsmCombact;
 
+    private GameObject boss;
+    private Rigidbody myRB;
+
     public float reactionTime = 2.0f;
+    public float distanceRange = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +77,10 @@ public class TankBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
 
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        myRB = GetComponent<Rigidbody>();
+
+
         // Start monitoring
         StartCoroutine(Fight());
     }
@@ -99,12 +107,21 @@ public class TankBehavior : MonoBehaviour
 
     public bool ChaseToCombact()
     {
-        return true;
+
+        if ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public bool CombactToChase()
     {
-        return true;
+        return !ChaseToCombact();
     }
 
     // ACTIONS
