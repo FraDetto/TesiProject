@@ -23,8 +23,8 @@ public class TankBehavior : MonoBehaviour
 
 
         FSMState Combact = new FSMState();
-        Combact.enterActions.Add(fsmCombact.Update);
-        Combact.stayActions.Add(fsmCombact.Update);
+        Combact.enterActions.Add(combactFase);
+        Combact.stayActions.Add(combactFase);
 
         // Define transitions
         FSMTransition t1 = new FSMTransition(ChaseToCombact);
@@ -125,25 +125,28 @@ public class TankBehavior : MonoBehaviour
         return !ChaseToCombact();
     }
 
+    
     // ACTIONS
 
     public void ChaseBoos()//avvicinati al boss
     {
-        if (boss.transform)
-        {
-            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
 
-            if(toBossPos.magnitude > distanceRange)
-            {
-                transform.LookAt(verticalAdj);
-                myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
-            }
+        Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+        Vector3 toBossPos = (verticalAdj - transform.position);
+
+        if(toBossPos.magnitude > distanceRange)
+        {
+            transform.LookAt(verticalAdj);
+            myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }
+
     }
 
 
-
+    public void combactFase()
+    {
+        fsmCombact.Update();
+    }
 
 
 
