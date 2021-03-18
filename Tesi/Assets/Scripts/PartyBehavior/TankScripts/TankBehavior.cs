@@ -10,8 +10,9 @@ public class TankBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 2.0f;
-    public float distanceRange = 5.0f;
+    public float reactionTime = 1.0f;
+    public float distanceRange = 4.0f;
+    public float speed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -128,7 +129,17 @@ public class TankBehavior : MonoBehaviour
 
     public void ChaseBoos()//avvicinati al boss
     {
+        if (boss.transform)
+        {
+            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+            Vector3 toBossPos = (verticalAdj - transform.position);
 
+            if(toBossPos.magnitude > distanceRange)
+            {
+                transform.LookAt(verticalAdj);
+                myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+            }
+        }
     }
 
 
