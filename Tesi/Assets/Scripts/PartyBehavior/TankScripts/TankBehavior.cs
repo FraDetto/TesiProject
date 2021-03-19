@@ -10,12 +10,16 @@ public class TankBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 1.0f;
-    public float distanceRange = 4.0f;
-    public float speed = 2.0f;
+    public float reactionTime = 0.5f;
+    public float distanceRange = 7.0f;
+    public float speed = 15.0f;
     // Start is called before the first frame update
     void Start()
     {
+        boss = GameObject.FindGameObjectWithTag("Boss");
+
+        myRB = GetComponent<Rigidbody>();
+
         ////////// MAIN FSM ///////////////////
         FSMState Chase = new FSMState();
         Chase.enterActions.Add(ChaseBoos);
@@ -38,9 +42,6 @@ public class TankBehavior : MonoBehaviour
 
         // Setup a FSA at initial state
         fsmMain = new FSM(Chase);
-
-
-
 
 
         //////////// COMBACT FSM /////////////////
@@ -78,8 +79,7 @@ public class TankBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
-        myRB = GetComponent<Rigidbody>();
+        
 
 
         // Start monitoring
@@ -130,12 +130,12 @@ public class TankBehavior : MonoBehaviour
 
     public void ChaseBoos()//avvicinati al boss
     {
-
         Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
         Vector3 toBossPos = (verticalAdj - transform.position);
 
         if(toBossPos.magnitude > distanceRange)
         {
+            Debug.Log("Tank distante dal boss mi sposto");
             transform.LookAt(verticalAdj);
             myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }
