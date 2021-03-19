@@ -10,12 +10,16 @@ public class HealerBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 1.0f;
+    public float reactionTime = 1.5f;
     public float distanceRange = 15.0f;
-    public float speed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
+
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        myRB = GetComponent<Rigidbody>();
+
+
         ////////// MAIN FSM ///////////////////
         FSMState takSafeSpot = new FSMState();
         takSafeSpot.enterActions.Add(takSafeSpotFromBoss);
@@ -34,12 +38,7 @@ public class HealerBehavior : MonoBehaviour
         // Link states with transitions
         takSafeSpot.AddTransition(t1, Combact);
         Combact.AddTransition(t2, takSafeSpot);
-
-
-        // Setup a FSA at initial state
-        fsmMain = new FSM(takSafeSpot);
-
-
+       
 
 
 
@@ -79,8 +78,10 @@ public class HealerBehavior : MonoBehaviour
         fsmCombact = new FSM(Attack);
 
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
-        myRB = GetComponent<Rigidbody>();
+        // Setup a FSA at initial state
+        fsmMain = new FSM(takSafeSpot);
+
+
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -110,6 +111,7 @@ public class HealerBehavior : MonoBehaviour
     {
         if ((boss.transform.position - myRB.transform.position).magnitude >= distanceRange)
         {
+            GetComponent<HealerMovement>().chaseFlag = false;
             return true;
         }
         else
@@ -126,21 +128,26 @@ public class HealerBehavior : MonoBehaviour
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
-        Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+        /*Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
         Vector3 toBossPos = (verticalAdj - transform.position);
 
         if (toBossPos.magnitude <= distanceRange)
         {
             transform.LookAt(verticalAdj);
             myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
+        }*/
+        if (!GetComponent<HealerMovement>().chaseFlag)
+        {
+            GetComponent<HealerMovement>().chaseFlag = true;
         }
-        
+
     }
 
 
 
     public void combactFase()
     {
+        Debug.Log("Combact Fase HEALER");
         fsmCombact.Update();
     }
 

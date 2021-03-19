@@ -10,9 +10,8 @@ public class TankBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 0.5f;
+    public float reactionTime = 1.5f;
     public float distanceRange = 7.0f;
-    public float speed = 15.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +74,7 @@ public class TankBehavior : MonoBehaviour
         Special.AddTransition(t7, Attack);
         Special.AddTransition(t8, Defend);
 
-        Debug.Log("Sto qua");
+        
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
 
@@ -109,7 +108,7 @@ public class TankBehavior : MonoBehaviour
 
     public bool ChaseToCombact()
     {
-        Debug.Log("ChaseToCombact");
+        //Debug.Log("ChaseToCombact");
         if ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange)
         {
             Debug.Log("ChaseToCombact TRUE BRANCH");
@@ -155,7 +154,7 @@ public class TankBehavior : MonoBehaviour
 
     public void combactFase()
     {
-        Debug.Log("combactFase");
+        Debug.Log("combactFase TANK");
         fsmCombact.Update();
     }
 

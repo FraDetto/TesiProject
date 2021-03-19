@@ -10,12 +10,16 @@ public class MageBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 1.0f;
+    public float reactionTime = 1.5f;
     public float distanceRange = 15.0f;
-    public float speed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
+
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        myRB = GetComponent<Rigidbody>();
+
+
         ////////// MAIN FSM ///////////////////
         FSMState takSafeSpot = new FSMState();
         takSafeSpot.enterActions.Add(takSafeSpotFromBoss);
@@ -34,11 +38,6 @@ public class MageBehavior : MonoBehaviour
         // Link states with transitions
         takSafeSpot.AddTransition(t1, Combact);
         Combact.AddTransition(t2, takSafeSpot);
-
-
-        // Setup a FSA at initial state
-        fsmMain = new FSM(takSafeSpot);
-
 
 
 
@@ -79,8 +78,10 @@ public class MageBehavior : MonoBehaviour
         fsmCombact = new FSM(Attack);
 
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
-        myRB = GetComponent<Rigidbody>();
+        // Setup a FSA at initial state
+        fsmMain = new FSM(takSafeSpot);
+
+
 
 
         // Start monitoring
@@ -111,6 +112,7 @@ public class MageBehavior : MonoBehaviour
     {
         if ((boss.transform.position - myRB.transform.position).magnitude >= distanceRange)
         {
+            GetComponent<MageMovement>().chaseFlag = false;
             return true;
         }
         else
@@ -128,7 +130,7 @@ public class MageBehavior : MonoBehaviour
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
-
+        /*
         Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
         Vector3 toBossPos = (verticalAdj - transform.position);
 
@@ -136,14 +138,18 @@ public class MageBehavior : MonoBehaviour
         {
             transform.LookAt(verticalAdj);
             myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
+        }*/
+        if (!GetComponent<MageMovement>().chaseFlag)
+        {
+            GetComponent<MageMovement>().chaseFlag = true;
         }
-        
     }
 
 
 
     public void combactFase()
     {
+        Debug.Log("Combact Fase Mage");
         fsmCombact.Update();
     }
 
