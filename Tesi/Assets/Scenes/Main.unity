@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47cd48deaabe2874f8049434b5eca519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRange: 15
+  distanceRange: 30
   speed: 15
   chaseFlag: 0
 --- !u!1 &963194225
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6145324c1c300d441a46fa0b1ead09f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRange: 15
+  distanceRange: 30
   speed: 15
   chaseFlag: 0
 --- !u!1001 &1169127070248072442
@@ -487,6 +487,10 @@ PrefabInstance:
       propertyPath: reactionTime
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
+      propertyPath: distanceRange
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
 --- !u!1001 &1557533995677620027
@@ -502,7 +506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4683753665356790898, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -163.7
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 4683753665356790898, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -556,6 +560,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
+    - target: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
 --- !u!1001 &4685454567216520624
@@ -583,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5327228082424320287, guid: f8982895849c30849b054ab374beeb7d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 148.4
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 5327228082424320287, guid: f8982895849c30849b054ab374beeb7d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -748,6 +756,10 @@ PrefabInstance:
       propertyPath: reactionTime
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5714320623505951237, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
+      propertyPath: distanceRange
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_Name
       value: Mage
@@ -770,7 +782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8796819102903675790, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.24
+      value: 7.7
       objectReference: {fileID: 0}
     - target: {fileID: 8796819102903675790, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_LocalRotation.w

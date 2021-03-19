@@ -7,7 +7,7 @@ public class MageMovement : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float distanceRange = 15.0f;
+    public float distanceRange = 45.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
     // Start is called before the first frame update

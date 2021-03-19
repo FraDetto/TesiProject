@@ -7,7 +7,7 @@ public class BruiserMovement : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float distanceRange = 7.0f;
+    public float distanceRange = 6.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
     // Start is called before the first frame update

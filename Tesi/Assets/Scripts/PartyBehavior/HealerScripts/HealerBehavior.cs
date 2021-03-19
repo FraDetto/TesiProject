@@ -11,7 +11,7 @@ public class HealerBehavior : MonoBehaviour
     private Rigidbody myRB;
 
     public float reactionTime = 1.5f;
-    public float distanceRange = 15.0f;
+    public float distanceRange = 45.0f;
     // Start is called before the first frame update
     void Start()
     {
