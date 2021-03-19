@@ -40,8 +40,7 @@ public class TankBehavior : MonoBehaviour
         Combact.AddTransition(t2, Chase);
 
 
-        // Setup a FSA at initial state
-        fsmMain = new FSM(Chase);
+       
 
 
         //////////// COMBACT FSM /////////////////
@@ -76,11 +75,13 @@ public class TankBehavior : MonoBehaviour
         Special.AddTransition(t7, Attack);
         Special.AddTransition(t8, Defend);
 
+        Debug.Log("Sto qua");
         // Setup a FSA at initial state
         fsmCombact = new FSM(Attack);
 
-        
 
+        // Setup a FSA at initial state
+        fsmMain = new FSM(Chase);
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -108,9 +109,11 @@ public class TankBehavior : MonoBehaviour
 
     public bool ChaseToCombact()
     {
-
+        Debug.Log("ChaseToCombact");
         if ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange)
         {
+            Debug.Log("ChaseToCombact TRUE BRANCH");
+            GetComponent<TankMovement>().chaseFlag = false;
             return true;
         }
         else
@@ -122,6 +125,7 @@ public class TankBehavior : MonoBehaviour
 
     public bool CombactToChase()
     {
+        Debug.Log("CombactToChase");
         return !ChaseToCombact();
     }
 
@@ -130,7 +134,7 @@ public class TankBehavior : MonoBehaviour
 
     public void ChaseBoos()//avvicinati al boss
     {
-        Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+        /*Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
         Vector3 toBossPos = (verticalAdj - transform.position);
 
         if(toBossPos.magnitude > distanceRange)
@@ -138,13 +142,20 @@ public class TankBehavior : MonoBehaviour
             Debug.Log("Tank distante dal boss mi sposto");
             transform.LookAt(verticalAdj);
             myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
-        }
+        }*/
+       
+        if (!GetComponent<TankMovement>().chaseFlag)
+        {
+            Debug.Log("ChaseBoos");
+            GetComponent<TankMovement>().chaseFlag = true;
+        }    
 
     }
 
 
     public void combactFase()
     {
+        Debug.Log("combactFase");
         fsmCombact.Update();
     }
 
