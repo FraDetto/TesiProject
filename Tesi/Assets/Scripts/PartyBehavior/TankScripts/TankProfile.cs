@@ -12,23 +12,21 @@ public class TankProfile : MonoBehaviour
     public Transform swordTransform;
     private Rigidbody myRB;
 
-    private PartyData partyData;
+    public PartyData partyData;
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         hp = partyData.hpTank;
         damage = partyData.damageTank;
         armor = partyData.armorTank;
 
     }
-
-
-
+    
     public void attackWithSword()
     {
-        Debug.Log("USO LA SPADA");
-        swordTransform.transform.localPosition = Vector3.Slerp(swordTransform.localPosition, new Vector3(1, 0, 1), 0.01f);
+        Debug.Log("attackWithSword");
+      
     }
 
     public void calculateDamage()

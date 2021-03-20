@@ -12,6 +12,7 @@ public class TankBehavior : MonoBehaviour
 
     public float reactionTime = 1.5f;
     public float distanceRange = 6.0f;
+    public bool firstRush = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -203,8 +204,18 @@ public class TankBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-        Debug.Log("ATTACK BOSS");
-        GetComponent<TankProfile>().attackWithSword();
+       
+        if (!firstRush)
+        {
+            Debug.Log("ATTACK BOSS !FIRSTRUSH");
+            GetComponent<TankProfile>().attackWithSword();
+        }
+        else
+        {
+            Debug.Log("ATTACK BOSS FIRST RUSH");
+            firstRush = false;
+        }
+        
     }
 
     public void DefendFromAttack()

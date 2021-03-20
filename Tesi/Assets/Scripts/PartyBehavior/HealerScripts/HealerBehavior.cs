@@ -12,6 +12,7 @@ public class HealerBehavior : MonoBehaviour
 
     public float reactionTime = 1.5f;
     public float distanceRange = 45.0f;
+    public bool firstRush = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -193,7 +194,16 @@ public class HealerBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-
+        if (!firstRush)
+        {
+           // Debug.Log("ATTACK BOSS !FIRSTRUSH");
+            //GetComponent<HealerProfile>().attackWithMagic();
+        }
+        else
+        {
+            //Debug.Log("ATTACK BOSS FIRST RUSH");
+            firstRush = false;
+        }
     }
 
     public void HealAnAlly()

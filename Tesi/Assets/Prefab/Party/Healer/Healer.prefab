@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1169127070104546555}
   - component: {fileID: 1169127070104546554}
   - component: {fileID: 8180474225729765010}
+  - component: {fileID: 861954019429596526}
+  - component: {fileID: 3936912560977091519}
   m_Layer: 0
   m_Name: Healer
   m_TagString: Healer
@@ -128,7 +130,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reactionTime: 1
   distanceRange: 15
-  speed: 2
+--- !u!114 &861954019429596526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169127070104544005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6145324c1c300d441a46fa0b1ead09f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceRange: 45
+  speed: 15
+  chaseFlag: 0
+--- !u!114 &3936912560977091519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169127070104544005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113b81614f267a54f97d7c569af9d326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
 --- !u!1 &2015099609082637747
 GameObject:
   m_ObjectHideFlags: 0

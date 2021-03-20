@@ -12,6 +12,8 @@ public class BruiserBehavior : MonoBehaviour
 
     public float reactionTime = 1.5f;
     public float distanceRange = 6.0f;
+    public bool firstRush = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -187,7 +189,14 @@ public class BruiserBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-
+        if (!firstRush)
+        {
+            GetComponent<BruiserProfile>().attackWithSword();
+        }
+        else
+        {
+            firstRush = false;
+        }
     }
 
     public void Heal()

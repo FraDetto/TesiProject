@@ -261,26 +261,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &848148615 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-  m_PrefabInstance: {fileID: 8189011056505969028}
+--- !u!4 &869778443 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8644945559505771678, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
+  m_PrefabInstance: {fileID: 1557533995677620027}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &848148616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848148615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47cd48deaabe2874f8049434b5eca519, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceRange: 30
-  speed: 15
-  chaseFlag: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,11 +349,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.071, y: 0, z: 0}
---- !u!4 &994814871 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7378594869807779231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-  m_PrefabInstance: {fileID: 1557533995677620027}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090415198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 577165681488225219, guid: f8982895849c30849b054ab374beeb7d, type: 3}
@@ -421,27 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a55650cc3e7bdc49bc0199bf7c930ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordTransform: {fileID: 994814871}
---- !u!1 &2081688826 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-  m_PrefabInstance: {fileID: 1169127070248072442}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2081688827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2081688826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6145324c1c300d441a46fa0b1ead09f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceRange: 30
-  speed: 15
-  chaseFlag: 0
+  swordTransform: {fileID: 869778443}
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
 --- !u!1001 &1169127070248072442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -518,6 +479,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2925854165314932750, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
+      propertyPath: m_Name
+      value: Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 4683753665356790898, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -582,7 +547,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8070311335732693016, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
 --- !u!1001 &4685454567216520624
 PrefabInstance:
@@ -647,7 +613,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2247251424426795488, guid: f8982895849c30849b054ab374beeb7d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f8982895849c30849b054ab374beeb7d, type: 3}
 --- !u!1001 &5475297297734807884
 PrefabInstance:

@@ -109,6 +109,8 @@ GameObject:
   - component: {fileID: 3036322873424512080}
   - component: {fileID: 3664607852459145828}
   - component: {fileID: 5714320623505951237}
+  - component: {fileID: 2097305734944077522}
+  - component: {fileID: 2318201167468610763}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Mage
@@ -223,4 +225,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reactionTime: 1
   distanceRange: 15
-  speed: 2
+--- !u!114 &2097305734944077522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098627424708326240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47cd48deaabe2874f8049434b5eca519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceRange: 45
+  speed: 15
+  chaseFlag: 0
+--- !u!114 &2318201167468610763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098627424708326240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c680a3e4e751784d8d4e39f863ee619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
