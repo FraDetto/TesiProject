@@ -168,12 +168,14 @@ public class TankBehavior : MonoBehaviour
 
     public bool AttkToDef()
     {
-        return true;
+        Debug.Log("ATTKDEF");
+        return false;
     }
 
     public bool AttkToSpec()
     {
-        return true;
+        Debug.Log("ATTKSPEC");
+        return false;
     }
 
     public bool DefToAttk()
@@ -201,7 +203,8 @@ public class TankBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-
+        Debug.Log("ATTACK BOSS");
+        GetComponent<TankProfile>().attackWithSword();
     }
 
     public void DefendFromAttack()
