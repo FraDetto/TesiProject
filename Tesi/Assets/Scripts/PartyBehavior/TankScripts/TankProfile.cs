@@ -21,23 +21,21 @@ public class TankProfile : MonoBehaviour
         armor = partyData.armorTank;
 
     }
+
+    public float getDamage() {
+        return damage;
+    }
     
     public void attackWithSword()
     {
         Debug.Log("attackWithSword");
        
         StartCoroutine(waitAfterAttack());
-        Debug.Log("HO ATTESO");
-
-        
-
     }
 
     public IEnumerator waitAfterAttack()
     {
-        GameObject go = Instantiate(sword, new Vector3(transform.position.x+3.0f , transform.position.y + 1, transform.position.z -0.1f), transform.rotation);
-
-        Debug.Log("STO attendendo");
+        GameObject go = Instantiate(sword, new Vector3(transform.position.x+2.9f , transform.position.y + 0.8f, transform.position.z -0.45f), transform.rotation, gameObject.transform);
         yield return new WaitForSeconds(1.0f);
         Destroy(go);
     }

@@ -23,6 +23,11 @@ public class BruiserProfile : MonoBehaviour
 
     }
 
+    public float getDamage()
+    {
+        return damage;
+    }
+
     public void attackWithSword()
     {
 

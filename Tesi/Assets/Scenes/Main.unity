@@ -344,6 +344,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.071, y: 0, z: 0}
+--- !u!1 &1049040768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3359959793238077300, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+  m_PrefabInstance: {fileID: 5475297297734807884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1049040769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049040768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517fcf8c3fdddbc4ca6677585046fff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 1049040770}
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+--- !u!65 &1049040770 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2438159072496211589, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+  m_PrefabInstance: {fileID: 5475297297734807884}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090415198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 577165681488225219, guid: f8982895849c30849b054ab374beeb7d, type: 3}
@@ -529,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: reactionTime
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: distanceRange
