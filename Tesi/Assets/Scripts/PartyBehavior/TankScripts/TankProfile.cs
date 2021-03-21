@@ -7,9 +7,8 @@ public class TankProfile : MonoBehaviour
     private float hp;
     private float damage;
     private float armor;
-    private GameObject sword;
-    private GameObject shield;
-    public Transform swordTransform;
+    public GameObject sword;
+    public GameObject shield;
     private Rigidbody myRB;
 
     public PartyData partyData;
@@ -26,9 +25,22 @@ public class TankProfile : MonoBehaviour
     public void attackWithSword()
     {
         Debug.Log("attackWithSword");
-      
+       
+        StartCoroutine(waitAfterAttack());
+        Debug.Log("HO ATTESO");
+
+        
+
     }
 
+    public IEnumerator waitAfterAttack()
+    {
+        GameObject go = Instantiate(sword, new Vector3(transform.position.x+3.0f , transform.position.y + 1, transform.position.z -0.1f), transform.rotation);
+
+        Debug.Log("STO attendendo");
+        yield return new WaitForSeconds(1.0f);
+        Destroy(go);
+    }
     public void calculateDamage()
     {
 

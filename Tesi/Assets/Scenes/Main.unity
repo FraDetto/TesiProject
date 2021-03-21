@@ -261,11 +261,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!4 &869778443 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8644945559505771678, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-  m_PrefabInstance: {fileID: 1557533995677620027}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a55650cc3e7bdc49bc0199bf7c930ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordTransform: {fileID: 869778443}
+  sword: {fileID: 2565423017887597707, guid: 972f7d13836cad947a1da879d0bb07b3, type: 3}
+  shield: {fileID: 5527568933421180270, guid: 131af02ddd423e94f94a18a6b9c84ea4, type: 3}
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
 --- !u!1001 &1169127070248072442
 PrefabInstance:
