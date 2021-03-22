@@ -6,16 +6,23 @@ public class BruiserMovement : MonoBehaviour
 {
     private GameObject boss;
     private Rigidbody myRB;
+    private float initialPositionZ;
 
-    public float distanceRange = 6.0f;
+    public float valueOfZAfterMovement = 0.0f;
+
+    public float distanceRange = 7.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
+
+    public bool directionRight = false;
     // Start is called before the first frame update
     void Start()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
 
         myRB = GetComponent<Rigidbody>();
+
+        initialPositionZ = transform.position.z;
 
     }
 
@@ -32,6 +39,8 @@ public class BruiserMovement : MonoBehaviour
             {
                 transform.LookAt(verticalAdj);
                 myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+
+                valueOfZAfterMovement = initialPositionZ - transform.position.z;
             }
         }
 

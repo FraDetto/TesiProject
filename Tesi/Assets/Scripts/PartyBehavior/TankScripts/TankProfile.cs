@@ -9,7 +9,10 @@ public class TankProfile : MonoBehaviour
     private float armor;
     public GameObject sword;
     public GameObject shield;
+
+
     private Rigidbody myRB;
+    private Transform pointSpawnSword;
 
     public PartyData partyData;
 
@@ -20,6 +23,8 @@ public class TankProfile : MonoBehaviour
         damage = partyData.damageTank;
         armor = partyData.armorTank;
 
+        pointSpawnSword = transform.GetChild(1);
+
     }
 
     public float getDamage() {
@@ -28,14 +33,14 @@ public class TankProfile : MonoBehaviour
     
     public void attackWithSword()
     {
-        Debug.Log("attackWithSword");
+        //Debug.Log("attackWithSword");
        
         StartCoroutine(waitAfterAttack());
     }
 
     public IEnumerator waitAfterAttack()
     {
-        GameObject go = Instantiate(sword, new Vector3(transform.position.x+2.9f , transform.position.y + 0.8f, transform.position.z -0.45f), transform.rotation, gameObject.transform);
+        GameObject go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
         yield return new WaitForSeconds(1.0f);
         Destroy(go);
     }

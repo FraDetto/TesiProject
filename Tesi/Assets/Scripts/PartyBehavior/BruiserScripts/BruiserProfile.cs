@@ -7,9 +7,9 @@ public class BruiserProfile : MonoBehaviour
     private float hp;
     private float damage;
     private float armor;
-    private GameObject sword;
-    private GameObject shield;
-    public Transform swordTransform;
+    public GameObject sword;
+
+    private Transform pointSpawnSword;
     private Rigidbody myRB;
 
     public PartyData partyData;
@@ -21,6 +21,7 @@ public class BruiserProfile : MonoBehaviour
         damage = partyData.damageBruiser;
         armor = partyData.armorBruiser;
 
+        pointSpawnSword = transform.GetChild(1);
     }
 
     public float getDamage()
@@ -30,7 +31,15 @@ public class BruiserProfile : MonoBehaviour
 
     public void attackWithSword()
     {
+        StartCoroutine(waitAfterAttack());
+    }
 
+    public IEnumerator waitAfterAttack()
+    {
+        GameObject go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
+    
+        yield return new WaitForSeconds(1.0f);
+        Destroy(go);
     }
 
     public void calculateDamage()
