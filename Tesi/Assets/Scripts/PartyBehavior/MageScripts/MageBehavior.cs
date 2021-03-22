@@ -10,7 +10,7 @@ public class MageBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 1.5f;
+    public float reactionTime = 2.5f;
     public float distanceRange = 45.0f;
     public bool firstRush = true;
     // Start is called before the first frame update
@@ -199,7 +199,7 @@ public class MageBehavior : MonoBehaviour
         if (!firstRush)
         {
            // Debug.Log("ATTACK BOSS !FIRSTRUSH");
-            //GetComponent<MageProfile>().attackWithMagic();
+            GetComponent<MageProfile>().attackWithMagic();
         }
         else
         {

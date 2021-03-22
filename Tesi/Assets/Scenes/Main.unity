@@ -368,41 +368,6 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 2438159072496211589, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
   m_PrefabInstance: {fileID: 5475297297734807884}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1123545150 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-  m_PrefabInstance: {fileID: 1557533995677620027}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1123545151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123545150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bfff4c340b150d4f86a6b0ff864c985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceRange: 7
-  speed: 15
-  chaseFlag: 0
---- !u!114 &1123545152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123545150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a55650cc3e7bdc49bc0199bf7c930ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sword: {fileID: 2565423017887597707, guid: 972f7d13836cad947a1da879d0bb07b3, type: 3}
-  shield: {fileID: 5527568933421180270, guid: 131af02ddd423e94f94a18a6b9c84ea4, type: 3}
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
 --- !u!1001 &1460637570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -540,10 +505,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2925854165314932750, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: m_Name
-      value: Sword
-      objectReference: {fileID: 0}
     - target: {fileID: 4683753665356790898, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -588,28 +549,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: reactionTime
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: distanceRange
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
-    - target: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -8070311335732693016, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
 --- !u!1001 &5475297297734807884
 PrefabInstance:
@@ -736,13 +680,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2318201167468610763, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
+      propertyPath: speed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2318201167468610763, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
+      propertyPath: fireBall
+      value: 
+      objectReference: {fileID: 5363455615661806282, guid: dc4adf78d1141884bb7f9074171cf1b7, type: 3}
+    - target: {fileID: 2318201167468610763, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
+      propertyPath: partyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
     - target: {fileID: 5714320623505951237, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: reactionTime
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5714320623505951237, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: distanceRange
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_Name
@@ -750,7 +706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8796819102903675790, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_RootOrder

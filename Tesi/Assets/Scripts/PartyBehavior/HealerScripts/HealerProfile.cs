@@ -22,6 +22,11 @@ public class HealerProfile : MonoBehaviour
 
     }
 
+    public float getDamage()
+    {
+        return damage;
+    }
+
     public void attackWithMagic()
     {
         Debug.Log("attackWithMagic");

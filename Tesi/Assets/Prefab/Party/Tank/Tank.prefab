@@ -169,15 +169,15 @@ GameObject:
   - component: {fileID: 8992308499473966270}
   - component: {fileID: 9151073715155477595}
   - component: {fileID: 8269627484573742231}
-  - component: {fileID: -4374453763534868854}
-  - component: {fileID: -8070311335732693016}
+  - component: {fileID: 1123545151}
+  - component: {fileID: 1123545152}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Tank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4683753665356790898
 Transform:
   m_ObjectHideFlags: 0
@@ -285,10 +285,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6629b19206fba4985730fcc096fe07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactionTime: 1
-  distanceRange: 4
+  reactionTime: 2.5
+  distanceRange: 7
   firstRush: 1
---- !u!114 &-4374453763534868854
+--- !u!114 &1123545151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,10 +300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfff4c340b150d4f86a6b0ff864c985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRange: 6
+  distanceRange: 7
   speed: 15
   chaseFlag: 0
---- !u!114 &-8070311335732693016
+--- !u!114 &1123545152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,6 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a55650cc3e7bdc49bc0199bf7c930ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 0}
-  shield: {fileID: 0}
+  sword: {fileID: 2565423017887597707, guid: 972f7d13836cad947a1da879d0bb07b3, type: 3}
+  shield: {fileID: 5527568933421180270, guid: 131af02ddd423e94f94a18a6b9c84ea4, type: 3}
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
