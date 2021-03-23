@@ -51,7 +51,7 @@ public class HealerProfile : MonoBehaviour
 
     public void attackWithMagic()
     {
-        Debug.Log("attackWithMagic");
+        //Debug.Log("attackWithMagic");
         if (!cooldown)
         {
             go = Instantiate(windBall, pointSpawnWindBall.position, transform.rotation, gameObject.transform);

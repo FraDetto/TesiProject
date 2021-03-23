@@ -7,8 +7,12 @@ public class BruiserProfile : MonoBehaviour
     private float hp;
     private float damage;
     private float armor;
+    private bool cooldown = false;
+
+
     public GameObject sword;
 
+    private GameObject go;
     private Transform pointSpawnSword;
     private Rigidbody myRB;
 
@@ -31,14 +35,18 @@ public class BruiserProfile : MonoBehaviour
 
     public void attackWithSword()
     {
-        StartCoroutine(waitAfterAttack());
+        if (!cooldown)
+        {
+            go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
+            cooldown = true;
+            StartCoroutine(waitAfterAttack());
+        }
     }
 
     public IEnumerator waitAfterAttack()
     {
-        GameObject go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
-    
         yield return new WaitForSeconds(1.0f);
+        cooldown = false;
         Destroy(go);
     }
 

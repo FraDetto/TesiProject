@@ -7,12 +7,17 @@ public class TankProfile : MonoBehaviour
     private float hp;
     private float damage;
     private float armor;
+    private bool cooldown = false;
+
+
     public GameObject sword;
     public GameObject shield;
 
 
     private Rigidbody myRB;
+    private GameObject go;
     private Transform pointSpawnSword;
+    private Transform pointSpawnShield;
 
     public PartyData partyData;
 
@@ -24,6 +29,7 @@ public class TankProfile : MonoBehaviour
         armor = partyData.armorTank;
 
         pointSpawnSword = transform.GetChild(1);
+        pointSpawnShield = transform.GetChild(2);
 
     }
 
@@ -34,14 +40,19 @@ public class TankProfile : MonoBehaviour
     public void attackWithSword()
     {
         //Debug.Log("attackWithSword");
-       
-        StartCoroutine(waitAfterAttack());
+        if (!cooldown)
+        {
+            go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
+            cooldown = true;
+            StartCoroutine(waitAfterAttack());
+        }
+        
     }
 
     public IEnumerator waitAfterAttack()
     {
-        GameObject go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
         yield return new WaitForSeconds(1.0f);
+        cooldown = false;
         Destroy(go);
     }
     public void calculateDamage()
