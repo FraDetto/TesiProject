@@ -19,6 +19,7 @@ public class SpellsCollider : MonoBehaviour
 
             default:
                 damageCharacter = gameObject.GetComponentInParent<HealerProfile>().getDamage();
+                gameObject.GetComponentInParent<HealerProfile>().shooting = false;
                 break;
         }
 

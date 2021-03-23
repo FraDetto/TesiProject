@@ -8,7 +8,7 @@ public class MageProfile : MonoBehaviour
     private float damage;
     private float armor;
 
-    public bool shooting;
+    public bool shooting = false;
     private bool cooldown = false;
 
     private GameObject boss;
@@ -28,7 +28,6 @@ public class MageProfile : MonoBehaviour
         damage = partyData.damageMage;
         armor = partyData.armorMage;
 
-        shooting = false;
 
         pointSpawnFireBall = transform.GetChild(1);
 
@@ -44,7 +43,7 @@ public class MageProfile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (shooting && go!=null)
+        if (shooting)
         {
             go.transform.LookAt(boss.transform.position);
             go.transform.position += go.transform.forward * speed * Time.deltaTime;

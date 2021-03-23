@@ -35,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children:
   - {fileID: 444697348692051554}
+  - {fileID: 8343963312369735543}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reactionTime: 1
   distanceRange: 15
+  firstRush: 1
 --- !u!114 &861954019429596526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +159,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b81614f267a54f97d7c569af9d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooting: 0
+  windBall: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  speed: 25
+--- !u!1 &1444606074867208168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8343963312369735543}
+  m_Layer: 0
+  m_Name: pointSpawnWindBall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8343963312369735543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444606074867208168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.184, z: 1.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1169127070104546558}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015099609082637747
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +206,7 @@ GameObject:
   - component: {fileID: 2619758533206616190}
   - component: {fileID: 4511055147138590277}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
