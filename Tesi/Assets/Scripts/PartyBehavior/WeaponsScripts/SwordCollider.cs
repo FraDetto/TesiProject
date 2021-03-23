@@ -25,6 +25,7 @@ public class SwordCollider : MonoBehaviour
         {
             other.GetComponent<BossProfile>().takeDamageFromSword(damageCharacter);
         }
-        
+
+       
     }
 }

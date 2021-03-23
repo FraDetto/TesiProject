@@ -10,9 +10,11 @@ public class TankBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 2.5f;
+    public float reactionTime = 1.2f;
     public float distanceRange = 7.0f;
     public bool firstRush = true;
+
+    //public bool shieldUp;
     // Start is called before the first frame update
     void Start()
     {
@@ -169,14 +171,31 @@ public class TankBehavior : MonoBehaviour
 
     public bool AttkToDef()
     {
-        Debug.Log("ATTKDEF");
-        return false;
+       
+        if(!GetComponent<TankProfile>().cooldownShield && boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag))
+        {
+            Debug.Log("ATTKDEF");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public bool AttkToSpec()
     {
-        Debug.Log("ATTKSPEC");
-        return false;
+        
+        if (!GetComponent<TankProfile>().cooldownSpecial)
+        {
+            Debug.Log("ATTKSPEC");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool DefToAttk()
@@ -220,11 +239,14 @@ public class TankBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
-
+        Debug.Log("MI DIFENDO");
+        GetComponent<TankProfile>().defendWithShield();
     }
 
     public void ActiveSpecial()
     {
-
+        Debug.Log("PASSO IN USA LA ULTI");
+        GetComponent<TankProfile>().specialInAction();
     }
 }
+    

@@ -9,9 +9,11 @@ public class BossProfile : MonoBehaviour
     private float armor;
 
     public Collider collider;
-
+    public bool isAttacking;
+    public string target;
     public PartyData partyData;
     // Start is called before the first frame update
+
     void Start()
     {
         hp = partyData.hpBoss;
