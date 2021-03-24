@@ -10,6 +10,8 @@ public class TankProfile : MonoBehaviour
     private bool cooldownSword = false;
     public bool cooldownShield = false;
     public bool cooldownSpecial = true;
+    public bool shieldActive = false;
+    public bool swordActive = false;
 
 
     public GameObject sword;
@@ -41,7 +43,7 @@ public class TankProfile : MonoBehaviour
     public float getDamage() {
         return damage;
     }
-    
+
     public void attackWithSword()
     {
         //Debug.Log("attackWithSword");
@@ -49,19 +51,25 @@ public class TankProfile : MonoBehaviour
         {
             go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
             cooldownSword = true;
-            StartCoroutine(waitAfterAttack());
+            swordActive = true;
+            StartCoroutine(waitBeforeRemoveSword());
+            StartCoroutine(cooldownAttack());
         }
-        
     }
+        public IEnumerator waitBeforeRemoveSword()
+        {
+            yield return new WaitForSeconds(1.0f);
+            swordActive = false;
+            Destroy(go);
+        }
 
-    public IEnumerator waitAfterAttack()
-    {
-        yield return new WaitForSeconds(2.0f);
-        cooldownSword = false;
-        Destroy(go);
-    }
+        public IEnumerator cooldownAttack()
+        {
+            yield return new WaitForSeconds(2.3f);
+            cooldownSword = false;
+        }
 
-    public void calculateDamage()
+        public void calculateDamage()
     {
 
     }
@@ -70,6 +78,7 @@ public class TankProfile : MonoBehaviour
     {
         go = Instantiate(shield, pointSpawnShield.position, transform.rotation, gameObject.transform);
         cooldownShield = true;
+        shieldActive = true;
         StartCoroutine(waitBeforeRemoveShield());
         StartCoroutine(cooldownDefense());
     }
@@ -77,6 +86,7 @@ public class TankProfile : MonoBehaviour
     public IEnumerator waitBeforeRemoveShield()
     {
         yield return new WaitForSeconds(2.0f);
+        shieldActive = false;
         Destroy(go);
     }
 

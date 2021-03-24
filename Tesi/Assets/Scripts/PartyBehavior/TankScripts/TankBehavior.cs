@@ -224,7 +224,7 @@ public class TankBehavior : MonoBehaviour
     public void AttackBoss()
     {
        
-        if (!firstRush)
+        if (!firstRush && !GetComponent<TankProfile>().shieldActive)
         {
             Debug.Log("ATTACK BOSS !FIRSTRUSH");
             GetComponent<TankProfile>().attackWithSword();
@@ -239,14 +239,23 @@ public class TankBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
-        Debug.Log("MI DIFENDO");
-        GetComponent<TankProfile>().defendWithShield();
+        if (!GetComponent<TankProfile>().swordActive)
+        {
+            Debug.Log("MI DIFENDO");
+            GetComponent<TankProfile>().defendWithShield();
+        }
+            
     }
 
     public void ActiveSpecial()
     {
-        Debug.Log("PASSO IN USA LA ULTI");
-        GetComponent<TankProfile>().specialInAction();
+        if (!GetComponent<TankProfile>().shieldActive)
+        {
+            Debug.Log("PASSO IN USA LA ULTI");
+            GetComponent<TankProfile>().specialInAction();
+        }
+
+       
     }
 }
     
