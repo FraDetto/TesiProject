@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 86
+  controlID: 102
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 342}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 50
+  controlID: 157
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 17
+  controlID: 128
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -431,9 +431,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.6330888, y: 2.6270952, z: 11.486884}
+    m_Target: {x: -8.740236, y: 0.31298184, z: 20.398693}
     speed: 2
-    m_Value: {x: -1.6330888, y: 2.6270952, z: 11.486884}
+    m_Value: {x: -8.740236, y: 0.31298184, z: 20.398693}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -480,13 +480,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.49190912, y: -0.14502493, z: 0.08349832, w: 0.8545608}
+    m_Target: {x: 0.2467035, y: -0.18054532, z: 0.046913654, w: 0.951102}
     speed: 2
-    m_Value: {x: 0.49184692, y: -0.14500658, z: 0.083487764, w: 0.8544527}
+    m_Value: {x: 0.24667203, y: -0.1805223, z: 0.04690767, w: 0.9509807}
   m_Size:
-    m_Target: 9.692382
+    m_Target: 43.599483
     speed: 2
-    m_Value: 9.692382
+    m_Value: 43.599483
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -589,8 +589,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 203a0000
-      m_LastClickedID: 14880
+      m_SelectedIDs: 5c080000
+      m_LastClickedID: 0
       m_ExpandedIDs: 56fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -653,22 +653,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab/Party/Tank
+    - Assets/Scripts/PartyBehavior/BruiserScripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefab/Party/Tank
+  - Assets/Scripts/PartyBehavior/BruiserScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\ProgettoTesi\Tesi
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 32}
+    scrollPos: {x: 0, y: 76}
     m_SelectedIDs: 8c3b0000
     m_LastClickedID: 15244
-    m_ExpandedIDs: 00000000683b00006c3b00006e3b0000903b000000ca9a3b
+    m_ExpandedIDs: 00000000683b00006a3b00006c3b00006e3b0000883b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
