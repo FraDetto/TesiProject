@@ -63,7 +63,6 @@ public class TankBehavior : MonoBehaviour
         FSMTransition t5 = new FSMTransition(DefToAttk); // different from t1
         FSMTransition t6 = new FSMTransition(DefToSpec);
         FSMTransition t7 = new FSMTransition(SpecToAttk);
-        FSMTransition t8 = new FSMTransition(SpecToDef);
 
 
         // Link states with transitions
@@ -75,7 +74,6 @@ public class TankBehavior : MonoBehaviour
         Defend.AddTransition(t6, Special);
 
         Special.AddTransition(t7, Attack);
-        Special.AddTransition(t8, Defend);
 
         
         // Setup a FSA at initial state
@@ -200,12 +198,28 @@ public class TankBehavior : MonoBehaviour
 
     public bool DefToAttk()
     {
-        return true;
+        if (GetComponent<TankProfile>().cooldownSpecial)
+        {
+            Debug.Log("SPEC NOT AVAIBLE SO DEF ATTK");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool DefToSpec()
     {
-        return true;
+        if (!GetComponent<TankProfile>().cooldownSpecial)
+        {
+            Debug.Log("SPEC NOT AVAIBLE SO DEF ATTK");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToAttk()
@@ -213,10 +227,6 @@ public class TankBehavior : MonoBehaviour
         return true;
     }
 
-    public bool SpecToDef()
-    {
-        return true;
-    }
 
 
     // ACTIONS
@@ -249,7 +259,7 @@ public class TankBehavior : MonoBehaviour
 
     public void ActiveSpecial()
     {
-        if (!GetComponent<TankProfile>().shieldActive)
+        if (!GetComponent<TankProfile>().shieldActive && !GetComponent<TankProfile>().swordActive)
         {
             Debug.Log("PASSO IN USA LA ULTI");
             GetComponent<TankProfile>().specialInAction();
