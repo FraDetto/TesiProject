@@ -10,7 +10,7 @@ public class BruiserBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float reactionTime = 2.5f;
+    public float reactionTime = 1.2f;
     public float distanceRange = 7.0f;
     public bool firstRush = true;
 

@@ -84,14 +84,14 @@ public class BruiserProfile : MonoBehaviour
     }
     public IEnumerator waitBeforeRemoveSword()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.4f);
         swordActive = false;
         Destroy(go);
     }
 
     public IEnumerator cooldownAttack()
     {
-        yield return new WaitForSeconds(2.8f);
+        yield return new WaitForSeconds(2.5f);
         cooldownSword = false;
     }
 

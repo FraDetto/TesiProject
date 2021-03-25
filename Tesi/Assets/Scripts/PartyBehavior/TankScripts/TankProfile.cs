@@ -70,7 +70,7 @@ public class TankProfile : MonoBehaviour
 
         public IEnumerator cooldownAttack()
         {
-            yield return new WaitForSeconds(2.3f);
+            yield return new WaitForSeconds(2.0f);
             cooldownSword = false;
         }
 

@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5116847619761412181, guid: f8982895849c30849b054ab374beeb7d, type: 3}
+      propertyPath: reactionTime
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5327228082424320287, guid: f8982895849c30849b054ab374beeb7d, type: 3}
       propertyPath: m_RootOrder
       value: 7
