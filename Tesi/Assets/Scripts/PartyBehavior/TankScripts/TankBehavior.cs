@@ -170,9 +170,9 @@ public class TankBehavior : MonoBehaviour
     public bool AttkToDef()
     {
        
-        if(!GetComponent<TankProfile>().cooldownShield && boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag))
+        if( !GetComponent<TankProfile>().cooldownShield && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)) && !GetComponent<TankProfile>().swordActive)
         {
-            Debug.Log("ATTKDEF");
+            //Debug.Log("ATTKDEF");
             return true;
         }
         else
@@ -185,7 +185,7 @@ public class TankBehavior : MonoBehaviour
     public bool AttkToSpec()
     {
         
-        if (!GetComponent<TankProfile>().cooldownSpecial)
+        if (!GetComponent<TankProfile>().cooldownSpecial && !GetComponent<TankProfile>().swordActive)
         {
             Debug.Log("ATTKSPEC");
             return true;
@@ -198,9 +198,9 @@ public class TankBehavior : MonoBehaviour
 
     public bool DefToAttk()
     {
-        if (GetComponent<TankProfile>().cooldownSpecial)
+        if (GetComponent<TankProfile>().cooldownSpecial && !GetComponent<TankProfile>().shieldActive)
         {
-            Debug.Log("SPEC NOT AVAIBLE SO DEF ATTK");
+            //Debug.Log("SPEC NOT AVAIBLE SO DEF ATTK");
             return true;
         }
         else
@@ -211,9 +211,9 @@ public class TankBehavior : MonoBehaviour
 
     public bool DefToSpec()
     {
-        if (!GetComponent<TankProfile>().cooldownSpecial)
+        if (!GetComponent<TankProfile>().cooldownSpecial && !GetComponent<TankProfile>().shieldActive)
         {
-            Debug.Log("SPEC NOT AVAIBLE SO DEF ATTK");
+            //Debug.Log("SPEC NOT AVAIBLE SO DEF ATTK");
             return true;
         }
         else
@@ -234,7 +234,7 @@ public class TankBehavior : MonoBehaviour
     public void AttackBoss()
     {
        
-        if (!firstRush && !GetComponent<TankProfile>().shieldActive)
+        if (!firstRush )
         {
             Debug.Log("ATTACK BOSS !FIRSTRUSH");
             GetComponent<TankProfile>().attackWithSword();
@@ -249,22 +249,16 @@ public class TankBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
-        if (!GetComponent<TankProfile>().swordActive)
-        {
-            Debug.Log("MI DIFENDO");
-            GetComponent<TankProfile>().defendWithShield();
-        }
+       
+       GetComponent<TankProfile>().defendWithShield();
+
             
     }
 
     public void ActiveSpecial()
     {
-        if (!GetComponent<TankProfile>().shieldActive && !GetComponent<TankProfile>().swordActive)
-        {
-            Debug.Log("PASSO IN USA LA ULTI");
-            GetComponent<TankProfile>().specialInAction();
-        }
 
+     GetComponent<TankProfile>().specialInAction();
        
     }
 }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TankProfile : MonoBehaviour
 {
-    private float hp;
+    private float totalhp;
+    private float currenthp;
+
     private float damage;
     private float armor;
     private bool cooldownSword = false;
@@ -29,8 +31,11 @@ public class TankProfile : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
-        hp = partyData.hpTank;
+    {
+        totalhp = partyData.hpTank;
+
+        currenthp = totalhp;
+
         damage = partyData.damageTank;
         armor = partyData.armorTank;
 
@@ -100,7 +105,7 @@ public class TankProfile : MonoBehaviour
     {
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         cooldownSpecial = true;
-        Debug.Log("APPENA USATA ULTI");
+
         StartCoroutine(specialDuration());
         
         StartCoroutine(waitAfterUlti());
@@ -109,18 +114,18 @@ public class TankProfile : MonoBehaviour
 
     public IEnumerator specialDuration()
     {
-        Debug.Log("ULTI STA PERDURANDO");
+        //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(6.0f);
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        Debug.Log("ULTI FINITA");
+        //Debug.Log("ULTI FINITA");
     }
 
     public IEnumerator waitAfterUlti()
     {
-        Debug.Log("ULTI IN COOLDOWN");
+        //Debug.Log("ULTI IN COOLDOWN");
         yield return new WaitForSeconds(timeForSpecial);
         cooldownSpecial = false;
-        Debug.Log("ULTI UP");
+        //Debug.Log("ULTI UP");
     }
 
 }
