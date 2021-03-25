@@ -249,6 +249,6 @@ public class BruiserBehavior : MonoBehaviour
 
     public void ActiveSpecial()
     {
-
+        GetComponent<BruiserProfile>().activateUlti();
     }
 }

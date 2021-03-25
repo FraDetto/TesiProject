@@ -115,7 +115,7 @@ public class TankProfile : MonoBehaviour
     public IEnumerator specialDuration()
     {
         //Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(6.0f);
+        yield return new WaitForSeconds(8.0f);
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         //Debug.Log("ULTI FINITA");
     }

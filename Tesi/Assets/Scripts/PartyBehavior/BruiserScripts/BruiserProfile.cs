@@ -14,6 +14,9 @@ public class BruiserProfile : MonoBehaviour
     public bool isHealing = false;
     public bool cooldownSpecial = true;
     public bool swordActive = false;
+    public bool ultiRunning = false;
+
+    private float timeForSpecial = 16.0f;
 
     public GameObject sword;
 
@@ -33,6 +36,8 @@ public class BruiserProfile : MonoBehaviour
 
 
         pointSpawnSword = transform.GetChild(1);
+
+        StartCoroutine(waitAfterUlti());
     }
 
     public float getDamage()
@@ -67,6 +72,10 @@ public class BruiserProfile : MonoBehaviour
         if (!cooldownSword)
         {
             go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
+            if (ultiRunning)
+            {
+                go.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            }
             cooldownSword = true;
             swordActive = true;
             StartCoroutine(waitBeforeRemoveSword());
@@ -121,6 +130,28 @@ public class BruiserProfile : MonoBehaviour
 
     public void activateUlti()
     {
+        ultiRunning = true;
+        cooldownSpecial = true;
 
+        StartCoroutine(specialDuration());
+
+        StartCoroutine(waitAfterUlti());
+    }
+
+    public IEnumerator specialDuration()
+    {
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(6.2f);
+        ultiRunning = false;
+        
+        //Debug.Log("ULTI FINITA");
+    }
+
+    public IEnumerator waitAfterUlti()
+    {
+        //Debug.Log("ULTI IN COOLDOWN");
+        yield return new WaitForSeconds(timeForSpecial);
+        cooldownSpecial = false;
+        //Debug.Log("ULTI UP");
     }
 }
