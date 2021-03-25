@@ -131,6 +131,7 @@ Transform:
   m_Children:
   - {fileID: 5913741522751107847}
   - {fileID: 1823497936206863020}
+  - {fileID: 2554008716124392547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -256,7 +257,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453ac195805eab6449400087960ef8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownHeal: 0
+  isHealing: 0
+  cooldownSpecial: 1
+  swordActive: 0
+  ultiRunning: 0
   sword: {fileID: 1550275239034851887, guid: 8567d0e39591fde4691b8fdac17d7528, type: 3}
+  HealSign: {fileID: 5657558105343175916, guid: d747bdf1c4480b046844659c73a95af2, type: 3}
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
 --- !u!1 &4292504042913590263
 GameObject:
@@ -287,4 +294,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5327228082424320287}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5736829986711416821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2554008716124392547}
+  m_Layer: 0
+  m_Name: HealSignSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2554008716124392547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736829986711416821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.221, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5327228082424320287}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -19,9 +19,11 @@ public class BruiserProfile : MonoBehaviour
     private float timeForSpecial = 16.0f;
 
     public GameObject sword;
+    public GameObject HealSign;
 
     private GameObject go;
     private Transform pointSpawnSword;
+    private Transform HealSignSpawnPoint;
     private Rigidbody myRB;
 
     public PartyData partyData;
@@ -36,6 +38,7 @@ public class BruiserProfile : MonoBehaviour
 
 
         pointSpawnSword = transform.GetChild(1);
+        HealSignSpawnPoint = transform.GetChild(2);
 
         StartCoroutine(waitAfterUlti());
     }
@@ -117,9 +120,11 @@ public class BruiserProfile : MonoBehaviour
     }
     public IEnumerator isHealingHimSelf()
     {
-        yield return new WaitForSeconds(1.2f);
+        go = Instantiate(HealSign, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
+        yield return new WaitForSeconds(1.0f);
         currenthp += calculateHeal();
         isHealing = false;
+        Destroy(go);
     }
 
     public IEnumerator cooldownHealing()
