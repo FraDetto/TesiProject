@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BruiserProfile : MonoBehaviour
 {
-    private float hp;
+    private float totalhp;
+    private float currenthp;
+
     private float damage;
     private float armor;
     private bool cooldownSword = false;
@@ -24,9 +26,11 @@ public class BruiserProfile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hp = partyData.hpBruiser;
+        totalhp = partyData.hpBruiser;
+        currenthp = totalhp;
         damage = partyData.damageBruiser;
         armor = partyData.armorBruiser;
+
 
         pointSpawnSword = transform.GetChild(1);
     }
@@ -36,9 +40,26 @@ public class BruiserProfile : MonoBehaviour
         return damage;
     }
 
-    public float getHp()
+    public float getTotalHp()
     {
-        return hp;
+        return totalhp;
+    }
+
+    public float getCurrentHp()
+    {
+        return currenthp;
+    }
+
+    public bool lifeUnderSixty()
+    {
+        if(currenthp <= (totalhp/100 * 60))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void attackWithSword()
@@ -82,13 +103,13 @@ public class BruiserProfile : MonoBehaviour
     private float calculateHeal()
     {
         float total = 0.0f;
-        total = hp / 100.0f * 30.0f;
+        total = totalhp / 100.0f * 30.0f;
         return total;
     }
     public IEnumerator isHealingHimSelf()
     {
         yield return new WaitForSeconds(1.2f);
-        hp += calculateHeal();
+        currenthp += calculateHeal();
         isHealing = false;
     }
 

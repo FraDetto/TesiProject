@@ -156,32 +156,75 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        return true;
+        if (!GetComponent<BruiserProfile>().swordActive && GetComponent<BruiserProfile>().lifeUnderSixty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public bool AttkToSpec()
     {
-        return true;
+        if (!GetComponent<BruiserProfile>().swordActive && !GetComponent<BruiserProfile>().cooldownSpecial && !GetComponent<BruiserProfile>().lifeUnderSixty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool HealToAttk()
     {
-        return true;
+        if (!GetComponent<BruiserProfile>().isHealing && GetComponent<BruiserProfile>().cooldownSpecial)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool HealToSpec()
     {
-        return true;
+        if (!GetComponent<BruiserProfile>().isHealing && !GetComponent<BruiserProfile>().cooldownSpecial)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToAttk()
     {
-        return true;
+        if (!GetComponent<BruiserProfile>().lifeUnderSixty() || GetComponent<BruiserProfile>().cooldownHeal)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToHeal()
     {
-        return true;
+        if (GetComponent<BruiserProfile>().lifeUnderSixty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -189,7 +232,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-        if (!firstRush && !GetComponent<BruiserProfile>().isHealing)
+        if (!firstRush)
         {
             GetComponent<BruiserProfile>().attackWithSword();
         }
@@ -201,11 +244,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public void Heal()
     {
-        if (!GetComponent<BruiserProfile>().swordActive/*&& GetComponent<BruiserProfile>().getHp()<= mettere che gli hp <=60%*/)
-        {
-            GetComponent<BruiserProfile>().healHimSelf();
-        }
-
+       GetComponent<BruiserProfile>().healHimSelf();
     }
 
     public void ActiveSpecial()
