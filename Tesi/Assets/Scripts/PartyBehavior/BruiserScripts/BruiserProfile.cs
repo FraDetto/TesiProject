@@ -9,6 +9,7 @@ public class BruiserProfile : MonoBehaviour
     private float armor;
     private bool cooldownSword = false;
     public bool cooldownHeal = false;
+    public bool isHealing = false;
     public bool cooldownSpecial = true;
     public bool swordActive = false;
 
@@ -33,6 +34,11 @@ public class BruiserProfile : MonoBehaviour
     public float getDamage()
     {
         return damage;
+    }
+
+    public float getHp()
+    {
+        return hp;
     }
 
     public void attackWithSword()
@@ -66,7 +72,30 @@ public class BruiserProfile : MonoBehaviour
 
     public void healHimSelf()
     {
+        cooldownHeal = true;
+        isHealing = true;
+        StartCoroutine(isHealingHimSelf());
+        
+        StartCoroutine(cooldownHealing());
+    }
 
+    private float calculateHeal()
+    {
+        float total = 0.0f;
+        total = hp / 100.0f * 30.0f;
+        return total;
+    }
+    public IEnumerator isHealingHimSelf()
+    {
+        yield return new WaitForSeconds(1.2f);
+        hp += calculateHeal();
+        isHealing = false;
+    }
+
+    public IEnumerator cooldownHealing()
+    {
+        yield return new WaitForSeconds(10.0f);
+        cooldownHeal = false;
     }
 
     public void activateUlti()

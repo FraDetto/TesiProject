@@ -189,7 +189,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-        if (!firstRush)
+        if (!firstRush && !GetComponent<BruiserProfile>().isHealing)
         {
             GetComponent<BruiserProfile>().attackWithSword();
         }
@@ -201,6 +201,10 @@ public class BruiserBehavior : MonoBehaviour
 
     public void Heal()
     {
+        if (!GetComponent<BruiserProfile>().swordActive/*&& GetComponent<BruiserProfile>().getHp()<= mettere che gli hp <=60%*/)
+        {
+            GetComponent<BruiserProfile>().healHimSelf();
+        }
 
     }
 
