@@ -255,11 +255,11 @@ public class MageBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
-
+        GetComponent<MageProfile>().defendWithSpell();
     }
 
     public void ActiveSpecial()
     {
-
+        GetComponent<MageProfile>().activateUlti();
     }
 }

@@ -23,6 +23,8 @@ public class MageProfile : MonoBehaviour
     private Rigidbody myRB;
     private GameObject go;
 
+    private Vector3 scaleChange;
+
     public  GameObject fireBall;
     public GameObject defenseSpellSign;
 
@@ -48,6 +50,8 @@ public class MageProfile : MonoBehaviour
 
         boss = GameObject.FindGameObjectWithTag("Boss");
 
+        scaleChange = new Vector3(0.1f, 0.1f, 0.1f);
+
         StartCoroutine(waitAfterUlti());
     }
 
@@ -63,6 +67,11 @@ public class MageProfile : MonoBehaviour
         {
             go.transform.LookAt(boss.transform.position);
             go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
+        }
+
+        if (chargingUlt)
+        {
+            go.transform.localScale += scaleChange * Time.deltaTime;
         }
     }
 
@@ -82,6 +91,7 @@ public class MageProfile : MonoBehaviour
             cooldown = true;
             StartCoroutine(waitAfterAttack());
         }
+
        
 
     }
@@ -128,10 +138,12 @@ public class MageProfile : MonoBehaviour
 
     public IEnumerator specialDuration()
     {
+        go = Instantiate(fireBall, pointSpawnUlt.position, transform.rotation, gameObject.transform);
         chargingUlt = true;
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(3.0f);
         chargingUlt = false;
+        Destroy(go);
         //Debug.Log("ULTI FINITA");
     }
 
