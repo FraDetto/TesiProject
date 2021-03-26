@@ -5,7 +5,7 @@ using UnityEngine;
 public class BruiserProfile : MonoBehaviour
 {
     private float totalhp;
-    private float currenthp;
+    [SerializeField] private float currenthp;
 
     private float damage;
     private float armor;
@@ -81,6 +81,9 @@ public class BruiserProfile : MonoBehaviour
             }
             cooldownSword = true;
             swordActive = true;
+
+            //calculateDamage(damage);
+
             StartCoroutine(waitBeforeRemoveSword());
             StartCoroutine(cooldownAttack());
         }
@@ -98,9 +101,9 @@ public class BruiserProfile : MonoBehaviour
         cooldownSword = false;
     }
 
-    public void calculateDamage()
+    public void calculateDamage(float damage)
     {
-
+        currenthp -= damage;
     }
 
     public void healHimSelf()
@@ -121,7 +124,7 @@ public class BruiserProfile : MonoBehaviour
     public IEnumerator isHealingHimSelf()
     {
         go = Instantiate(HealSign, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.2f);
         currenthp += calculateHeal();
         isHealing = false;
         Destroy(go);

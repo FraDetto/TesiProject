@@ -25,6 +25,7 @@ public class BossProfile : MonoBehaviour
     {
         hp -= damageFromCharacter;
         Debug.Log("OH NO MI HAI COLPITO " + hp);
+
     }
 
     public void takeDamageFromSpell(float damageFromCharacter)

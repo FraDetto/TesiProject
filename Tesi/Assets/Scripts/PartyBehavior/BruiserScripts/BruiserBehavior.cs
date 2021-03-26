@@ -156,7 +156,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        if (!GetComponent<BruiserProfile>().swordActive && GetComponent<BruiserProfile>().lifeUnderSixty())
+        if (!GetComponent<BruiserProfile>().swordActive && GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal)
         {
             return true;
         }
@@ -217,7 +217,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool SpecToHeal()
     {
-        if (GetComponent<BruiserProfile>().lifeUnderSixty())
+        if (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal)
         {
             return true;
         }
