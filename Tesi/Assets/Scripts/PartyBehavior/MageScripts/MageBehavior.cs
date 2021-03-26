@@ -163,32 +163,77 @@ public class MageBehavior : MonoBehaviour
 
     public bool AttkToDef()
     {
-        return true;
+       
+        if (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     public bool AttkToSpec()
     {
-        return true;
+        if (!GetComponent<MageProfile>().cooldownSpecial)
+        {
+            Debug.Log("ATTKSPEC");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool DefToAttk()
     {
-        return true;
+        if (GetComponent<MageProfile>().cooldownSpecial && !GetComponent<MageProfile>().defenseActive)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool DefToSpec()
     {
-        return true;
+        if (!GetComponent<MageProfile>().cooldownSpecial && !GetComponent<MageProfile>().defenseActive)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToAttk()
     {
-        return true;
+        if (!GetComponent<MageProfile>().chargingUlt && GetComponent<MageProfile>().cooldownSpecial && (GetComponent<MageProfile>().cooldownDefense || (!boss.GetComponent<BossProfile>().isAttacking || !boss.GetComponent<BossProfile>().target.Equals(transform.tag)) ))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToDef()
     {
-        return true;
+        if (!GetComponent<MageProfile>().chargingUlt && GetComponent<MageProfile>().cooldownSpecial && (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && !boss.GetComponent<BossProfile>().target.Equals(transform.tag))))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
