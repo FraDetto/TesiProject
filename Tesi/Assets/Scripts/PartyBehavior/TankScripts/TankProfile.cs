@@ -51,6 +51,16 @@ public class TankProfile : MonoBehaviour
         return damage;
     }
 
+    public float getCurrentLife()
+    {
+        return currenthp;
+    }
+
+    public void addLifeByCure(float cure)
+    {
+        currenthp += cure;
+    }
+
     public void attackWithSword()
     {
         //Debug.Log("attackWithSword");

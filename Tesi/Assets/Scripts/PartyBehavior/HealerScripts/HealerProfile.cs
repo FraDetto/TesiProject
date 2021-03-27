@@ -17,6 +17,11 @@ public class HealerProfile : MonoBehaviour
     public bool healActive = false;
 
     private GameObject boss;
+
+    private GameObject tank;
+    private GameObject bruiser;
+    private GameObject mage;
+
     private Transform pointSpawnWindBall;
     private Transform pointSpawnHealHealer;
     private Rigidbody myRB;
@@ -45,11 +50,21 @@ public class HealerProfile : MonoBehaviour
         pointSpawnHealHealer = transform.GetChild(2);
 
         boss = GameObject.FindGameObjectWithTag("Boss");
+
+        tank = GameObject.FindGameObjectWithTag("Tank");
+        mage = GameObject.FindGameObjectWithTag("Mage");
+        bruiser = GameObject.FindGameObjectWithTag("Bruiser");
     }
 
     public float getDamage()
     {
         return damage;
+    }
+
+
+    public void addLifeByCure(float cure)
+    {
+        currenthp += cure;
     }
 
     private void FixedUpdate()
@@ -95,26 +110,7 @@ public class HealerProfile : MonoBehaviour
 
     public void findAllyToHeal()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
-
-        Rigidbody playerToHeal = null;
-
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            Rigidbody targetRigidBody = colliders[i].GetComponent<Rigidbody>();
-
-            if (!targetRigidBody)
-                continue;
-            if(playerToHeal == null)
-            {
-                playerToHeal = targetRigidBody;
-            }
-            else
-            {
-
-            }
-           
-        }
+       
     }
 
     public void calculateHeal()

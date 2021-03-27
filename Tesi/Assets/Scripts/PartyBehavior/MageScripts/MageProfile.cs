@@ -61,6 +61,16 @@ public class MageProfile : MonoBehaviour
         return damage;
     }
 
+    public float getCurrentLife()
+    {
+        return currenthp;
+    }
+
+    public void addLifeByCure(float cure)
+    {
+        currenthp += cure;
+    }
+
     private void FixedUpdate()
     {
         if (shooting)

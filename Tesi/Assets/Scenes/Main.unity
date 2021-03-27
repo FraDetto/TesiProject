@@ -498,6 +498,10 @@ PrefabInstance:
       propertyPath: fireBall
       value: 
       objectReference: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
+    - target: {fileID: 3936912560977091519, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
+      propertyPath: m_PlayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: reactionTime
       value: 2.5

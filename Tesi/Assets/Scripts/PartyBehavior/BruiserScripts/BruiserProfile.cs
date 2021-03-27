@@ -53,9 +53,14 @@ public class BruiserProfile : MonoBehaviour
         return totalhp;
     }
 
-    public float getCurrentHp()
+    public float getCurrentLife()
     {
         return currenthp;
+    }
+
+    public void addLifeByCure(float cure)
+    {
+        currenthp += cure;
     }
 
     public bool lifeUnderSixty()
