@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8180474225729765010}
   - component: {fileID: 861954019429596526}
   - component: {fileID: 3936912560977091519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Healer
   m_TagString: Healer
   m_Icon: {fileID: 0}
@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 444697348692051554}
   - {fileID: 8343963312369735543}
+  - {fileID: 6921424698161907159}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -160,6 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooting: 0
+  cooldownHeal: 0
+  cooldownSpecial: 1
+  healActive: 0
   windBall: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
   speed: 25
@@ -288,3 +292,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7474539332618139712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6921424698161907159}
+  m_Layer: 0
+  m_Name: pointSpawnHealHealer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6921424698161907159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474539332618139712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.051, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1169127070104546558}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

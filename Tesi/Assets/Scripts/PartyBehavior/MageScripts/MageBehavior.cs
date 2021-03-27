@@ -214,7 +214,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool SpecToAttk()
     {
-        if (!GetComponent<MageProfile>().chargingUlt && GetComponent<MageProfile>().cooldownSpecial && (GetComponent<MageProfile>().cooldownDefense || (!boss.GetComponent<BossProfile>().isAttacking || !boss.GetComponent<BossProfile>().target.Equals(transform.tag)) ))
+        if (!GetComponent<MageProfile>().chargingUlt && (GetComponent<MageProfile>().cooldownDefense || (!boss.GetComponent<BossProfile>().isAttacking || !boss.GetComponent<BossProfile>().target.Equals(transform.tag)) ))
         {
             return true;
         }
@@ -226,7 +226,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool SpecToDef()
     {
-        if (!GetComponent<MageProfile>().chargingUlt && GetComponent<MageProfile>().cooldownSpecial && (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && !boss.GetComponent<BossProfile>().target.Equals(transform.tag))))
+        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag))))
         {
             return true;
         }

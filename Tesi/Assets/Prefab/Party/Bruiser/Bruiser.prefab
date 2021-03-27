@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5116847619761412181}
   - component: {fileID: 2247251424426795488}
   - component: {fileID: 7490145434396163932}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bruiser
   m_TagString: Bruiser
   m_Icon: {fileID: 0}
@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453ac195805eab6449400087960ef8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currenthp: 0
   cooldownHeal: 0
   isHealing: 0
   cooldownSpecial: 1

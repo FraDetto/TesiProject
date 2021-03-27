@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class HealerProfile : MonoBehaviour
 {
-    private float hp;
+    private float totalhp;
+    private float currenthp;
     private float damage;
     private float armor;
 
     public bool shooting = false;
-    private bool cooldown = false;
+    private bool cooldownAttack = false;
+
+    public bool cooldownHeal = false;
+    public bool cooldownSpecial = true;
+    public bool healActive = false;
 
     private GameObject boss;
     private Transform pointSpawnWindBall;
+    private Transform pointSpawnHealHealer;
     private Rigidbody myRB;
     private GameObject go;
 
     public GameObject windBall;
 
+
+    public float m_HealRadius = 30f;
+    public LayerMask m_PlayerMask;
 
     public PartyData partyData;
 
@@ -26,11 +35,14 @@ public class HealerProfile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hp = partyData.hpHealer;
+        totalhp = partyData.hpHealer;
+
+        currenthp = totalhp;
         damage = partyData.damageHealer;
         armor = partyData.armorHealer;
 
         pointSpawnWindBall = transform.GetChild(1);
+        pointSpawnHealHealer = transform.GetChild(2);
 
         boss = GameObject.FindGameObjectWithTag("Boss");
     }
@@ -52,11 +64,11 @@ public class HealerProfile : MonoBehaviour
     public void attackWithMagic()
     {
         //Debug.Log("attackWithMagic");
-        if (!cooldown)
+        if (!cooldownAttack)
         {
             go = Instantiate(windBall, pointSpawnWindBall.position, transform.rotation, gameObject.transform);
             shooting = true;
-            cooldown = true;
+            cooldownAttack = true;
             StartCoroutine(waitAfterAttack());
         }
 
@@ -66,7 +78,7 @@ public class HealerProfile : MonoBehaviour
     {
 
         yield return new WaitForSeconds(2.0f);
-        cooldown = false;
+        cooldownAttack = false;
     }
 
     public void calculateDamage()
@@ -76,8 +88,53 @@ public class HealerProfile : MonoBehaviour
 
     public void healAlly()
     {
+        findAllyToHeal();
+        StartCoroutine(waitBeforeRemoveShield());
+        StartCoroutine(cooldownDefense());
+    }
+
+    public void findAllyToHeal()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
+
+        Rigidbody playerToHeal = null;
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            Rigidbody targetRigidBody = colliders[i].GetComponent<Rigidbody>();
+
+            if (!targetRigidBody)
+                continue;
+            if(playerToHeal == null)
+            {
+                playerToHeal = targetRigidBody;
+            }
+            else
+            {
+
+            }
+           
+        }
+    }
+
+    public void calculateHeal()
+    {
 
     }
+
+    public IEnumerator waitBeforeRemoveShield()
+    {
+        yield return new WaitForSeconds(2.0f);
+        healActive = false;
+        Destroy(go);
+    }
+
+    public IEnumerator cooldownDefense()
+    {
+        yield return new WaitForSeconds(10.0f);
+        cooldownHeal = false;
+    }
+
 
     public void activateUlti()
     {

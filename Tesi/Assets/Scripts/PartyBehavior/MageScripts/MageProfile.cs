@@ -36,7 +36,7 @@ public class MageProfile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        totalhp = partyData.hpTank;
+        totalhp = partyData.hpMage;
 
         currenthp = totalhp;
 

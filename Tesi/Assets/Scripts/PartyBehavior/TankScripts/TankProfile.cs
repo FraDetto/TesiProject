@@ -24,6 +24,7 @@ public class TankProfile : MonoBehaviour
     private GameObject go;
     private Transform pointSpawnSword;
     private Transform pointSpawnShield;
+    private Transform pointSpawnHealHealer;
 
     private float timeForSpecial = 16.0f;
 
@@ -41,6 +42,7 @@ public class TankProfile : MonoBehaviour
 
         pointSpawnSword = transform.GetChild(1);
         pointSpawnShield = transform.GetChild(2);
+        pointSpawnHealHealer = transform.GetChild(3);
 
         StartCoroutine(waitAfterUlti());
     }
