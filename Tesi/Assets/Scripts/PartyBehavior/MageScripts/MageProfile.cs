@@ -6,7 +6,7 @@ public class MageProfile : MonoBehaviour
 {
     private float totalhp;
     [SerializeField] private float currenthp;
-    [SerializeField] private float shield;
+    [SerializeField] private float shieldValue;
 
     [SerializeField] private float damage;
     [SerializeField] private float armor;

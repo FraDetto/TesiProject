@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BruiserProfile : MonoBehaviour
+public class BruiserProfile : aProfile
 {
     private float totalhp;
     [SerializeField] private float currenthp;
-    [SerializeField] private float shield;
+    [SerializeField] private float shieldValue;
 
     [SerializeField] private float damage;
     [SerializeField] private float armor;
@@ -27,7 +27,7 @@ public class BruiserProfile : MonoBehaviour
     private Transform HealSignSpawnPoint;
     private Rigidbody myRB;
 
-    public PartyData partyData;
+    //public PartyData partyData;
 
     // Start is called before the first frame update
     void Start()
