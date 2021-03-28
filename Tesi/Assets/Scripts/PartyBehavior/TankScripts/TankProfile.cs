@@ -5,10 +5,11 @@ using UnityEngine;
 public class TankProfile : MonoBehaviour
 {
     private float totalhp;
-    private float currenthp;
+    [SerializeField] private float currenthp;
+    [SerializeField] private float shield;
 
-    private float damage;
-    private float armor;
+    [SerializeField] private float damage;
+    [SerializeField] private float armor;
     private bool cooldownSword = false;
     public bool cooldownShield = false;
     public bool cooldownSpecial = true;

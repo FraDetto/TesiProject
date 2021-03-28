@@ -6,9 +6,10 @@ public class BruiserProfile : MonoBehaviour
 {
     private float totalhp;
     [SerializeField] private float currenthp;
+    [SerializeField] private float shield;
 
-    private float damage;
-    private float armor;
+    [SerializeField] private float damage;
+    [SerializeField] private float armor;
     private bool cooldownSword = false;
     public bool cooldownHeal = false;
     public bool isHealing = false;

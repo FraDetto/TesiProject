@@ -5,9 +5,11 @@ using UnityEngine;
 public class HealerProfile : MonoBehaviour
 {
     private float totalhp;
-    private float currenthp;
-    private float damage;
-    private float armor;
+    [SerializeField] private float currenthp;
+    [SerializeField] private float shield;
+
+    [SerializeField] private float damage;
+    [SerializeField] private float armor;
 
     public bool shooting = false;
     private bool cooldownAttack = false;
