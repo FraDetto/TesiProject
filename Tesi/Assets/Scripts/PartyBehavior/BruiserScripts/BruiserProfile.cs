@@ -27,7 +27,7 @@ public class BruiserProfile : aProfile
     private Transform HealSignSpawnPoint;
     private Rigidbody myRB;
 
-    //public PartyData partyData;
+    public PartyData partyData;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,7 @@ public class BruiserProfile : aProfile
         return totalhp;
     }
 
-    public float getCurrentLife()
+    protected override float getCurrentLife()
     {
         return currenthp;
     }

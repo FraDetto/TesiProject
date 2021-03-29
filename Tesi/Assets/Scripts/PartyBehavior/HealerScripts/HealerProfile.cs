@@ -63,6 +63,10 @@ public class HealerProfile : aProfile
         return damage;
     }
 
+    protected override float  getCurrentLife()
+    {
+        return currenthp;
+    }
 
     public void addLifeByCure(float cure)
     {
@@ -138,4 +142,6 @@ public class HealerProfile : aProfile
     {
 
     }
+
+
 }

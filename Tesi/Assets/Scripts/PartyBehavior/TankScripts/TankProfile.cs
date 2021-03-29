@@ -29,7 +29,7 @@ public class TankProfile : aProfile
 
     private float timeForSpecial = 16.0f;
 
-    //public PartyData partyData;
+    public PartyData partyData;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +52,7 @@ public class TankProfile : aProfile
         return damage;
     }
 
-    public float getCurrentLife()
+    protected override float getCurrentLife()
     {
         return currenthp;
     }

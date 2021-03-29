@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MageProfile : MonoBehaviour
+public class MageProfile : aProfile
 {
     private float totalhp;
     [SerializeField] private float currenthp;
@@ -63,7 +63,7 @@ public class MageProfile : MonoBehaviour
         return damage;
     }
 
-    public float getCurrentLife()
+    protected override float getCurrentLife()
     {
         return currenthp;
     }
@@ -166,4 +166,6 @@ public class MageProfile : MonoBehaviour
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }
+
+
 }
