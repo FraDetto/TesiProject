@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MageProfile : aProfile
+public class MageProfile : moreSpecificProfile
 {
-    private float totalhp;
+    /*[SerializeField] private float totalhp;
     [SerializeField] private float currenthp;
     [SerializeField] private float shieldValue;
 
     [SerializeField] private float damage;
-    [SerializeField] private float armor;
+    [SerializeField] private float armor;*/
 
     public bool shooting = false;
     private bool cooldown = false;
@@ -30,7 +30,8 @@ public class MageProfile : aProfile
     public  GameObject fireBall;
     public GameObject defenseSpellSign;
 
-    public PartyData partyData;
+    //protected PartyData partyData;
+
     public float speedSpells = 25.0f;
 
     private float timeForSpecial = 16.0f;
@@ -38,12 +39,12 @@ public class MageProfile : aProfile
     // Start is called before the first frame update
     void Start()
     {
-        totalhp = partyData.hpMage;
+        /*totalhp = partyData.hpMage;
 
         currenthp = totalhp;
 
         damage = partyData.damageMage;
-        armor = partyData.armorMage;
+        armor = partyData.armorMage;*/
 
 
         pointSpawnFireBall = transform.GetChild(1);
@@ -57,20 +58,9 @@ public class MageProfile : aProfile
         StartCoroutine(waitAfterUlti());
     }
 
-
     public float getDamage()
     {
-        return damage;
-    }
-
-    protected override float getCurrentLife()
-    {
-        return currenthp;
-    }
-
-    public void addLifeByCure(float cure)
-    {
-        currenthp += cure;
+        return getDamageValue();
     }
 
     private void FixedUpdate()

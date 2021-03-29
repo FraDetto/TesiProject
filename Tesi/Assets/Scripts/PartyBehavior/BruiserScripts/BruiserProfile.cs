@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BruiserProfile : aProfile
+public class BruiserProfile : moreSpecificProfile
 {
-    private float totalhp;
+    /*[SerializeField]private float totalhp;
     [SerializeField] private float currenthp;
     [SerializeField] private float shieldValue;
 
     [SerializeField] private float damage;
-    [SerializeField] private float armor;
+    [SerializeField] private float armor;*/
     private bool cooldownSword = false;
     public bool cooldownHeal = false;
     public bool isHealing = false;
@@ -27,15 +27,15 @@ public class BruiserProfile : aProfile
     private Transform HealSignSpawnPoint;
     private Rigidbody myRB;
 
-    public PartyData partyData;
+   // protected PartyData partyData;
 
     // Start is called before the first frame update
     void Start()
     {
-        totalhp = partyData.hpBruiser;
+       /* totalhp = partyData.hpBruiser;
         currenthp = totalhp;
         damage = partyData.damageBruiser;
-        armor = partyData.armorBruiser;
+        armor = partyData.armorBruiser;*/
 
 
         pointSpawnSword = transform.GetChild(1);
@@ -46,27 +46,13 @@ public class BruiserProfile : aProfile
 
     public float getDamage()
     {
-        return damage;
+        return getDamageValue();
     }
 
-    public float getTotalHp()
-    {
-        return totalhp;
-    }
-
-    protected override float getCurrentLife()
-    {
-        return currenthp;
-    }
-
-    public void addLifeByCure(float cure)
-    {
-        currenthp += cure;
-    }
 
     public bool lifeUnderSixty()
     {
-        if(currenthp <= (totalhp/100 * 60))
+        if(getCurrentLife() <= (getTotalLife()/100 * 60))
         {
             return true;
         }
@@ -109,7 +95,7 @@ public class BruiserProfile : aProfile
 
     public void calculateDamage(float damage)
     {
-        currenthp -= damage;
+        setLifeAfterDamage(damage);
     }
 
     public void healHimSelf()
@@ -124,14 +110,14 @@ public class BruiserProfile : aProfile
     private float calculateHeal()
     {
         float total = 0.0f;
-        total = totalhp / 100.0f * 30.0f;
+        total = getTotalLife() / 100.0f * 30.0f;
         return total;
     }
     public IEnumerator isHealingHimSelf()
     {
         go = Instantiate(HealSign, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
         yield return new WaitForSeconds(1.2f);
-        currenthp += calculateHeal();
+        addLifeByCure(calculateHeal());
         isHealing = false;
         Destroy(go);
     }

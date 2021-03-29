@@ -4,13 +4,16 @@ using UnityEngine;
 
 public abstract class aProfile : MonoBehaviour
 {
-    //protected PartyData partyData;
-    // Start is called before the first frame update
-    /*
-    void Start()
-    {
-        partyData = Resources.Load<PartyData>("../DataManagment/PartyData");
-    }
-    */
+    //
+
     protected abstract float getCurrentLife();
+
+    protected abstract float getTotalLife();
+
+    protected abstract float getDamageValue();
+
+    protected abstract void setLifeAfterDamage(float damage);
+
+    protected abstract void addLifeByCure(float cure);
+
 }

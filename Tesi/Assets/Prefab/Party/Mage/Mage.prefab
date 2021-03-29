@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 556228715601557939}
   - component: {fileID: 3036322873424512080}
   - component: {fileID: 3664607852459145828}
+  - component: {fileID: 3853577795443865132}
   - component: {fileID: 5714320623505951237}
   - component: {fileID: 2097305734944077522}
   - component: {fileID: 2318201167468610763}
@@ -273,6 +274,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3853577795443865132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098627424708326240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  totalhp: 0
+  currenthp: 0
+  shieldValue: 0
+  damage: 0
+  armor: 0
 --- !u!114 &5714320623505951237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +334,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c680a3e4e751784d8d4e39f863ee619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  totalhp: 0
+  currenthp: 0
+  shieldValue: 0
+  damage: 0
+  armor: 0
   shooting: 0
   cooldownDefense: 0
   cooldownSpecial: 1
@@ -322,5 +347,4 @@ MonoBehaviour:
   chargingUlt: 0
   fireBall: {fileID: 5363455615661806282, guid: dc4adf78d1141884bb7f9074171cf1b7, type: 3}
   defenseSpellSign: {fileID: 593407422996108344, guid: 3c4d45c08b09a9c4ca97018559c9ed01, type: 3}
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
   speedSpells: 25

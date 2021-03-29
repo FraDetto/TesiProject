@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1169127070104546552}
   - component: {fileID: 1169127070104546555}
   - component: {fileID: 1169127070104546554}
+  - component: {fileID: 206342578867591768}
   - component: {fileID: 8180474225729765010}
   - component: {fileID: 861954019429596526}
   - component: {fileID: 3936912560977091519}
@@ -118,6 +119,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &206342578867591768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169127070104544005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  totalhp: 0
+  currenthp: 0
+  shieldValue: 0
+  damage: 0
+  armor: 0
 --- !u!114 &8180474225729765010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,12 +179,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b81614f267a54f97d7c569af9d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  totalhp: 0
+  currenthp: 0
+  shieldValue: 0
+  damage: 0
+  armor: 0
   shooting: 0
   cooldownHeal: 0
   cooldownSpecial: 1
   healActive: 0
   windBall: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  m_HealRadius: 30
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   speed: 25
 --- !u!1 &1444606074867208168
 GameObject:

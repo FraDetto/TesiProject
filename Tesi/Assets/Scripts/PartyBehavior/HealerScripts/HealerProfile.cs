@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealerProfile : aProfile
+public class HealerProfile : moreSpecificProfile
 {
-    private float totalhp;
+    /*[SerializeField] private float totalhp;
     [SerializeField] private float currenthp;
     [SerializeField] private float shieldValue;
 
     [SerializeField] private float damage;
-    [SerializeField] private float armor;
+    [SerializeField] private float armor;*/
 
     public bool shooting = false;
     private bool cooldownAttack = false;
@@ -35,18 +35,18 @@ public class HealerProfile : aProfile
     public float m_HealRadius = 30f;
     public LayerMask m_PlayerMask;
 
-    public PartyData partyData;
+    //protected PartyData partyData;
 
     public float speed = 25.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        totalhp = partyData.hpHealer;
+        /*totalhp = partyData.hpHealer;
 
         currenthp = totalhp;
         damage = partyData.damageHealer;
-        armor = partyData.armorHealer;
+        armor = partyData.armorHealer;*/
 
         pointSpawnWindBall = transform.GetChild(1);
         pointSpawnHealHealer = transform.GetChild(2);
@@ -60,17 +60,7 @@ public class HealerProfile : aProfile
 
     public float getDamage()
     {
-        return damage;
-    }
-
-    protected override float  getCurrentLife()
-    {
-        return currenthp;
-    }
-
-    public void addLifeByCure(float cure)
-    {
-        currenthp += cure;
+        return getDamageValue();
     }
 
     private void FixedUpdate()

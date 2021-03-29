@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankProfile : aProfile
+public class TankProfile : moreSpecificProfile
 {
-    private float totalhp;
+    /*[SerializeField] private float totalhp;
     [SerializeField] private float currenthp;
     [SerializeField] private float shieldValue;
 
     [SerializeField] private float damage;
-    [SerializeField] private float armor;
+    [SerializeField] private float armor;*/
+
     private bool cooldownSword = false;
     public bool cooldownShield = false;
     public bool cooldownSpecial = true;
@@ -29,17 +30,17 @@ public class TankProfile : aProfile
 
     private float timeForSpecial = 16.0f;
 
-    public PartyData partyData;
+    //protected PartyData partyData;
 
     // Start is called before the first frame update
     void Start()
     {
-        totalhp = partyData.hpTank;
+        /*totalhp = partyData.hpTank;
 
         currenthp = totalhp;
 
         damage = partyData.damageTank;
-        armor = partyData.armorTank;
+        armor = partyData.armorTank;*/
 
         pointSpawnSword = transform.GetChild(1);
         pointSpawnShield = transform.GetChild(2);
@@ -48,19 +49,11 @@ public class TankProfile : aProfile
         StartCoroutine(waitAfterUlti());
     }
 
-    public float getDamage() {
-        return damage;
+    public float getDamage()
+    {
+        return getDamageValue();
     }
 
-    protected override float getCurrentLife()
-    {
-        return currenthp;
-    }
-
-    public void addLifeByCure(float cure)
-    {
-        currenthp += cure;
-    }
 
     public void attackWithSword()
     {
