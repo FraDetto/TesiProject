@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class HealerProfile : moreSpecificProfile
 {
-    /*[SerializeField] private float totalhp;
-    [SerializeField] private float currenthp;
-    [SerializeField] private float shieldValue;
-
-    [SerializeField] private float damage;
-    [SerializeField] private float armor;*/
 
     public bool shooting = false;
     private bool cooldownAttack = false;
@@ -35,18 +29,12 @@ public class HealerProfile : moreSpecificProfile
     public float m_HealRadius = 30f;
     public LayerMask m_PlayerMask;
 
-    //protected PartyData partyData;
 
     public float speed = 25.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        /*totalhp = partyData.hpHealer;
-
-        currenthp = totalhp;
-        damage = partyData.damageHealer;
-        armor = partyData.armorHealer;*/
 
         pointSpawnWindBall = transform.GetChild(1);
         pointSpawnHealHealer = transform.GetChild(2);
@@ -106,13 +94,37 @@ public class HealerProfile : moreSpecificProfile
 
     public void findAllyToHeal()
     {
-       
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
+        int index = 0;
+        float minLife = 0.0f;
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
+
+            if (!targetProfile)
+                continue;
+            if (i == 0)
+            {
+                index = i;
+                minLife = targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100;
+
+            }
+            else
+            {
+                if(minLife > (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100))
+                {
+                    minLife = (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100);
+                    index = i;
+                }
+            }
+            
+        }
+        float cure = colliders[index].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40;
+        colliders[index].GetComponent<moreSpecificProfile>().publicAddLifeByCure(cure);
     }
 
-    public void calculateHeal()
-    {
 
-    }
 
     public IEnumerator waitBeforeRemoveShield()
     {

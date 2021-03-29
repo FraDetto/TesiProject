@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class BruiserProfile : moreSpecificProfile
 {
-    /*[SerializeField]private float totalhp;
-    [SerializeField] private float currenthp;
-    [SerializeField] private float shieldValue;
-
-    [SerializeField] private float damage;
-    [SerializeField] private float armor;*/
+  
     private bool cooldownSword = false;
     public bool cooldownHeal = false;
     public bool isHealing = false;
@@ -27,16 +22,11 @@ public class BruiserProfile : moreSpecificProfile
     private Transform HealSignSpawnPoint;
     private Rigidbody myRB;
 
-   // protected PartyData partyData;
+
 
     // Start is called before the first frame update
     void Start()
     {
-       /* totalhp = partyData.hpBruiser;
-        currenthp = totalhp;
-        damage = partyData.damageBruiser;
-        armor = partyData.armorBruiser;*/
-
 
         pointSpawnSword = transform.GetChild(1);
         HealSignSpawnPoint = transform.GetChild(2);

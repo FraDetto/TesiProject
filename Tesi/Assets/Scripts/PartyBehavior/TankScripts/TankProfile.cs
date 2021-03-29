@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class TankProfile : moreSpecificProfile
 {
-    /*[SerializeField] private float totalhp;
-    [SerializeField] private float currenthp;
-    [SerializeField] private float shieldValue;
-
-    [SerializeField] private float damage;
-    [SerializeField] private float armor;*/
 
     private bool cooldownSword = false;
     public bool cooldownShield = false;
@@ -30,17 +24,10 @@ public class TankProfile : moreSpecificProfile
 
     private float timeForSpecial = 16.0f;
 
-    //protected PartyData partyData;
-
     // Start is called before the first frame update
     void Start()
     {
-        /*totalhp = partyData.hpTank;
 
-        currenthp = totalhp;
-
-        damage = partyData.damageTank;
-        armor = partyData.armorTank;*/
 
         pointSpawnSword = transform.GetChild(1);
         pointSpawnShield = transform.GetChild(2);

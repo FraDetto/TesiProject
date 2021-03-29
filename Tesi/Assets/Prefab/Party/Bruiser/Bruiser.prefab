@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453ac195805eab6449400087960ef8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyData: {fileID: 0}
+  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
   totalhp: 0
   currenthp: 0
   shieldValue: 0

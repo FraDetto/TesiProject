@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class MageProfile : moreSpecificProfile
 {
-    /*[SerializeField] private float totalhp;
-    [SerializeField] private float currenthp;
-    [SerializeField] private float shieldValue;
-
-    [SerializeField] private float damage;
-    [SerializeField] private float armor;*/
 
     public bool shooting = false;
     private bool cooldown = false;
@@ -30,7 +24,6 @@ public class MageProfile : moreSpecificProfile
     public  GameObject fireBall;
     public GameObject defenseSpellSign;
 
-    //protected PartyData partyData;
 
     public float speedSpells = 25.0f;
 
@@ -39,13 +32,7 @@ public class MageProfile : moreSpecificProfile
     // Start is called before the first frame update
     void Start()
     {
-        /*totalhp = partyData.hpMage;
-
-        currenthp = totalhp;
-
-        damage = partyData.damageMage;
-        armor = partyData.armorMage;*/
-
+       
 
         pointSpawnFireBall = transform.GetChild(1);
 
