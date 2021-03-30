@@ -161,8 +161,6 @@ public class HealerProfile : moreSpecificProfile
         go = Instantiate(windBall, pointSpawnHealHealer.position, transform.rotation, gameObject.transform);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
-        int index = 0;
-        float minLife = 0.0f;
 
         for (int i = 0; i < colliders.Length; i++)
         {

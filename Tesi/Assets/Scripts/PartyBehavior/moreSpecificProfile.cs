@@ -115,8 +115,8 @@ public class moreSpecificProfile : aProfile
 
     public IEnumerator decayShield()
     {
-        //Debug.Log("ULTI IN COOLDOWN");
         yield return new WaitForSeconds(5.0f);
+        resetShield();
         Debug.Log("Scudo FINITO");
     }
 
