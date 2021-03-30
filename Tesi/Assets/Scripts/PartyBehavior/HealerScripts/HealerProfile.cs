@@ -11,6 +11,8 @@ public class HealerProfile : moreSpecificProfile
     public bool cooldownHeal = false;
     public bool cooldownSpecial = true;
     public bool healActive = false;
+    public bool chargingUlt = false;
+
 
     private GameObject boss;
 
@@ -30,6 +32,7 @@ public class HealerProfile : moreSpecificProfile
     public LayerMask m_PlayerMask;
 
 
+    private float timeForSpecial = 16.0f;
     public float speed = 25.0f;
 
     // Start is called before the first frame update
@@ -142,8 +145,50 @@ public class HealerProfile : moreSpecificProfile
 
     public void activateUlti()
     {
+        cooldownSpecial = true;
+
+        StartCoroutine(specialActivation());
+
+        StartCoroutine(waitAfterUlti());
 
     }
 
+    public IEnumerator specialActivation()
+    {
+      
+        chargingUlt = true;
 
+        go = Instantiate(windBall, pointSpawnHealHealer.position, transform.rotation, gameObject.transform);
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
+        int index = 0;
+        float minLife = 0.0f;
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
+
+            if (!targetProfile)
+                continue;
+            targetProfile.publicAddShield(60.0f);
+
+        }
+
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(1.2f);
+        chargingUlt = false;
+        Destroy(go);
+        
+        //Debug.Log("ULTI FINITA");
+    }
+
+  
+
+    public IEnumerator waitAfterUlti()
+    {
+        //Debug.Log("ULTI IN COOLDOWN");
+        yield return new WaitForSeconds(timeForSpecial);
+        cooldownSpecial = false;
+        //Debug.Log("ULTI UP");
+    }
 }

@@ -16,4 +16,9 @@ public abstract class aProfile : MonoBehaviour
 
     protected abstract void addLifeByCure(float cure);
 
+    protected abstract void addShield(float shieldValue);
+
+    protected abstract void resetShield();
+
+
 }

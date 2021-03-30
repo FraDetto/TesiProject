@@ -9,7 +9,7 @@ public class moreSpecificProfile : aProfile
 
     [SerializeField] private float totalhp;
     [SerializeField] private float currenthp;
-    [SerializeField] private float shieldValue;
+    [SerializeField] private float shield;
     [SerializeField] private float damage;
     [SerializeField] private float armor;
 
@@ -100,6 +100,29 @@ public class moreSpecificProfile : aProfile
     public void publicSetLifeAfterDamage(float damage)
     {
         addLifeByCure(damage);
+    }
+
+    protected override void addShield(float shieldValue)
+    {
+        shield += shieldValue;
+        StartCoroutine(decayShield());
+    }
+
+    public void publicAddShield(float shieldValue)
+    {
+        addShield(shieldValue);
+    }
+
+    public IEnumerator decayShield()
+    {
+        //Debug.Log("ULTI IN COOLDOWN");
+        yield return new WaitForSeconds(5.0f);
+        Debug.Log("Scudo FINITO");
+    }
+
+    protected override void resetShield()
+    {
+        shield = 0.0f;
     }
 
 }

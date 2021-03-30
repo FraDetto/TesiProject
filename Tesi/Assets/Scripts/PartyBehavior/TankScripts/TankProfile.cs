@@ -13,7 +13,7 @@ public class TankProfile : moreSpecificProfile
 
 
     public GameObject sword;
-    public GameObject shield;
+    public GameObject shieldTank;
 
 
     private Rigidbody myRB;
@@ -74,7 +74,7 @@ public class TankProfile : moreSpecificProfile
 
     public void defendWithShield()
     {
-        go = Instantiate(shield, pointSpawnShield.position, transform.rotation, gameObject.transform);
+        go = Instantiate(shieldTank, pointSpawnShield.position, transform.rotation, gameObject.transform);
         cooldownShield = true;
         shieldActive = true;
         StartCoroutine(waitBeforeRemoveShield());
