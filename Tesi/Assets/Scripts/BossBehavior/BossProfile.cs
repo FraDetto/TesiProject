@@ -10,6 +10,7 @@ public class BossProfile : MonoBehaviour
 
     public Collider collider;
     public bool isAttacking;
+    public bool isUsingAoE;
     public string target;
     public PartyData partyData;
     // Start is called before the first frame update

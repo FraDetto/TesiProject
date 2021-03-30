@@ -90,6 +90,8 @@ public class HealerProfile : moreSpecificProfile
 
     public void healAlly()
     {
+        healActive = true;
+        cooldownHeal = true;
         findAllyToHeal();
         StartCoroutine(waitBeforeRemoveShield());
         StartCoroutine(cooldownDefense());

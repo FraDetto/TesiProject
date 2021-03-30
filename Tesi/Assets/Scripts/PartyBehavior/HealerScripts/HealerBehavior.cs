@@ -13,6 +13,9 @@ public class HealerBehavior : MonoBehaviour
     public float reactionTime = 2.5f;
     public float distanceRange = 45.0f;
     public bool firstRush = true;
+
+    public float m_HealRadius = 30f;
+    public LayerMask m_PlayerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -161,32 +164,74 @@ public class HealerBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        return true;
+        if (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool AttkToSpec()
     {
-        return true;
+        if ( !GetComponent<HealerProfile>().cooldownSpecial && boss.GetComponent<BossProfile>().isUsingAoE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool HealToAttk()
     {
-        return true;
+        if ( GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool HealToSpec()
     {
-        return true;
+        if (!GetComponent<HealerProfile>().cooldownSpecial && boss.GetComponent<BossProfile>().isUsingAoE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToAttk()
     {
-        return true;
+        if ( GetComponent<HealerProfile>().cooldownHeal || allFullLife())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool SpecToHeal()
     {
-        return true;
+        if (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -214,5 +259,25 @@ public class HealerBehavior : MonoBehaviour
     public void ActiveSpecial()
     {
 
+    }
+
+    public bool allFullLife()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
+        bool flag = true;
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
+
+            if (!targetProfile)
+                continue;
+
+            if (targetProfile.publicGetCurrentLife() != targetProfile.publicGetTotalLife())
+            {
+                flag = false;
+            }
+
+        }
+        return flag;
     }
 }
