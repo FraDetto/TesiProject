@@ -13,12 +13,12 @@ public class SpellsCollider : MonoBehaviour
         switch (characterName)
         {
             case "Mage":
-                damageCharacter = gameObject.GetComponentInParent<MageProfile>().getDamage();
+                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
                 gameObject.GetComponentInParent<MageProfile>().shooting = false;
                 break;
 
             default:
-                damageCharacter = gameObject.GetComponentInParent<HealerProfile>().getDamage();
+                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
                 gameObject.GetComponentInParent<HealerProfile>().shooting = false;
                 break;
         }

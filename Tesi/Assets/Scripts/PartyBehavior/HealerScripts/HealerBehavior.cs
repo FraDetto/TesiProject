@@ -253,12 +253,12 @@ public class HealerBehavior : MonoBehaviour
 
     public void HealAnAlly()
     {
-
+        GetComponent<HealerProfile>().healAlly();
     }
 
     public void ActiveSpecial()
     {
-
+        GetComponent<HealerProfile>().activateUlti();
     }
 
     public bool allFullLife()

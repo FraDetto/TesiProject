@@ -79,7 +79,7 @@ public class moreSpecificProfile : aProfile
 
     public float publicGetDamageValue()
     {
-        return getTotalLife();
+        return getDamageValue();
     }
 
     protected override void addLifeByCure(float cure)

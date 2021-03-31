@@ -47,6 +47,9 @@ public class HealerProfile : moreSpecificProfile
         tank = GameObject.FindGameObjectWithTag("Tank");
         mage = GameObject.FindGameObjectWithTag("Mage");
         bruiser = GameObject.FindGameObjectWithTag("Bruiser");
+
+
+        StartCoroutine(waitAfterUlti());
     }
 
     public float getDamage()
@@ -93,7 +96,7 @@ public class HealerProfile : moreSpecificProfile
         healActive = true;
         cooldownHeal = true;
         findAllyToHeal();
-        StartCoroutine(waitBeforeRemoveShield());
+        StartCoroutine(waitCastHeal());
         StartCoroutine(cooldownDefense());
     }
 
@@ -127,11 +130,12 @@ public class HealerProfile : moreSpecificProfile
         }
         float cure = colliders[index].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40;
         colliders[index].GetComponent<moreSpecificProfile>().publicAddLifeByCure(cure);
+        Debug.Log("STO HEALANDO: " + colliders[index].tag);
     }
 
 
 
-    public IEnumerator waitBeforeRemoveShield()
+    public IEnumerator waitCastHeal()
     {
         yield return new WaitForSeconds(2.0f);
         healActive = false;
@@ -174,12 +178,12 @@ public class HealerProfile : moreSpecificProfile
 
         }
 
-        //Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(1.2f);
+        Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(1.5f);
         chargingUlt = false;
         Destroy(go);
         
-        //Debug.Log("ULTI FINITA");
+        Debug.Log("ULTI FINITA");
     }
 
   
