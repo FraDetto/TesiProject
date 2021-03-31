@@ -363,6 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 1049040770}
   isAttacking: 0
+  isUsingAoE: 0
   target: 
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
 --- !u!65 &1049040770 stripped
@@ -383,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 577165681488225219, guid: f8982895849c30849b054ab374beeb7d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5116847619761412181, guid: f8982895849c30849b054ab374beeb7d, type: 3}
       propertyPath: reactionTime
@@ -503,8 +504,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
     - target: {fileID: 3936912560977091519, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
+      propertyPath: m_HealRadius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936912560977091519, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: m_PlayerMask.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
+      propertyPath: m_HealRadius
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: reactionTime
@@ -513,6 +522,10 @@ PrefabInstance:
     - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: distanceRange
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
+      propertyPath: m_PlayerMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}

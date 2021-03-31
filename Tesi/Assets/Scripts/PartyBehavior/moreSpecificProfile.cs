@@ -69,7 +69,7 @@ public class moreSpecificProfile : aProfile
 
     public float publicGetCurrentLife()
     {
-        return getTotalLife();
+        return getCurrentLife();
     }
 
     protected override float getDamageValue()
@@ -84,7 +84,16 @@ public class moreSpecificProfile : aProfile
 
     protected override void addLifeByCure(float cure)
     {
-        currenthp += cure;
+     
+        if ( (currenthp + cure)<= totalhp)
+        {
+            currenthp += cure;
+        }
+        else
+        {
+            currenthp = totalhp;
+        }
+        
     }
 
     public void publicAddLifeByCure(float cure)
@@ -99,7 +108,7 @@ public class moreSpecificProfile : aProfile
 
     public void publicSetLifeAfterDamage(float damage)
     {
-        addLifeByCure(damage);
+        setLifeAfterDamage(damage);
     }
 
     protected override void addShield(float shieldValue)

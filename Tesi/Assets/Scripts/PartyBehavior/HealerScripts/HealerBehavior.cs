@@ -14,7 +14,7 @@ public class HealerBehavior : MonoBehaviour
     public float distanceRange = 45.0f;
     public bool firstRush = true;
 
-    public float m_HealRadius = 30f;
+    public float m_HealRadius = 100f;
     public LayerMask m_PlayerMask;
     // Start is called before the first frame update
     void Start()
@@ -151,7 +151,7 @@ public class HealerBehavior : MonoBehaviour
 
     public void combactFase()
     {
-        Debug.Log("Combact Fase HEALER");
+        //Debug.Log("Combact Fase HEALER");
         fsmCombact.Update();
     }
 
@@ -164,8 +164,10 @@ public class HealerBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
+        Debug.Log("SONO IN TEST" + (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE)));
         if (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE))
         {
+            Debug.Log("SONO IN TRUE");
             return true;
         }
         else
@@ -263,21 +265,25 @@ public class HealerBehavior : MonoBehaviour
 
     public bool allFullLife()
     {
+        
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
+       
         bool flag = true;
         for (int i = 0; i < colliders.Length; i++)
         {
             moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
-
             if (!targetProfile)
                 continue;
 
+
             if (targetProfile.publicGetCurrentLife() != targetProfile.publicGetTotalLife())
             {
+                Debug.Log("Trovato uno ferito");
                 flag = false;
             }
 
         }
+
         return flag;
     }
 }

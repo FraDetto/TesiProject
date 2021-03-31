@@ -18,6 +18,7 @@ public class SwordCollider : MonoBehaviour
 
             default:
                 damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                gameObject.GetComponentInParent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
                 break;
         }
 

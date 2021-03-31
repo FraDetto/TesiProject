@@ -28,7 +28,7 @@ public class HealerProfile : moreSpecificProfile
     public GameObject windBall;
 
 
-    public float m_HealRadius = 30f;
+    public float m_HealRadius = 100f;
     public LayerMask m_PlayerMask;
 
 
@@ -88,6 +88,7 @@ public class HealerProfile : moreSpecificProfile
 
     public void healAlly()
     {
+        Debug.Log("SONO IN HEALALLY" );
         healActive = true;
         cooldownHeal = true;
         findAllyToHeal();
@@ -105,6 +106,7 @@ public class HealerProfile : moreSpecificProfile
         {
             moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
 
+            Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
             if (!targetProfile)
                 continue;
             if (i == 0)

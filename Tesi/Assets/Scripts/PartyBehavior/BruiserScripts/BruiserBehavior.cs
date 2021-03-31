@@ -142,7 +142,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public void combactFase()
     {
-        Debug.Log("Combact Fase BBRUISER");
+        //Debug.Log("Combact Fase BBRUISER");
         fsmCombact.Update();
     }
 
