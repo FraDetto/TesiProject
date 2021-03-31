@@ -34,11 +34,6 @@ public class BruiserProfile : moreSpecificProfile
         StartCoroutine(waitAfterUlti());
     }
 
-    public float getDamage()
-    {
-        return getDamageValue();
-    }
-
 
     public bool lifeUnderSixty()
     {

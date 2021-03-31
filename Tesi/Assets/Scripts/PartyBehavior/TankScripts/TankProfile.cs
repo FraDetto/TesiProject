@@ -36,11 +36,6 @@ public class TankProfile : moreSpecificProfile
         StartCoroutine(waitAfterUlti());
     }
 
-    public float getDamage()
-    {
-        return getDamageValue();
-    }
-
 
     public void attackWithSword()
     {

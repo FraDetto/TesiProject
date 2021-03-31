@@ -52,11 +52,6 @@ public class HealerProfile : moreSpecificProfile
         StartCoroutine(waitAfterUlti());
     }
 
-    public float getDamage()
-    {
-        return getDamageValue();
-    }
-
     private void FixedUpdate()
     {
         if (shooting)

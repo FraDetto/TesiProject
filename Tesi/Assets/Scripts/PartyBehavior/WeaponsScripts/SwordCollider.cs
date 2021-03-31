@@ -13,11 +13,11 @@ public class SwordCollider : MonoBehaviour
         switch (characterName)
         {
             case "Tank":
-                damageCharacter = gameObject.GetComponentInParent<TankProfile>().getDamage();
+                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
                 break;          
 
             default:
-                damageCharacter = gameObject.GetComponentInParent<BruiserProfile>().getDamage();
+                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
                 break;
         }
 
