@@ -360,14 +360,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bruiser
       objectReference: {fileID: 0}
-    - target: {fileID: 577165681488225219, guid: f8982895849c30849b054ab374beeb7d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5116847619761412181, guid: f8982895849c30849b054ab374beeb7d, type: 3}
-      propertyPath: reactionTime
-      value: 1.2
-      objectReference: {fileID: 0}
     - target: {fileID: 5327228082424320287, guid: f8982895849c30849b054ab374beeb7d, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -412,10 +404,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7490145434396163932, guid: f8982895849c30849b054ab374beeb7d, type: 3}
-      propertyPath: partyData
-      value: 
-      objectReference: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8982895849c30849b054ab374beeb7d, type: 3}
 --- !u!1001 &1169127070248072442
@@ -428,10 +416,6 @@ PrefabInstance:
     - target: {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: m_Name
       value: Healer
-      objectReference: {fileID: 0}
-    - target: {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1169127070104546558, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: m_RootOrder
@@ -478,33 +462,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3936912560977091519, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: fireBall
+      propertyPath: healingText
       value: 
-      objectReference: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
-    - target: {fileID: 3936912560977091519, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: m_HealRadius
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3936912560977091519, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: m_PlayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: m_HealRadius
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: reactionTime
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: distanceRange
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 8180474225729765010, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-      propertyPath: m_PlayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5004143338378178936, guid: 85ff0493af34b0b4dad70ccb13b9f189, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
 --- !u!1001 &1557533995677620027
@@ -514,10 +474,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1123545151, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: distanceRange
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 4683753665356790898, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -562,21 +518,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: reactionTime
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8269627484573742231, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: distanceRange
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_Name
       value: Tank
-      objectReference: {fileID: 0}
-    - target: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
@@ -709,26 +653,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2318201167468610763, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-      propertyPath: speed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2318201167468610763, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-      propertyPath: fireBall
-      value: 
-      objectReference: {fileID: 5363455615661806282, guid: dc4adf78d1141884bb7f9074171cf1b7, type: 3}
-    - target: {fileID: 2318201167468610763, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-      propertyPath: partyData
-      value: 
-      objectReference: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
-    - target: {fileID: 5714320623505951237, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-      propertyPath: reactionTime
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5714320623505951237, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-      propertyPath: distanceRange
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_Name
       value: Mage

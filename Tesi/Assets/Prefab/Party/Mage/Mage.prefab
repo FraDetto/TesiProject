@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1215835857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1215835858}
+  m_Layer: 0
+  m_Name: pointSpawnHealHealer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1215835858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215835857}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8796819102903675790}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &98837049992592962
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4695128686214483473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.19, z: 0}
+  m_LocalPosition: {x: 0, y: 1.19, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8796819102903675790}
@@ -193,6 +223,7 @@ Transform:
   - {fileID: 7386487332143358816}
   - {fileID: 3004653383143027183}
   - {fileID: 8299227313537156578}
+  - {fileID: 1215835858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -289,7 +320,7 @@ MonoBehaviour:
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
   totalhp: 0
   currenthp: 0
-  shieldValue: 0
+  shield: 0
   damage: 0
   armor: 0
 --- !u!114 &5714320623505951237
@@ -304,8 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af2ce2b1bb365148aa90a3e9914e266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactionTime: 1
-  distanceRange: 15
+  reactionTime: 2.5
+  distanceRange: 45
   firstRush: 1
 --- !u!114 &2097305734944077522
 MonoBehaviour:
@@ -337,7 +368,7 @@ MonoBehaviour:
   partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
   totalhp: 0
   currenthp: 0
-  shieldValue: 0
+  shield: 0
   damage: 0
   armor: 0
   shooting: 0

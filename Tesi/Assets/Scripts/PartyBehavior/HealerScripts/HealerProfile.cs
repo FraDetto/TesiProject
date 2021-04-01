@@ -24,7 +24,9 @@ public class HealerProfile : moreSpecificProfile
     private Transform pointSpawnHealHealer;
     private Rigidbody myRB;
     private GameObject go;
+    private GameObject hs;
 
+    public GameObject healingText;
     public GameObject windBall;
 
 
@@ -127,6 +129,8 @@ public class HealerProfile : moreSpecificProfile
         }
         float cure = colliders[index].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40;
         colliders[index].GetComponent<moreSpecificProfile>().publicAddLifeByCure(cure);
+        hs = Instantiate(healingText, colliders[index].transform.Find("pointSpawnHealHealer").position, colliders[index].transform.rotation, colliders[index].transform);
+        
         Debug.Log("STO HEALANDO: " + colliders[index].tag);
     }
 
@@ -136,7 +140,7 @@ public class HealerProfile : moreSpecificProfile
     {
         yield return new WaitForSeconds(2.0f);
         healActive = false;
-        Destroy(go);
+        Destroy(hs);
     }
 
     public IEnumerator cooldownDefense()
