@@ -2,37 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossProfile : MonoBehaviour
+public class BossProfile : moreSpecificProfile
 {
-    private float hp;
-    private float damage;
-    private float armor;
-
+ 
     public Collider collider;
     public bool isAttacking;
     public bool isUsingAoE;
     public string target;
-    public PartyData partyData;
+  
     // Start is called before the first frame update
 
-    void Start()
-    {
-        hp = partyData.hpBoss;
-        damage = partyData.damageBoss;
-        armor = partyData.armorBoss;
-    }
 
     public void takeDamageFromSword(float damageFromCharacter)
     {
-        hp -= damageFromCharacter;
-        Debug.Log("OH NO MI HAI COLPITO " + hp);
+        publicSetLifeAfterDamage(damageFromCharacter);
+        
+        Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
 
     }
 
     public void takeDamageFromSpell(float damageFromCharacter)
     {
-        hp -= damageFromCharacter;
-        Debug.Log("OH NO SPELL MI HAI COLPITO " + hp);
+        publicSetLifeAfterDamage(damageFromCharacter);
+        Debug.Log("OH NO SPELL MI HAI COLPITO " + publicGetCurrentLife());
     }
 }
 

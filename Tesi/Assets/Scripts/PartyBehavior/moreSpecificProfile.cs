@@ -41,11 +41,18 @@ public class moreSpecificProfile : aProfile
                 armor = partyData.armorMage;
                 break;
 
-            default:
+            case "Healer":
                 totalhp = partyData.hpHealer;
                 currenthp = totalhp;
                 damage = partyData.damageHealer;
                 armor = partyData.armorHealer;
+                break;
+
+            default:
+                totalhp = partyData.hpBoss;
+                currenthp = totalhp;
+                damage = partyData.damageBoss;
+                armor = partyData.armorBoss;
                 break;
         }
 
