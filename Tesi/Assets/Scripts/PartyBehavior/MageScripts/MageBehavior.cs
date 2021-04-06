@@ -26,6 +26,10 @@ public class MageBehavior : MonoBehaviour
         takSafeSpot.enterActions.Add(takSafeSpotFromBoss);
         takSafeSpot.stayActions.Add(takSafeSpotFromBoss);
 
+        FSMState chaseBossTooDistance = new FSMState();
+        chaseBossTooDistance.enterActions.Add(chaseDistanceBoss);
+        chaseBossTooDistance.stayActions.Add(chaseDistanceBoss);
+
 
         FSMState Combact = new FSMState();
         Combact.enterActions.Add(combactFase);
@@ -35,10 +39,16 @@ public class MageBehavior : MonoBehaviour
         FSMTransition t1 = new FSMTransition(safeSpotToCombact);
         FSMTransition t2 = new FSMTransition(CombactToSafeSpot);
 
+        FSMTransition t9 = new FSMTransition(chaseBossToCombact);
+        FSMTransition t10 = new FSMTransition(combactToChaseBoss);
+
 
         // Link states with transitions
         takSafeSpot.AddTransition(t1, Combact);
         Combact.AddTransition(t2, takSafeSpot);
+
+        chaseBossTooDistance.AddTransition(t9, Combact);
+        Combact.AddTransition(t10, chaseBossTooDistance);
 
 
 
@@ -127,6 +137,16 @@ public class MageBehavior : MonoBehaviour
         return !safeSpotToCombact();
     }
 
+    public bool chaseBossToCombact()
+    {
+        return false;
+    }
+
+    public bool combactToChaseBoss()
+    {
+        return false;
+    }
+
     // ACTIONS
 
     public void takSafeSpotFromBoss()//allontanati dal boss
@@ -154,6 +174,11 @@ public class MageBehavior : MonoBehaviour
         fsmCombact.Update();
     }
 
+
+    public void chaseDistanceBoss()
+    {
+
+    }
 
 
     //////////////////// COMBACT FSM //////////////////////////////
