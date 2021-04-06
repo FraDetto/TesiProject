@@ -7,9 +7,12 @@ public class HealerMovement : MonoBehaviour
     private GameObject boss;
     private Rigidbody myRB;
 
-    public float distanceRange = 45.0f;
+    [SerializeField]private float distanceRangeDown;
+    [SerializeField]private float distanceRangeUp;
+
     public float speed = 15.0f;
     public bool chaseFlag = false;
+    public bool distanceFlag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,22 +20,39 @@ public class HealerMovement : MonoBehaviour
 
         myRB = GetComponent<Rigidbody>();
 
+        distanceRangeDown = GetComponent<HealerBehavior>().distanceRangeDown;
+        distanceRangeUp = GetComponent<HealerBehavior>().distanceRangeUp;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (chaseFlag)
+        if (distanceFlag)
         {
             Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
             Vector3 toBossPos = (verticalAdj - transform.position);
 
-            if ((boss.transform.position - myRB.transform.position).magnitude < distanceRange)
+            if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
             {
                 transform.LookAt(verticalAdj);
                 myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
             }
         }
+
+        if (chaseFlag)
+        {
+            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+            Vector3 toBossPos = (verticalAdj - transform.position);
+
+            if ((boss.transform.position - myRB.transform.position).magnitude > distanceRangeUp)
+            {
+                transform.LookAt(verticalAdj);
+                myRB.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
+            }
+        }
+
+
 
     }
 }

@@ -11,7 +11,8 @@ public class MageBehavior : MonoBehaviour
     private Rigidbody myRB;
 
     public float reactionTime = 2.5f;
-    public float distanceRange = 45.0f;
+    public float distanceRangeDown = 45.0f;
+    public float distanceRangeUp = 60.0f;
     public bool firstRush = true;
     // Start is called before the first frame update
     void Start()
@@ -26,9 +27,6 @@ public class MageBehavior : MonoBehaviour
         takSafeSpot.enterActions.Add(takSafeSpotFromBoss);
         takSafeSpot.stayActions.Add(takSafeSpotFromBoss);
 
-        FSMState chaseBossTooDistance = new FSMState();
-        chaseBossTooDistance.enterActions.Add(chaseDistanceBoss);
-        chaseBossTooDistance.stayActions.Add(chaseDistanceBoss);
 
 
         FSMState Combact = new FSMState();
@@ -39,16 +37,12 @@ public class MageBehavior : MonoBehaviour
         FSMTransition t1 = new FSMTransition(safeSpotToCombact);
         FSMTransition t2 = new FSMTransition(CombactToSafeSpot);
 
-        FSMTransition t9 = new FSMTransition(chaseBossToCombact);
-        FSMTransition t10 = new FSMTransition(combactToChaseBoss);
 
 
         // Link states with transitions
         takSafeSpot.AddTransition(t1, Combact);
         Combact.AddTransition(t2, takSafeSpot);
 
-        chaseBossTooDistance.AddTransition(t9, Combact);
-        Combact.AddTransition(t10, chaseBossTooDistance);
 
 
 
@@ -121,9 +115,9 @@ public class MageBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        if ((boss.transform.position - myRB.transform.position).magnitude >= distanceRange)
+        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude<= distanceRangeUp) )
         {
-            GetComponent<MageMovement>().chaseFlag = false;
+            GetComponent<MageMovement>().distanceFlag = false;
             return true;
         }
         else
@@ -136,34 +130,29 @@ public class MageBehavior : MonoBehaviour
     {
         return !safeSpotToCombact();
     }
-
-    public bool chaseBossToCombact()
-    {
-        return false;
-    }
-
-    public bool combactToChaseBoss()
-    {
-        return false;
-    }
+    
 
     // ACTIONS
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
-        /*
-        Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-        Vector3 toBossPos = (verticalAdj - transform.position);
-
-        if (toBossPos.magnitude <= distanceRange)
+        if ( (boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown )
         {
-            transform.LookAt(verticalAdj);
-            myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
-        }*/
-        if (!GetComponent<MageMovement>().chaseFlag)
-        {
-            GetComponent<MageMovement>().chaseFlag = true;
+            if (!GetComponent<MageMovement>().distanceFlag)
+            {
+                GetComponent<MageMovement>().distanceFlag = true;
+            }
         }
+        else
+        {
+            if (!GetComponent<MageMovement>().chaseFlag)
+            {
+                GetComponent<MageMovement>().chaseFlag = true;
+            }
+        }
+
+
+        
     }
 
 
@@ -177,7 +166,10 @@ public class MageBehavior : MonoBehaviour
 
     public void chaseDistanceBoss()
     {
-
+        if (!GetComponent<MageMovement>().chaseFlag)
+        {
+            GetComponent<MageMovement>().chaseFlag = true;
+        }
     }
 
 

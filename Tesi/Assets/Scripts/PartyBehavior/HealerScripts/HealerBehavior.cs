@@ -11,7 +11,8 @@ public class HealerBehavior : MonoBehaviour
     private Rigidbody myRB;
 
     public float reactionTime = 2.5f;
-    public float distanceRange = 45.0f;
+    public float distanceRangeDown = 45.0f;
+    public float distanceRangeUp = 60.0f;
     public bool firstRush = true;
 
     public float m_HealRadius = 100f;
@@ -113,9 +114,9 @@ public class HealerBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        if ((boss.transform.position - myRB.transform.position).magnitude >= distanceRange)
+        if (((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude <= distanceRangeUp))
         {
-            GetComponent<HealerMovement>().chaseFlag = false;
+            GetComponent<HealerMovement>().distanceFlag = false;
             return true;
         }
         else
@@ -132,17 +133,19 @@ public class HealerBehavior : MonoBehaviour
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
-        /*Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-        Vector3 toBossPos = (verticalAdj - transform.position);
-
-        if (toBossPos.magnitude <= distanceRange)
+        if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
         {
-            transform.LookAt(verticalAdj);
-            myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
-        }*/
-        if (!GetComponent<HealerMovement>().chaseFlag)
+            if (!GetComponent<HealerMovement>().distanceFlag)
+            {
+                GetComponent<HealerMovement>().distanceFlag = true;
+            }
+        }
+        else
         {
-            GetComponent<HealerMovement>().chaseFlag = true;
+            if (!GetComponent<HealerMovement>().chaseFlag)
+            {
+                GetComponent<HealerMovement>().chaseFlag = true;
+            }
         }
 
     }
