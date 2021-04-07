@@ -1,0 +1,142 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BruiserProfile : moreSpecificProfile
+{
+  
+    private bool cooldownSword = false;
+    public bool cooldownHeal = false;
+    public bool isHealing = false;
+    public bool cooldownSpecial = true;
+    public bool swordActive = false;
+    public bool ultiRunning = false;
+
+    private float timeForSpecial = 16.0f;
+
+    public GameObject sword;
+    public GameObject HealSign;
+
+    private GameObject go;
+    private Transform pointSpawnSword;
+    private Transform HealSignSpawnPoint;
+    private Rigidbody myRB;
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        pointSpawnSword = transform.GetChild(1);
+        HealSignSpawnPoint = transform.GetChild(2);
+
+        StartCoroutine(waitAfterUlti());
+    }
+
+
+    public bool lifeUnderSixty()
+    {
+        if(getCurrentLife() <= (getTotalLife()/100 * 60))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void attackWithSword()
+    {
+        if (!cooldownSword)
+        {
+            go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
+            if (ultiRunning)
+            {
+                go.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            }
+            cooldownSword = true;
+            swordActive = true;
+
+            //calculateDamage(damage);
+
+            StartCoroutine(waitBeforeRemoveSword());
+            StartCoroutine(cooldownAttack());
+        }
+    }
+    public IEnumerator waitBeforeRemoveSword()
+    {
+        yield return new WaitForSeconds(1.4f);
+        swordActive = false;
+        Destroy(go);
+    }
+
+    public IEnumerator cooldownAttack()
+    {
+        yield return new WaitForSeconds(2.5f);
+        cooldownSword = false;
+    }
+
+    public void calculateDamage(float damage)
+    {
+        setLifeAfterDamage(damage);
+    }
+
+    public void healHimSelf()
+    {
+        cooldownHeal = true;
+        isHealing = true;
+        StartCoroutine(isHealingHimSelf());
+        
+        StartCoroutine(cooldownHealing());
+    }
+
+    private float calculateHeal()
+    {
+        float total = 0.0f;
+        total = getTotalLife() / 100.0f * 30.0f;
+        return total;
+    }
+    public IEnumerator isHealingHimSelf()
+    {
+        go = Instantiate(HealSign, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
+        yield return new WaitForSeconds(1.2f);
+        addLifeByCure(calculateHeal());
+        isHealing = false;
+        Destroy(go);
+    }
+
+    public IEnumerator cooldownHealing()
+    {
+        yield return new WaitForSeconds(10.0f);
+        cooldownHeal = false;
+    }
+
+    public void activateUlti()
+    {
+        ultiRunning = true;
+        cooldownSpecial = true;
+
+        StartCoroutine(specialDuration());
+
+        StartCoroutine(waitAfterUlti());
+    }
+
+    public IEnumerator specialDuration()
+    {
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(6.2f);
+        ultiRunning = false;
+        
+        //Debug.Log("ULTI FINITA");
+    }
+
+    public IEnumerator waitAfterUlti()
+    {
+        //Debug.Log("ULTI IN COOLDOWN");
+        yield return new WaitForSeconds(timeForSpecial);
+        cooldownSpecial = false;
+        //Debug.Log("ULTI UP");
+    }
+}

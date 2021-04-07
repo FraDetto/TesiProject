@@ -1,0 +1,282 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MageBehavior : MonoBehaviour
+{
+    private FSM fsmMain;
+    private FSM fsmCombact;
+
+    private GameObject boss;
+    private Rigidbody myRB;
+
+    public float reactionTime = 2.5f;
+    public float distanceRangeDown = 45.0f;
+    public float distanceRangeUp = 60.0f;
+    public bool firstRush = true;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        boss = GameObject.FindGameObjectWithTag("Boss");
+        myRB = GetComponent<Rigidbody>();
+
+
+        ////////// MAIN FSM ///////////////////
+        FSMState takSafeSpot = new FSMState();
+        takSafeSpot.enterActions.Add(takSafeSpotFromBoss);
+        takSafeSpot.stayActions.Add(takSafeSpotFromBoss);
+
+
+
+        FSMState Combact = new FSMState();
+        Combact.enterActions.Add(combactFase);
+        Combact.stayActions.Add(combactFase);
+
+        // Define transitions
+        FSMTransition t1 = new FSMTransition(safeSpotToCombact);
+        FSMTransition t2 = new FSMTransition(CombactToSafeSpot);
+
+
+
+        // Link states with transitions
+        takSafeSpot.AddTransition(t1, Combact);
+        Combact.AddTransition(t2, takSafeSpot);
+
+
+
+
+
+        //////////// COMBACT FSM /////////////////
+        FSMState Attack = new FSMState();
+        Attack.enterActions.Add(AttackBoss);
+        Attack.stayActions.Add(AttackBoss);
+
+        FSMState Defend = new FSMState();
+        Defend.enterActions.Add(DefendFromAttack);
+
+        FSMState Special = new FSMState();
+        Special.enterActions.Add(ActiveSpecial);
+
+        // Define transitions
+
+        FSMTransition t3 = new FSMTransition(AttkToSpec);
+        FSMTransition t4 = new FSMTransition(AttkToDef);
+        FSMTransition t5 = new FSMTransition(DefToAttk); // different from t1
+        FSMTransition t6 = new FSMTransition(DefToSpec);
+        FSMTransition t7 = new FSMTransition(SpecToAttk);
+        FSMTransition t8 = new FSMTransition(SpecToDef);
+
+
+        // Link states with transitions
+        Attack.AddTransition(t3, Special);
+        Attack.AddTransition(t4, Defend);
+
+
+        Defend.AddTransition(t5, Attack);
+        Defend.AddTransition(t6, Special);
+
+        Special.AddTransition(t7, Attack);
+        Special.AddTransition(t8, Defend);
+
+        // Setup a FSA at initial state
+        fsmCombact = new FSM(Attack);
+
+
+        // Setup a FSA at initial state
+        fsmMain = new FSM(takSafeSpot);
+
+
+
+
+        // Start monitoring
+        StartCoroutine(Fight());
+    }
+
+
+
+
+    // Periodic update, run forever
+    public IEnumerator Fight()
+    {
+        while (true)
+        {
+            fsmMain.Update();
+            yield return new WaitForSeconds(reactionTime);
+        }
+    }
+
+
+
+
+    /////////////////// MAIN FSM ////////////////////////////////
+
+    // CONDITIONS
+
+    public bool safeSpotToCombact()
+    {
+        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude<= distanceRangeUp) )
+        {
+            GetComponent<MageMovement>().distanceFlag = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CombactToSafeSpot()
+    {
+        return !safeSpotToCombact();
+    }
+    
+
+    // ACTIONS
+
+    public void takSafeSpotFromBoss()//allontanati dal boss
+    {
+        if ( (boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown )
+        {
+            if (!GetComponent<MageMovement>().distanceFlag)
+            {
+                GetComponent<MageMovement>().distanceFlag = true;
+            }
+        }
+        else
+        {
+            if (!GetComponent<MageMovement>().chaseFlag)
+            {
+                GetComponent<MageMovement>().chaseFlag = true;
+            }
+        }
+
+
+        
+    }
+
+
+
+    public void combactFase()
+    {
+        Debug.Log("Combact Fase Mage");
+        fsmCombact.Update();
+    }
+
+
+    public void chaseDistanceBoss()
+    {
+        if (!GetComponent<MageMovement>().chaseFlag)
+        {
+            GetComponent<MageMovement>().chaseFlag = true;
+        }
+    }
+
+
+    //////////////////// COMBACT FSM //////////////////////////////
+
+    // CONDITIONS
+
+
+    public bool AttkToDef()
+    {
+       
+        if (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public bool AttkToSpec()
+    {
+        if (!GetComponent<MageProfile>().cooldownSpecial)
+        {
+            Debug.Log("ATTKSPEC");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool DefToAttk()
+    {
+        if (GetComponent<MageProfile>().cooldownSpecial && !GetComponent<MageProfile>().defenseActive)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool DefToSpec()
+    {
+        if (!GetComponent<MageProfile>().cooldownSpecial && !GetComponent<MageProfile>().defenseActive)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool SpecToAttk()
+    {
+        if (!GetComponent<MageProfile>().chargingUlt && (GetComponent<MageProfile>().cooldownDefense || (!boss.GetComponent<BossProfile>().isAttacking || !boss.GetComponent<BossProfile>().target.Equals(transform.tag)) ))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool SpecToDef()
+    {
+        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag))))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    // ACTIONS
+
+    public void AttackBoss()
+    {
+        if (!firstRush)
+        {
+           // Debug.Log("ATTACK BOSS !FIRSTRUSH");
+            GetComponent<MageProfile>().attackWithMagic();
+        }
+        else
+        {
+           //Debug.Log("ATTACK BOSS FIRST RUSH");
+            firstRush = false;
+        }
+    }
+
+    public void DefendFromAttack()
+    {
+        GetComponent<MageProfile>().defendWithSpell();
+    }
+
+    public void ActiveSpecial()
+    {
+        GetComponent<MageProfile>().activateUlti();
+    }
+}
