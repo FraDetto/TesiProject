@@ -86,3 +86,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 Tesi/Temp/UnityLockfile
+
+#PYTHON DEPENDECES
+Tesi/venv/*
