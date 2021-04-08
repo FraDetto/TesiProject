@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.MLAgents;
 
-public class BossBehavior : MonoBehaviour
+public class BossBehavior : Agent
 {
     // Start is called before the first frame update
     void Start()
