@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 
 public class BossBehavior : Agent
 {
@@ -11,9 +12,13 @@ public class BossBehavior : Agent
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void CollectObservations(VectorSensor sensor)
     {
-        
+      
+    }
+
+    public override void OnActionReceived(float[] vectorAction)
+    {
+       
     }
 }
