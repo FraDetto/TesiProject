@@ -344,11 +344,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.071, y: 0, z: 0}
---- !u!65 &1049040770 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 2438159072496211589, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-  m_PrefabInstance: {fileID: 5475297297734807884}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1460637570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -543,14 +538,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1049040769, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: collider
-      value: 
-      objectReference: {fileID: 1049040770}
-    - target: {fileID: 1049040769, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: partyData
-      value: 
-      objectReference: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
     - target: {fileID: 3359959793238077300, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -601,65 +588,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
---- !u!1 &5475297297734807885 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3359959793238077300, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-  m_PrefabInstance: {fileID: 5475297297734807884}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5475297297734807886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5475297297734807885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
---- !u!114 &5475297297734807887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5475297297734807885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf074f68fb5ad654d95cf8551ec05c39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
---- !u!114 &5475297297734807888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5475297297734807885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BrainParameters:
-    VectorObservationSize: 1
-    NumStackedVectorObservations: 1
-    VectorActionSize: 01000000
-    VectorActionDescriptions: []
-    VectorActionSpaceType: 0
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: My Behavior
-  TeamId: 0
-  m_UseChildSensors: 1
 --- !u!1001 &6511954190391844738
 PrefabInstance:
   m_ObjectHideFlags: 0
