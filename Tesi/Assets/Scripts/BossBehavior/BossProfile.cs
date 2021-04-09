@@ -6,10 +6,23 @@ public class BossProfile : moreSpecificProfile
 {
  
     public Collider collider;
-    public bool isAttacking;
-    public bool isUsingAoE;
+   
     public string target;
-  
+    public bool isAttacking = false;
+    public bool isUsingAoE = false;
+
+
+    private Rigidbody rb;
+    private GameObject targetPlayer;
+    
+
+    private bool cooldownRangedAttk = false;
+    private bool cooldownJumpAttk = false;
+    private bool cooldownAoEAttk = false;
+    private bool cooldownSwingAttk = false;
+    private bool cooldownAheadAttk = false;
+    private bool cooldownbreakAttk = false;
+
     // Start is called before the first frame update
 
 
