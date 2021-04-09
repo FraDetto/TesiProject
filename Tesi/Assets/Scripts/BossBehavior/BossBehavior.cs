@@ -12,6 +12,11 @@ public class BossBehavior : Agent
         
     }
 
+    public override void OnEpisodeBegin()
+    {
+     
+    }
+
     public override void CollectObservations(VectorSensor sensor)
     {
       
