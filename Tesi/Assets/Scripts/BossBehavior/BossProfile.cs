@@ -12,7 +12,12 @@ public class BossProfile : moreSpecificProfile
 
     private Rigidbody rb;
     private GameObject targetPlayer;
-    
+
+    private Transform rangedAttackPosition;
+    private Transform swingAttackPosition;
+    private Transform aheadAttackPosition;
+    private Transform breakAttackPosition;
+   
 
     private bool cooldownRangedAttk = false;
     private bool cooldownJumpAttk = false;
