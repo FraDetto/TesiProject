@@ -9,6 +9,11 @@ public class BossProfile : moreSpecificProfile
     public bool isAttacking = false;
     public bool isUsingAoE = false;
     public int[] playersParty;
+    public float speedRangedAttk = 25.0f;
+
+    public GameObject goRangedAttk;
+    public GameObject swordSwingAttk;
+    public GameObject swordAheadAttk;
 
     private Rigidbody rb;
     private GameObject targetPlayer;
@@ -26,6 +31,8 @@ public class BossProfile : moreSpecificProfile
     private bool cooldownAheadAttk = false;
     private bool cooldownBreakAttk = false;
 
+    private bool isShooting = false;
+
     // Start is called before the first frame update
 
     public void Start()
@@ -36,6 +43,17 @@ public class BossProfile : moreSpecificProfile
         aheadAttackPosition = transform.GetChild(3);
         //assign i player all'array
 
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (isShooting)
+        {
+            go.transform.LookAt(targetPlayer.transform.position);
+            go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
+            //bisogna poi cambiare isShooting in false
+        }
     }
 
     public void takeDamageFromSword(float damageFromCharacter)
@@ -56,15 +74,18 @@ public class BossProfile : moreSpecificProfile
 
     public void rangedAttack()
     {
-        //target gia' scelto? o lo sceglie qua?
+        //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
 
+        go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
+        isShooting = true;
         cooldownRangedAttk = true;
         StartCoroutine(startCooldownRangedAttk());
     }
 
     public IEnumerator startCooldownRangedAttk()
     {
-        yield return new WaitForSeconds(1.4f);
+        //ricordarsi di gestire i cooldown
+        yield return new WaitForSeconds(6.4f);
         cooldownRangedAttk = false;
     }
 
