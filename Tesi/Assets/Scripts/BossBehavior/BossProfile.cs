@@ -8,7 +8,7 @@ public class BossProfile : moreSpecificProfile
     public string target;
     public bool isAttacking = false;
     public bool isUsingAoE = false;
-
+    public int[] playersParty;
 
     private Rigidbody rb;
     private GameObject targetPlayer;
@@ -28,6 +28,10 @@ public class BossProfile : moreSpecificProfile
 
     // Start is called before the first frame update
 
+    public void Start()
+    {
+        playersParty = new int[4];
+    }
 
     public void takeDamageFromSword(float damageFromCharacter)
     {
