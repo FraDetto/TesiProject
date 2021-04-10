@@ -79,7 +79,7 @@ public class BossProfile : moreSpecificProfile
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
         cooldownRangedAttk = true;
-        StartCoroutine(startCooldownRangedAttk());
+        StartCoroutine(startCooldownRangedAttk());//gestire distruzione proiettile
     }
 
     public IEnumerator startCooldownRangedAttk()
@@ -115,26 +115,36 @@ public class BossProfile : moreSpecificProfile
 
     public void SwingAttack()
     {
+        go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownSwingAttk = true;
+        StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownSwingAttk());
     }
 
     public IEnumerator startCooldownSwingAttk()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1.6f);
         cooldownSwingAttk = false;
     }
 
     public void aheadAttack()
     {
+        go = Instantiate(swordAheadAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownAheadAttk = true;
+        StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownAheadAttk());
     }
 
     public IEnumerator startCooldownAheadAttk()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1.6f);
         cooldownAheadAttk = false;
+    }
+
+    public IEnumerator waitBeforeRemoveSword()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(go);
     }
 
     public void breakAttack()
