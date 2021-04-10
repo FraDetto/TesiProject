@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &136637091536569307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5668220218237637415}
+  m_Layer: 0
+  m_Name: RangedAttkPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5668220218237637415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136637091536569307}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.713, y: 0.472, z: 0.538}
+  m_LocalScale: {x: 0.2, y: 0.125, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 5617987301070202409}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2421681866626765582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701052497020445118}
+  m_Layer: 0
+  m_Name: AheadAttkPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1701052497020445118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421681866626765582}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.485, y: -0.169, z: 0.844}
+  m_LocalScale: {x: 0.2, y: 0.125, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 5617987301070202409}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3359959793238077300
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,6 +97,9 @@ Transform:
   m_LocalScale: {x: 5, y: 8, z: 5}
   m_Children:
   - {fileID: 3494354567973110338}
+  - {fileID: 5668220218237637415}
+  - {fileID: 9046850513472922660}
+  - {fileID: 1701052497020445118}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,10 +199,10 @@ MonoBehaviour:
   shield: 0
   damage: 0
   armor: 0
-  collider: {fileID: 2438159072496211589}
+  target: 
   isAttacking: 0
   isUsingAoE: 0
-  target: 
+  playersParty: 
 --- !u!114 &6233091902138811558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +261,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  partyList: 
 --- !u!114 &5475297297734807886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +276,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
+--- !u!1 &4504717002041630814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9046850513472922660}
+  m_Layer: 0
+  m_Name: SwingAttkPostion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9046850513472922660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504717002041630814}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.146, z: 1.167}
+  m_LocalScale: {x: 0.2, y: 0.125, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 5617987301070202409}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7694889718683459259
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +319,7 @@ GameObject:
   - component: {fileID: 3356527689737732260}
   - component: {fileID: 2797638296287751751}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

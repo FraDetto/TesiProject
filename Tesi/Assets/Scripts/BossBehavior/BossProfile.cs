@@ -12,11 +12,11 @@ public class BossProfile : moreSpecificProfile
 
     private Rigidbody rb;
     private GameObject targetPlayer;
+    private GameObject go;
 
     private Transform rangedAttackPosition;
     private Transform swingAttackPosition;
-    private Transform aheadAttackPosition;
-    private Transform breakAttackPosition;
+    private Transform aheadAttackPosition;//stessa posizione usata per il break
    
 
     private bool cooldownRangedAttk = false;
@@ -31,6 +31,11 @@ public class BossProfile : moreSpecificProfile
     public void Start()
     {
         playersParty = new int[4];
+        rangedAttackPosition = transform.GetChild(1);
+        swingAttackPosition = transform.GetChild(2);
+        aheadAttackPosition = transform.GetChild(3);
+        //assign i player all'array
+
     }
 
     public void takeDamageFromSword(float damageFromCharacter)
@@ -51,6 +56,8 @@ public class BossProfile : moreSpecificProfile
 
     public void rangedAttack()
     {
+        //target gia' scelto? o lo sceglie qua?
+
         cooldownRangedAttk = true;
         StartCoroutine(startCooldownRangedAttk());
     }
