@@ -203,6 +203,10 @@ MonoBehaviour:
   isAttacking: 0
   isUsingAoE: 0
   playersParty: 
+  speedRangedAttk: 25
+  goRangedAttk: {fileID: 3598328088470394854, guid: 9e391bc03674c8c44b2e6001fd26ff37, type: 3}
+  swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
+  swordAheadAttk: {fileID: 6814415977512439784, guid: ef3906f6ae01225418b896a3c2bdec84, type: 3}
 --- !u!114 &6233091902138811558
 MonoBehaviour:
   m_ObjectHideFlags: 0
