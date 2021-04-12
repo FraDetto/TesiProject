@@ -31,7 +31,7 @@ public class BossProfile : moreSpecificProfile
     private bool cooldownAheadAttk = false;
     private bool cooldownBreakAttk = false;
 
-    private bool isShooting = false;
+    public bool isShooting = false;
 
     // Start is called before the first frame update
 
