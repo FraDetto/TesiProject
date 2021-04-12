@@ -16,7 +16,7 @@ public class BossProfile : moreSpecificProfile
     public GameObject swordAheadAttk;
 
     private Rigidbody rb;
-    private GameObject targetPlayer;
+    public GameObject targetPlayer;
     private GameObject go;
 
     private Transform rangedAttackPosition;
@@ -33,6 +33,15 @@ public class BossProfile : moreSpecificProfile
 
     public bool isShooting = false;
 
+
+    public float firingAngle = 45.0f;
+    public float gravity = 5.0f;
+
+    private bool bTargetReady;
+
+    private Vector3 initialPosition;
+  
+
     // Start is called before the first frame update
 
     public void Start()
@@ -43,6 +52,9 @@ public class BossProfile : moreSpecificProfile
         aheadAttackPosition = transform.GetChild(3);
         //assign i player all'array
 
+        rb = GetComponent<Rigidbody>();
+        initialPosition = transform.position;
+    
     }
 
 
@@ -54,6 +66,11 @@ public class BossProfile : moreSpecificProfile
             go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
             //bisogna poi cambiare isShooting in false
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Launch();
+        }
+
     }
 
     public void takeDamageFromSword(float damageFromCharacter)
@@ -92,13 +109,51 @@ public class BossProfile : moreSpecificProfile
     public void jumpAttack()
     {
         cooldownJumpAttk = true;
+        bTargetReady = false;
         StartCoroutine(startCooldownJumpAttk());
     }
+
+    // launches the object towards the TargetObject with a given LaunchAngle
+    /*void Launch()
+    {
+
+        Vector3 projectileXZPos = new Vector3(transform.position.x, 0.0f, transform.position.z);
+        Vector3 targetXZPos = new Vector3(targetPlayer.transform.position.x, 0.0f, targetPlayer.transform.position.z);
+
+        // rotate the object to face the target
+        transform.LookAt(targetXZPos);
+
+        // shorthands for the formula
+        float R = Vector3.Distance(projectileXZPos, targetXZPos);
+        float G = Physics.gravity.y;
+        float tanAlpha = Mathf.Tan(LaunchAngle * Mathf.Deg2Rad);
+        float H = targetPlayer.transform.position.y - transform.position.y;
+
+        // calculate the local space components of the velocity 
+        // required to land the projectile on the target object 
+        float Vz = Mathf.Sqrt(G * R * R / (2.0f * (H - R * tanAlpha)));
+        float Vy = tanAlpha * Vz;
+
+        // create the velocity vector in local space and get it in global space
+        Vector3 localVelocity = new Vector3(0f, Vy, Vz);
+        Vector3 globalVelocity = transform.TransformDirection(localVelocity);
+
+        // launch the object by setting its initial velocity and flipping its state
+        rb.velocity = globalVelocity;
+        bTargetReady = false;
+    }*/
+    void Launch()
+    {
+
+    }
+
+
 
     public IEnumerator startCooldownJumpAttk()
     {
         yield return new WaitForSeconds(1.4f);
         cooldownJumpAttk = false;
+        bTargetReady = true;
     }
 
     public void AoEAttack()

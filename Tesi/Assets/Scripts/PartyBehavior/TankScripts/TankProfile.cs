@@ -62,10 +62,7 @@ public class TankProfile : moreSpecificProfile
             cooldownSword = false;
         }
 
-        public void calculateDamage()
-    {
 
-    }
 
     public void defendWithShield()
     {
