@@ -23,18 +23,18 @@ public class BossProfile : moreSpecificProfile
     private Transform swingAttackPosition;
     private Transform aheadAttackPosition;//stessa posizione usata per il break
 
-    private float velocityJump;
+    private float velocityActraction = 25.0f;
 
     private bool cooldownRangedAttk = false;
-    private bool cooldownJumpAttk = false;
+    private bool cooldownRayAttk = false;
     private bool cooldownAoEAttk = false;
     private bool cooldownSwingAttk = false;
     private bool cooldownAheadAttk = false;
     private bool cooldownBreakAttk = false;
 
     public bool isShooting = false;
+    public bool isActracting = false;
 
-    private bool bTargetReady;
 
     private Vector3 initialPosition;
 
@@ -51,8 +51,6 @@ public class BossProfile : moreSpecificProfile
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
 
-        velocityJump = 0.0f;
-
     }
 
 
@@ -66,32 +64,38 @@ public class BossProfile : moreSpecificProfile
             
         }
 
-        
 
-        if (bTargetReady)
+        if (isActracting)
         {
-            Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
+            Vector3 verticalAdjBoss = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+            Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayer.transform.position.y, transform.position.z);
+            Vector3 toBossPos = (verticalAdj - targetPlayer.transform.position);
 
-            if ((targetPlayer.transform.position - rb.transform.position).magnitude > 8.0f)
+            if ((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
             {
-                transform.LookAt(verticalAdj);
-                rb.MovePosition(transform.position + (transform.forward) * velocityJump * Time.deltaTime);
+                Debug.Log("SONO QUA"+ targetPlayer.GetComponent<Rigidbody>());
+                transform.LookAt(verticalAdjBoss);
+                targetPlayer.transform.LookAt(verticalAdj);
+                targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityActraction * Time.deltaTime);
             }
             else
             {
-                bTargetReady = false;
+                isActracting = false;
+                rayAttack();
             }
+               
         }
 
+  
     }
+        
+
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!bTargetReady) { Launch(); }
-            
+            LaunchRay();
         }
     }
 
@@ -132,67 +136,27 @@ public class BossProfile : moreSpecificProfile
         cooldownRangedAttk = false;
     }
 
-    public void jumpAttack()
+    public void rayAttack()
     {
-        cooldownJumpAttk = true;
-        bTargetReady = false;
-        StartCoroutine(startCooldownJumpAttk());
-    }
+        cooldownRayAttk = true;
 
-    // launches the object towards the TargetObject with a given LaunchAngle
-    /*void Launch()
-    {
-
-        Vector3 projectileXZPos = new Vector3(transform.position.x, 0.0f, transform.position.z);
-        Vector3 targetXZPos = new Vector3(targetPlayer.transform.position.x, 0.0f, targetPlayer.transform.position.z);
-
-        // rotate the object to face the target
-        transform.LookAt(targetXZPos);
-
-        // shorthands for the formula
-        float R = Vector3.Distance(projectileXZPos, targetXZPos);
-        float G = Physics.gravity.y;
-        float tanAlpha = Mathf.Tan(LaunchAngle * Mathf.Deg2Rad);
-        float H = targetPlayer.transform.position.y - transform.position.y;
-
-        // calculate the local space components of the velocity 
-        // required to land the projectile on the target object 
-        float Vz = Mathf.Sqrt(G * R * R / (2.0f * (H - R * tanAlpha)));
-        float Vy = tanAlpha * Vz;
-
-        // create the velocity vector in local space and get it in global space
-        Vector3 localVelocity = new Vector3(0f, Vy, Vz);
-        Vector3 globalVelocity = transform.TransformDirection(localVelocity);
-
-        // launch the object by setting its initial velocity and flipping its state
-        rb.velocity = globalVelocity;
-        bTargetReady = false;
-    }
-    */
-
-     void Launch()
-    {
-        float force = 0.0f;
-        if ((targetPlayer.transform.position - rb.transform.position).magnitude > 8.0f)
-        {
-            force = 12.0f;
-            velocityJump = 25.0f;
-        }
-        else
-        {
-            force = 10.0f;
-        }
-        rb.AddForce(transform.up * force, ForceMode.Impulse);
-        bTargetReady = true;
+        StartCoroutine(startCooldownRayAttk());
     }
 
 
 
-    public IEnumerator startCooldownJumpAttk()
+    public void LaunchRay()
     {
-        yield return new WaitForSeconds(1.4f);
-        cooldownJumpAttk = false;
-        bTargetReady = true;
+        Debug.Log("HO ATTIVATO RAY");
+        isActracting = true;
+    }
+
+
+
+    public IEnumerator startCooldownRayAttk()
+    {
+        yield return new WaitForSeconds(10.4f);
+        cooldownRayAttk = false;
     }
 
     public void AoEAttack()
