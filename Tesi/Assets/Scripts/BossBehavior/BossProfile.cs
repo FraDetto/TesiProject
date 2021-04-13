@@ -22,7 +22,8 @@ public class BossProfile : moreSpecificProfile
     private Transform rangedAttackPosition;
     private Transform swingAttackPosition;
     private Transform aheadAttackPosition;//stessa posizione usata per il break
-   
+
+    private float velocityJump;
 
     private bool cooldownRangedAttk = false;
     private bool cooldownJumpAttk = false;
@@ -33,16 +34,11 @@ public class BossProfile : moreSpecificProfile
 
     public bool isShooting = false;
 
-
-    public float firingAngle = 45.0f;
-    public float gravity = 5.0f;
-
     private bool bTargetReady;
 
     private Vector3 initialPosition;
-  
 
-    // Start is called before the first frame update
+
 
     public void Start()
     {
@@ -54,7 +50,9 @@ public class BossProfile : moreSpecificProfile
 
         rb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
-    
+
+        velocityJump = 0.0f;
+
     }
 
 
@@ -65,13 +63,41 @@ public class BossProfile : moreSpecificProfile
             go.transform.LookAt(targetPlayer.transform.position);
             go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
             //bisogna poi cambiare isShooting in false
+            
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        
+
+        if (bTargetReady)
         {
-            Launch();
+            Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+            Vector3 toBossPos = (verticalAdj - transform.position);
+
+            if ((targetPlayer.transform.position - rb.transform.position).magnitude > 8.0f)
+            {
+                transform.LookAt(verticalAdj);
+                rb.MovePosition(transform.position + (transform.forward) * velocityJump * Time.deltaTime);
+            }
+            else
+            {
+                bTargetReady = false;
+            }
         }
 
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!bTargetReady) { Launch(); }
+            
+        }
+    }
+
+
+
+
 
     public void takeDamageFromSword(float damageFromCharacter)
     {
@@ -141,10 +167,23 @@ public class BossProfile : moreSpecificProfile
         // launch the object by setting its initial velocity and flipping its state
         rb.velocity = globalVelocity;
         bTargetReady = false;
-    }*/
-    void Launch()
-    {
+    }
+    */
 
+     void Launch()
+    {
+        float force = 0.0f;
+        if ((targetPlayer.transform.position - rb.transform.position).magnitude > 8.0f)
+        {
+            force = 12.0f;
+            velocityJump = 25.0f;
+        }
+        else
+        {
+            force = 10.0f;
+        }
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
+        bTargetReady = true;
     }
 
 
