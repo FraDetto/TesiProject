@@ -255,15 +255,19 @@ public class BossProfile : moreSpecificProfile
         Destroy(go);
     }
 
-    public void breakAttack()
+    public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
         cooldownBreakAttk = true;
+        targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//applica ferite gravi
+        targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
+
+        //danno basso
         StartCoroutine(startCooldownBreakAttk());
     }
 
     public IEnumerator startCooldownBreakAttk()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(4.4f);
         cooldownBreakAttk = false;
     }
 }

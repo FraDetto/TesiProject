@@ -6,6 +6,9 @@ public class moreSpecificProfile : aProfile
 {
     public PartyData partyData;
     protected string champTag;
+    protected float armorReductionDuration = 4.0f;
+    protected float woundsDuration = 6.0f;
+
 
     [SerializeField] private float totalhp;
     [SerializeField] private float currenthp;
@@ -13,6 +16,7 @@ public class moreSpecificProfile : aProfile
     [SerializeField] private float damage;
     [SerializeField] private float armor;
     [SerializeField] private int status; // 0: OK  1: ROOT  2: STUN 
+    [SerializeField] private bool woundsActive;
 
 
     private void Start()
@@ -186,6 +190,35 @@ public class moreSpecificProfile : aProfile
     {
         yield return new WaitForSeconds(stunDuration);
         status = 0;
+    }
+
+    public void reduceArmor()
+    {
+        float originalArmor = armor;
+        armor -= (armor / 100 * 30);
+        StartCoroutine(resetArmor(armorReductionDuration, originalArmor));
+    }
+
+    public IEnumerator resetArmor(float armoreReduceDuration, float originalArmor)
+    {
+        yield return new WaitForSeconds(armoreReduceDuration);
+        armor = originalArmor;
+    }
+
+    public bool getWoundActive()
+    {
+        return woundsActive;
+    }
+
+    public void applyWound()
+    {
+        woundsActive = true;
+    }
+
+    public IEnumerator resetWound()
+    {
+        yield return new WaitForSeconds(woundsDuration);
+        woundsActive = false;
     }
 
 }
