@@ -12,6 +12,10 @@ public abstract class aProfile : MonoBehaviour
 
     protected abstract float getDamageValue();
 
+    protected abstract int getStatus();
+
+    protected abstract void setStatus(int newStatusValue);
+
     protected abstract void setLifeAfterDamage(float damage);
 
     protected abstract void addLifeByCure(float cure);

@@ -73,7 +73,6 @@ public class BossProfile : moreSpecificProfile
 
             if ((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
             {
-                Debug.Log("SONO QUA"+ targetPlayer.GetComponent<Rigidbody>());
                 transform.LookAt(verticalAdjBoss);
                 targetPlayer.transform.LookAt(verticalAdj);
                 targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityActraction * Time.deltaTime);

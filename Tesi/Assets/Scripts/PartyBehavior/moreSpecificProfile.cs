@@ -12,6 +12,7 @@ public class moreSpecificProfile : aProfile
     [SerializeField] private float shield;
     [SerializeField] private float damage;
     [SerializeField] private float armor;
+    [SerializeField] private int status; // 0: OK  1: ROOT  2: STUN 
 
 
     private void Start()
@@ -56,7 +57,7 @@ public class moreSpecificProfile : aProfile
                 break;
         }
 
-       
+        status = 0;
     }
 
     protected override float getTotalLife()
@@ -87,6 +88,26 @@ public class moreSpecificProfile : aProfile
     public float publicGetDamageValue()
     {
         return getDamageValue();
+    }
+
+    protected override int getStatus()
+    {
+        return status;
+    }
+
+    public int publicGetStatus()
+    {
+        return getStatus();
+    }
+
+    protected override void setStatus(int newStatusValue)
+    {
+        status = newStatusValue;
+    }
+
+    public void publicSetStatus(int newStatusValue)
+    {
+        setStatus(newStatusValue);
     }
 
     protected override void addLifeByCure(float cure)
