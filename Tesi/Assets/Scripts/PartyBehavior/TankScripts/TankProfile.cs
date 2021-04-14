@@ -22,7 +22,13 @@ public class TankProfile : moreSpecificProfile
     private Transform pointSpawnShield;
     private Transform pointSpawnHealHealer;
 
-    private float timeForSpecial = 16.0f;
+    
+    private float swordDuration = 1.0f;
+    private float timeCoolDownSword = 2.0f;
+    private float shieldDuration = 2.0f;
+    private float timeCoolDownShield = 10.0f;
+    private float specialDuration = 2.0f;
+    private float timeCoolDownSpecial = 16.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -51,14 +57,14 @@ public class TankProfile : moreSpecificProfile
     }
         public IEnumerator waitBeforeRemoveSword()
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(swordDuration);
             swordActive = false;
             Destroy(go);
         }
 
         public IEnumerator cooldownAttack()
         {
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(timeCoolDownSword);
             cooldownSword = false;
         }
 
@@ -75,14 +81,14 @@ public class TankProfile : moreSpecificProfile
 
     public IEnumerator waitBeforeRemoveShield()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(shieldDuration);
         shieldActive = false;
         Destroy(go);
     }
 
     public IEnumerator cooldownDefense()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(timeCoolDownShield);
         cooldownShield = false;
     }
 
@@ -91,16 +97,16 @@ public class TankProfile : moreSpecificProfile
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
         cooldownSpecial = true;
 
-        StartCoroutine(specialDuration());
+        StartCoroutine(waitBeforeStopSpecial());
         
         StartCoroutine(waitAfterUlti());
         
     }
 
-    public IEnumerator specialDuration()
+    public IEnumerator waitBeforeStopSpecial()
     {
         //Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(specialDuration);
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         //Debug.Log("ULTI FINITA");
     }
@@ -108,7 +114,7 @@ public class TankProfile : moreSpecificProfile
     public IEnumerator waitAfterUlti()
     {
         //Debug.Log("ULTI IN COOLDOWN");
-        yield return new WaitForSeconds(timeForSpecial);
+        yield return new WaitForSeconds(timeCoolDownSpecial);
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }

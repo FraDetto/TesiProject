@@ -148,7 +148,7 @@ public class BossProfile : moreSpecificProfile
     public void LaunchRay()
     {
         Debug.Log("HO ATTIVATO RAY");
-        // AGGIUGNERE CONTROLLLO PER DIFESA MAGE E TANK: SE SCUDO O SPELL ATTIVA o DISPONIBILE in teoria ray non va a segno
+        //  CONTROLLLO PER DIFESA MAGE E TANK: SE SCUDO O SPELL ATTIVA o DISPONIBILE in teoria ray non va a segno
 
         bool enemyIsDefending;
 
