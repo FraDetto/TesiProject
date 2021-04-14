@@ -149,7 +149,56 @@ public class BossProfile : moreSpecificProfile
     {
         Debug.Log("HO ATTIVATO RAY");
         // AGGIUGNERE CONTROLLLO PER DIFESA MAGE E TANK: SE SCUDO O SPELL ATTIVA o DISPONIBILE in teoria ray non va a segno
-        isAttracting = true;
+
+        bool enemyIsDefending;
+
+        switch (targetPlayer.tag)
+        {
+            case "Tank":
+                enemyIsDefending = targetPlayer.transform.GetComponent<TankProfile>().shieldActive;
+
+                break;
+
+            case "Mage":
+                enemyIsDefending = targetPlayer.transform.GetComponent<MageProfile>().defenseActive;
+                break;
+
+            default:
+                enemyIsDefending = false;
+                break;
+        }
+        if (!enemyIsDefending)
+        {
+            isAttracting = true;
+        }
+        else
+        {
+            //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
+        }
+
+        if (targetPlayer.tag.Equals("Tank"))
+        {
+            while (isAttracting)
+            {
+                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                {
+                    isAttracting = false;
+                    //stessa cosa di prima per far vedere che fallisce
+                }
+            }
+        }else if (targetPlayer.tag.Equals("Mage"))
+        {
+            while (isAttracting)
+            {
+                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                {
+                    isAttracting = false;
+                    //stessa cosa di prima per far vedere che fallisce
+                }
+            }
+        }
+           
+
     }
 
 
