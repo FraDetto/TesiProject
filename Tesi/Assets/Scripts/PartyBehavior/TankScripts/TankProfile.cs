@@ -24,10 +24,10 @@ public class TankProfile : moreSpecificProfile
 
     
     private float swordDuration = 1.0f;
-    private float timeCoolDownSword = 2.0f;
+    private float timeCoolDownSwordAttack = 2.0f;
     private float shieldDuration = 2.0f;
     private float timeCoolDownShield = 10.0f;
-    private float specialDuration = 2.0f;
+    private float specialDuration = 6.0f;
     private float timeCoolDownSpecial = 16.0f;
 
     // Start is called before the first frame update
@@ -64,7 +64,7 @@ public class TankProfile : moreSpecificProfile
 
         public IEnumerator cooldownAttack()
         {
-            yield return new WaitForSeconds(timeCoolDownSword);
+            yield return new WaitForSeconds(timeCoolDownSwordAttack);
             cooldownSword = false;
         }
 

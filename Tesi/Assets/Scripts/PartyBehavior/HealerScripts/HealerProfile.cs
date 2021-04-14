@@ -33,9 +33,15 @@ public class HealerProfile : moreSpecificProfile
     public float m_HealRadius = 100f;
     public LayerMask m_PlayerMask;
 
-
-    private float timeForSpecial = 16.0f;
     public float speed = 25.0f;
+
+
+    private float timeCoolDownMagicAttack = 2.0f;
+    private float healingActivation = 1.5f;
+    private float timeCoolDownheal = 10.0f;
+    private float timeSpecialActivation = 1.0f;
+    private float timeCoolDownSpecial = 16.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -78,24 +84,19 @@ public class HealerProfile : moreSpecificProfile
 
     public IEnumerator waitAfterAttack()
     {
-
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(timeCoolDownMagicAttack);
         cooldownAttack = false;
     }
 
-    public void calculateDamage()
-    {
-
-    }
 
     public void healAlly()
     {
-        Debug.Log("SONO IN HEALALLY" );
+        //Debug.Log("SONO IN HEALALLY" );
         healActive = true;
         cooldownHeal = true;
         findAllyToHeal();
         StartCoroutine(waitCastHeal());
-        StartCoroutine(cooldownDefense());
+        StartCoroutine(cooldownHealing());
     }
 
     public void findAllyToHeal()
@@ -108,14 +109,14 @@ public class HealerProfile : moreSpecificProfile
         {
             moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
 
-            Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
+            //Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
             if (!targetProfile)
                 continue;
+
             if (i == 0)
             {
                 index = i;
                 minLife = targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100;
-
             }
             else
             {
@@ -124,8 +125,7 @@ public class HealerProfile : moreSpecificProfile
                     minLife = (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100);
                     index = i;
                 }
-            }
-            
+            }          
         }
         float cure = colliders[index].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40;
         colliders[index].GetComponent<moreSpecificProfile>().publicAddLifeByCure(cure);
@@ -138,14 +138,14 @@ public class HealerProfile : moreSpecificProfile
 
     public IEnumerator waitCastHeal()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(healingActivation);
         healActive = false;
         Destroy(hs);
     }
 
-    public IEnumerator cooldownDefense()
+    public IEnumerator cooldownHealing()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(timeCoolDownheal);
         cooldownHeal = false;
     }
 
@@ -155,9 +155,7 @@ public class HealerProfile : moreSpecificProfile
         cooldownSpecial = true;
 
         StartCoroutine(specialActivation());
-
         StartCoroutine(waitAfterUlti());
-
     }
 
     public IEnumerator specialActivation()
@@ -179,12 +177,12 @@ public class HealerProfile : moreSpecificProfile
 
         }
 
-        Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(1.5f);
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(timeSpecialActivation);
         chargingUlt = false;
         Destroy(go);
         
-        Debug.Log("ULTI FINITA");
+        //Debug.Log("ULTI FINITA");
     }
 
   
@@ -192,7 +190,7 @@ public class HealerProfile : moreSpecificProfile
     public IEnumerator waitAfterUlti()
     {
         //Debug.Log("ULTI IN COOLDOWN");
-        yield return new WaitForSeconds(timeForSpecial);
+        yield return new WaitForSeconds(timeCoolDownSpecial);
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }

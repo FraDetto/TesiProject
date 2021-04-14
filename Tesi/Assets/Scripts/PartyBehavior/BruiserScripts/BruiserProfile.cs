@@ -12,7 +12,6 @@ public class BruiserProfile : moreSpecificProfile
     public bool swordActive = false;
     public bool ultiRunning = false;
 
-    private float timeForSpecial = 16.0f;
 
     public GameObject sword;
     public GameObject HealSign;
@@ -22,7 +21,12 @@ public class BruiserProfile : moreSpecificProfile
     private Transform HealSignSpawnPoint;
     private Rigidbody myRB;
 
-
+    private float swordDuration = 1.4f;
+    private float timeCoolDownSwordAttack = 2.5f;
+    private float healingHimselfDuration = 1.2f;
+    private float timeCoolDownheal = 10.0f;
+    private float specialDuration = 6.2f;
+    private float timeCoolDownSpecial = 16.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -67,14 +71,14 @@ public class BruiserProfile : moreSpecificProfile
     }
     public IEnumerator waitBeforeRemoveSword()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(swordDuration);
         swordActive = false;
         Destroy(go);
     }
 
     public IEnumerator cooldownAttack()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(timeCoolDownSwordAttack);
         cooldownSword = false;
     }
 
@@ -101,7 +105,7 @@ public class BruiserProfile : moreSpecificProfile
     public IEnumerator isHealingHimSelf()
     {
         go = Instantiate(HealSign, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(healingHimselfDuration);
         addLifeByCure(calculateHeal());
         isHealing = false;
         Destroy(go);
@@ -109,7 +113,7 @@ public class BruiserProfile : moreSpecificProfile
 
     public IEnumerator cooldownHealing()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(timeCoolDownheal);
         cooldownHeal = false;
     }
 
@@ -118,15 +122,15 @@ public class BruiserProfile : moreSpecificProfile
         ultiRunning = true;
         cooldownSpecial = true;
 
-        StartCoroutine(specialDuration());
+        StartCoroutine(waitBeforeStopSpecial());
 
         StartCoroutine(waitAfterUlti());
     }
 
-    public IEnumerator specialDuration()
+    public IEnumerator waitBeforeStopSpecial()
     {
         //Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(6.2f);
+        yield return new WaitForSeconds(specialDuration);
         ultiRunning = false;
         
         //Debug.Log("ULTI FINITA");
@@ -135,7 +139,7 @@ public class BruiserProfile : moreSpecificProfile
     public IEnumerator waitAfterUlti()
     {
         //Debug.Log("ULTI IN COOLDOWN");
-        yield return new WaitForSeconds(timeForSpecial);
+        yield return new WaitForSeconds(timeCoolDownSpecial);
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }

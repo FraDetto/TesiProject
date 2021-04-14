@@ -27,7 +27,11 @@ public class MageProfile : moreSpecificProfile
 
     public float speedSpells = 25.0f;
 
-    private float timeForSpecial = 16.0f;
+    private float timeCoolDownMagicAttack = 2.0f;
+    private float defenseSpellDuration = 2.0f;
+    private float timeCoolDownDefenseSpell = 10.0f;
+    private float specialDuration = 3.0f;
+    private float timeCoolDownSpecial = 16.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -61,14 +65,9 @@ public class MageProfile : moreSpecificProfile
     }
 
 
-    public void calculateDamage()
-    {
-
-    }
-
     public void attackWithMagic()
     {
-        Debug.Log("attackWithMagic");
+        //Debug.Log("attackWithMagic");
         if (!cooldown)
         {
             go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
@@ -76,17 +75,12 @@ public class MageProfile : moreSpecificProfile
             cooldown = true;
             StartCoroutine(waitAfterAttack());
         }
-
-       
-
     }
 
     public IEnumerator waitAfterAttack()
     {
-
-        yield return new WaitForSeconds(2.0f);
-        cooldown = false;
-     
+        yield return new WaitForSeconds(timeCoolDownMagicAttack);
+        cooldown = false;  
     }
 
 
@@ -101,14 +95,14 @@ public class MageProfile : moreSpecificProfile
 
     public IEnumerator waitBeforeRemoveShield()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(defenseSpellDuration);
         defenseActive = false;
         Destroy(go);
     }
 
     public IEnumerator cooldownSpellDefense()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(timeCoolDownDefenseSpell);
         cooldownDefense = false;
     }
 
@@ -116,17 +110,16 @@ public class MageProfile : moreSpecificProfile
     {
         cooldownSpecial = true;
 
-        StartCoroutine(specialDuration());
-
+        StartCoroutine(chargingSpecialDuration());
         StartCoroutine(waitAfterUlti());
     }
 
-    public IEnumerator specialDuration()
+    public IEnumerator chargingSpecialDuration()
     {
         go = Instantiate(fireBall, pointSpawnUlt.position, transform.rotation, gameObject.transform);
         chargingUlt = true;
         //Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(specialDuration);
         chargingUlt = false;
         Destroy(go);
         //Debug.Log("ULTI FINITA");
@@ -135,7 +128,7 @@ public class MageProfile : moreSpecificProfile
     public IEnumerator waitAfterUlti()
     {
         //Debug.Log("ULTI IN COOLDOWN");
-        yield return new WaitForSeconds(timeForSpecial);
+        yield return new WaitForSeconds(timeCoolDownSpecial);
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }
