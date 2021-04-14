@@ -112,7 +112,7 @@ public class TankBehavior : MonoBehaviour
         //Debug.Log("ChaseToCombact");
         if ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange)
         {
-            Debug.Log("ChaseToCombact TRUE BRANCH");
+            //Debug.Log("ChaseToCombact TRUE BRANCH");
             GetComponent<TankMovement>().chaseFlag = false;
             return true;
         }
@@ -125,8 +125,16 @@ public class TankBehavior : MonoBehaviour
 
     public bool CombactToChase()
     {
-        Debug.Log("CombactToChase");
-        return !ChaseToCombact();
+        //Debug.Log("CombactToChase");
+        if (GetComponent<TankProfile>().publicGetStatus() == 0)//If status OK work normal, otherwise FALSE -> Rooted or stunned can't move
+        {
+            return !ChaseToCombact();
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     
@@ -146,7 +154,7 @@ public class TankBehavior : MonoBehaviour
        
         if (!GetComponent<TankMovement>().chaseFlag)
         {
-            Debug.Log("ChaseBoos");
+            //Debug.Log("ChaseBoos");
             GetComponent<TankMovement>().chaseFlag = true;
         }    
 
@@ -155,8 +163,12 @@ public class TankBehavior : MonoBehaviour
 
     public void combactFase()
     {
-        Debug.Log("combactFase TANK");
-        fsmCombact.Update();
+        //Debug.Log("combactFase TANK");
+        if (GetComponent<TankProfile>().publicGetStatus() != 2) //if 2 = stunned can't attack and move
+        {
+            fsmCombact.Update();
+        }
+       
     }
 
 

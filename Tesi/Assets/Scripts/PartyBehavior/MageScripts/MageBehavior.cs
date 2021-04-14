@@ -128,7 +128,15 @@ public class MageBehavior : MonoBehaviour
 
     public bool CombactToSafeSpot()
     {
-        return !safeSpotToCombact();
+        if (GetComponent<MageProfile>().publicGetStatus() == 0)//If status OK work normal, otherwise FALSE -> Rooted or stunned can't move
+        {
+            return !safeSpotToCombact();
+        }
+        else
+        {
+            return false;
+        }
+       
     }
     
 
@@ -159,8 +167,12 @@ public class MageBehavior : MonoBehaviour
 
     public void combactFase()
     {
-        Debug.Log("Combact Fase Mage");
-        fsmCombact.Update();
+        //Debug.Log("Combact Fase Mage");
+        if (GetComponent<MageProfile>().publicGetStatus() != 2)//if 2 = stunned can't attack and move
+        {
+            fsmCombact.Update();
+        }
+        
     }
 
 

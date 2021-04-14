@@ -127,7 +127,14 @@ public class HealerBehavior : MonoBehaviour
 
     public bool CombactToSafeSpot()
     {
-        return !safeSpotToCombact();
+        if (GetComponent<HealerProfile>().publicGetStatus() == 0)//If status OK work normal, otherwise FALSE -> Rooted or stunned can't move
+        {
+            return !safeSpotToCombact();
+        }
+        else
+        {
+            return false;
+        }
     }
     // ACTIONS
 
@@ -155,7 +162,10 @@ public class HealerBehavior : MonoBehaviour
     public void combactFase()
     {
         //Debug.Log("Combact Fase HEALER");
-        fsmCombact.Update();
+        if (GetComponent<HealerProfile>().publicGetStatus() != 2)//if 2 = stunned can't attack and move
+        {
+            fsmCombact.Update();
+        }
     }
 
 
