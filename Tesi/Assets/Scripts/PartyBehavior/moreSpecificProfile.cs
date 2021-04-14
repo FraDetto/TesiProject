@@ -100,16 +100,6 @@ public class moreSpecificProfile : aProfile
         return getStatus();
     }
 
-    protected override void setStatus(int newStatusValue)
-    {
-        status = newStatusValue;
-    }
-
-    public void publicSetStatus(int newStatusValue)
-    {
-        setStatus(newStatusValue);
-    }
-
     protected override void addLifeByCure(float cure)
     {
      
@@ -160,6 +150,42 @@ public class moreSpecificProfile : aProfile
     protected override void resetShield()
     {
         shield = 0.0f;
+    }
+
+
+    protected override void addRootStatus(float rootDuration)
+    {
+        status = 1;
+        StartCoroutine(decayRoot(rootDuration));
+    }
+
+    public void publicAddRootStatus(float rootDuration)
+    {
+        addRootStatus(rootDuration);
+    }
+
+    public IEnumerator decayRoot(float rootDuration)
+    {
+        yield return new WaitForSeconds(rootDuration);
+        status = 0;
+    }
+
+    protected override void addStunStatus(float stunDuration)
+    {
+        status = 2;
+        StartCoroutine(decayStun(stunDuration));
+    }
+
+
+    public void publicAddStunStatus(float stunDuration)
+    {
+        addStunStatus(stunDuration);
+    }
+
+    public IEnumerator decayStun(float stunDuration)
+    {
+        yield return new WaitForSeconds(stunDuration);
+        status = 0;
     }
 
 }

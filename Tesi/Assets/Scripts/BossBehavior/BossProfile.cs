@@ -23,7 +23,7 @@ public class BossProfile : moreSpecificProfile
     private Transform swingAttackPosition;
     private Transform aheadAttackPosition;//stessa posizione usata per il break
 
-    private float velocityActraction = 25.0f;
+    private float velocityAttraction = 25.0f;
 
     private bool cooldownRangedAttk = false;
     private bool cooldownRayAttk = false;
@@ -33,11 +33,11 @@ public class BossProfile : moreSpecificProfile
     private bool cooldownBreakAttk = false;
 
     public bool isShooting = false;
-    public bool isActracting = false;
+    public bool isAttracting = false;
 
 
     private Vector3 initialPosition;
-
+    private float attractingRootDuration = 2.0f;
 
 
     public void Start()
@@ -65,7 +65,7 @@ public class BossProfile : moreSpecificProfile
         }
 
 
-        if (isActracting)
+        if (isAttracting)
         {
             Vector3 verticalAdjBoss = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
             Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayer.transform.position.y, transform.position.z);
@@ -75,11 +75,12 @@ public class BossProfile : moreSpecificProfile
             {
                 transform.LookAt(verticalAdjBoss);
                 targetPlayer.transform.LookAt(verticalAdj);
-                targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityActraction * Time.deltaTime);
+                targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityAttraction * Time.deltaTime);
             }
             else
             {
-                isActracting = false;
+                isAttracting = false;
+                targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
                 rayAttack();
             }
                
@@ -147,7 +148,7 @@ public class BossProfile : moreSpecificProfile
     public void LaunchRay()
     {
         Debug.Log("HO ATTIVATO RAY");
-        isActracting = true;
+        isAttracting = true;
     }
 
 
