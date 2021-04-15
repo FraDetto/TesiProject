@@ -292,6 +292,14 @@ public class BossProfile : moreSpecificProfile
         yield return new WaitForSeconds(4.4f);
         cooldownBreakAttk = false;
     }
+
+
+    public void turnBossToTarget()
+    {
+        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+        transform.LookAt(verticalAdj);
+    }
+
 }
 
 
