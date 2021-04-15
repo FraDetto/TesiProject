@@ -132,7 +132,7 @@ public class BossProfile : moreSpecificProfile
     public void rangedAttack()
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
-
+        turnBossToTarget();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
         cooldownRangedAttk = true;
@@ -148,6 +148,7 @@ public class BossProfile : moreSpecificProfile
 
     public void rayAttack()
     {
+        turnBossToTarget();
         cooldownRayAttk = true;
 
         StartCoroutine(startCooldownRayAttk());
@@ -243,6 +244,7 @@ public class BossProfile : moreSpecificProfile
 
     public void SwingAttack()
     {
+        turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownSwingAttk = true;
         codeAttack = 0;
@@ -258,6 +260,7 @@ public class BossProfile : moreSpecificProfile
 
     public void aheadAttack()
     {
+        turnBossToTarget();
         go = Instantiate(swordAheadAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownAheadAttk = true;
         codeAttack = 1;
@@ -279,6 +282,7 @@ public class BossProfile : moreSpecificProfile
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
+        turnBossToTarget();
         cooldownBreakAttk = true;
         targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//applica ferite gravi
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
