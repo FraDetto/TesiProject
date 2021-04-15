@@ -16,6 +16,7 @@ public class BossProfile : moreSpecificProfile
     public GameObject goRangedAttk;
     public GameObject swordSwingAttk;
     public GameObject swordAheadAttk;
+    public GameObject containerAoEAttk;
 
     private Rigidbody rb;
     public GameObject targetPlayer;
@@ -24,6 +25,8 @@ public class BossProfile : moreSpecificProfile
     private Transform rangedAttackPosition;
     private Transform swingAttackPosition;
     private Transform aheadAttackPosition;//stessa posizione usata per il break
+    private Transform AoEAttackPosition;
+    private Vector3 scaleChange;
 
     private float velocityAttraction = 25.0f;
 
@@ -36,8 +39,9 @@ public class BossProfile : moreSpecificProfile
 
     public bool isShooting = false;
     public bool isAttracting = false;
+    public bool isCastingAoE = false;
 
-    
+
     private float attractingRootDuration = 2.0f;
     
 
@@ -49,9 +53,12 @@ public class BossProfile : moreSpecificProfile
         rangedAttackPosition = transform.GetChild(1);
         swingAttackPosition = transform.GetChild(2);
         aheadAttackPosition = transform.GetChild(3);
+        AoEAttackPosition = transform.GetChild(4);
         //assign i player all'array
 
         rb = GetComponent<Rigidbody>();
+
+        scaleChange = new Vector3(0.18f, 0.02f, 0.18f);
 
     }
 
@@ -88,35 +95,36 @@ public class BossProfile : moreSpecificProfile
                
         }
 
-  
-    }
-        
+
+        if (isCastingAoE)
+        {
+            go.transform.localScale += scaleChange * Time.deltaTime;
+        }
+
+
+    }      
 
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            LaunchRay();
+            //LaunchRay();
+            AoEAttack();
         }
     }
 
 
-
-
-
     public void takeDamageFromSword(float damageFromCharacter)
     {
-        publicSetLifeAfterDamage(damageFromCharacter);
-        
-        Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
-
+        publicSetLifeAfterDamage(damageFromCharacter);       
+        //Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
     }
 
     public void takeDamageFromSpell(float damageFromCharacter)
     {
         publicSetLifeAfterDamage(damageFromCharacter);
-        Debug.Log("OH NO SPELL MI HAI COLPITO " + publicGetCurrentLife());
+        //Debug.Log("OH NO SPELL MI HAI COLPITO " + publicGetCurrentLife());
     }
 
 
@@ -213,13 +221,23 @@ public class BossProfile : moreSpecificProfile
 
     public void AoEAttack()
     {
+        go = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
+        isCastingAoE = true;
         cooldownAoEAttk = true;
+        StartCoroutine(castingAoEAttack());
         StartCoroutine(startCooldownAoEAttk());
+    }
+
+    public IEnumerator castingAoEAttack()
+    {
+        yield return new WaitForSeconds(1.8f);
+        isCastingAoE = false;
+        Destroy(go);
     }
 
     public IEnumerator startCooldownAoEAttk()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(8.4f);
         cooldownAoEAttk = false;
     }
 
