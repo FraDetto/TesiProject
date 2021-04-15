@@ -11,6 +11,8 @@ public class BossProfile : moreSpecificProfile
     public int[] playersParty;
     public float speedRangedAttk = 25.0f;
 
+    public int codeAttack = 0; // 0:swing  1: ahead  2:break    i use it to divide the different attack and apply the correct damage
+
     public GameObject goRangedAttk;
     public GameObject swordSwingAttk;
     public GameObject swordAheadAttk;
@@ -35,9 +37,10 @@ public class BossProfile : moreSpecificProfile
     public bool isShooting = false;
     public bool isAttracting = false;
 
-
-    private Vector3 initialPosition;
+    
     private float attractingRootDuration = 2.0f;
+    
+
 
 
     public void Start()
@@ -49,7 +52,6 @@ public class BossProfile : moreSpecificProfile
         //assign i player all'array
 
         rb = GetComponent<Rigidbody>();
-        initialPosition = transform.position;
 
     }
 
@@ -225,6 +227,7 @@ public class BossProfile : moreSpecificProfile
     {
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownSwingAttk = true;
+        codeAttack = 0;
         StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownSwingAttk());
     }
@@ -239,6 +242,7 @@ public class BossProfile : moreSpecificProfile
     {
         go = Instantiate(swordAheadAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownAheadAttk = true;
+        codeAttack = 1;
         StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownAheadAttk());
     }
@@ -260,7 +264,7 @@ public class BossProfile : moreSpecificProfile
         cooldownBreakAttk = true;
         targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//applica ferite gravi
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
-
+        codeAttack = 2;
         //danno basso
         StartCoroutine(startCooldownBreakAttk());
     }

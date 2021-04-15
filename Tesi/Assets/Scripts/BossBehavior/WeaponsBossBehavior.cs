@@ -10,7 +10,23 @@ public class WeaponsBossBehavior : MonoBehaviour
         //sword
         if (!other.tag.Equals("Boss"))
         {
-            float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+            int codeAttack = gameObject.GetComponentInParent<BossProfile>().codeAttack;
+            float damageCharacter = 0.0f;
+
+            switch (codeAttack)
+            {
+                case 0: //swing attack
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    break;
+                case 1: //ahead attack
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    damageCharacter += (damageCharacter / 100 * 40);
+                    break;
+                default: //break attack
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    damageCharacter -= (damageCharacter / 100 * 40);
+                    break;
+            }
 
             other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
         }
