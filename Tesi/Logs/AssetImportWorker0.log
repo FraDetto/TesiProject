@@ -80,3 +80,66 @@ Received Import Request.
 Start importing Assets/Scripts/BossBehavior/BossProfile.cs using Guid(517fcf8c3fdddbc4ca6677585046fff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aaf25533e7d0a8e1c4e8da81b7763a3a') in 0.045318 seconds
   Import took 0.047875 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003828 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.891 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1580 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 78.6 MB.
+System memory in use after: 78.7 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2015.
+Total: 2.461900 ms (FindLiveObjects: 0.195500 ms CreateObjectMapping: 0.075100 ms MarkObjects: 2.140300 ms  DeleteObjects: 0.049500 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 169.468072 seconds.
+  path: Assets/Scripts/BossBehavior/BossProfile.cs
+  artifactKey: Guid(517fcf8c3fdddbc4ca6677585046fff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BossBehavior/BossProfile.cs using Guid(517fcf8c3fdddbc4ca6677585046fff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b3db65396d76e8530fb4e89f5af5cb6') in 0.003471 seconds
+  Import took 0.005553 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002797 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.879 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1580 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 78.9 MB.
+System memory in use after: 79.0 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2017.
+Total: 2.454900 ms (FindLiveObjects: 0.155700 ms CreateObjectMapping: 0.048200 ms MarkObjects: 2.199700 ms  DeleteObjects: 0.050200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 81.301525 seconds.
+  path: Assets/Scripts/BossBehavior/BossProfile.cs
+  artifactKey: Guid(517fcf8c3fdddbc4ca6677585046fff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BossBehavior/BossProfile.cs using Guid(517fcf8c3fdddbc4ca6677585046fff1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8b8c211a554a51ddc6034bfe78ec153') in 0.003377 seconds
+  Import took 0.005480 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

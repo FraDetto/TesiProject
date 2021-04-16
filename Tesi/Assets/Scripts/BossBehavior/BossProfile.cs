@@ -114,9 +114,36 @@ public class BossProfile : moreSpecificProfile
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            rangedAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            rayAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            swingAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            aheadAttack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            breakAttack();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //LaunchRay();
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             AoEAttack();
         }
     }
@@ -249,7 +276,7 @@ public class BossProfile : moreSpecificProfile
         cooldownAoEAttk = false;
     }
 
-    public void SwingAttack()
+    public void swingAttack()
     {
         turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
