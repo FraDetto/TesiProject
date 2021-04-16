@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossProfile : moreSpecificProfile
 {
    
-    public string target;
+    
     public bool isAttacking = false;
     public bool isUsingAoE = false;
     public int[] playersParty;
@@ -20,6 +20,7 @@ public class BossProfile : moreSpecificProfile
 
     private Rigidbody rb;
     public GameObject targetPlayer;
+    public string target;
     private GameObject go;
 
     private Transform rangedAttackPosition;
