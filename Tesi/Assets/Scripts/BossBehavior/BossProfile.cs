@@ -42,8 +42,15 @@ public class BossProfile : moreSpecificProfile
     public bool isCastingAoE = false;
 
 
-    private float attractingRootDuration = 2.0f;
     
+    private float timeCoolDownRangedAttack = 6.4f;
+    private float timeCoolDownRayAttack = 10.4f;
+    private float attractingRootDuration = 2.0f;
+    private float AoEDuration = 1.8f;
+    private float timeCoolDownAoEAttack = 8.4f;
+    private float timeCoolDownSwingAttack= 1.6f;
+    private float timeCoolDownAheadAttack = 1.6f;
+    private float timeCoolDownBreakAttack = 4.4f;
 
 
 
@@ -142,7 +149,7 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator startCooldownRangedAttk()
     {
         //ricordarsi di gestire i cooldown
-        yield return new WaitForSeconds(6.4f);
+        yield return new WaitForSeconds(timeCoolDownRangedAttack);
         cooldownRangedAttk = false;
     }
 
@@ -216,7 +223,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownRayAttk()
     {
-        yield return new WaitForSeconds(10.4f);
+        yield return new WaitForSeconds(timeCoolDownRayAttack);
         cooldownRayAttk = false;
     }
 
@@ -231,14 +238,14 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator castingAoEAttack()
     {
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(AoEDuration);
         isCastingAoE = false;
         Destroy(go);
     }
 
     public IEnumerator startCooldownAoEAttk()
     {
-        yield return new WaitForSeconds(8.4f);
+        yield return new WaitForSeconds(timeCoolDownAoEAttack);
         cooldownAoEAttk = false;
     }
 
@@ -254,7 +261,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownSwingAttk()
     {
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(timeCoolDownSwingAttack);
         cooldownSwingAttk = false;
     }
 
@@ -270,7 +277,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownAheadAttk()
     {
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(timeCoolDownAheadAttack);
         cooldownAheadAttk = false;
     }
 
@@ -293,7 +300,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownBreakAttk()
     {
-        yield return new WaitForSeconds(4.4f);
+        yield return new WaitForSeconds(timeCoolDownBreakAttack);
         cooldownBreakAttk = false;
     }
 
