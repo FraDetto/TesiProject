@@ -6,11 +6,14 @@ public class RangedWeaponBehaviour : MonoBehaviour
 {
     public void OnTriggerEnter(Collider other)
     {
+        if (null != other.GetComponent<moreSpecificProfile>())
+        {
+            float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+            this.transform.GetComponentInParent<BossProfile>().isShooting = false;
+            other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
 
-        float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-        this.transform.GetComponentInParent<BossProfile>().isShooting = false;
-        other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
-
-        Destroy(this.gameObject);
+            Destroy(this.gameObject);
+        }
+        
     }
 }

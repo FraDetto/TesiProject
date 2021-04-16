@@ -8,28 +8,30 @@ public class SpellsCollider : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        string characterName = transform.parent.tag;
-      
-        switch (characterName)
-        {
-            case "Mage":
-                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                gameObject.GetComponentInParent<MageProfile>().shooting = false;
-                break;
-
-            default:
-                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                gameObject.GetComponentInParent<HealerProfile>().shooting = false;
-                break;
-        }
-
         if (other.tag.Equals("Boss"))
         {
+            string characterName = transform.parent.tag;
+      
+            switch (characterName)
+            {
+                case "Mage":
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    gameObject.GetComponentInParent<MageProfile>().shooting = false;
+                    break;
+
+                default:
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    gameObject.GetComponentInParent<HealerProfile>().shooting = false;
+                    break;
+            }
+
+       
             other.GetComponent<BossProfile>().takeDamageFromSpell(damageCharacter);
+            Destroy(this.gameObject);
         }
 
         
-        Destroy(this.gameObject);
+      
 
     }
 }
