@@ -115,7 +115,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude<= distanceRangeUp) )
+        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude<= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<MageMovement>().distanceFlag = false;
             return true;
@@ -128,7 +128,8 @@ public class MageBehavior : MonoBehaviour
 
     public bool CombactToSafeSpot()
     {
-        if (GetComponent<MageProfile>().publicGetStatus() == 0)//If status OK work normal, otherwise FALSE -> Rooted or stunned can't move
+       
+        if (GetComponent<moreSpecificProfile>().publicGetStatus() == 0)//If status OK work normal, otherwise FALSE -> Rooted or stunned can't move
         {
             return !safeSpotToCombact();
         }
@@ -168,7 +169,7 @@ public class MageBehavior : MonoBehaviour
     public void combactFase()
     {
         //Debug.Log("Combact Fase Mage");
-        if (GetComponent<MageProfile>().publicGetStatus() != 2)//if 2 = stunned can't attack and move
+        if (GetComponent<moreSpecificProfile>().publicGetStatus() != 2)//if 2 = stunned can't attack and move
         {
             fsmCombact.Update();
         }
@@ -178,7 +179,7 @@ public class MageBehavior : MonoBehaviour
 
     public void chaseDistanceBoss()
     {
-        if (!GetComponent<MageMovement>().chaseFlag)
+        if (!GetComponent<MageMovement>().chaseFlag && GetComponent<moreSpecificProfile>().publicGetStatus() == 0)
         {
             GetComponent<MageMovement>().chaseFlag = true;
         }
