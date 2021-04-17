@@ -123,7 +123,7 @@ public class BossProfile : moreSpecificProfile
         if (Input.GetKeyDown(KeyCode.W))
         {
             targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            rayAttack();
+            //LaunchRay();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -182,10 +182,8 @@ public class BossProfile : moreSpecificProfile
     }
 
     public void rayAttack()
-    {
-        turnBossToTarget();
+    {     
         cooldownRayAttk = true;
-
         StartCoroutine(startCooldownRayAttk());
     }
 
@@ -194,6 +192,7 @@ public class BossProfile : moreSpecificProfile
     public void LaunchRay()
     {
         Debug.Log("HO ATTIVATO RAY");
+        turnBossToTarget();
         //  CONTROLLLO PER DIFESA MAGE E TANK: SE SCUDO O SPELL ATTIVA o DISPONIBILE in teoria ray non va a segno
 
         bool enemyIsDefending;
@@ -220,6 +219,7 @@ public class BossProfile : moreSpecificProfile
         else
         {
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
+            Debug.Log("FALLITO RAY STA DIFENDENDO");
         }
 
         if (targetPlayer.tag.Equals("Tank"))
@@ -230,6 +230,7 @@ public class BossProfile : moreSpecificProfile
                 {
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce
+                    Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
             }
         }else if (targetPlayer.tag.Equals("Mage"))
@@ -240,6 +241,7 @@ public class BossProfile : moreSpecificProfile
                 {
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce
+                    Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
             }
         }

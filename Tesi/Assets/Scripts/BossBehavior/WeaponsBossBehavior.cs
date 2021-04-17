@@ -8,7 +8,7 @@ public class WeaponsBossBehavior : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         //sword
-        if (!other.tag.Equals("Boss"))
+        if (null != other.GetComponent<moreSpecificProfile>() && !other.tag.Equals("Boss"))
         {
             int codeAttack = gameObject.GetComponentInParent<BossProfile>().codeAttack;
             float damageCharacter = 0.0f;
