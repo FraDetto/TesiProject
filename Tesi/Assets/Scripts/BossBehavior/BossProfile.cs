@@ -221,7 +221,7 @@ public class BossProfile : moreSpecificProfile
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
             Debug.Log("FALLITO RAY STA DIFENDENDO");
         }
-
+        /*
         if (targetPlayer.tag.Equals("Tank"))
         {
             while (isAttracting)
@@ -244,7 +244,7 @@ public class BossProfile : moreSpecificProfile
                     Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
             }
-        }
+        }*/
            
 
     }
