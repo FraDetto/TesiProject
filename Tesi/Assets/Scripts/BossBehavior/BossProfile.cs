@@ -147,7 +147,7 @@ public class BossProfile : moreSpecificProfile
         {
             targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
-            LaunchRay();
+            StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -205,13 +205,16 @@ public class BossProfile : moreSpecificProfile
         cooldownRangedAttk = false;
     }
 
-    public void rayAttack()
-    {     
-        cooldownRayAttk = true;
-        StartCoroutine(startCooldownRayAttk());
+
+
+   
+
+    public IEnumerator timeBeforeCastRayAttack()
+    {
+        //ricordarsi di gestire i cooldown
+        yield return new WaitForSeconds(1.0f);
+        LaunchRay();
     }
-
-
 
     public void LaunchRay()
     {
@@ -245,35 +248,14 @@ public class BossProfile : moreSpecificProfile
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
             Debug.Log("FALLITO RAY STA DIFENDENDO");
         }
-        /*
-        if (targetPlayer.tag.Equals("Tank"))
-        {
-            while (isAttracting)
-            {
-                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
-                {
-                    isAttracting = false;
-                    //stessa cosa di prima per far vedere che fallisce
-                    Debug.Log("FALLITO RAY STA DIFENDENDO");
-                }
-            }
-        }else if (targetPlayer.tag.Equals("Mage"))
-        {
-            while (isAttracting)
-            {
-                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
-                {
-                    isAttracting = false;
-                    //stessa cosa di prima per far vedere che fallisce
-                    Debug.Log("FALLITO RAY STA DIFENDENDO");
-                }
-            }
-        }*/
            
-
     }
 
-
+    public void rayAttack()
+    {
+        cooldownRayAttk = true;
+        StartCoroutine(startCooldownRayAttk());
+    }
 
     public IEnumerator startCooldownRayAttk()
     {
