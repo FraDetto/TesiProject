@@ -324,6 +324,7 @@ public class BossProfile : moreSpecificProfile
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
         codeAttack = 2;
         //danno basso
+        StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownBreakAttk());
     }
 
