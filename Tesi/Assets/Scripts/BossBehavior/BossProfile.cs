@@ -98,6 +98,7 @@ public class BossProfile : moreSpecificProfile
             else
             {
                 isAttracting = false;
+                isAttacking = false;
                 targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
                 rayAttack();
             }
@@ -109,6 +110,7 @@ public class BossProfile : moreSpecificProfile
                 {
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce
+                    isAttacking = false;
                     Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
             }
@@ -119,6 +121,7 @@ public class BossProfile : moreSpecificProfile
                 {
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce
+                    isAttacking = false;
                     Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
 
@@ -147,6 +150,7 @@ public class BossProfile : moreSpecificProfile
         {
             targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
+            isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
