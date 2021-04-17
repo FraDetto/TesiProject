@@ -84,6 +84,7 @@ public class BossProfile : moreSpecificProfile
 
         if (isAttracting)
         {
+            
             Vector3 verticalAdjBoss = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
             Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayer.transform.position.y, transform.position.z);
             Vector3 toBossPos = (verticalAdj - targetPlayer.transform.position);
@@ -100,7 +101,29 @@ public class BossProfile : moreSpecificProfile
                 targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
                 rayAttack();
             }
-               
+
+            if (targetPlayer.tag.Equals("Tank"))
+            {
+
+                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                {
+                    isAttracting = false;
+                    //stessa cosa di prima per far vedere che fallisce
+                    Debug.Log("FALLITO RAY STA DIFENDENDO");
+                }
+            }
+            else if (targetPlayer.tag.Equals("Mage"))
+            {
+
+                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                {
+                    isAttracting = false;
+                    //stessa cosa di prima per far vedere che fallisce
+                    Debug.Log("FALLITO RAY STA DIFENDENDO");
+                }
+
+            }
+
         }
 
 
@@ -123,7 +146,8 @@ public class BossProfile : moreSpecificProfile
         if (Input.GetKeyDown(KeyCode.W))
         {
             targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            //LaunchRay();
+            target = targetPlayer.tag;
+            LaunchRay();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
