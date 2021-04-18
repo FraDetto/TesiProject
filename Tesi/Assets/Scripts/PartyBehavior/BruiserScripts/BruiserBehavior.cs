@@ -111,7 +111,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool ChaseToCombact()
     {
-        if ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange)
+        if ( ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             return true;
         }
