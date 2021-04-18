@@ -197,6 +197,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTarget();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
+        isAttacking = true;
         cooldownRangedAttk = true;
         StartCoroutine(startCooldownRangedAttk());//gestire distruzione proiettile
     }
@@ -215,7 +216,7 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastRayAttack()
     {
         //ricordarsi di gestire i cooldown
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.8f);
         LaunchRay();
     }
 
@@ -271,6 +272,7 @@ public class BossProfile : moreSpecificProfile
     {
         go = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
         isCastingAoE = true;
+        isAttacking = true;
         cooldownAoEAttk = true;
         StartCoroutine(castingAoEAttack());
         StartCoroutine(startCooldownAoEAttk());
@@ -281,6 +283,7 @@ public class BossProfile : moreSpecificProfile
         yield return new WaitForSeconds(AoEDuration);
         isCastingAoE = false;
         Destroy(go);
+        isAttacking = false;
     }
 
     public IEnumerator startCooldownAoEAttk()
@@ -294,6 +297,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownSwingAttk = true;
+        isAttacking = true;
         codeAttack = 0;
         StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownSwingAttk());
@@ -310,6 +314,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTarget();
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownAheadAttk = true;
+        isAttacking = true;
         codeAttack = 1;
         StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownAheadAttk());
@@ -325,12 +330,14 @@ public class BossProfile : moreSpecificProfile
     {
         yield return new WaitForSeconds(1.0f);
         Destroy(go);
+        isAttacking = false;
     }
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
         turnBossToTarget();
         cooldownBreakAttk = true;
+        isAttacking = true;
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
         targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//applica ferite gravi
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
