@@ -303,7 +303,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &3853577795443865132
 MonoBehaviour:
@@ -323,6 +323,8 @@ MonoBehaviour:
   shield: 0
   damage: 0
   armor: 0
+  status: 0
+  woundsActive: 0
 --- !u!114 &5714320623505951237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactionTime: 2.5
-  distanceRange: 45
+  distanceRangeDown: 45
+  distanceRangeUp: 60
   firstRush: 1
 --- !u!114 &2097305734944077522
 MonoBehaviour:
@@ -350,9 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47cd48deaabe2874f8049434b5eca519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRange: 45
   speed: 15
   chaseFlag: 0
+  distanceFlag: 0
 --- !u!114 &2318201167468610763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +374,8 @@ MonoBehaviour:
   shield: 0
   damage: 0
   armor: 0
+  status: 0
+  woundsActive: 0
   shooting: 0
   cooldownDefense: 0
   cooldownSpecial: 1

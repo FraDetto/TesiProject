@@ -102,7 +102,7 @@ public class BossProfile : moreSpecificProfile
                 targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
                 rayAttack();
             }
-
+            
             if (targetPlayer.tag.Equals("Tank"))
             {
 
@@ -111,6 +111,7 @@ public class BossProfile : moreSpecificProfile
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce
                     isAttacking = false;
+                    targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
                     Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
             }
@@ -122,11 +123,12 @@ public class BossProfile : moreSpecificProfile
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce
                     isAttacking = false;
+                    targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
                     Debug.Log("FALLITO RAY STA DIFENDENDO");
                 }
 
             }
-
+            
         }
 
 
@@ -246,6 +248,7 @@ public class BossProfile : moreSpecificProfile
         if (!enemyIsDefending)
         {
             isAttracting = true;
+            targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(1);
         }
         else
         {

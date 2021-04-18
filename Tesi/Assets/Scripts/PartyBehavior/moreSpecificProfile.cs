@@ -168,6 +168,11 @@ public class moreSpecificProfile : aProfile
         addRootStatus(rootDuration);
     }
 
+    public void publicSetPreviousStatus(int value)
+    {
+        status = value;
+    }
+
     public IEnumerator decayRoot(float rootDuration)
     {
         yield return new WaitForSeconds(rootDuration);
