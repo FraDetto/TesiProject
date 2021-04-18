@@ -42,6 +42,10 @@ public class BruiserMovement : MonoBehaviour
 
                 valueOfZAfterMovement = initialPositionZ - transform.position.z;
             }
+            else
+            {
+                chaseFlag = false;
+            }
         }
 
     }

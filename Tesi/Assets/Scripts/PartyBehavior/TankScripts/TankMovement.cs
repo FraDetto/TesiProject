@@ -34,6 +34,10 @@ public class TankMovement : MonoBehaviour
                 transform.LookAt(verticalAdj);
                 myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
             }
+            else
+            {
+                chaseFlag = false;
+            }
         }
        
     }

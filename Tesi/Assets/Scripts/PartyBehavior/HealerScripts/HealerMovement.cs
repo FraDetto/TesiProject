@@ -39,6 +39,10 @@ public class HealerMovement : MonoBehaviour
                 myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
             }
         }
+        else
+        {
+            distanceFlag = false;
+        }
 
         if (chaseFlag)
         {
@@ -50,6 +54,10 @@ public class HealerMovement : MonoBehaviour
                 transform.LookAt(verticalAdj);
                 myRB.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
             }
+        }
+        else
+        {
+            chaseFlag = false;
         }
 
 
