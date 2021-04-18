@@ -344,6 +344,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.071, y: 0, z: 0}
+--- !u!1 &1371127867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
+  m_PrefabInstance: {fileID: 1169127070248072442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1460637570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,11 +406,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8982895849c30849b054ab374beeb7d, type: 3}
---- !u!1 &2001504624 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
-  m_PrefabInstance: {fileID: 8189011056505969028}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1169127070248072442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -538,7 +538,7 @@ PrefabInstance:
     - target: {fileID: 1049040769, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: targetPlayer
       value: 
-      objectReference: {fileID: 2001504624}
+      objectReference: {fileID: 1371127867}
     - target: {fileID: 3359959793238077300, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_Name
       value: Boss

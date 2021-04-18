@@ -114,7 +114,7 @@ public class HealerBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        if (((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude <= distanceRangeUp))
+        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude <= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<HealerMovement>().distanceFlag = false;
             return true;

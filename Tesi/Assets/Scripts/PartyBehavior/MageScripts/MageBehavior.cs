@@ -176,7 +176,7 @@ public class MageBehavior : MonoBehaviour
         
     }
 
-
+    /*
     public void chaseDistanceBoss()
     {
         if (!GetComponent<MageMovement>().chaseFlag && GetComponent<moreSpecificProfile>().publicGetStatus() == 0)
@@ -184,7 +184,7 @@ public class MageBehavior : MonoBehaviour
             GetComponent<MageMovement>().chaseFlag = true;
         }
     }
-
+    */
 
     //////////////////// COMBACT FSM //////////////////////////////
 
