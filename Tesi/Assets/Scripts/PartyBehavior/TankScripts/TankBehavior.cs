@@ -110,7 +110,7 @@ public class TankBehavior : MonoBehaviour
     public bool ChaseToCombact()
     {
         //Debug.Log("ChaseToCombact");
-        if ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange)
+        if ( ((boss.transform.position - myRB.transform.position).magnitude <= distanceRange && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             //Debug.Log("ChaseToCombact TRUE BRANCH");
             GetComponent<TankMovement>().chaseFlag = false;

@@ -344,11 +344,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.071, y: 0, z: 0}
---- !u!1 &1371127867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
-  m_PrefabInstance: {fileID: 1169127070248072442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1460637570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1169127070104546558, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
       propertyPath: m_RootOrder
@@ -522,10 +517,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank
       objectReference: {fileID: 0}
-    - target: {fileID: 8863393698405314928, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
 --- !u!1001 &5475297297734807884
@@ -538,7 +529,7 @@ PrefabInstance:
     - target: {fileID: 1049040769, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: targetPlayer
       value: 
-      objectReference: {fileID: 1371127867}
+      objectReference: {fileID: 0}
     - target: {fileID: 3359959793238077300, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_Name
       value: Boss

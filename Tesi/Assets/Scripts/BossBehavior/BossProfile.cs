@@ -106,7 +106,7 @@ public class BossProfile : moreSpecificProfile
             if (targetPlayer.tag.Equals("Tank"))
             {
 
-                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                if (targetPlayer.transform.GetComponent<TankProfile>().shieldActive)
                 {
                     isAttracting = false;
                     //stessa cosa di prima per far vedere che fallisce

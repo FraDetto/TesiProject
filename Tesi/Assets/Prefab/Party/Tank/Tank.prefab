@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410306429690130120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 0, z: 1.44}
+  m_LocalPosition: {x: -0.8, y: 0.12, z: 1.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4683753665356790898}
@@ -208,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4683753665356790898
 Transform:
   m_ObjectHideFlags: 0
@@ -380,4 +380,4 @@ MonoBehaviour:
   shieldActive: 0
   swordActive: 0
   sword: {fileID: 2565423017887597707, guid: 972f7d13836cad947a1da879d0bb07b3, type: 3}
-  shieldTank: {fileID: 0}
+  shieldTank: {fileID: 5527568933421180270, guid: 131af02ddd423e94f94a18a6b9c84ea4, type: 3}
