@@ -52,18 +52,10 @@ public class TankProfile : moreSpecificProfile
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                rollAwayL();
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                rollAwayB();
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                rollAwayR();
-            }
+                rollAway();
+            }     
         }
-        
+       
     }
 
 
@@ -143,31 +135,32 @@ public class TankProfile : moreSpecificProfile
         //Debug.Log("ULTI UP");
     }
 
-    public void rollAwayB()
-    {
-        //tiri numero casuale da 1 a 3 e sceglie cosi direzione destra sinistra o indietro
-        cooldownDash = true;
-        rb.velocity = -transform.forward * 20.0f;
-        StartCoroutine(waitRollCollDown());
-    }
-    public void rollAwayR()
+    public void rollAway()
     {
         cooldownDash = true;
-       
-        rb.velocity = transform.right * 20.0f;
-        StartCoroutine(waitRollCollDown());
-    }
-    public void rollAwayL()
-    {
-        cooldownDash = true;
-        rb.velocity = -transform.right * 20.0f;
+
+        int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
+        
+        switch (way)
+        {
+            case 1:
+                rb.velocity = -transform.right * 15.0f;
+                break;
+            case 2:
+                rb.velocity = -transform.forward * 15.0f;
+                break;
+            default:
+                rb.velocity = transform.right * 15.0f;
+                break;
+        }
+
         StartCoroutine(waitRollCollDown());
     }
 
+
+
     public IEnumerator waitRollCollDown()
     {
-        Debug.Log(rb.velocity);
-        
         yield return new WaitForSeconds(timeRollCooldown);
         cooldownDash = false;
         rb.velocity = Vector3.zero;
