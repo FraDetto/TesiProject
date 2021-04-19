@@ -12,6 +12,7 @@ public class BruiserProfile : moreSpecificProfile
     public bool swordActive = false;
     public bool ultiRunning = false;
 
+    public bool cooldownDash = false;
 
     public GameObject sword;
     public GameObject HealSign;
@@ -19,7 +20,7 @@ public class BruiserProfile : moreSpecificProfile
     private GameObject go;
     private Transform pointSpawnSword;
     private Transform HealSignSpawnPoint;
-    private Rigidbody myRB;
+    private Rigidbody rb;
 
     private float swordDuration = 1.4f;
     private float timeCoolDownSwordAttack = 2.5f;
@@ -28,14 +29,29 @@ public class BruiserProfile : moreSpecificProfile
     private float specialDuration = 6.2f;
     private float timeCoolDownSpecial = 16.0f;
 
+    private float timeRollCooldown = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
-
         pointSpawnSword = transform.GetChild(1);
         HealSignSpawnPoint = transform.GetChild(2);
+        rb = GetComponent<Rigidbody>();
 
         StartCoroutine(waitAfterUlti());
+    }
+
+
+    private void Update()
+    {
+        if (!cooldownDash)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                rollAway();
+            }
+        }
+
     }
 
 
@@ -143,4 +159,33 @@ public class BruiserProfile : moreSpecificProfile
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }
+
+    public void rollAway()
+    {
+        cooldownDash = true;
+        int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
+
+        switch (way)
+        {
+            case 1:
+                rb.velocity = -transform.right * 15.0f;
+                break;
+            case 2:
+                rb.velocity = -transform.forward * 15.0f;
+                break;
+            default:
+                rb.velocity = transform.right * 15.0f;
+                break;
+        }
+        StartCoroutine(waitRollCollDown());
+    }
+
+
+    public IEnumerator waitRollCollDown()
+    {
+        yield return new WaitForSeconds(timeRollCooldown);
+        cooldownDash = false;
+        rb.velocity = Vector3.zero;
+    }
+
 }

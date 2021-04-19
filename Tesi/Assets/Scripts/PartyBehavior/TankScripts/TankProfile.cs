@@ -59,7 +59,7 @@ public class TankProfile : moreSpecificProfile
     }
 
 
-        public void attackWithSword()
+    public void attackWithSword()
     {
         //Debug.Log("attackWithSword");
         if (!cooldownSword)
@@ -71,18 +71,19 @@ public class TankProfile : moreSpecificProfile
             StartCoroutine(cooldownAttack());
         }
     }
-        public IEnumerator waitBeforeRemoveSword()
-        {
-            yield return new WaitForSeconds(swordDuration);
-            swordActive = false;
-            Destroy(go);
-        }
 
-        public IEnumerator cooldownAttack()
-        {
-            yield return new WaitForSeconds(timeCoolDownSwordAttack);
-            cooldownSword = false;
-        }
+    public IEnumerator waitBeforeRemoveSword()
+    {
+        yield return new WaitForSeconds(swordDuration);
+        swordActive = false;
+        Destroy(go);
+    }
+
+    public IEnumerator cooldownAttack()
+    {
+        yield return new WaitForSeconds(timeCoolDownSwordAttack);
+        cooldownSword = false;
+    }
 
 
 
@@ -135,12 +136,12 @@ public class TankProfile : moreSpecificProfile
         //Debug.Log("ULTI UP");
     }
 
+
     public void rollAway()
     {
         cooldownDash = true;
-
         int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
-        
+
         switch (way)
         {
             case 1:
@@ -153,10 +154,8 @@ public class TankProfile : moreSpecificProfile
                 rb.velocity = transform.right * 15.0f;
                 break;
         }
-
         StartCoroutine(waitRollCollDown());
     }
-
 
 
     public IEnumerator waitRollCollDown()
@@ -165,5 +164,6 @@ public class TankProfile : moreSpecificProfile
         cooldownDash = false;
         rb.velocity = Vector3.zero;
     }
+
 
 }

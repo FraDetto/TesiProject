@@ -13,6 +13,7 @@ public class HealerProfile : moreSpecificProfile
     public bool healActive = false;
     public bool chargingUlt = false;
 
+    public bool cooldownDash = false;
 
     private GameObject boss;
 
@@ -22,7 +23,7 @@ public class HealerProfile : moreSpecificProfile
 
     private Transform pointSpawnWindBall;
     private Transform pointSpawnHealHealer;
-    private Rigidbody myRB;
+    private Rigidbody rb;
     private GameObject go;
     private GameObject hs;
 
@@ -42,6 +43,7 @@ public class HealerProfile : moreSpecificProfile
     private float timeSpecialActivation = 1.0f;
     private float timeCoolDownSpecial = 16.0f;
 
+    private float timeRollCooldown = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class HealerProfile : moreSpecificProfile
         mage = GameObject.FindGameObjectWithTag("Mage");
         bruiser = GameObject.FindGameObjectWithTag("Bruiser");
 
+        rb = GetComponent<Rigidbody>();
 
         StartCoroutine(waitAfterUlti());
     }
@@ -67,6 +70,18 @@ public class HealerProfile : moreSpecificProfile
             go.transform.LookAt(boss.transform.position);
             go.transform.position += go.transform.forward * speed * Time.deltaTime;
         }
+    }
+
+    private void Update()
+    {
+        if (!cooldownDash)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                rollAway();
+            }
+        }
+
     }
 
     public void attackWithMagic()
@@ -185,8 +200,6 @@ public class HealerProfile : moreSpecificProfile
         //Debug.Log("ULTI FINITA");
     }
 
-  
-
     public IEnumerator waitAfterUlti()
     {
         //Debug.Log("ULTI IN COOLDOWN");
@@ -194,4 +207,35 @@ public class HealerProfile : moreSpecificProfile
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
     }
+
+
+    public void rollAway()
+    {
+        cooldownDash = true;
+        int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
+
+        switch (way)
+        {
+            case 1:
+                rb.velocity = -transform.right * 15.0f;
+                break;
+            case 2:
+                rb.velocity = -transform.forward * 15.0f;
+                break;
+            default:
+                rb.velocity = transform.right * 15.0f;
+                break;
+        }
+        StartCoroutine(waitRollCollDown());
+    }
+
+
+    public IEnumerator waitRollCollDown()
+    {
+        yield return new WaitForSeconds(timeRollCooldown);
+        cooldownDash = false;
+        rb.velocity = Vector3.zero;
+    }
+
+
 }

@@ -19,6 +19,8 @@ public class moreSpecificProfile : aProfile
     [SerializeField] private bool woundsActive;
 
 
+
+
     private void Start()
     {
         champTag = transform.tag;
@@ -225,6 +227,7 @@ public class moreSpecificProfile : aProfile
         yield return new WaitForSeconds(woundsDuration);
         woundsActive = false;
     }
+
 
 }
 
