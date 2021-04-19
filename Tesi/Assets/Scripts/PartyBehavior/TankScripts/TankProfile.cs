@@ -11,6 +11,8 @@ public class TankProfile : moreSpecificProfile
     public bool shieldActive = false;
     public bool swordActive = false;
 
+    public bool cooldownDash = false;
+
 
     public GameObject sword;
     public GameObject shieldTank;
@@ -46,10 +48,22 @@ public class TankProfile : moreSpecificProfile
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!cooldownDash)
         {
-            rollAway();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                rollAwayL();
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                rollAwayB();
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                rollAwayR();
+            }
         }
+        
     }
 
 
@@ -129,16 +143,34 @@ public class TankProfile : moreSpecificProfile
         //Debug.Log("ULTI UP");
     }
 
-    public void rollAway()
+    public void rollAwayB()
     {
-        rb.velocity = Vector3.right * 20.0f;
+        //tiri numero casuale da 1 a 3 e sceglie cosi direzione destra sinistra o indietro
+        cooldownDash = true;
+        rb.velocity = -transform.forward * 20.0f;
+        StartCoroutine(waitRollCollDown());
+    }
+    public void rollAwayR()
+    {
+        cooldownDash = true;
+       
+        rb.velocity = transform.right * 20.0f;
+        StartCoroutine(waitRollCollDown());
+    }
+    public void rollAwayL()
+    {
+        cooldownDash = true;
+        rb.velocity = -transform.right * 20.0f;
+        StartCoroutine(waitRollCollDown());
     }
 
     public IEnumerator waitRollCollDown()
     {
-       
+        Debug.Log(rb.velocity);
+        
         yield return new WaitForSeconds(timeRollCooldown);
-
+        cooldownDash = false;
+        rb.velocity = Vector3.zero;
     }
 
 }

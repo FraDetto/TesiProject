@@ -6,9 +6,9 @@ public class TankMovement : MonoBehaviour
 {
     
     private GameObject boss;
-    private Rigidbody myRB;
+    private Rigidbody rb;
 
-    public float distanceRange = 6.0f;
+    public float distanceRange = 7.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class TankMovement : MonoBehaviour
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
 
-        myRB = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
     }
 
@@ -29,10 +29,10 @@ public class TankMovement : MonoBehaviour
             Vector3 toBossPos = (verticalAdj - transform.position);
 
             //if (toBossPos.magnitude > distanceRange)
-            if((boss.transform.position - myRB.transform.position).magnitude >distanceRange)
+            if((boss.transform.position - rb.transform.position).magnitude >distanceRange)
             {
                 transform.LookAt(verticalAdj);
-                myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
             }
             else
             {

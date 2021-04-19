@@ -182,7 +182,7 @@ public class BossProfile : moreSpecificProfile
     public void takeDamageFromSword(float damageFromCharacter)
     {
         publicSetLifeAfterDamage(damageFromCharacter);       
-        //Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
+        Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
     }
 
     public void takeDamageFromSpell(float damageFromCharacter)
