@@ -28,6 +28,7 @@ public class BossProfile : moreSpecificProfile
     private Transform aheadAttackPosition;//stessa posizione usata per il break
     private Transform AoEAttackPosition;
     private Vector3 scaleChange;
+    private Vector3 originalPositionTarget;
 
     private float velocityAttraction = 25.0f;
 
@@ -76,7 +77,7 @@ public class BossProfile : moreSpecificProfile
     {
         if (isShooting)
         {
-            go.transform.LookAt(targetPlayer.transform.position);
+            go.transform.LookAt(originalPositionTarget);
             go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
             //bisogna poi cambiare isShooting in false
             
@@ -143,7 +144,7 @@ public class BossProfile : moreSpecificProfile
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             rangedAttack();
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -195,6 +196,7 @@ public class BossProfile : moreSpecificProfile
     public void rangedAttack()
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
+        originalPositionTarget = targetPlayer.transform.position;
         turnBossToTarget();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
@@ -357,7 +359,9 @@ public class BossProfile : moreSpecificProfile
 
     public void turnBossToTarget()
     {
-        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+        //Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+        Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
+        
         transform.LookAt(verticalAdj);
     }
 
