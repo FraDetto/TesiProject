@@ -47,6 +47,7 @@ public class BossProfile : moreSpecificProfile
     private float timeCoolDownRangedAttack = 6.4f;
     private float timeCoolDownRayAttack = 10.4f;
     private float attractingRootDuration = 2.0f;
+    private float timeBeforeCastAttracting = 0.8f;
     private float AoEDuration = 1.8f;
     private float timeCoolDownAoEAttack = 8.4f;
     private float timeCoolDownSwingAttack= 1.6f;
@@ -216,7 +217,7 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastRayAttack()
     {
         //ricordarsi di gestire i cooldown
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(timeBeforeCastAttracting);
         LaunchRay();
     }
 
