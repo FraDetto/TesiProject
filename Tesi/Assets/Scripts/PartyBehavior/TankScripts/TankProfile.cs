@@ -30,6 +30,8 @@ public class TankProfile : moreSpecificProfile
     private float specialDuration = 6.0f;
     private float timeCoolDownSpecial = 16.0f;
 
+    private float timeRollCooldown = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,6 +119,18 @@ public class TankProfile : moreSpecificProfile
         yield return new WaitForSeconds(timeCoolDownSpecial);
         cooldownSpecial = false;
         //Debug.Log("ULTI UP");
+    }
+
+    public void rollAway()
+    {
+
+    }
+
+    public IEnumerator waitRollCollDown()
+    {
+       
+        yield return new WaitForSeconds(timeRollCooldown);
+
     }
 
 }
