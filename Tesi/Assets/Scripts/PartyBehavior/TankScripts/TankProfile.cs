@@ -16,7 +16,7 @@ public class TankProfile : moreSpecificProfile
     public GameObject shieldTank;
 
 
-    private Rigidbody myRB;
+    private Rigidbody rb;
     private GameObject go;
     private Transform pointSpawnSword;
     private Transform pointSpawnShield;
@@ -36,7 +36,7 @@ public class TankProfile : moreSpecificProfile
     void Start()
     {
 
-
+        rb = GetComponent<Rigidbody>();
         pointSpawnSword = transform.GetChild(1);
         pointSpawnShield = transform.GetChild(2);
         pointSpawnHealHealer = transform.GetChild(3);
@@ -44,8 +44,16 @@ public class TankProfile : moreSpecificProfile
         StartCoroutine(waitAfterUlti());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            rollAway();
+        }
+    }
 
-    public void attackWithSword()
+
+        public void attackWithSword()
     {
         //Debug.Log("attackWithSword");
         if (!cooldownSword)
@@ -123,7 +131,7 @@ public class TankProfile : moreSpecificProfile
 
     public void rollAway()
     {
-
+        rb.velocity = Vector3.right * 20.0f;
     }
 
     public IEnumerator waitRollCollDown()
