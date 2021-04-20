@@ -179,10 +179,9 @@ public class TankBehavior : MonoBehaviour
 
     public bool AttkToDef()
     {
-       
-        if( !GetComponent<TankProfile>().cooldownShield && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)) && !GetComponent<TankProfile>().swordActive)
+        //if( (!GetComponent<TankProfile>().cooldownShield || !GetComponent<TankProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)) && !GetComponent<TankProfile>().swordActive)
+        if( (!GetComponent<TankProfile>().cooldownShield || !GetComponent<TankProfile>().cooldownDash) &&  (boss.GetComponent<BossProfile>().isAttacking && ( boss.GetComponent<BossProfile>().target.Equals(transform.tag) || boss.GetComponent<BossProfile>().isUsingAoE) ) )
         {
-            //Debug.Log("ATTKDEF");
             return true;
         }
         else
@@ -197,7 +196,7 @@ public class TankBehavior : MonoBehaviour
         
         if (!GetComponent<TankProfile>().cooldownSpecial && !GetComponent<TankProfile>().swordActive)
         {
-            Debug.Log("ATTKSPEC");
+            //Debug.Log("ATTKSPEC");
             return true;
         }
         else
@@ -259,8 +258,33 @@ public class TankBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
+        //qua mettere scelta tra dash e scudo (con prob 50%)
+        if ( (!GetComponent<TankProfile>().cooldownShield && !GetComponent<TankProfile>().cooldownDash) )
+        {
+            //qua probabilita'
+            int random = Random.Range(1, 101);
+
+            if( random >=1 && random < 60)
+            {
+                GetComponent<TankProfile>().defendWithShield();
+            }
+            else
+            {
+                GetComponent<TankProfile>().rollAway();
+            }
+        }
+        else
+        {
+            if (!GetComponent<TankProfile>().cooldownShield)
+            {
+                GetComponent<TankProfile>().defendWithShield();
+            }
+            else
+            {
+                GetComponent<TankProfile>().rollAway();
+            }
+        }
        
-       GetComponent<TankProfile>().defendWithShield();
 
             
     }

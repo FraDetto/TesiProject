@@ -6,8 +6,7 @@ public class BossProfile : moreSpecificProfile
 {
    
     
-    public bool isAttacking = false;
-    public bool isUsingAoE = false;
+    
     public int[] playersParty;
     public float speedRangedAttk = 25.0f;
 
@@ -38,6 +37,9 @@ public class BossProfile : moreSpecificProfile
     private bool cooldownSwingAttk = false;
     private bool cooldownAheadAttk = false;
     private bool cooldownBreakAttk = false;
+
+    public bool isAttacking = false;
+    public bool isUsingAoE = false;
 
     public bool isShooting = false;
     public bool isAttracting = false;
