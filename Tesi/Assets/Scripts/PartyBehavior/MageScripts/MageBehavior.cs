@@ -145,20 +145,24 @@ public class MageBehavior : MonoBehaviour
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
-        if ( (boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown )
+        if (!GetComponent<MageProfile>().isDashing)
         {
-            if (!GetComponent<MageMovement>().distanceFlag)
+            if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
             {
-                GetComponent<MageMovement>().distanceFlag = true;
+                if (!GetComponent<MageMovement>().distanceFlag)
+                {
+                    GetComponent<MageMovement>().distanceFlag = true;
+                }
+            }
+            else
+            {
+                if (!GetComponent<MageMovement>().chaseFlag)
+                {
+                    GetComponent<MageMovement>().chaseFlag = true;
+                }
             }
         }
-        else
-        {
-            if (!GetComponent<MageMovement>().chaseFlag)
-            {
-                GetComponent<MageMovement>().chaseFlag = true;
-            }
-        }
+        
 
 
         
@@ -194,7 +198,7 @@ public class MageBehavior : MonoBehaviour
     public bool AttkToDef()
     {
        
-        if (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)))
+        if ( (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking &&  (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && ((boss.transform.position - myRB.transform.position).magnitude < 15.0f) )) ))
         {
             return true;
         }
@@ -209,7 +213,7 @@ public class MageBehavior : MonoBehaviour
     {
         if (!GetComponent<MageProfile>().cooldownSpecial)
         {
-            Debug.Log("ATTKSPEC");
+            //Debug.Log("ATTKSPEC");
             return true;
         }
         else
@@ -256,7 +260,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool SpecToDef()
     {
-        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag))))
+        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && ((boss.transform.position - myRB.transform.position).magnitude < 15.0f)))))
         {
             return true;
         }
@@ -285,7 +289,32 @@ public class MageBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
-        GetComponent<MageProfile>().defendWithSpell();
+
+        if ((!GetComponent<MageProfile>().cooldownDefense && !GetComponent<MageProfile>().cooldownDash))
+        {
+            //qua probabilita'
+            int random = Random.Range(1, 101);
+
+            if (random >= 1 && random < 60)
+            {
+                GetComponent<MageProfile>().defendWithSpell();
+            }
+            else
+            {
+                GetComponent<MageProfile>().rollAway();
+            }
+        }
+        else
+        {
+            if (!GetComponent<MageProfile>().cooldownDefense)
+            {
+                GetComponent<MageProfile>().defendWithSpell();
+            }
+            else
+            {
+                GetComponent<MageProfile>().rollAway();
+            }
+        }
     }
 
     public void ActiveSpecial()

@@ -158,20 +158,20 @@ public class BossProfile : moreSpecificProfile
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             rangedAttack();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             isUsingAoE = true;
@@ -180,7 +180,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
            
@@ -190,7 +190,7 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastBreakAttk());

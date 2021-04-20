@@ -283,10 +283,7 @@ public class TankBehavior : MonoBehaviour
             {
                 GetComponent<TankProfile>().rollAway();
             }
-        }
-       
-
-            
+        }    
     }
 
     public void ActiveSpecial()
