@@ -146,36 +146,36 @@ public class BossProfile : moreSpecificProfile
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             rangedAttack();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             swingAttack();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             aheadAttack();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             breakAttack();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             AoEAttack();
         }
     }
@@ -199,7 +199,7 @@ public class BossProfile : moreSpecificProfile
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
         originalPositionTarget = targetPlayer.transform.position;
-        turnBossToTarget();
+        turnBossToTargetForRanged();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
         isAttacking = true;
@@ -360,6 +360,14 @@ public class BossProfile : moreSpecificProfile
 
 
     public void turnBossToTarget()
+    {
+        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+        //Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
+
+        transform.LookAt(verticalAdj);
+    }
+
+    public void turnBossToTargetForRanged()
     {
         //Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
         Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
