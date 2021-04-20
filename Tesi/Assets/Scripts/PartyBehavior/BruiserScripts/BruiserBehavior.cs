@@ -137,12 +137,15 @@ public class BruiserBehavior : MonoBehaviour
 
     public void ChaseBoos()//avvicinati al boss
     {
-
-        if (!GetComponent<BruiserMovement>().chaseFlag)
+        if (!GetComponent<BruiserProfile>().isDashing)
         {
-            //Debug.Log("ChaseBoos");
-            GetComponent<BruiserMovement>().chaseFlag = true;
+            if (!GetComponent<BruiserMovement>().chaseFlag)
+            {
+                //Debug.Log("ChaseBoos");
+                GetComponent<BruiserMovement>().chaseFlag = true;
+            }
         }
+      
 
     }
 
@@ -166,7 +169,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        if (!GetComponent<BruiserProfile>().swordActive && GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal)
+        if (!GetComponent<BruiserProfile>().swordActive &&  ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) ) )
         {
             return true;
         }
