@@ -316,7 +316,7 @@ public class BossProfile : moreSpecificProfile
     {
         turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
-        cooldownSwingAttk = true;
+        
         //isAttacking = true;
         codeAttack = 0;
         StartCoroutine(waitBeforeRemoveSword());
@@ -325,6 +325,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownSwingAttk()
     {
+        cooldownSwingAttk = true;
         yield return new WaitForSeconds(timeCoolDownSwingAttack);
         cooldownSwingAttk = false;
     }
@@ -333,7 +334,7 @@ public class BossProfile : moreSpecificProfile
     {
         turnBossToTarget();
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
-        cooldownAheadAttk = true;
+        
         //isAttacking = true;
         codeAttack = 1;
         StartCoroutine(waitBeforeRemoveSword());
@@ -342,6 +343,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownAheadAttk()
     {
+        cooldownAheadAttk = true;
         yield return new WaitForSeconds(timeCoolDownAheadAttack);
         cooldownAheadAttk = false;
     }
@@ -356,8 +358,8 @@ public class BossProfile : moreSpecificProfile
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
         turnBossToTarget();
-        cooldownBreakAttk = true;
-        isAttacking = true;
+        
+        //isAttacking = true;
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
         targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//applica ferite gravi
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
@@ -369,6 +371,7 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator startCooldownBreakAttk()
     {
+        cooldownBreakAttk = true;
         yield return new WaitForSeconds(timeCoolDownBreakAttack);
         cooldownBreakAttk = false;
     }
