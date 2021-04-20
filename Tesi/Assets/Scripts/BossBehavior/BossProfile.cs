@@ -147,6 +147,7 @@ public class BossProfile : moreSpecificProfile
         if (Input.GetKeyDown(KeyCode.Q))
         {
             targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            target = targetPlayer.tag;
             rangedAttack();
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -186,8 +187,8 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
-            target = targetPlayer.tag;
+            //targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            //target = targetPlayer.tag;
             isAttacking = true;
             isUsingAoE = true;
             StartCoroutine(timeBeforeCastAoEAttk());
@@ -291,7 +292,7 @@ public class BossProfile : moreSpecificProfile
     public void AoEAttack()
     {
         go = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
-        //isCastingAoE = true;
+        isCastingAoE = true;
         //isAttacking = true;
         cooldownAoEAttk = true;
         StartCoroutine(castingAoEAttack());
