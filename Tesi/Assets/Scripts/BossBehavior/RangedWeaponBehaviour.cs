@@ -12,6 +12,9 @@ public class RangedWeaponBehaviour : MonoBehaviour
             this.transform.GetComponentInParent<BossProfile>().isShooting = false;
             other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
             this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
+
+            this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
+            this.transform.GetComponentInParent<BossProfile>().target = "";
             Destroy(this.gameObject);
         }
         

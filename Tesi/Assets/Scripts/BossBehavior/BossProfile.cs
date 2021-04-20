@@ -104,34 +104,46 @@ public class BossProfile : moreSpecificProfile
                 isAttracting = false;
                 isAttacking = false;
                 targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
+
+                targetPlayer = null;
+                target = "";
                 rayAttack();
             }
+            if (null != targetPlayer)
+            {
+                if (targetPlayer.tag.Equals("Tank"))
+                {
+
+                    if (targetPlayer.transform.GetComponent<TankProfile>().shieldActive)
+                    {
+                        isAttracting = false;
+                        //stessa cosa di prima per far vedere che fallisce
+                        isAttacking = false;
+                        targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+
+                        targetPlayer = null;
+                        target = "";
+                        Debug.Log("FALLITO RAY STA DIFENDENDO");
+                    }
+                }
+                else if (targetPlayer.tag.Equals("Mage"))
+                {
+
+                    if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                    {
+                        isAttracting = false;
+                        //stessa cosa di prima per far vedere che fallisce
+                        isAttacking = false;
+                        targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+
+                        targetPlayer = null;
+                        target = "";
+                        Debug.Log("FALLITO RAY STA DIFENDENDO");
+                    }
+
+                }
+            }
             
-            if (targetPlayer.tag.Equals("Tank"))
-            {
-
-                if (targetPlayer.transform.GetComponent<TankProfile>().shieldActive)
-                {
-                    isAttracting = false;
-                    //stessa cosa di prima per far vedere che fallisce
-                    isAttacking = false;
-                    targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
-                    Debug.Log("FALLITO RAY STA DIFENDENDO");
-                }
-            }
-            else if (targetPlayer.tag.Equals("Mage"))
-            {
-
-                if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
-                {
-                    isAttracting = false;
-                    //stessa cosa di prima per far vedere che fallisce
-                    isAttacking = false;
-                    targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
-                    Debug.Log("FALLITO RAY STA DIFENDENDO");
-                }
-
-            }
             
         }
 
@@ -272,6 +284,8 @@ public class BossProfile : moreSpecificProfile
         else
         {
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
+            targetPlayer = null;
+            target = "";
             Debug.Log("FALLITO RAY STA DIFENDENDO");
         }
            
@@ -305,6 +319,8 @@ public class BossProfile : moreSpecificProfile
         isCastingAoE = false;
         Destroy(go);
         isAttacking = false;
+        isUsingAoE = false;
+
     }
 
     public IEnumerator startCooldownAoEAttk()
@@ -354,6 +370,8 @@ public class BossProfile : moreSpecificProfile
         yield return new WaitForSeconds(1.0f);
         Destroy(go);
         isAttacking = false;
+        targetPlayer = null;
+        target = "";
     }
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
