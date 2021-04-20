@@ -48,17 +48,7 @@ public class TankProfile : moreSpecificProfile
         StartCoroutine(waitAfterUlti());
     }
 
-    private void Update()
-    {
-        if (!cooldownDash)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                rollAway();
-            }     
-        }
-       
-    }
+
 
 
     public void attackWithSword()

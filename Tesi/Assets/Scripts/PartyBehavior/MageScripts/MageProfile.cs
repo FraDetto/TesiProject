@@ -14,7 +14,7 @@ public class MageProfile : moreSpecificProfile
     public bool chargingUlt = false;
 
     public bool cooldownDash = false;
-
+    public bool isDashing = false;
 
     private GameObject boss;
     private Transform pointSpawnFireBall;
@@ -38,6 +38,7 @@ public class MageProfile : moreSpecificProfile
 
     private float timeRollCooldown = 2.0f;
 
+    private float dashFroce = 17.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,16 +68,6 @@ public class MageProfile : moreSpecificProfile
         }
     }
 
-    private void Update()
-    {
-        if (!cooldownDash)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                rollAway();
-            }
-        }
-    }
 
 
     public void attackWithMagic()
@@ -164,9 +155,15 @@ public class MageProfile : moreSpecificProfile
                 rb.velocity = transform.right * 15.0f;
                 break;
         }
+        StartCoroutine(endDash());
         StartCoroutine(waitRollCollDown());
     }
 
+    public IEnumerator endDash()
+    {
+        yield return new WaitForSeconds(1.0f);
+        isDashing = false;
+    }
 
     public IEnumerator waitRollCollDown()
     {
