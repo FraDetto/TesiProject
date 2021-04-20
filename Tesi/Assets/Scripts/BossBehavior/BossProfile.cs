@@ -159,24 +159,39 @@ public class BossProfile : moreSpecificProfile
         if (Input.GetKeyDown(KeyCode.E))
         {
             targetPlayer = FindObjectOfType<TankProfile>().gameObject;
-            swingAttack();
+            target = targetPlayer.tag;
+            isAttacking = true;
+            isUsingAoE = true;
+            StartCoroutine(timeBeforeCastSwingAttk());
+            //swingAttack();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             targetPlayer = FindObjectOfType<TankProfile>().gameObject;
-            aheadAttack();
+            target = targetPlayer.tag;
+            isAttacking = true;
+           
+            StartCoroutine(timeBeforeCastAheadAttk());
+            //aheadAttack();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
             targetPlayer = FindObjectOfType<TankProfile>().gameObject;
-            breakAttack();
+            target = targetPlayer.tag;
+            isAttacking = true;
+            StartCoroutine(timeBeforeCastBreakAttk());
+            //breakAttack();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             targetPlayer = FindObjectOfType<TankProfile>().gameObject;
-            AoEAttack();
+            target = targetPlayer.tag;
+            isAttacking = true;
+            isUsingAoE = true;
+            StartCoroutine(timeBeforeCastAoEAttk());
+            //AoEAttack();
         }
     }
 
@@ -276,8 +291,8 @@ public class BossProfile : moreSpecificProfile
     public void AoEAttack()
     {
         go = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
-        isCastingAoE = true;
-        isAttacking = true;
+        //isCastingAoE = true;
+        //isAttacking = true;
         cooldownAoEAttk = true;
         StartCoroutine(castingAoEAttack());
         StartCoroutine(startCooldownAoEAttk());
@@ -302,7 +317,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownSwingAttk = true;
-        isAttacking = true;
+        //isAttacking = true;
         codeAttack = 0;
         StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownSwingAttk());
@@ -319,7 +334,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTarget();
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
         cooldownAheadAttk = true;
-        isAttacking = true;
+        //isAttacking = true;
         codeAttack = 1;
         StartCoroutine(waitBeforeRemoveSword());
         StartCoroutine(startCooldownAheadAttk());
@@ -358,6 +373,27 @@ public class BossProfile : moreSpecificProfile
         cooldownBreakAttk = false;
     }
 
+    public IEnumerator timeBeforeCastSwingAttk()
+    {
+        yield return new WaitForSeconds(0.5f);
+        swingAttack();
+    }
+    public IEnumerator timeBeforeCastAheadAttk()
+    {
+        yield return new WaitForSeconds(0.5f);
+        aheadAttack();
+    }
+    public IEnumerator timeBeforeCastBreakAttk()
+    {
+        yield return new WaitForSeconds(0.5f);
+        breakAttack();
+    }
+
+    public IEnumerator timeBeforeCastAoEAttk()
+    {
+        yield return new WaitForSeconds(0.5f);
+        AoEAttack();
+    }
 
     public void turnBossToTarget()
     {
