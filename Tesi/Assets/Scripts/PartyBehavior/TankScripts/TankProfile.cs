@@ -12,7 +12,7 @@ public class TankProfile : moreSpecificProfile
     public bool swordActive = false;
 
     public bool cooldownDash = false;
-
+    public bool isDashing = false;
 
     public GameObject sword;
     public GameObject shieldTank;
@@ -33,6 +33,8 @@ public class TankProfile : moreSpecificProfile
     private float timeCoolDownSpecial = 16.0f;
 
     private float timeRollCooldown = 2.0f;
+
+    private float dashFroce = 17.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -140,23 +142,30 @@ public class TankProfile : moreSpecificProfile
     public void rollAway()
     {
         cooldownDash = true;
+        isDashing = true; ;
         int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
 
         switch (way)
         {
             case 1:
-                rb.velocity = -transform.right * 15.0f;
+                rb.velocity = -transform.right * dashFroce;
                 break;
             case 2:
-                rb.velocity = -transform.forward * 15.0f;
+                rb.velocity = -transform.forward * dashFroce;
                 break;
             default:
-                rb.velocity = transform.right * 15.0f;
+                rb.velocity = transform.right * dashFroce;
                 break;
         }
+        StartCoroutine(endDash());
         StartCoroutine(waitRollCollDown());
     }
 
+    public IEnumerator endDash()
+    {
+        yield return new WaitForSeconds(1.0f);
+        isDashing = false;
+    }
 
     public IEnumerator waitRollCollDown()
     {

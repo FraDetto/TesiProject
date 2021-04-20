@@ -149,8 +149,8 @@ public class TankBehavior : MonoBehaviour
             transform.LookAt(verticalAdj);
             myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
         }*/
-       
-        if (!GetComponent<TankMovement>().chaseFlag)
+        
+        if (!GetComponent<TankMovement>().chaseFlag && !GetComponent<TankProfile>().isDashing)
         {
             //Debug.Log("ChaseBoos");
             GetComponent<TankMovement>().chaseFlag = true;
