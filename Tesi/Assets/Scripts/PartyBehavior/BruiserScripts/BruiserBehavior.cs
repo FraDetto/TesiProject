@@ -169,7 +169,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        if (!GetComponent<BruiserProfile>().swordActive &&  ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) ) )
+        if (!GetComponent<BruiserProfile>().swordActive &&  ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) || (!GetComponent<BruiserProfile>().cooldownDash && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE) ) ) ) )
         {
             return true;
         }
