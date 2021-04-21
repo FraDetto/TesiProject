@@ -169,7 +169,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        if (!GetComponent<BruiserProfile>().swordActive &&  ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) || (!GetComponent<BruiserProfile>().cooldownDash && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE) ) ) ) )
+        if (!GetComponent<BruiserProfile>().swordActive &&  ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) || (!GetComponent<BruiserProfile>().cooldownDash && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE)) ) ) )
         {
             return true;
         }
@@ -257,7 +257,16 @@ public class BruiserBehavior : MonoBehaviour
 
     public void Heal()
     {
-       GetComponent<BruiserProfile>().healHimSelf();
+        //Uso heal in priorita' se disponibile se no dash
+        if (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal)
+        {
+            GetComponent<BruiserProfile>().healHimSelf();
+        }
+        else
+        {
+            GetComponent<BruiserProfile>().rollAway();
+        }
+       
     }
 
     public void ActiveSpecial()
