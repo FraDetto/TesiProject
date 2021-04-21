@@ -260,6 +260,7 @@ public class BruiserBehavior : MonoBehaviour
         //Uso heal in priorita' se disponibile se no dash
         if (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal)
         {
+            Debug.Log("Uso Heal");
             GetComponent<BruiserProfile>().healHimSelf();
         }
         else

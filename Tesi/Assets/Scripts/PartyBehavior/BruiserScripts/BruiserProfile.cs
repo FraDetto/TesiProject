@@ -48,7 +48,7 @@ public class BruiserProfile : moreSpecificProfile
 
     public bool lifeUnderSixty()
     {
-        if(getCurrentLife() <= (getTotalLife()/100 * 60))
+        if(GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 60))
         {
             return true;
         }
