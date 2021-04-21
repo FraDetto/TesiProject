@@ -177,10 +177,10 @@ public class HealerBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        Debug.Log("SONO IN TEST" + (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE)));
-        if (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE))
+        //Debug.Log("SONO IN TEST" + (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE)));
+        if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE) ) || (!GetComponent<HealerProfile>().cooldownDash && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && GetComponent<HealerProfile>().cooldownSpecial) )) )
         {
-            Debug.Log("SONO IN TRUE");
+            Debug.Log("SONO IN VADI IJN HEAL");
             return true;
         }
         else
@@ -268,7 +268,16 @@ public class HealerBehavior : MonoBehaviour
 
     public void HealAnAlly()
     {
-        GetComponent<HealerProfile>().healAlly();
+        //si da' priorita' a cura
+        if (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() )
+        {
+            GetComponent<HealerProfile>().healAlly();
+        }
+        else
+        {
+            GetComponent<HealerProfile>().rollAway();
+        }
+       
     }
 
     public void ActiveSpecial()
