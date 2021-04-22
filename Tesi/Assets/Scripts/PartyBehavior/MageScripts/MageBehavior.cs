@@ -8,7 +8,7 @@ public class MageBehavior : MonoBehaviour
     private FSM fsmCombact;
 
     private GameObject boss;
-    private Rigidbody myRB;
+    private Rigidbody rb;
 
     public float reactionTime = 2.5f;
     public float distanceRangeDown = 45.0f;
@@ -19,7 +19,7 @@ public class MageBehavior : MonoBehaviour
     {
 
         boss = GameObject.FindGameObjectWithTag("Boss");
-        myRB = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
 
         ////////// MAIN FSM ///////////////////
@@ -115,7 +115,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude<= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
+        if ( ((boss.transform.position - rb.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - rb.transform.position).magnitude<= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<MageMovement>().distanceFlag = false;
             return true;
@@ -147,7 +147,7 @@ public class MageBehavior : MonoBehaviour
     {
         if (!GetComponent<MageProfile>().isDashing)
         {
-            if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
+            if ((boss.transform.position - rb.transform.position).magnitude < distanceRangeDown)
             {
                 if (!GetComponent<MageMovement>().distanceFlag)
                 {
@@ -198,7 +198,7 @@ public class MageBehavior : MonoBehaviour
     public bool AttkToDef()
     {
        
-        if ( (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking &&  (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && ((boss.transform.position - myRB.transform.position).magnitude < 15.0f) )) ))
+        if ( (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && ( boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)   ))
         {
             return true;
         }
@@ -260,7 +260,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool SpecToDef()
     {
-        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && ((boss.transform.position - myRB.transform.position).magnitude < 15.0f)))))
+        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && ((boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)))
         {
             return true;
         }
@@ -321,4 +321,19 @@ public class MageBehavior : MonoBehaviour
     {
         GetComponent<MageProfile>().activateUlti();
     }
+
+
+    public bool attackInRange()
+    {
+        if ((boss.transform.position - rb.transform.position).magnitude < 15.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
 }

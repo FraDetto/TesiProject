@@ -8,7 +8,7 @@ public class HealerBehavior : MonoBehaviour
     private FSM fsmCombact;
 
     private GameObject boss;
-    private Rigidbody myRB;
+    private Rigidbody rb;
 
     public float reactionTime = 2.5f;
     public float distanceRangeDown = 45.0f;
@@ -22,7 +22,7 @@ public class HealerBehavior : MonoBehaviour
     {
 
         boss = GameObject.FindGameObjectWithTag("Boss");
-        myRB = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
 
         ////////// MAIN FSM ///////////////////
@@ -114,7 +114,7 @@ public class HealerBehavior : MonoBehaviour
 
     public bool safeSpotToCombact()
     {
-        if ( ((boss.transform.position - myRB.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - myRB.transform.position).magnitude <= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
+        if ( ((boss.transform.position - rb.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - rb.transform.position).magnitude <= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<HealerMovement>().distanceFlag = false;
             return true;
@@ -140,7 +140,7 @@ public class HealerBehavior : MonoBehaviour
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
-        if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
+        if ((boss.transform.position - rb.transform.position).magnitude < distanceRangeDown)
         {
             if (!GetComponent<HealerMovement>().distanceFlag)
             {
@@ -177,10 +177,10 @@ public class HealerBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        //Debug.Log("SONO IN TEST" + (!GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE)));
-        if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE) ) || (!GetComponent<HealerProfile>().cooldownDash && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && GetComponent<HealerProfile>().cooldownSpecial) )) )
+        if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE) ) ||
+            (!GetComponent<HealerProfile>().cooldownDash && boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || (boss.GetComponent<BossProfile>().isUsingAoE && GetComponent<HealerProfile>().cooldownSpecial) || boss.GetComponent<BossProfile>().isShooting )) )
         {
-            Debug.Log("SONO IN VADI IJN HEAL");
+            //Debug.Log("SONO IN VADo HEAL");
             return true;
         }
         else
@@ -307,5 +307,18 @@ public class HealerBehavior : MonoBehaviour
         }
 
         return flag;
+    }
+
+    public bool attackInRange()
+    {
+        if ((boss.transform.position - rb.transform.position).magnitude < 15.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }

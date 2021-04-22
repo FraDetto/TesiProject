@@ -158,20 +158,21 @@ public class BossProfile : moreSpecificProfile
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
-            rangedAttack();
+            isAttacking = true;
+            StartCoroutine(timeBeforeCastRangedAttack());
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             isUsingAoE = true;
@@ -180,7 +181,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
            
@@ -190,7 +191,7 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastBreakAttk());
@@ -222,6 +223,13 @@ public class BossProfile : moreSpecificProfile
     }
 
 
+    public IEnumerator timeBeforeCastRangedAttack()
+    {
+        //ricordarsi di gestire i cooldown
+        yield return new WaitForSeconds(timeBeforeCastAttracting);
+        rangedAttack();
+    }
+
 
     public void rangedAttack()
     {
@@ -230,7 +238,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTargetForRanged();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
-        isAttacking = true;
+        //isAttacking = true;
         cooldownRangedAttk = true;
         StartCoroutine(startCooldownRangedAttk());//gestire distruzione proiettile
     }
