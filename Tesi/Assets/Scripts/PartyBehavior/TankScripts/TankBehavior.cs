@@ -180,7 +180,7 @@ public class TankBehavior : MonoBehaviour
     public bool AttkToDef()
     {
         //if( (!GetComponent<TankProfile>().cooldownShield || !GetComponent<TankProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)) && !GetComponent<TankProfile>().swordActive)
-        if( (!GetComponent<TankProfile>().cooldownShield || !GetComponent<TankProfile>().cooldownDash) &&  (boss.GetComponent<BossProfile>().isAttacking && ( boss.GetComponent<BossProfile>().target.Equals(transform.tag) || boss.GetComponent<BossProfile>().isUsingAoE) ) )
+        if( (!GetComponent<TankProfile>().cooldownShield || (!GetComponent<TankProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&  (boss.GetComponent<BossProfile>().isAttacking && ( boss.GetComponent<BossProfile>().target.Equals(transform.tag) || boss.GetComponent<BossProfile>().isUsingAoE) ) )
         {
             return true;
         }
@@ -259,7 +259,7 @@ public class TankBehavior : MonoBehaviour
     public void DefendFromAttack()
     {
         //qua mettere scelta tra dash e scudo (con prob 50%)
-        if ( (!GetComponent<TankProfile>().cooldownShield && !GetComponent<TankProfile>().cooldownDash) )
+        if ( (!GetComponent<TankProfile>().cooldownShield && (!GetComponent<TankProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0)) )
         {
             //qua probabilita'
             int random = Random.Range(1, 101);

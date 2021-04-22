@@ -197,8 +197,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool AttkToDef()
     {
-       
-        if ( (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && ( boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)   ))
+        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)   ))
         {
             return true;
         }
@@ -260,7 +259,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool SpecToDef()
     {
-        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || !GetComponent<MageProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && ((boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)))
+        if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) && (boss.GetComponent<BossProfile>().isAttacking && ((boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)))
         {
             return true;
         }
@@ -289,8 +288,8 @@ public class MageBehavior : MonoBehaviour
 
     public void DefendFromAttack()
     {
-
-        if ((!GetComponent<MageProfile>().cooldownDefense && !GetComponent<MageProfile>().cooldownDash))
+        
+        if ((!GetComponent<MageProfile>().cooldownDefense && (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ))
         {
             //qua probabilita'
             int random = Random.Range(1, 101);
