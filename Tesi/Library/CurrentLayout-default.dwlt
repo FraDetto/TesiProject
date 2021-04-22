@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Project
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 521}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinSize: {x: 707, y: 471}
   m_MaxSize: {x: 18003, y: 14021}
   vertical: 0
-  controlID: 174
+  controlID: 113
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 321}
   m_MaxSize: {x: 4001, y: 8021}
   vertical: 1
-  controlID: 40
+  controlID: 118
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -195,8 +195,8 @@ MonoBehaviour:
     y: 450
     width: 836
     height: 281
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 13}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 471}
   m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
-  controlID: 96
+  controlID: 154
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -431,9 +431,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 8.356422, y: 2.3835144, z: -21.693281}
+    m_Target: {x: -7.28156, y: 9.044969, z: -22.572838}
     speed: 2
-    m_Value: {x: 8.356422, y: 2.3835144, z: -21.693281}
+    m_Value: {x: -7.28156, y: 9.044969, z: -22.572838}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -480,13 +480,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.2511286, y: -0.43353853, z: 0.12718567, w: 0.85622996}
+    m_Target: {x: 0.16476358, y: -0.4492404, z: 0.084706664, w: 0.87418}
     speed: 2
-    m_Value: {x: 0.25108755, y: -0.43346763, z: 0.12716487, w: 0.85608995}
+    m_Value: {x: 0.1647364, y: -0.44916627, z: 0.084692694, w: 0.87403584}
   m_Size:
-    m_Target: 26.860296
+    m_Target: 14.864336
     speed: 2
-    m_Value: 26.860296
+    m_Value: 14.864336
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a40f0000
+      m_SelectedIDs: 860c0000
       m_LastClickedID: 0
       m_ExpandedIDs: 56fbffff
       m_RenameOverlay:
@@ -653,22 +653,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/PartyBehavior/MageScripts
+    - Assets/Scripts/PartyBehavior/BruiserScripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/PartyBehavior/MageScripts
+  - Assets/Scripts/PartyBehavior/BruiserScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\ProgettoTesi\Tesi
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 28400000
-    m_LastClickedID: 16424
-    m_ExpandedIDs: 000000000040000002400000044000002640000000ca9a3b
+    scrollPos: {x: 0, y: 108}
+    m_SelectedIDs: 1e400000
+    m_LastClickedID: 16414
+    m_ExpandedIDs: 000000000040000002400000044000000e4000001a40000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

@@ -159,13 +159,13 @@ public class BruiserProfile : moreSpecificProfile
         switch (way)
         {
             case 1:
-                rb.velocity = -transform.right * 15.0f;
+                rb.velocity = -transform.right * dashFroce;
                 break;
             case 2:
-                rb.velocity = -transform.forward * 15.0f;
+                rb.velocity = -transform.forward * dashFroce;
                 break;
             default:
-                rb.velocity = transform.right * 15.0f;
+                rb.velocity = transform.right * dashFroce;
                 break;
         }
         StartCoroutine(endDash());
