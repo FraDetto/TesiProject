@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453ac195805eab6449400087960ef8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  partyData: {fileID: 0}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -292,6 +292,8 @@ MonoBehaviour:
   cooldownSpecial: 1
   swordActive: 0
   ultiRunning: 0
+  cooldownDash: 0
+  isDashing: 0
   sword: {fileID: 1550275239034851887, guid: 8567d0e39591fde4691b8fdac17d7528, type: 3}
   HealSign: {fileID: 5657558105343175916, guid: d747bdf1c4480b046844659c73a95af2, type: 3}
 --- !u!1 &4292504042913590263

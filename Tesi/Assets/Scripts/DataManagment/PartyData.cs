@@ -27,7 +27,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpMage = 150.0f;
-    public float damageMage = 90.0f;
+    public float damageMage = 80.0f;
     public float armorMage = 9.0f;
 
     /// <summary>
@@ -43,7 +43,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpBoss = 300.0f;
-    public float damageBoss = 40.0f;
+    public float damageBoss = 95.0f;
     public float armorBoss = 15.0f;
 
    

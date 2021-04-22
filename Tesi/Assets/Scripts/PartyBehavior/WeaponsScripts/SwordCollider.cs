@@ -24,7 +24,7 @@ public class SwordCollider : MonoBehaviour
 
         if (other.tag.Equals("Boss"))
         {
-            other.GetComponent<BossProfile>().takeDamageFromSword(damageCharacter);
+            other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
         }
 
        

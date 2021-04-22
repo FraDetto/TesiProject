@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BossProfile : moreSpecificProfile
 {
-   
-    
     
     public int[] playersParty;
     public float speedRangedAttk = 25.0f;
@@ -79,10 +77,15 @@ public class BossProfile : moreSpecificProfile
     {
         if (isShooting)
         {
-            go.transform.LookAt(originalPositionTarget);
+            //go.transform.LookAt(new Vector3(originalPositionTarget.x, 1.0f, originalPositionTarget.z));
             go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
+            //go.GetComponent<Rigidbody>().MovePosition(go.transform.position+ go.transform.forward * speedRangedAttk * Time.deltaTime);
             //bisogna poi cambiare isShooting in false
-            
+            if(go.transform.position == originalPositionTarget)
+            {
+                isShooting = false;
+                Destroy(go);
+            }
         }
 
 
@@ -209,18 +212,18 @@ public class BossProfile : moreSpecificProfile
         }
     }
 
-
+    /*
     public void takeDamageFromSword(float damageFromCharacter)
     {
-        publicSetLifeAfterDamage(damageFromCharacter);       
+        this.       
         Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
     }
 
     public void takeDamageFromSpell(float damageFromCharacter)
     {
-        publicSetLifeAfterDamage(damageFromCharacter);
+        this.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageFromCharacter);
         //Debug.Log("OH NO SPELL MI HAI COLPITO " + publicGetCurrentLife());
-    }
+    }*/
 
 
     public IEnumerator timeBeforeCastRangedAttack()
@@ -238,7 +241,8 @@ public class BossProfile : moreSpecificProfile
         turnBossToTargetForRanged();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
-        //isAttacking = true;
+        go.transform.LookAt(new Vector3(originalPositionTarget.x, 2.0f, originalPositionTarget.z));
+
         cooldownRangedAttk = true;
         StartCoroutine(startCooldownRangedAttk());//gestire distruzione proiettile
     }

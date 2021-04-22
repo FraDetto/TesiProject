@@ -9,6 +9,7 @@ TagManager:
   - Mage
   - Bruiser
   - Healer
+  - Ground
   layers:
   - Default
   - TransparentFX

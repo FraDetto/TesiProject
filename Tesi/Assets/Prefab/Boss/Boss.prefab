@@ -73,11 +73,11 @@ GameObject:
   - component: {fileID: 3181115330687859850}
   - component: {fileID: 2438159072496211589}
   - component: {fileID: 3355486365531466470}
-  - component: {fileID: 1049040769}
-  - component: {fileID: 6233091902138811558}
   - component: {fileID: 5475297297734807888}
   - component: {fileID: 5475297297734807887}
   - component: {fileID: 5475297297734807886}
+  - component: {fileID: 1852354072}
+  - component: {fileID: 1852354071}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -182,60 +182,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &1049040769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3359959793238077300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 517fcf8c3fdddbc4ca6677585046fff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
-  totalhp: 0
-  currenthp: 0
-  shield: 0
-  damage: 0
-  armor: 0
-  status: 0
-  woundsActive: 0
-  isAttacking: 0
-  isUsingAoE: 0
-  playersParty: 
-  speedRangedAttk: 25
-  codeAttack: 0
-  goRangedAttk: {fileID: 3598328088470394854, guid: 9e391bc03674c8c44b2e6001fd26ff37, type: 3}
-  swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
-  swordAheadAttk: {fileID: 6814415977512439784, guid: ef3906f6ae01225418b896a3c2bdec84, type: 3}
-  containerAoEAttk: {fileID: 2296344002437002397, guid: cb9d9a76bf3ca6c4bb73d30264cb1656, type: 3}
-  targetPlayer: {fileID: 0}
-  target: 
-  isShooting: 0
-  isAttracting: 0
-  isCastingAoE: 0
---- !u!114 &6233091902138811558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3359959793238077300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
-  totalhp: 0
-  currenthp: 0
-  shield: 0
-  damage: 0
-  armor: 0
-  status: 0
-  woundsActive: 0
 --- !u!114 &5475297297734807888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +237,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
+--- !u!114 &1852354072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359959793238077300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
+  totalhp: 0
+  currenthp: 0
+  shield: 0
+  damage: 0
+  armor: 0
+  status: 0
+  woundsActive: 0
+--- !u!114 &1852354071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359959793238077300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517fcf8c3fdddbc4ca6677585046fff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 0}
+  totalhp: 0
+  currenthp: 0
+  shield: 0
+  damage: 0
+  armor: 0
+  status: 0
+  woundsActive: 0
+  playersParty: 
+  speedRangedAttk: 25
+  codeAttack: 0
+  goRangedAttk: {fileID: 3598328088470394854, guid: 9e391bc03674c8c44b2e6001fd26ff37, type: 3}
+  swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
+  swordAheadAttk: {fileID: 6814415977512439784, guid: ef3906f6ae01225418b896a3c2bdec84, type: 3}
+  containerAoEAttk: {fileID: 2296344002437002397, guid: cb9d9a76bf3ca6c4bb73d30264cb1656, type: 3}
+  targetPlayer: {fileID: 0}
+  target: 
+  isAttacking: 0
+  isUsingAoE: 0
+  isShooting: 0
+  isAttracting: 0
+  isCastingAoE: 0
 --- !u!1 &4012549927593715571
 GameObject:
   m_ObjectHideFlags: 0

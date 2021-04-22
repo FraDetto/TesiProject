@@ -19,11 +19,11 @@ MonoBehaviour:
   damageBruiser: 60
   armorBruiser: 11
   hpMage: 150
-  damageMage: 90
+  damageMage: 80
   armorMage: 9
   hpHealer: 180
   damageHealer: 25
   armorHealer: 9
   hpBoss: 300
-  damageBoss: 40
+  damageBoss: 95
   armorBoss: 15

@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b81614f267a54f97d7c569af9d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 4911e4a7899ad354d9ce7c85594f8e17, type: 2}
+  partyData: {fileID: 0}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -201,6 +201,8 @@ MonoBehaviour:
   cooldownSpecial: 1
   healActive: 0
   chargingUlt: 0
+  cooldownDash: 0
+  isDashing: 0
   healingText: {fileID: 5004143338378178936, guid: 85ff0493af34b0b4dad70ccb13b9f189, type: 3}
   windBall: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
   m_HealRadius: 100

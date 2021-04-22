@@ -25,8 +25,7 @@ public class SpellsCollider : MonoBehaviour
                     break;
             }
 
-       
-            other.GetComponent<BossProfile>().takeDamageFromSpell(damageCharacter);
+            other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
             Destroy(this.gameObject);
         }
 

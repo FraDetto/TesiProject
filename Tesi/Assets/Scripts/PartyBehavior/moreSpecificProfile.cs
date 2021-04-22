@@ -55,11 +55,15 @@ public class moreSpecificProfile : aProfile
                 armor = partyData.armorHealer;
                 break;
 
-            default:
+            case "Boss":
                 totalhp = partyData.hpBoss;
                 currenthp = totalhp;
                 damage = partyData.damageBoss;
                 armor = partyData.armorBoss;
+                break;
+
+            default:
+                Debug.Log("CHARACTER UNKNOWN");
                 break;
         }
 
@@ -128,6 +132,7 @@ public class moreSpecificProfile : aProfile
     protected override void setLifeAfterDamage(float damage)
     {
         currenthp -= damage;
+        Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
     }
 
     public void publicSetLifeAfterDamage(float damage)
