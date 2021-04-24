@@ -32,6 +32,9 @@ public class BossBehavior : Agent
         //If fewer entities are observed than the maximum, the observation will be padded with zeros and the trainer will ignore the padded observations
         //Cosi quando un pg del party muore lo si puo' disattivare e lui continua con le osservazioni sugli altri?? 
         //The data we will observe are float, int and bool
+
+        //For the best results when training, we should normalize the components of feature vector to the range [-1, +1] or [0, 1]. 
+        //When we normalize the values the PPO neural network can often converge to a solution faster.
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -40,6 +43,33 @@ public class BossBehavior : Agent
         //When using Discrete Actions, it is possible to specify that some actions are impossible for the next decision(i can use it as a sort of cooldown for the boss).
         //Discrete actions can have multiple action branches: i can use 2 branches-> 1 for actions and 1 for targets so it decides which target and which actions do so i can bettere assign rewards
 
+        ////REWARDS////
+        ///The PPO reinforcement learning algorithm works by optimizing the choices an agent makes such that the agent earns the highest cumulative reward over time
+        ///If there are multiple calls to AddReward() for a single agent decision, the rewards will be summed together to evaluate how good the previous decision was.
+        ///Range for rewards between -1 and 1
+        ///Th idea is +1 and -1 if boss defeat the party or if it dies respectively
 
+        //In detail for each attack of the boss (ideas)
+
+        ////RANGED ATTACK////
+        ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
+        ///Good rew: against healer
+        ///Bad rew: if use against tank and bruiser OR if after bait spelldef to Mage it attacks an other champ
+
+        ////RAY ATTACK////
+        ///Max rew: on mage after ranged attack which baits def spell  OR agaisnt healer
+        ///little bad: if do on mage with def up and it defends
+        ///Bad rew: against bruiser or tank
+        ///
+
+        //// ATTACK AoE ////
+        ///Max rew: vs 3 or more target
+        ///good rew: vs 2 target and ranged pg are dead
+        ///bad rew: vs 1 champ OR there are the 2 melee but there are ranged champ alive 
+        ///
+
+        //// Swing Attack ////
+        ///Max rew:
+        ///
     }
 }
