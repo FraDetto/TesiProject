@@ -36,7 +36,10 @@ public class BossBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-       //action he will apply are discrete (for the moment):the academy generate an int that corresponds to an action of the boss
+        //action he will apply are discrete (for the moment):the academy generate an int that corresponds to an action of the boss
+        //When using Discrete Actions, it is possible to specify that some actions are impossible for the next decision(i can use it as a sort of cooldown for the boss).
+        //Discrete actions can have multiple action branches: i can use 2 branches-> 1 for actions and 1 for targets so it decides which target and which actions do so i can bettere assign rewards
+
 
     }
 }
