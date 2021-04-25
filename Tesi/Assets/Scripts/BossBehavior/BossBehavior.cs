@@ -19,8 +19,10 @@ public class BossBehavior : Agent
 
     public override void OnEpisodeBegin()
     {
-      //The episode end when the boss dies or all the party die? I want to do in this way to let the agent understand if an action is ok or not in the long time so ill'give a small rewaerd for an action or a 
-      //a sequence of actions that are correct and follow the strategies to defeat the single members of the party and the whole party at the end.
+        //The episode end when the boss dies or all the party die? I want to do in this way to let the agent understand if an action is ok or not in the long time so ill'give a small rewaerd for an action or a 
+        //a sequence of actions that are correct and follow the strategies to defeat the single members of the party and the whole party at the end.
+        //
+        //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
     }
 
     public override void CollectObservations(VectorSensor sensor)
