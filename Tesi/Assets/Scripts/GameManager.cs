@@ -4,41 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] prefabsArray;
-    public bool makeBetterTeam;
+    public GameObject[] poolOfCLasses;
+    public GameObject[] partyOnRun = new GameObject[4];
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!makeBetterTeam)
-        {
-            int[] team = chooseTeam();
-            for (int i = 0; i < 4; i++)
-            {
-                Debug.Log(team[i]);
-            }
-        }
-        else
-        {
-            int[] team = { 0, 1, 2, 3 };
-            for (int i = 0; i < 4; i++)
-            {
-                Debug.Log(team[i]);
-            }
-        }
+
        
 
     }
     
-    public int[] chooseTeam()
+    public void chooseTeam()
     {
-        int n;
-        int[] team = new int[4];
-        for (int i = 0; i < 4; i++){
-            n = Random.RandomRange(0, 4);
-            team[i] = n;
+       for(int n=0; n< partyOnRun.Length; n++)
+        {
+
         }
-        
-        return team;
     }
 }
