@@ -34,10 +34,12 @@ public class BruiserMovement : MonoBehaviour
             Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
             Vector3 toBossPos = (verticalAdj - transform.position);
 
+
             //if (toBossPos.magnitude > distanceRange)
             if ((boss.transform.position - myRB.transform.position).magnitude > distanceRange)
             {
                 transform.LookAt(verticalAdj);
+
                 myRB.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
 
                 valueOfZAfterMovement = initialPositionZ - transform.position.z;
@@ -48,5 +50,10 @@ public class BruiserMovement : MonoBehaviour
             }
         }
 
+    }
+
+    public void controllo()
+    {
+        
     }
 }
