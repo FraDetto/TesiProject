@@ -284,6 +284,9 @@ MonoBehaviour:
   swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
   swordAheadAttk: {fileID: 6814415977512439784, guid: ef3906f6ae01225418b896a3c2bdec84, type: 3}
   containerAoEAttk: {fileID: 2296344002437002397, guid: cb9d9a76bf3ca6c4bb73d30264cb1656, type: 3}
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   targetPlayer: {fileID: 0}
   target: 
   isAttacking: 0

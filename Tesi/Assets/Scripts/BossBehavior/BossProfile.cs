@@ -15,6 +15,8 @@ public class BossProfile : moreSpecificProfile
     public GameObject swordAheadAttk;
     public GameObject containerAoEAttk;
 
+    public LayerMask m_PlayerMask;
+
     private Rigidbody rb;
     public GameObject targetPlayer;
     public string target;
@@ -168,7 +170,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
@@ -292,6 +294,7 @@ public class BossProfile : moreSpecificProfile
         {
             isAttracting = true;
             targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(1);
+            targetPlayer.GetComponent<moreSpecificProfile>().impulseFromRay((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude, m_PlayerMask);
         }
         else
         {

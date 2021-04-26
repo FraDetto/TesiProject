@@ -9,13 +9,17 @@ public class moreSpecificProfile : aProfile
     protected float armorReductionDuration = 4.0f;
     protected float woundsDuration = 6.0f;
 
-    private bool m_HitDetect_left;
-    private bool m_HitDetect_right;
-    private bool m_HitDetect_back;
+    private bool m_HitDetect_dash_left;
+    private bool m_HitDetect_dash_right;
+    private bool m_HitDetect_dash_back;
 
-    RaycastHit m_Hit_left;
-    RaycastHit m_Hit_right;
-    RaycastHit m_Hit_back;
+    private bool m_HitDetect_onRay_front;
+
+    RaycastHit m_Hit_dash_left;
+    RaycastHit m_Hit_dash_right;
+    RaycastHit m_Hit_dash_back;
+
+    RaycastHit m_Hit_onRay_front;
 
 
     [SerializeField] private float totalhp;
@@ -245,11 +249,11 @@ public class moreSpecificProfile : aProfile
     public void rollAwayChamp(Rigidbody rb, float m_MaxDistance, LayerMask m_PlayerMask, float dashForce)
     {
 
-        m_HitDetect_left = Physics.BoxCast(transform.position, transform.localScale, -transform.right, out m_Hit_left, transform.rotation, m_MaxDistance, m_PlayerMask);
-        m_HitDetect_right = Physics.BoxCast(transform.position, transform.localScale, transform.right, out m_Hit_right, transform.rotation, m_MaxDistance, m_PlayerMask);
-        m_HitDetect_back = Physics.BoxCast(transform.position, transform.localScale, -transform.forward, out m_Hit_back, transform.rotation, m_MaxDistance, m_PlayerMask);
+        m_HitDetect_dash_left = Physics.BoxCast(transform.position, transform.localScale, -transform.right, out m_Hit_dash_left, transform.rotation, m_MaxDistance, m_PlayerMask);
+        m_HitDetect_dash_right = Physics.BoxCast(transform.position, transform.localScale, transform.right, out m_Hit_dash_right, transform.rotation, m_MaxDistance, m_PlayerMask);
+        m_HitDetect_dash_back = Physics.BoxCast(transform.position, transform.localScale, -transform.forward, out m_Hit_dash_back, transform.rotation, m_MaxDistance, m_PlayerMask);
 
-        if (!m_HitDetect_left && !m_HitDetect_right && !m_HitDetect_back)
+        if (!m_HitDetect_dash_left && !m_HitDetect_dash_right && !m_HitDetect_dash_back)
         {
             //Debug.Log("LIBERE TUTTE E TRE");
             int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
@@ -267,7 +271,7 @@ public class moreSpecificProfile : aProfile
                     break;
             }
         }
-        else if (m_HitDetect_left && !m_HitDetect_right && !m_HitDetect_back)
+        else if (m_HitDetect_dash_left && !m_HitDetect_dash_right && !m_HitDetect_dash_back)
         {
             //Debug.Log("CONTATTO L");
             int way = Random.Range(1, 3);// 1 back, 2 right
@@ -282,11 +286,11 @@ public class moreSpecificProfile : aProfile
                     break;
             }
         }
-        else if (m_HitDetect_left && m_HitDetect_right && !m_HitDetect_back)
+        else if (m_HitDetect_dash_left && m_HitDetect_dash_right && !m_HitDetect_dash_back)
         {
             rb.velocity = -transform.forward * dashForce; //BACK
         }
-        else if (!m_HitDetect_left && m_HitDetect_right && !m_HitDetect_back)
+        else if (!m_HitDetect_dash_left && m_HitDetect_dash_right && !m_HitDetect_dash_back)
         {
             //Debug.Log("CONTATTO R");
             int way = Random.Range(1, 3);// 1 left, 2 back, 
@@ -302,7 +306,7 @@ public class moreSpecificProfile : aProfile
 
             }
         }
-        else if (!m_HitDetect_left && !m_HitDetect_right && m_HitDetect_back)
+        else if (!m_HitDetect_dash_left && !m_HitDetect_dash_right && m_HitDetect_dash_back)
         {
             //Debug.Log("CONTATTO B");
             int way = Random.Range(1, 3);// 1 left, 2 right, 
@@ -318,11 +322,11 @@ public class moreSpecificProfile : aProfile
             }
 
         }
-        else if (m_HitDetect_left && !m_HitDetect_right && m_HitDetect_back)
+        else if (m_HitDetect_dash_left && !m_HitDetect_dash_right && m_HitDetect_dash_back)
         {
             rb.velocity = transform.right * dashForce; //RIGHT
         }
-        else if (!m_HitDetect_left && m_HitDetect_right && m_HitDetect_back)
+        else if (!m_HitDetect_dash_left && m_HitDetect_dash_right && m_HitDetect_dash_back)
         {
             rb.velocity = -transform.right * dashForce; //LEFT
         }
@@ -332,6 +336,34 @@ public class moreSpecificProfile : aProfile
             Debug.Log("CASO CHE NON DOVREBBE VERIFICARSI DI COLPITE IN TUTTE LE DIREZIONI PER ROLL ");
         }
 
+    }
+
+    public void impulseFromRay(float m_MaxDistance, LayerMask m_PlayerMask)
+    {
+        m_HitDetect_onRay_front = Physics.BoxCast(transform.position, transform.localScale, transform.forward, out m_Hit_onRay_front, transform.rotation, m_MaxDistance, m_PlayerMask);
+
+        if (m_HitDetect_onRay_front)
+        {
+            Debug.Log("HO DAVANTI " + m_Hit_onRay_front.collider.transform.tag);
+            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(10.0f, FindObjectOfType<BossProfile>().transform.position, 9.0f, 2.0F);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (m_HitDetect_onRay_front)
+        {
+            Gizmos.DrawRay(transform.position, transform.forward * m_Hit_onRay_front.distance);
+            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_onRay_front.distance, transform.localScale);
+        }
+        else
+        {
+            //Draw a Ray forward from GameObject toward the maximum distance
+            Gizmos.DrawRay(transform.position, transform.forward * 50.0f);
+            //Draw a cube at the maximum distance
+            Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
+        }
     }
     /*
     void OnDrawGizmos()
