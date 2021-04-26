@@ -344,11 +344,11 @@ public class moreSpecificProfile : aProfile
 
         if (m_HitDetect_onRay_front)
         {
-            Debug.Log("HO DAVANTI " + m_Hit_onRay_front.collider.transform.tag);
-            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(10.0f, FindObjectOfType<BossProfile>().transform.position, 9.0f, 2.0F);
+            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(34.0f, FindObjectOfType<BossProfile>().transform.position, 15.0f, 2.2F, ForceMode.Impulse);
         }
     }
 
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -365,62 +365,8 @@ public class moreSpecificProfile : aProfile
             Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
         }
     }
-    /*
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        //Check if there has been a hit yet
-        if (m_HitDetect_left)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, transform.forward * m_Hit_left.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_left.distance, transform.localScale);
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, -transform.right * 10.0f);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + -transform.right * 10.0f, transform.localScale);
-        }
-
-        if (m_HitDetect_right)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, transform.right * m_Hit_right.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.right * m_Hit_right.distance, transform.localScale);
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.right * 10.0f);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.right * 10.0f, transform.localScale);
-        }
-
-        if (m_HitDetect_back)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, -transform.forward * m_Hit_back.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + -transform.forward * m_Hit_back.distance, transform.localScale);
-
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, -transform.forward * 10.0f);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + -transform.forward * 10.0f, transform.localScale);
-        }
-    }
     */
+  
 
 }
 
