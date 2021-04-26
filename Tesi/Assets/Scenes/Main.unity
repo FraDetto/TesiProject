@@ -489,6 +489,10 @@ PrefabInstance:
       propertyPath: distanceRange
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1123545152, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
+      propertyPath: m_PlayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4683753665356790898, guid: 94c699b3c9d96b84892399f10f53ee8c, type: 3}
       propertyPath: m_RootOrder
       value: 4

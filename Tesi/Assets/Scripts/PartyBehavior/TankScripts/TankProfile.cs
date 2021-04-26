@@ -175,6 +175,7 @@ public class TankProfile : moreSpecificProfile
 
         if (!m_HitDetect_left && !m_HitDetect_right && !m_HitDetect_back)
         {
+            Debug.Log("LIBERE TUTTE E TRE");
             int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
 
             switch (way)
@@ -192,6 +193,7 @@ public class TankProfile : moreSpecificProfile
         }
         else if (m_HitDetect_left && !m_HitDetect_right && !m_HitDetect_back)
         {
+            Debug.Log("CONTATTO L");
             int way = Random.Range(1, 3);// 1 back, 2 right
 
             switch (way)
@@ -208,6 +210,7 @@ public class TankProfile : moreSpecificProfile
             rb.velocity = -transform.forward * dashFroce; //BACK
         } else if (!m_HitDetect_left && m_HitDetect_right && !m_HitDetect_back)
         {
+            Debug.Log("CONTATTO R");
             int way = Random.Range(1, 3);// 1 left, 2 back, 
 
             switch (way)
@@ -222,6 +225,7 @@ public class TankProfile : moreSpecificProfile
             }
         } else if (!m_HitDetect_left && !m_HitDetect_right && m_HitDetect_back)
         {
+            Debug.Log("CONTATTO B");
             int way = Random.Range(1, 3);// 1 left, 2 right, 
 
             switch (way)
@@ -296,6 +300,7 @@ public class TankProfile : moreSpecificProfile
             Gizmos.DrawRay(transform.position, -transform.forward * m_Hit_back.distance);
             //Draw a cube that extends to where the hit exists
             Gizmos.DrawWireCube(transform.position + -transform.forward * m_Hit_back.distance, transform.localScale);
+            
         }
         //If there hasn't been a hit yet, draw the ray at the maximum distance
         else
