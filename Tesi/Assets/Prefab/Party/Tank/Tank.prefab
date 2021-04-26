@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfff4c340b150d4f86a6b0ff864c985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRange: 6
+  distanceRange: 7
   speed: 15
   chaseFlag: 0
 --- !u!114 &1123545152
@@ -383,3 +383,6 @@ MonoBehaviour:
   isDashing: 0
   sword: {fileID: 2565423017887597707, guid: 972f7d13836cad947a1da879d0bb07b3, type: 3}
   shieldTank: {fileID: 5527568933421180270, guid: 131af02ddd423e94f94a18a6b9c84ea4, type: 3}
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64

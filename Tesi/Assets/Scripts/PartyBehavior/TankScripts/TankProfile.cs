@@ -34,16 +34,10 @@ public class TankProfile : moreSpecificProfile
 
     private float timeRollCooldown = 2.0f;
 
-    private float dashFroce = 17.0f;
+    private float dashForce = 17.0f;
 
 
-    private bool m_HitDetect_left;
-    private bool m_HitDetect_right;
-    private bool m_HitDetect_back;
-
-    RaycastHit m_Hit_left;
-    RaycastHit m_Hit_right;
-    RaycastHit m_Hit_back;
+    
 
     float m_MaxDistance = 10.0f;
     public LayerMask m_PlayerMask;
@@ -168,148 +162,9 @@ public class TankProfile : moreSpecificProfile
 
     public void correctRoll()
     {
-        Debug.Log("SONO QUA");
-        m_HitDetect_left = Physics.BoxCast(transform.position, transform.localScale, -transform.right, out m_Hit_left, transform.rotation, m_MaxDistance, m_PlayerMask);
-        m_HitDetect_right = Physics.BoxCast(transform.position, transform.localScale, transform.right, out m_Hit_right, transform.rotation, m_MaxDistance, m_PlayerMask);
-        m_HitDetect_back = Physics.BoxCast(transform.position, transform.localScale, -transform.forward, out m_Hit_back, transform.rotation, m_MaxDistance, m_PlayerMask);
-
-        if (!m_HitDetect_left && !m_HitDetect_right && !m_HitDetect_back)
-        {
-            Debug.Log("LIBERE TUTTE E TRE");
-            int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
-
-            switch (way)
-            {
-                case 1:
-                    rb.velocity = -transform.right * dashFroce;
-                    break;
-                case 2:
-                    rb.velocity = -transform.forward * dashFroce;
-                    break;
-                default:
-                    rb.velocity = transform.right * dashFroce;
-                    break;
-            }
-        }
-        else if (m_HitDetect_left && !m_HitDetect_right && !m_HitDetect_back)
-        {
-            Debug.Log("CONTATTO L");
-            int way = Random.Range(1, 3);// 1 back, 2 right
-
-            switch (way)
-            {
-                case 1:
-                    rb.velocity = -transform.forward * dashFroce;
-                    break;
-                default:
-                    rb.velocity = transform.right * dashFroce;
-                    break;
-            }
-        } else if (m_HitDetect_left && m_HitDetect_right && !m_HitDetect_back)
-        {
-            rb.velocity = -transform.forward * dashFroce; //BACK
-        } else if (!m_HitDetect_left && m_HitDetect_right && !m_HitDetect_back)
-        {
-            Debug.Log("CONTATTO R");
-            int way = Random.Range(1, 3);// 1 left, 2 back, 
-
-            switch (way)
-            {
-                case 1:
-                    rb.velocity = -transform.right * dashFroce;
-                    break;
-                default:
-                    rb.velocity = -transform.forward * dashFroce;
-                    break;
-
-            }
-        } else if (!m_HitDetect_left && !m_HitDetect_right && m_HitDetect_back)
-        {
-            Debug.Log("CONTATTO B");
-            int way = Random.Range(1, 3);// 1 left, 2 right, 
-
-            switch (way)
-            {
-                case 1:
-                    rb.velocity = -transform.right * dashFroce;
-                    break;
-                default:
-                    rb.velocity = transform.right * dashFroce;
-                    break;
-
-            }
-
-        }
-        else if (m_HitDetect_left && !m_HitDetect_right && m_HitDetect_back)
-        {
-            rb.velocity = transform.right * dashFroce; //RIGHT
-        }
-        else if (!m_HitDetect_left && m_HitDetect_right && m_HitDetect_back)
-        {
-            rb.velocity = -transform.right * dashFroce; //LEFT
-        }
-        else
-        {
-            //CASE HIT ALL DIRECTION IN THEORY NOT POSSIBLE
-            Debug.Log("CASO CHE NON DOVREBBE VERIFICARSI DI COLPITE IN TUTTE LE DIREZIONI PER ROLL ");
-        }
-
-        
+        GetComponent<moreSpecificProfile>().rollAwayChamp(rb, m_MaxDistance, m_PlayerMask, dashForce);       
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        //Check if there has been a hit yet
-        if (m_HitDetect_left)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, transform.forward * m_Hit_left.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_left.distance, transform.localScale);
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, -transform.right * m_MaxDistance);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + -transform.right * m_MaxDistance, transform.localScale);
-        }
-
-        if (m_HitDetect_right)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, transform.right * m_Hit_right.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.right * m_Hit_right.distance, transform.localScale);
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.right * m_MaxDistance);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.right * m_MaxDistance, transform.localScale);
-        }
-
-        if (m_HitDetect_back)
-        {
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, -transform.forward * m_Hit_back.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + -transform.forward * m_Hit_back.distance, transform.localScale);
-            
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, -transform.forward * m_MaxDistance);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + -transform.forward * m_MaxDistance, transform.localScale);
-        }
-    }
+    
 
 }

@@ -296,6 +296,9 @@ MonoBehaviour:
   isDashing: 0
   sword: {fileID: 1550275239034851887, guid: 8567d0e39591fde4691b8fdac17d7528, type: 3}
   HealSign: {fileID: 5657558105343175916, guid: d747bdf1c4480b046844659c73a95af2, type: 3}
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4292504042913590263
 GameObject:
   m_ObjectHideFlags: 0

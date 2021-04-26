@@ -32,7 +32,10 @@ public class BruiserProfile : moreSpecificProfile
 
     private float timeRollCooldown = 2.0f;
 
-    private float dashFroce = 17.0f;
+    private float dashForce = 17.0f;
+
+    float m_MaxDistance = 10.0f;
+    public LayerMask m_PlayerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -154,20 +157,9 @@ public class BruiserProfile : moreSpecificProfile
     public void rollAway()
     {
         cooldownDash = true;
-        int way = Random.Range(1, 4);// 1 left, 2 back, 3 right
 
-        switch (way)
-        {
-            case 1:
-                rb.velocity = -transform.right * dashFroce;
-                break;
-            case 2:
-                rb.velocity = -transform.forward * dashFroce;
-                break;
-            default:
-                rb.velocity = transform.right * dashFroce;
-                break;
-        }
+        correctRoll();
+
         StartCoroutine(endDash());
         StartCoroutine(waitRollCollDown());
     }
@@ -185,4 +177,8 @@ public class BruiserProfile : moreSpecificProfile
         rb.velocity = Vector3.zero;
     }
 
+    public void correctRoll()
+    {
+        GetComponent<moreSpecificProfile>().rollAwayChamp(rb, m_MaxDistance, m_PlayerMask, dashForce);
+    }
 }
