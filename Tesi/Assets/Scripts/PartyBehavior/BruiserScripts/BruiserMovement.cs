@@ -47,18 +47,25 @@ public class BruiserMovement : MonoBehaviour
             //if (toBossPos.magnitude > distanceRange)
             if ((boss.transform.position - rb.transform.position).magnitude > distanceRange)
             {
-                m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, transform.forward, out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
+                m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
                 if (m_HitDetect_mov_front)
                 {
                     Debug.Log("STO HITTANDO");
-                    flagDash = true; ;
+                    Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
+                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                    rb.MoveRotation(rb.rotation * deltaRotation);
+                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                    //good smooth rotation in the other branch
+                }
+                else
+                {
+                    transform.LookAt(verticalAdj);
 
+                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
                 }
                 //far scegliere un altro punto in cui andare perche alleato davanti
 
-                transform.LookAt(verticalAdj);
-
-                rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                
 
 
                
