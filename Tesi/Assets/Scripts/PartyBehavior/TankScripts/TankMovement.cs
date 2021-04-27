@@ -11,6 +11,11 @@ public class TankMovement : MonoBehaviour
     public float distanceRange = 7.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
+
+    private bool m_HitDetect_mov_front;
+
+    RaycastHit m_Hit_mov_front;
+    public LayerMask m_PlayerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +34,27 @@ public class TankMovement : MonoBehaviour
             Vector3 toBossPos = (verticalAdj - transform.position);
 
             //if (toBossPos.magnitude > distanceRange)
-            if((boss.transform.position - rb.transform.position).magnitude >distanceRange)
+            if ((boss.transform.position - rb.transform.position).magnitude > distanceRange)
             {
-                transform.LookAt(verticalAdj);
-                rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
+                if (m_HitDetect_mov_front)
+                {
+
+                    Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
+                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                    rb.MoveRotation(rb.rotation * deltaRotation);
+                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                    //good smooth rotation in the other branch
+                }
+                else
+                {
+                    //transform.LookAt(verticalAdj);
+                    var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
+
+                    // Smoothly rotate towards the target point.
+                    rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
+                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                }
             }
             else
             {
@@ -41,4 +63,23 @@ public class TankMovement : MonoBehaviour
         }
        
     }
+        /*
+            private void OnDrawGizmos()
+            {
+                Gizmos.color = Color.red;
+                if (m_HitDetect_mov_front)
+                {
+                    Gizmos.DrawRay(transform.position, transform.forward * m_Hit_mov_front.distance);
+                    Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_mov_front.distance, transform.localScale);
+                }
+                else
+                {
+                    //Draw a Ray forward from GameObject toward the maximum distance
+                    Gizmos.DrawRay(transform.position, transform.forward * 50.0f);
+                    //Draw a cube at the maximum distance
+                    Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
+                }
+            }
+        */
+
 }

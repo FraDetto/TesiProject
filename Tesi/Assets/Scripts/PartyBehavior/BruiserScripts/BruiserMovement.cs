@@ -43,8 +43,7 @@ public class BruiserMovement : MonoBehaviour
             Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
             Vector3 toBossPos = (verticalAdj - transform.position);
 
-
-            //if (toBossPos.magnitude > distanceRange)
+           
             if ((boss.transform.position - rb.transform.position).magnitude > distanceRange)
             {
                 m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
@@ -66,12 +65,7 @@ public class BruiserMovement : MonoBehaviour
                     rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
                     rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
                 }
-                //far scegliere un altro punto in cui andare perche alleato davanti
 
-                
-
-
-               
 
 
                 valueOfZAfterMovement = initialPositionZ - transform.position.z;
@@ -84,20 +78,5 @@ public class BruiserMovement : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (m_HitDetect_mov_front)
-        {
-            Gizmos.DrawRay(transform.position, transform.forward * m_Hit_mov_front.distance);
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_mov_front.distance, transform.localScale);
-        }
-        else
-        {
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.forward * 50.0f);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
-        }
-    }
+    
 }
