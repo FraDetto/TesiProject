@@ -59,8 +59,11 @@ public class BruiserMovement : MonoBehaviour
                 }
                 else
                 {
-                    transform.LookAt(verticalAdj);
+                    //transform.LookAt(verticalAdj);
+                    var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
 
+                    // Smoothly rotate towards the target point.
+                    rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
                     rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
                 }
                 //far scegliere un altro punto in cui andare perche alleato davanti
