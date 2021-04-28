@@ -169,7 +169,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        if (!GetComponent<BruiserProfile>().swordActive &&  ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) || ( (!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE)) ) ) )
+        if ( ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) || ( (!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE)) ) ) )
         {
             return true;
         }
@@ -182,7 +182,7 @@ public class BruiserBehavior : MonoBehaviour
 
     public bool AttkToSpec()
     {
-        if (!GetComponent<BruiserProfile>().swordActive && !GetComponent<BruiserProfile>().cooldownSpecial && !GetComponent<BruiserProfile>().lifeUnderSixty())
+        if ( !GetComponent<BruiserProfile>().cooldownSpecial && (!GetComponent<BruiserProfile>().lifeUnderSixty() || GetComponent<BruiserProfile>().cooldownHeal) )
         {
             return true;
         }
