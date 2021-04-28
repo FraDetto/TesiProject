@@ -49,7 +49,7 @@ public class BruiserMovement : MonoBehaviour
                 m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
                 if (m_HitDetect_mov_front)
                 {
-                    Debug.Log("STO HITTANDO");
+                    
                     Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
                     Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
                     rb.MoveRotation(rb.rotation * deltaRotation);
