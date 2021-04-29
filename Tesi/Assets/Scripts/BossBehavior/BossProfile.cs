@@ -163,7 +163,7 @@ public class BossProfile : moreSpecificProfile
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            targetPlayer = FindObjectOfType<HealerProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastRangedAttack());

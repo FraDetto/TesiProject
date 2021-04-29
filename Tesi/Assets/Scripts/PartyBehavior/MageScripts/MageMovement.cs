@@ -5,7 +5,7 @@ using UnityEngine;
 public class MageMovement : MonoBehaviour
 {
     private GameObject boss;
-    private Rigidbody myRB;
+    private Rigidbody rb;
 
     private float distanceRangeDown;
     private float distanceRangeUp;
@@ -17,7 +17,7 @@ public class MageMovement : MonoBehaviour
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
 
-        myRB = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
         distanceRangeDown = GetComponent<MageBehavior>().distanceRangeDown;
         distanceRangeUp = GetComponent<MageBehavior>().distanceRangeUp;
@@ -31,10 +31,10 @@ public class MageMovement : MonoBehaviour
             Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
             Vector3 toBossPos = (verticalAdj - transform.position);
 
-            if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
+            if ((boss.transform.position - rb.transform.position).magnitude < distanceRangeDown)
             {
                 transform.LookAt(verticalAdj);
-                myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
+                rb.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
             }
             else
             {
@@ -47,14 +47,41 @@ public class MageMovement : MonoBehaviour
             Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
             Vector3 toBossPos = (verticalAdj - transform.position);
 
-            if ((boss.transform.position - myRB.transform.position).magnitude > distanceRangeUp)
+            if ((boss.transform.position - rb.transform.position).magnitude > distanceRangeUp)
             {
                 transform.LookAt(verticalAdj);
-                myRB.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
+                rb.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
             }
             else
             {
                 chaseFlag = false;
+            }
+        }
+
+        if (GetComponent<MageProfile>().defenseActive)
+        {
+            if (GetComponent<MageProfile>().rightDefSpellDirection)
+            {
+                if (transform.rotation.y<=0.70f)
+                {
+                    
+                    Vector3 m_EulerAngleVelocity = new Vector3(0f, 60.0f, 0f);
+                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                    rb.MoveRotation(rb.rotation * deltaRotation);
+                }
+                
+                rb.MovePosition(transform.position + transform.forward * 12.0f * Time.deltaTime);
+            }
+            else
+            {
+                if (transform.rotation.y >= -0.70f)
+                {
+                    Vector3 m_EulerAngleVelocity = new Vector3(0f, -60.0f, 0f);
+                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                    rb.MoveRotation(rb.rotation * deltaRotation);
+                }
+                   
+                rb.MovePosition(transform.position + transform.forward * 12.0f * Time.deltaTime);
             }
         }
 

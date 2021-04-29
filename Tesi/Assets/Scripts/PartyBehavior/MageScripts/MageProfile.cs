@@ -16,6 +16,8 @@ public class MageProfile : moreSpecificProfile
     public bool cooldownDash = false;
     public bool isDashing = false;
 
+    public bool rightDefSpellDirection = false;
+
     private GameObject boss;
     private Transform pointSpawnFireBall;
     private Transform pointSpawnUlt;
@@ -79,6 +81,7 @@ public class MageProfile : moreSpecificProfile
         //Debug.Log("attackWithMagic");
         if (!cooldown)
         {
+            
             go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
             shooting = true;
             cooldown = true;
@@ -100,6 +103,19 @@ public class MageProfile : moreSpecificProfile
         go = Instantiate(defenseSpellSign, pointSpawnUlt.position, transform.rotation, gameObject.transform);
         cooldownDefense = true;
         defenseActive = true;
+
+        int direction = Random.Range(0, 2);
+
+        if(direction == 0)
+        {
+            rightDefSpellDirection = true;
+        }
+        else
+        {
+            rightDefSpellDirection = false;
+        }
+       
+
         StartCoroutine(waitBeforeRemoveShield());
         StartCoroutine(cooldownSpellDefense());
     }
