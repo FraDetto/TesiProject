@@ -64,6 +64,7 @@ public class TankProfile : moreSpecificProfile
         //Debug.Log("attackWithSword");
         if (!cooldownSword)
         {
+            GetComponent<moreSpecificProfile>().turnToBoss();
             go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
             cooldownSword = true;
             swordActive = true;
@@ -90,6 +91,7 @@ public class TankProfile : moreSpecificProfile
     public void defendWithShield()
     {
         GetComponent<moreSpecificProfile>().publicSetIsDefending(true);
+        GetComponent<moreSpecificProfile>().turnToBoss();
 
         go = Instantiate(shieldTank, pointSpawnShield.position, transform.rotation, gameObject.transform);
         cooldownShield = true;

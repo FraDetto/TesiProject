@@ -93,6 +93,7 @@ public class HealerProfile : moreSpecificProfile
         //Debug.Log("attackWithMagic");
         if (!cooldownAttack)
         {
+            GetComponent<moreSpecificProfile>().turnToBoss();
             go = Instantiate(windBall, pointSpawnWindBall.position, transform.rotation, gameObject.transform);
             shooting = true;
             cooldownAttack = true;

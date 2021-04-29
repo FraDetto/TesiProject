@@ -18,7 +18,7 @@ public class BruiserBehavior : MonoBehaviour
     void Start()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
-        myRB = GetComponent<Rigidbody>();
+        myRB = transform.GetComponent<Rigidbody>();
 
 
         ////////// MAIN FSM ///////////////////

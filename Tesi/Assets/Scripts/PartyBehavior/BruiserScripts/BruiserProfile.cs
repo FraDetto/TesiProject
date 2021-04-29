@@ -66,6 +66,7 @@ public class BruiserProfile : moreSpecificProfile
     {
         if (!cooldownSword)
         {
+            GetComponent<moreSpecificProfile>().turnToBoss();
             go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
             if (ultiRunning)
             {

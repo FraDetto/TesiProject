@@ -373,6 +373,15 @@ public class moreSpecificProfile : aProfile
     {
         return alive;
     }
+
+    public void turnToBoss()
+    {
+        Vector3 verticalAdj = new Vector3(FindObjectOfType<BossProfile>().transform.position.x, transform.position.y, FindObjectOfType<BossProfile>().transform.position.z);
+        //Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
+
+        transform.LookAt(verticalAdj);
+    }
+
     /*
     private void OnDrawGizmos()
     {

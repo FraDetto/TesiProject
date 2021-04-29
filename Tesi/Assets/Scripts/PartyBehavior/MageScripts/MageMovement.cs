@@ -58,9 +58,9 @@ public class MageMovement : MonoBehaviour
             }
         }
 
-        if (GetComponent<MageProfile>().defenseActive)
+        if (transform.GetComponent<MageProfile>().defenseActive)
         {
-            if (GetComponent<MageProfile>().rightDefSpellDirection)
+            if (transform.GetComponent<MageProfile>().rightDefSpellDirection)
             {
                 if (transform.rotation.y<=0.70f)
                 {

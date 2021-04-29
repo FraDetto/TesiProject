@@ -81,7 +81,7 @@ public class MageProfile : moreSpecificProfile
         //Debug.Log("attackWithMagic");
         if (!cooldown)
         {
-            
+            GetComponent<moreSpecificProfile>().turnToBoss();
             go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
             shooting = true;
             cooldown = true;
@@ -126,6 +126,7 @@ public class MageProfile : moreSpecificProfile
         defenseActive = false;
         Destroy(go);
         GetComponent<moreSpecificProfile>().publicSetIsDefending(false);
+        GetComponent<moreSpecificProfile>().turnToBoss();
     }
 
     public IEnumerator cooldownSpellDefense()
@@ -136,6 +137,7 @@ public class MageProfile : moreSpecificProfile
 
     public void activateUlti()
     {
+        GetComponent<moreSpecificProfile>().turnToBoss();
         cooldownSpecial = true;
 
         StartCoroutine(chargingSpecialDuration());
