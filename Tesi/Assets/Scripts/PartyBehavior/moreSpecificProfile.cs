@@ -9,6 +9,8 @@ public class moreSpecificProfile : aProfile
     protected float armorReductionDuration = 4.0f;
     protected float woundsDuration = 6.0f;
 
+    private bool isDefending;
+
     private bool m_HitDetect_dash_left;
     private bool m_HitDetect_dash_right;
     private bool m_HitDetect_dash_back;
@@ -348,6 +350,15 @@ public class moreSpecificProfile : aProfile
         }
     }
 
+    public bool publicGetIsDefending()
+    {
+        return isDefending;
+    }
+
+    public void publicSetIsDefending(bool value)
+    {
+        isDefending = value;
+    }
     /*
     private void OnDrawGizmos()
     {
@@ -366,7 +377,7 @@ public class moreSpecificProfile : aProfile
         }
     }
     */
-  
+
 
 }
 

@@ -10,25 +10,32 @@ public class WeaponsBossBehavior : MonoBehaviour
         //sword
         if (null != other.GetComponent<moreSpecificProfile>() && !other.tag.Equals("Boss"))
         {
-            int codeAttack = gameObject.GetComponentInParent<BossProfile>().codeAttack;
-            float damageCharacter = 0.0f;
-
-            switch (codeAttack)
+            if (!other.GetComponent<moreSpecificProfile>().publicGetIsDefending())
             {
-                case 0: //swing attack
-                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                    break;
-                case 1: //ahead attack
-                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                    damageCharacter += (damageCharacter / 100 * 40);
-                    break;
-                default: //break attack
-                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                    damageCharacter -= (damageCharacter / 100 * 40);
-                    break;
-            }
+                int codeAttack = gameObject.GetComponentInParent<BossProfile>().codeAttack;
+                float damageCharacter = 0.0f;
 
-            other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+                switch (codeAttack)
+                {
+                    case 0: //swing attack
+                        damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                        break;
+                    case 1: //ahead attack
+                        damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                        damageCharacter += (damageCharacter / 100 * 40);
+                        break;
+                    default: //break attack
+                        damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                        damageCharacter -= (damageCharacter / 100 * 40);
+                        break;
+                }
+
+                other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+            }else
+            {
+                Debug.Log("PLAYER SI STA DIFENDENDO SDOOOOONG");
+            }
+            
         }
         
 

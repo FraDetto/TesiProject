@@ -95,6 +95,8 @@ public class MageProfile : moreSpecificProfile
 
     public void defendWithSpell()
     {
+        GetComponent<moreSpecificProfile>().publicSetIsDefending(true);
+
         go = Instantiate(defenseSpellSign, pointSpawnUlt.position, transform.rotation, gameObject.transform);
         cooldownDefense = true;
         defenseActive = true;
@@ -107,6 +109,7 @@ public class MageProfile : moreSpecificProfile
         yield return new WaitForSeconds(defenseSpellDuration);
         defenseActive = false;
         Destroy(go);
+        GetComponent<moreSpecificProfile>().publicSetIsDefending(false);
     }
 
     public IEnumerator cooldownSpellDefense()

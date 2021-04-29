@@ -177,7 +177,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             isUsingAoE = true;
@@ -186,7 +186,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
            
@@ -196,7 +196,7 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            targetPlayer = FindObjectOfType<BruiserProfile>().gameObject;
+            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastBreakAttk());

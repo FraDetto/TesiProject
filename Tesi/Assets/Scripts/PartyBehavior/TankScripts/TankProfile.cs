@@ -87,6 +87,8 @@ public class TankProfile : moreSpecificProfile
 
     public void defendWithShield()
     {
+        GetComponent<moreSpecificProfile>().publicSetIsDefending(true);
+
         go = Instantiate(shieldTank, pointSpawnShield.position, transform.rotation, gameObject.transform);
         cooldownShield = true;
         shieldActive = true;
@@ -99,6 +101,8 @@ public class TankProfile : moreSpecificProfile
         yield return new WaitForSeconds(shieldDuration);
         shieldActive = false;
         Destroy(go);
+
+        GetComponent<moreSpecificProfile>().publicSetIsDefending(false);
     }
 
     public IEnumerator cooldownDefense()
