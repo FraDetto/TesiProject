@@ -10,6 +10,8 @@ public class TankProfile : moreSpecificProfile
     public bool cooldownSpecial = true;
     public bool shieldActive = false;
     public bool swordActive = false;
+    public bool ultiRunning = false;
+    public bool castingUlt = false;
 
     public bool cooldownDash = false;
     public bool isDashing = false;
@@ -113,13 +115,26 @@ public class TankProfile : moreSpecificProfile
 
     public void specialInAction()
     {
-        transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-        cooldownSpecial = true;
+        castingUlt = true;
+        go = Instantiate(sword, pointSpawnHealHealer.position, transform.rotation, gameObject.transform);
+        go.transform.rotation = Quaternion.Euler(new Vector3(0f, 90.0f, 0f));
+        StartCoroutine(castSpecial());
+        
+    }
 
+    public IEnumerator castSpecial()
+    {
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(0.8f);
+        Destroy(go);
+        transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        castingUlt = false;
+        ultiRunning = true;
+        cooldownSpecial = true;
         StartCoroutine(waitBeforeStopSpecial());
-        
+
         StartCoroutine(waitAfterUlti());
-        
+        //Debug.Log("ULTI FINITA");
     }
 
     public IEnumerator waitBeforeStopSpecial()
@@ -127,6 +142,7 @@ public class TankProfile : moreSpecificProfile
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(specialDuration);
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        ultiRunning = false;
         //Debug.Log("ULTI FINITA");
     }
 

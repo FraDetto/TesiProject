@@ -10,6 +10,7 @@ public class moreSpecificProfile : aProfile
     protected float woundsDuration = 6.0f;
 
     private bool isDefending;
+    private int alive = 0; //0 alive, 1 dead
 
     private bool m_HitDetect_dash_left;
     private bool m_HitDetect_dash_right;
@@ -145,6 +146,14 @@ public class moreSpecificProfile : aProfile
     protected override void setLifeAfterDamage(float damage)
     {
         currenthp -= damage;
+        if (currenthp <=0)
+        {
+            currenthp = 0;
+            alive = 1;
+            ////FARE ANIMAZIONE MORTE////
+            ///COMUNICARE MORTE A BOSS SE DI CHAMP PER TOGLIERLO DALLE SCELTE
+            ///FAR FINIRE EPISODIO SE INVECE E" BOSS O ULTIMO DEL PARTY
+        }
         Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
     }
 
@@ -358,6 +367,11 @@ public class moreSpecificProfile : aProfile
     public void publicSetIsDefending(bool value)
     {
         isDefending = value;
+    }
+
+    public int getStatusLifeChamp()
+    {
+        return alive;
     }
     /*
     private void OnDrawGizmos()

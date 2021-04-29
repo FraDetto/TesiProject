@@ -10,6 +10,7 @@ public class BruiserProfile : moreSpecificProfile
     public bool isHealing = false;
     public bool cooldownSpecial = true;
     public bool swordActive = false;
+    public bool castingUlt = false;
     public bool ultiRunning = false;
 
     public bool cooldownDash = false;
@@ -129,12 +130,26 @@ public class BruiserProfile : moreSpecificProfile
 
     public void activateUlti()
     {
+        
+        castingUlt = true;
+        go = Instantiate(sword, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
+        go.transform.rotation = Quaternion.Euler(new Vector3(0f, 90.0f, 0f));
+        StartCoroutine(castSpecial());
+
+    }
+
+    public IEnumerator castSpecial()
+    {
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(0.8f);
+        Destroy(go);
+        castingUlt = false;
         ultiRunning = true;
         cooldownSpecial = true;
-
         StartCoroutine(waitBeforeStopSpecial());
 
         StartCoroutine(waitAfterUlti());
+        //Debug.Log("ULTI FINITA");
     }
 
     public IEnumerator waitBeforeStopSpecial()
