@@ -150,9 +150,21 @@ public class moreSpecificProfile : aProfile
         {
             currenthp = 0;
             alive = 1;
-            ////FARE ANIMAZIONE MORTE////
-            ///COMUNICARE MORTE A BOSS SE DI CHAMP PER TOGLIERLO DALLE SCELTE
+            ////DEATH ANIMATION////
+            ///DE-ACTIVATION OF REAL CHAMP INSTANTIATION OF DEATH MODEL OR SOMETHING SIMILAR
+            
             ///FAR FINIRE EPISODIO SE INVECE E" BOSS O ULTIMO DEL PARTY
+            ///
+            if (transform.tag.Equals("Boss"))
+            {
+                //// END EPISODE WITH MALUS ///// 
+                Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO"); 
+            }
+            else
+            {
+                /// BOSS HAS TO REMOVE THE CHAMP FROM THE ARRAY 
+                FindObjectOfType<BossProfile>().checkChampDieInFight();
+            }
         }
         Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
     }

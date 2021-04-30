@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
     public LayerMask m_PlayerMask;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
-        //chooseTeam();
+        chooseTeam();
 
     }
 

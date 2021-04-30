@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossProfile : moreSpecificProfile
 {
     
-    public int[] playersParty;
+    public GameObject[] playersParty;
     public float speedRangedAttk = 25.0f;
 
     public int codeAttack = 0; // 0:swing  1: ahead  2:break    i use it to divide the different attack and apply the correct damage
@@ -61,7 +61,7 @@ public class BossProfile : moreSpecificProfile
 
     public void Start()
     {
-        playersParty = new int[4];
+        playersParty = FindObjectOfType<GameManager>().getPartyInGame();
         rangedAttackPosition = transform.GetChild(1);
         swingAttackPosition = transform.GetChild(2);
         aheadAttackPosition = transform.GetChild(3);
@@ -177,7 +177,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             isUsingAoE = true;
@@ -186,7 +186,7 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
            
@@ -196,7 +196,7 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            targetPlayer = FindObjectOfType<TankProfile>().gameObject;
+            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             target = targetPlayer.tag;
             isAttacking = true;
             StartCoroutine(timeBeforeCastBreakAttk());
@@ -446,6 +446,30 @@ public class BossProfile : moreSpecificProfile
         Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
         
         transform.LookAt(verticalAdj);
+    }
+
+
+    public void checkChampDieInFight()
+    {
+        playersParty = removeChampDieInFight();
+        Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  "+ playersParty.Length);
+    }
+    
+    public GameObject[] removeChampDieInFight()
+    {
+        GameObject[] arrNew = new GameObject[playersParty.Length - 1];
+        int count = 0;
+
+        for(int i=0; i<playersParty.Length; i++)
+        {
+            if (playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp()!=1)
+            {
+                arrNew[count] = playersParty[i];
+                count++;
+            }
+        }
+
+        return arrNew;
     }
 
 }
