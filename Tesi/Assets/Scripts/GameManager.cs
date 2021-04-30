@@ -53,9 +53,14 @@ public class GameManager : MonoBehaviour
 
             Vector3 spawmPos = takeRandomPos(n);
 
-            Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity);
+            partyOnRun[n] = Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity);
         }
     }
 
+
+    public GameObject[] getPartyInGame()
+    {
+        return partyOnRun;
+    }
  
 }
