@@ -86,7 +86,7 @@ public class HealerBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmMain = new FSM(takSafeSpot);
 
-
+        Debug.Log("HEAL " + this.gameObject.GetInstanceID());
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -178,7 +178,7 @@ public class HealerBehavior : MonoBehaviour
     public bool AttkToHeal()
     {
         if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE) ) ||
-            ( (!GetComponent<HealerProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || (boss.GetComponent<BossProfile>().isUsingAoE && GetComponent<HealerProfile>().cooldownSpecial) || boss.GetComponent<BossProfile>().isShooting )) )
+            ( (!GetComponent<HealerProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponent<BossProfile>().isShooting) ) || (boss.GetComponent<BossProfile>().isUsingAoE && GetComponent<HealerProfile>().cooldownSpecial)  )) )
         {
             //Debug.Log("SONO IN VADo HEAL");
             return true;

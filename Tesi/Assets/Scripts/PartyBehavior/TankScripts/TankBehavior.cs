@@ -83,6 +83,7 @@ public class TankBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmMain = new FSM(Chase);
 
+        Debug.Log("TANK " + this.gameObject.GetInstanceID());
         // Start monitoring
         StartCoroutine(Fight());
     }
@@ -180,7 +181,7 @@ public class TankBehavior : MonoBehaviour
     public bool AttkToDef()
     {
         //if( (!GetComponent<TankProfile>().cooldownShield || !GetComponent<TankProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)) && !GetComponent<TankProfile>().swordActive)
-        if( (!GetComponent<TankProfile>().cooldownShield || (!GetComponent<TankProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&  (boss.GetComponent<BossProfile>().isAttacking && ( boss.GetComponent<BossProfile>().target.Equals(transform.tag) || boss.GetComponent<BossProfile>().isUsingAoE) ) )
+        if( (!GetComponent<TankProfile>().cooldownShield || (!GetComponent<TankProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&  (boss.GetComponent<BossProfile>().isAttacking && ( boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() || boss.GetComponent<BossProfile>().isUsingAoE) ) )
         {
             return true;
         }
@@ -245,12 +246,12 @@ public class TankBehavior : MonoBehaviour
        
         if (!firstRush )
         {
-            Debug.Log("ATTACK BOSS !FIRSTRUSH");
+            //Debug.Log("ATTACK BOSS !FIRSTRUSH");
             GetComponent<TankProfile>().attackWithSword();
         }
         else
         {
-            Debug.Log("ATTACK BOSS FIRST RUSH");
+            //Debug.Log("ATTACK BOSS FIRST RUSH");
             firstRush = false;
         }
         

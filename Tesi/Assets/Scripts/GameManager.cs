@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public LayerMask m_PlayerMask;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
 
         chooseTeam();
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
             Vector3 spawmPos = takeRandomPos(n);
 
             partyOnRun[n] = Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity);
+            Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
         }
     }
 

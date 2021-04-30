@@ -83,7 +83,7 @@ public class BruiserBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmMain = new FSM(Chase);
 
-      
+        Debug.Log("BRUISER " + this.gameObject.GetInstanceID());
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -170,7 +170,7 @@ public class BruiserBehavior : MonoBehaviour
     public bool AttkToHeal()
     {
         if (!GetComponent<BruiserProfile>().swordActive && ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) ||
-            ( (!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE)) ) ) )
+            ( (!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() || (boss.GetComponent<BossProfile>().isUsingAoE)) ) ) )
         {
             return true;
         }
@@ -220,7 +220,7 @@ public class BruiserBehavior : MonoBehaviour
     public bool SpecToAttk()
     {
         if ( (!GetComponent<BruiserProfile>().lifeUnderSixty() || GetComponent<BruiserProfile>().cooldownHeal) ||
-            ((GetComponent<BruiserProfile>().cooldownDash || GetComponent<moreSpecificProfile>().publicGetStatus() != 0) || !boss.GetComponent<BossProfile>().isAttacking || (!boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (!boss.GetComponent<BossProfile>().isUsingAoE))))
+            ((GetComponent<BruiserProfile>().cooldownDash || GetComponent<moreSpecificProfile>().publicGetStatus() != 0) || !boss.GetComponent<BossProfile>().isAttacking || (boss.GetComponent<BossProfile>().instanceIDtarget != this.gameObject.GetInstanceID() || (!boss.GetComponent<BossProfile>().isUsingAoE))))
         {
             return true;
         }
@@ -233,7 +233,7 @@ public class BruiserBehavior : MonoBehaviour
     public bool SpecToHeal()
     {
         if ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) ||
-            ((!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE))))
+            ((!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && (boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() || (boss.GetComponent<BossProfile>().isUsingAoE))))
         {
             return true;
         }

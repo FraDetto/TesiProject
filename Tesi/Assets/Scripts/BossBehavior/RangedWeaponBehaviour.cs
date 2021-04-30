@@ -17,7 +17,8 @@ public class RangedWeaponBehaviour : MonoBehaviour
                 this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
 
                 this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
-                this.transform.GetComponentInParent<BossProfile>().target = "";
+                this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                //this.transform.GetComponentInParent<BossProfile>().target = "";
             }
             else
             {
@@ -25,8 +26,9 @@ public class RangedWeaponBehaviour : MonoBehaviour
                 this.transform.GetComponentInParent<BossProfile>().isShooting = false;
                 this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
                 this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
-                this.transform.GetComponentInParent<BossProfile>().target = "";
-                
+                this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                //this.transform.GetComponentInParent<BossProfile>().target = "";
+
             }
            
             Destroy(this.gameObject);
@@ -38,7 +40,8 @@ public class RangedWeaponBehaviour : MonoBehaviour
                 this.transform.GetComponentInParent<BossProfile>().isShooting = false;
                 this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
                 this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
-                this.transform.GetComponentInParent<BossProfile>().target = "";
+                this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                //this.transform.GetComponentInParent<BossProfile>().target = "";
                 Destroy(this.gameObject);
             }
         }

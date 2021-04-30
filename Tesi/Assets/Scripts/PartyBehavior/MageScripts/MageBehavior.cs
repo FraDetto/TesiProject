@@ -87,7 +87,7 @@ public class MageBehavior : MonoBehaviour
         fsmMain = new FSM(takSafeSpot);
 
 
-
+        Debug.Log("MAGE " + this.gameObject.GetInstanceID());
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -197,7 +197,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool AttkToDef()
     {
-        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)   ))
+        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponent<BossProfile>().isShooting) ) || boss.GetComponent<BossProfile>().isUsingAoE )   ))
         {
             return true;
         }
@@ -248,7 +248,7 @@ public class MageBehavior : MonoBehaviour
     public bool SpecToAttk()
     {
         if (!GetComponent<MageProfile>().chargingUlt && ( GetComponent<MageProfile>().cooldownDefense || ( GetComponent<moreSpecificProfile>().publicGetStatus() == 1) ||
-            (!boss.GetComponent<BossProfile>().isAttacking || !boss.GetComponent<BossProfile>().target.Equals(transform.tag) || (boss.GetComponent<BossProfile>().isUsingAoE && !attackInRange()) ) ))
+            (!boss.GetComponent<BossProfile>().isAttacking || boss.GetComponent<BossProfile>().instanceIDtarget != this.gameObject.GetInstanceID() || (boss.GetComponent<BossProfile>().isUsingAoE && !attackInRange()) ) ))
         {
             return true;
         }
@@ -261,7 +261,7 @@ public class MageBehavior : MonoBehaviour
     public bool SpecToDef()
     {
         if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&
-            (boss.GetComponent<BossProfile>().isAttacking && ((boss.GetComponent<BossProfile>().target.Equals(transform.tag) && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)))
+            (boss.GetComponent<BossProfile>().isAttacking && ((boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() && attackInRange()) || boss.GetComponent<BossProfile>().isUsingAoE || boss.GetComponent<BossProfile>().isShooting)))
         {
             return true;
         }

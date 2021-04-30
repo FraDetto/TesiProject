@@ -166,7 +166,7 @@ public class moreSpecificProfile : aProfile
                 FindObjectOfType<BossProfile>().checkChampDieInFight();
             }
         }
-        Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
+        //Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
     }
 
     public void publicSetLifeAfterDamage(float damage)

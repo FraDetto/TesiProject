@@ -19,7 +19,8 @@ public class BossProfile : moreSpecificProfile
 
     private Rigidbody rb;
     public GameObject targetPlayer;
-    public string target;
+    public int instanceIDtarget;
+    //public string target;
     private GameObject go;
 
     private Transform rangedAttackPosition;
@@ -111,7 +112,7 @@ public class BossProfile : moreSpecificProfile
                 targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
 
                 targetPlayer = null;
-                target = "";
+                //target = "";
                 rayAttack();
             }
             if (null != targetPlayer)
@@ -127,7 +128,7 @@ public class BossProfile : moreSpecificProfile
                         targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
 
                         targetPlayer = null;
-                        target = "";
+                        //target = "";
                         Debug.Log("FALLITO RAY STA DIFENDENDO");
                     }
                 }
@@ -142,7 +143,7 @@ public class BossProfile : moreSpecificProfile
                         targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
 
                         targetPlayer = null;
-                        target = "";
+                        //target = "";
                         Debug.Log("FALLITO RAY STA DIFENDENDO");
                     }
 
@@ -163,22 +164,30 @@ public class BossProfile : moreSpecificProfile
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            target = targetPlayer.tag;
+            int rand = Random.Range(0, playersParty.Length);
+            //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            targetPlayer = playersParty[rand];
+            
+            instanceIDtarget = targetPlayer.GetInstanceID();
+            Debug.Log("ID TARGET " + instanceIDtarget);
             isAttacking = true;
             StartCoroutine(timeBeforeCastRangedAttack());
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            target = targetPlayer.tag;
+            int rand = Random.Range(0, playersParty.Length);
+            //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            targetPlayer = playersParty[rand];
+            instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            target = targetPlayer.tag;
+            int rand = Random.Range(0, playersParty.Length);
+            //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            targetPlayer = playersParty[rand];
+            instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
             isUsingAoE = true;
             StartCoroutine(timeBeforeCastSwingAttk());
@@ -186,8 +195,10 @@ public class BossProfile : moreSpecificProfile
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            target = targetPlayer.tag;
+            int rand = Random.Range(0, playersParty.Length);
+            //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            targetPlayer = playersParty[rand];
+            instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
            
             StartCoroutine(timeBeforeCastAheadAttk());
@@ -196,8 +207,10 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            target = targetPlayer.tag;
+            int rand = Random.Range(0, playersParty.Length);
+            //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
+            targetPlayer = playersParty[rand];
+            instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
             StartCoroutine(timeBeforeCastBreakAttk());
             //breakAttack();
@@ -205,8 +218,6 @@ public class BossProfile : moreSpecificProfile
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //targetPlayer = FindObjectOfType<TankProfile>().gameObject;
-            //target = targetPlayer.tag;
             isAttacking = true;
             isUsingAoE = true;
             StartCoroutine(timeBeforeCastAoEAttk());
@@ -214,18 +225,7 @@ public class BossProfile : moreSpecificProfile
         }
     }
 
-    /*
-    public void takeDamageFromSword(float damageFromCharacter)
-    {
-        this.       
-        Debug.Log("OH NO MI HAI COLPITO " + publicGetCurrentLife());
-    }
 
-    public void takeDamageFromSpell(float damageFromCharacter)
-    {
-        this.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageFromCharacter);
-        //Debug.Log("OH NO SPELL MI HAI COLPITO " + publicGetCurrentLife());
-    }*/
 
 
     public IEnumerator timeBeforeCastRangedAttack()
@@ -271,7 +271,6 @@ public class BossProfile : moreSpecificProfile
     {
         Debug.Log("HO ATTIVATO RAY");
         //turnBossToTarget();
-        //  CONTROLLLO PER DIFESA MAGE E TANK: SE SCUDO O SPELL ATTIVA o DISPONIBILE in teoria ray non va a segno
 
         bool enemyIsDefending;
 
@@ -300,7 +299,8 @@ public class BossProfile : moreSpecificProfile
         {
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
             targetPlayer = null;
-            target = "";
+            this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+            //target = "";
             Debug.Log("FALLITO RAY STA DIFENDENDO");
         }
            
@@ -386,7 +386,8 @@ public class BossProfile : moreSpecificProfile
         Destroy(go);
         isAttacking = false;
         targetPlayer = null;
-        target = "";
+        instanceIDtarget = 0;
+        //target = "";
     }
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
