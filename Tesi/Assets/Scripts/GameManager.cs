@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
        for(int n=0; n< partyOnRun.Length; n++)
         {
-            int rand = Random.Range(0, 4);
+            int rand = Random.Range(0, poolOfCLasses.Length);
 
             Vector3 spawmPos = takeRandomPos(n);
 

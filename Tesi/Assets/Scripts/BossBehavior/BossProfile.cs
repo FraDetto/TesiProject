@@ -189,7 +189,7 @@ public class BossProfile : moreSpecificProfile
             targetPlayer = playersParty[rand];
             instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
-            isUsingAoE = true;
+            isUsingAoE = true; 
             StartCoroutine(timeBeforeCastSwingAttk());
             //swingAttack();
         }
@@ -299,7 +299,7 @@ public class BossProfile : moreSpecificProfile
         {
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
             targetPlayer = null;
-            this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+            instanceIDtarget = 0;
             //target = "";
             Debug.Log("FALLITO RAY STA DIFENDENDO");
         }
@@ -351,7 +351,7 @@ public class BossProfile : moreSpecificProfile
         
         //isAttacking = true;
         codeAttack = 0;
-        StartCoroutine(waitBeforeRemoveSword());
+        StartCoroutine(waitBeforeRemoveSword(1));
         StartCoroutine(startCooldownSwingAttk());
     }
 
@@ -369,7 +369,7 @@ public class BossProfile : moreSpecificProfile
         
         //isAttacking = true;
         codeAttack = 1;
-        StartCoroutine(waitBeforeRemoveSword());
+        StartCoroutine(waitBeforeRemoveSword(0));
         StartCoroutine(startCooldownAheadAttk());
     }
 
@@ -380,13 +380,17 @@ public class BossProfile : moreSpecificProfile
         cooldownAheadAttk = false;
     }
 
-    public IEnumerator waitBeforeRemoveSword()
+    public IEnumerator waitBeforeRemoveSword(int code)
     {
         yield return new WaitForSeconds(1.0f);
         Destroy(go);
         isAttacking = false;
         targetPlayer = null;
         instanceIDtarget = 0;
+        if (code == 1)
+        {
+            isUsingAoE = false;
+        }
         //target = "";
     }
 
@@ -400,7 +404,7 @@ public class BossProfile : moreSpecificProfile
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
         codeAttack = 2;
         //danno basso
-        StartCoroutine(waitBeforeRemoveSword());
+        StartCoroutine(waitBeforeRemoveSword(0));
         StartCoroutine(startCooldownBreakAttk());
     }
 

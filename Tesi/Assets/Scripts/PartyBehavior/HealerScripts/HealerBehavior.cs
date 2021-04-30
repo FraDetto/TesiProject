@@ -178,7 +178,7 @@ public class HealerBehavior : MonoBehaviour
     public bool AttkToHeal()
     {
         if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossProfile>().isUsingAoE) ) ||
-            ( (!GetComponent<HealerProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponent<BossProfile>().isShooting) ) || (boss.GetComponent<BossProfile>().isUsingAoE && GetComponent<HealerProfile>().cooldownSpecial)  )) )
+            ( (!GetComponent<HealerProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && (boss.GetComponent<BossProfile>().isAttacking && ( (boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponent<BossProfile>().isShooting) ) || (boss.GetComponent<BossProfile>().isUsingAoE && attackInRange())  ))) )
         {
             //Debug.Log("SONO IN VADo HEAL");
             return true;
