@@ -6,6 +6,7 @@ public class SpellsCollider : MonoBehaviour
 {
     private float damageCharacter = 0.0f;
 
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Boss"))
