@@ -40,7 +40,7 @@ public class HealerProfile : moreSpecificProfile
     private float timeCoolDownMagicAttack = 2.0f;
     private float healingActivation = 1.5f;
     private float timeCoolDownheal = 10.0f;
-    private float timeSpecialActivation = 1.0f;
+    private float timeSpecialActivation = 0.8f;
     private float timeCoolDownSpecial = 16.0f;
 
     private float timeRollCooldown = 2.0f;
@@ -188,6 +188,10 @@ public class HealerProfile : moreSpecificProfile
 
         go = Instantiate(windBall, pointSpawnHealHealer.position, transform.rotation, gameObject.transform);
 
+        //Debug.Log("ULTI STA PERDURANDO");
+        yield return new WaitForSeconds(timeSpecialActivation);
+
+        //Shield applied after time of activation
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_HealRadius, m_PlayerMask);
 
         for (int i = 0; i < colliders.Length; i++)
@@ -196,12 +200,13 @@ public class HealerProfile : moreSpecificProfile
 
             if (!targetProfile)
                 continue;
-            targetProfile.publicAddShield(60.0f);
+            if (targetProfile.getStatusLifeChamp() == 0)
+            {
+                targetProfile.publicAddShield(60.0f);
+            }
 
         }
 
-        //Debug.Log("ULTI STA PERDURANDO");
-        yield return new WaitForSeconds(timeSpecialActivation);
         chargingUlt = false;
         Destroy(go);
         
