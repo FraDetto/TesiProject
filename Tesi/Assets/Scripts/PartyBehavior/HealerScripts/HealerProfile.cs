@@ -132,20 +132,23 @@ public class HealerProfile : moreSpecificProfile
             //Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
             if (!targetProfile)
                 continue;
-
-            if (i == 0)
+            if (targetProfile.getStatusLifeChamp()==0)
             {
-                index = i;
-                minLife = targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100;
-            }
-            else
-            {
-                if(minLife > (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100))
+                if (i == 0)
                 {
-                    minLife = (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100);
                     index = i;
+                    minLife = targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100;
                 }
-            }          
+                else
+                {
+                    if (minLife > (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100))
+                    {
+                        minLife = (targetProfile.publicGetCurrentLife() / targetProfile.publicGetTotalLife() * 100);
+                        index = i;
+                    }
+                }
+            }
+           
         }
         float cure = colliders[index].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40;
         colliders[index].GetComponent<moreSpecificProfile>().publicAddLifeByCure(cure);

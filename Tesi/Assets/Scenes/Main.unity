@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolOfCLasses:
   - {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
+  - {fileID: 1169127070104544005, guid: 5a5a3710aaa00064992aeb07678dd292, type: 3}
   partyOnRun:
   - {fileID: 0}
   - {fileID: 0}
