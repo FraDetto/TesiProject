@@ -99,11 +99,14 @@ public class MageBehavior : MonoBehaviour
     // Periodic update, run forever
     public IEnumerator Fight()
     {
-        while (true)
+        //while (true)
+        while(GetComponent<moreSpecificProfile>().getStatusLifeChamp()==0)
         {
             fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);
         }
+        ////Animation death
+        transform.rotation = Quaternion.Euler(new Vector3(90f, 0.0f, 0f));
     }
 
 
