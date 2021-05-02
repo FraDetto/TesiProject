@@ -5,6 +5,7 @@ using UnityEngine;
 public class moreSpecificProfile : aProfile
 {
     public PartyData partyData;
+    public healthBarScript healthBar;
     protected string champTag;
     protected float armorReductionDuration = 4.0f;
     protected float woundsDuration = 6.0f;
@@ -82,6 +83,7 @@ public class moreSpecificProfile : aProfile
         }
 
         status = 0;
+        healthBar.setMaxHealth(currenthp);
     }
 
     protected override float getTotalLife()
@@ -135,7 +137,8 @@ public class moreSpecificProfile : aProfile
         {
             currenthp = totalhp;
         }
-        
+
+        healthBar.setHealth(currenthp);
     }
 
     public void publicAddLifeByCure(float cure)
@@ -146,9 +149,13 @@ public class moreSpecificProfile : aProfile
     protected override void setLifeAfterDamage(float damage)
     {
         currenthp -= damage;
+        healthBar.setHealth(currenthp);
+
         if (currenthp <=0)
         {
             currenthp = 0;
+            healthBar.setHealth(0);
+
             alive = 1;
             ////DEATH ANIMATION////
             ///DE-ACTIVATION OF REAL CHAMP INSTANTIATION OF DEATH MODEL OR SOMETHING SIMILAR
