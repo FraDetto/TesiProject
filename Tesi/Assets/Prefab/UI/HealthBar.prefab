@@ -102,7 +102,7 @@ RectTransform:
   m_GameObject: {fileID: 6445018852990324164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025892835, y: 0.012140341, z: 1}
+  m_LocalScale: {x: 0.025892835, y: 0.012914894, z: 1}
   m_Children:
   - {fileID: 5994183757346235473}
   - {fileID: 1150410206441718037}
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9dfccefc7612c4a89c57854f477510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
 --- !u!1 &7069429495176097272
 GameObject:
   m_ObjectHideFlags: 0
