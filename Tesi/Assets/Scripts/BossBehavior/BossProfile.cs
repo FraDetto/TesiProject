@@ -176,6 +176,7 @@ public class BossProfile : moreSpecificProfile
         if (Input.GetKeyDown(KeyCode.W))
         {
             int rand = Random.Range(0, playersParty.Length);
+
             //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             targetPlayer = playersParty[rand];
             instanceIDtarget = targetPlayer.GetInstanceID();
@@ -196,6 +197,7 @@ public class BossProfile : moreSpecificProfile
         if (Input.GetKeyDown(KeyCode.R))
         {
             int rand = Random.Range(0, playersParty.Length);
+
             //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
             targetPlayer = playersParty[rand];
             instanceIDtarget = targetPlayer.GetInstanceID();
@@ -348,6 +350,7 @@ public class BossProfile : moreSpecificProfile
     {
         turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
+
         
         //isAttacking = true;
         codeAttack = 0;
@@ -366,7 +369,10 @@ public class BossProfile : moreSpecificProfile
     {
         turnBossToTarget();
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
-        
+
+        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
+
+        go.transform.LookAt(verticalAdj);
         //isAttacking = true;
         codeAttack = 1;
         StartCoroutine(waitBeforeRemoveSword(0));
@@ -397,11 +403,15 @@ public class BossProfile : moreSpecificProfile
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
         turnBossToTarget();
-        
+
         //isAttacking = true;
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
-        targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//applica ferite gravi
-        targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//applica riduzione armor
+
+        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
+
+        go.transform.LookAt(verticalAdj);
+        targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//apply wounds
+        targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//apply armor reduction
         codeAttack = 2;
         //danno basso
         StartCoroutine(waitBeforeRemoveSword(0));
@@ -440,8 +450,7 @@ public class BossProfile : moreSpecificProfile
     public void turnBossToTarget()
     {
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
-        //Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
-
+      
         transform.LookAt(verticalAdj);
     }
 
