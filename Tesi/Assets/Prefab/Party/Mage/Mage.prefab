@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
   healthBar: {fileID: 8445411876421248679}
+  shieldBar: {fileID: 9048539787436602980}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -372,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partyData: {fileID: 0}
   healthBar: {fileID: 0}
+  shieldBar: {fileID: 0}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -736,3 +738,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5130181532190408834, guid: 8ecd3035040551746a903c1c7b636861, type: 3}
   m_PrefabInstance: {fileID: 9186926130921644151}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9048539787436602980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 210642627680474643, guid: 8ecd3035040551746a903c1c7b636861, type: 3}
+  m_PrefabInstance: {fileID: 9186926130921644151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871671885affc2542b31e5577ae91e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

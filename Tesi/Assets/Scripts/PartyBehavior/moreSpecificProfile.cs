@@ -6,6 +6,7 @@ public class moreSpecificProfile : aProfile
 {
     public PartyData partyData;
     public healthBarScript healthBar;
+    public shieldBarScript shieldBar;
     protected string champTag;
     protected float armorReductionDuration = 4.0f;
     protected float woundsDuration = 6.0f;
@@ -83,7 +84,13 @@ public class moreSpecificProfile : aProfile
         }
 
         status = 0;
+        shield = 0.0f;
+
         healthBar.setMaxHealth(currenthp);
+        if (!champTag.Equals("Boss"))
+        {
+            shieldBar.setMaxShield(shield);
+        }
     }
 
     protected override float getTotalLife()
@@ -155,19 +162,22 @@ public class moreSpecificProfile : aProfile
             if( resultDS > 0)
             {
                 resetShield();
-                //ricuciamo barra scudo del necessario
+
+                shieldBar.setShield(shield);
                 currenthp -= resultDS;
                 healthBar.setHealth(currenthp);
             }
             else if ( resultDS < 0)
             {    
                 shield = System.Math.Abs(resultDS);
-                //ricuciamo barra scudo del necessario
+
+                shieldBar.setShield(shield);
             }
             else
             {
                 resetShield();
-                //ricuciamo barra scudo del necessario
+
+                shieldBar.setShield(shield);
             }
         }
         else
@@ -211,6 +221,7 @@ public class moreSpecificProfile : aProfile
     protected override void addShield(float shieldValue)
     {
         shield += shieldValue;
+        shieldBar.setMaxShield(shield);
         StartCoroutine(decayShield());
     }
 
@@ -223,6 +234,7 @@ public class moreSpecificProfile : aProfile
     {
         yield return new WaitForSeconds(5.0f);
         resetShield();
+        shieldBar.setMaxShield(shield);
         Debug.Log("Scudo FINITO");
     }
 

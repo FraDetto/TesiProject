@@ -816,23 +816,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5085167091261807945, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5085167091261807945, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5382571157354320622, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5382571157354320622, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_Name
       value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098627424708326240, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8796819102903675790, guid: fb7a3814a7e8d4549af6a99c8f459ab4, type: 3}
       propertyPath: m_RootOrder

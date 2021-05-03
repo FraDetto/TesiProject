@@ -8,14 +8,14 @@ public class shieldBarScript : MonoBehaviour
 
     public Slider slider;
 
-    public void setMaxHealth(float health)
+    public void setMaxShield(float shieldValue)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        slider.maxValue = shieldValue;
+        slider.value = shieldValue;
     }
 
-    public void setHealth(float health)
+    public void setShield(float shieldValue)
     {
-        slider.value = health;
+        slider.value = shieldValue;
     }
 }
