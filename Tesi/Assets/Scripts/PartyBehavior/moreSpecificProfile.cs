@@ -160,9 +160,7 @@ public class moreSpecificProfile : aProfile
                 healthBar.setHealth(currenthp);
             }
             else if ( resultDS < 0)
-            {
-                damage = 0.0f;
-                
+            {    
                 shield = System.Math.Abs(resultDS);
                 //ricuciamo barra scudo del necessario
             }
@@ -170,7 +168,6 @@ public class moreSpecificProfile : aProfile
             {
                 resetShield();
                 //ricuciamo barra scudo del necessario
-                damage = 0.0f;
             }
         }
         else
