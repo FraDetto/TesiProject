@@ -160,6 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5130181532190408834}
   - component: {fileID: 5640449983482536008}
+  - component: {fileID: 210642627680474643}
   m_Layer: 5
   m_Name: ShieldBar
   m_TagString: Untagged
@@ -240,6 +241,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &210642627680474643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683133031097932249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871671885affc2542b31e5577ae91e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 5640449983482536008}
 --- !u!1 &4093944277426267714
 GameObject:
   m_ObjectHideFlags: 0
