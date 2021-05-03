@@ -91,4 +91,5 @@ Tesi/Temp/UnityLockfile
 Tesi/venv/*
 
 #MODEL FOR THE MOMENT
-!/[Aa]ssets/**/*.obj
+Tesi/Assets/Models/*.obj
+Tesi/Assets/Models/*.obj.meta
