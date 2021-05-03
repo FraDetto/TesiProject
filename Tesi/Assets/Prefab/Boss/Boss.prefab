@@ -251,6 +251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
+  healthBar: {fileID: 0}
+  shieldBar: {fileID: 0}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -271,6 +273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyData: {fileID: 0}
+  healthBar: {fileID: 0}
+  shieldBar: {fileID: 0}
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -284,7 +288,7 @@ MonoBehaviour:
   goRangedAttk: {fileID: 3598328088470394854, guid: 9e391bc03674c8c44b2e6001fd26ff37, type: 3}
   swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
   swordAheadAttk: {fileID: 6814415977512439784, guid: ef3906f6ae01225418b896a3c2bdec84, type: 3}
-  containerAoEAttk: {fileID: 2296344002437002397, guid: cb9d9a76bf3ca6c4bb73d30264cb1656, type: 3}
+  containerAoEAttk: {fileID: 1880339284888658300, guid: f0621d70328ce4441a2b3c36e4efa403, type: 3}
   m_PlayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -319,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4012549927593715571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0, y: -0.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5617987301070202409}
