@@ -148,8 +148,38 @@ public class moreSpecificProfile : aProfile
 
     protected override void setLifeAfterDamage(float damage)
     {
-        currenthp -= damage;
-        healthBar.setHealth(currenthp);
+        if(shield > 0)
+        {
+            // NEED TO SCALE DAMAGE BASE ON ARMOR (MUST THINK TO A FORMULA)
+            float resultDS = damage - shield;
+            if( resultDS > 0)
+            {
+                resetShield();
+                //ricuciamo barra scudo del necessario
+                currenthp -= resultDS;
+                healthBar.setHealth(currenthp);
+            }
+            else if ( resultDS < 0)
+            {
+                damage = 0.0f;
+                
+                shield = System.Math.Abs(resultDS);
+                //ricuciamo barra scudo del necessario
+            }
+            else
+            {
+                resetShield();
+                //ricuciamo barra scudo del necessario
+                damage = 0.0f;
+            }
+        }
+        else
+        {
+            // NEED TO SCALE DAMAGE BASE ON ARMOR (MUST THINK TO A FORMULA)
+            currenthp -= damage;
+            healthBar.setHealth(currenthp);
+        }
+        
 
         if (currenthp <=0)
         {
