@@ -8,7 +8,7 @@ public class RangedWeaponBehaviour : MonoBehaviour
     {
         if (null != other.GetComponent<moreSpecificProfile>() && !other.transform.tag.Equals("Boss"))
         {
-            if (!other.GetComponent<moreSpecificProfile>().publicGetIsDefending())
+            if (!other.GetComponent<moreSpecificProfile>().publicGetIsDefending() && other.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
             {
                 float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
 
@@ -22,12 +22,16 @@ public class RangedWeaponBehaviour : MonoBehaviour
             }
             else
             {
-                Debug.Log("PLAYER SI STA DIFENDENDO SDDDDDDDDDDOOOOOONG SPLAASH");
-                this.transform.GetComponentInParent<BossProfile>().isShooting = false;
-                this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
-                this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
-                this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
-                //this.transform.GetComponentInParent<BossProfile>().target = "";
+                if (other.GetComponent<moreSpecificProfile>().publicGetIsDefending())
+                {
+                    Debug.Log("PLAYER SI STA DIFENDENDO SDDDDDDDDDDOOOOOONG SPLAASH");
+                    this.transform.GetComponentInParent<BossProfile>().isShooting = false;
+                    this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
+                    this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
+                    this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                    //this.transform.GetComponentInParent<BossProfile>().target = "";
+                }
+
 
             }
            

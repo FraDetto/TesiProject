@@ -10,7 +10,7 @@ public class WeaponsBossBehavior : MonoBehaviour
         //sword
         if (null != other.GetComponent<moreSpecificProfile>() && !other.tag.Equals("Boss"))
         {
-            if (!other.GetComponent<moreSpecificProfile>().publicGetIsDefending())
+            if (!other.GetComponent<moreSpecificProfile>().publicGetIsDefending() && other.GetComponent<moreSpecificProfile>().getStatusLifeChamp()==0)
             {
                 int codeAttack = gameObject.GetComponentInParent<BossProfile>().codeAttack;
                 float damageCharacter = 0.0f;

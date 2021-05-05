@@ -129,7 +129,7 @@ public class HealerProfile : moreSpecificProfile
         {
             moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
 
-            //Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
+            Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
             if (!targetProfile)
                 continue;
             if (targetProfile.getStatusLifeChamp()==0)
@@ -202,7 +202,8 @@ public class HealerProfile : moreSpecificProfile
                 continue;
             if (targetProfile.getStatusLifeChamp() == 0)
             {
-                targetProfile.publicAddShield(60.0f);
+                float shieldToApply = (targetProfile.publicGetTotalLife() / 100) * 50;
+                targetProfile.publicAddShield(shieldToApply);
             }
 
         }

@@ -13,22 +13,26 @@ public class AoEDamageBehavior : MonoBehaviour
 
         if (null!=other.GetComponent<moreSpecificProfile>())
         {
-            for (int i = 0; i < playersHit.Length; i++)
+            if (other.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
             {
-                if (null!=playersHit && other.gameObject.GetInstanceID() == playersHit[i].GetInstanceID())
+                for (int i = 0; i < playersHit.Length; i++)
                 {
-                    flag = true;
+                    if (null != playersHit && other.gameObject.GetInstanceID() == playersHit[i].GetInstanceID())
+                    {
+                        flag = true;
 
+                    }
+                }
+
+                if (!flag)
+                {
+                    playersHit[cont] = other.gameObject;
+
+                    //other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage( ((damageCharacter/100)*50) );
+                    cont++;
                 }
             }
-
-            if (!flag)
-            {
-                playersHit[cont] = other.gameObject;
-
-                //other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage( ((damageCharacter/100)*50) );
-                cont++;
-            }
+            
         }
 
        
