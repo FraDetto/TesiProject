@@ -6,6 +6,7 @@ using Unity.MLAgents.Sensors;
 
 public class BossBehavior : Agent
 {
+    public GameObject[] playersParty;
 
     [SerializeField] private string partyList;
     private BossProfile myProfile;
@@ -23,6 +24,21 @@ public class BossBehavior : Agent
         //a sequence of actions that are correct and follow the strategies to defeat the single members of the party and the whole party at the end.
         //
         //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
+        moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+        foreach(moreSpecificProfile mr in listOfagents)
+        {
+            if (!mr.transform.tag.Equals("Boss"))
+            {
+                Destroy(mr);
+            }
+            else
+            {
+                myProfile.resetBossStats();
+            }
+        }
+
+        playersParty = FindObjectOfType<GameManager>().getPartyInGame();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -37,6 +53,32 @@ public class BossBehavior : Agent
 
         //For the best results when training, we should normalize the components of feature vector to the range [-1, +1] or [0, 1]. 
         //When we normalize the values the PPO neural network can often converge to a solution faster.
+
+        sensor.AddObservation(playersParty[0].transform.position);
+        sensor.AddObservation(playersParty[0].GetComponent<moreSpecificProfile>().publicGetIsDefending());
+        sensor.AddObservation(playersParty[0].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+        sensor.AddObservation(playersParty[0].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+        sensor.AddObservation(playersParty[0]);
+
+        sensor.AddObservation(playersParty[1].transform.position);
+        sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().publicGetIsDefending());
+        sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+        sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+        sensor.AddObservation(playersParty[1]);
+
+        sensor.AddObservation(playersParty[2].transform.position);
+        sensor.AddObservation(playersParty[2].GetComponent<moreSpecificProfile>().publicGetIsDefending());
+        sensor.AddObservation(playersParty[2].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+        sensor.AddObservation(playersParty[2].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+        sensor.AddObservation(playersParty[2]);
+
+        sensor.AddObservation(playersParty[3].transform.position);
+        sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().publicGetIsDefending());
+        sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+        sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+        sensor.AddObservation(playersParty[3]);
+
+        
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -53,6 +95,10 @@ public class BossBehavior : Agent
 
         //In detail for each attack of the boss (ideas)
 
+        /// Number of targets 
+        int target = Mathf.FloorToInt(vectorAction[0]);
+
+        int actionForBoss = Mathf.FloorToInt(vectorAction[1]);
         ////RANGED ATTACK////
         ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
         ///Good rew: against healer and After use the ray attack

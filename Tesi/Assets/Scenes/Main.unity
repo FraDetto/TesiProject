@@ -690,6 +690,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[1]
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5617987301070202409, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_RootOrder
       value: 8

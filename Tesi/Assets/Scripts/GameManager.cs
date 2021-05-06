@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        chooseTeam();
+        //chooseTeam();
 
     }
 
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void chooseTeam()
+    public GameObject[] chooseTeam()
     {
        for(int n=0; n< partyOnRun.Length; n++)
         {
@@ -56,12 +56,13 @@ public class GameManager : MonoBehaviour
             partyOnRun[n] = Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity);
             Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
         }
+        return partyOnRun;
     }
 
 
     public GameObject[] getPartyInGame()
     {
-        return partyOnRun;
+        return chooseTeam();
     }
  
 }

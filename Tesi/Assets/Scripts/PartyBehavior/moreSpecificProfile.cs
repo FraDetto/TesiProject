@@ -440,6 +440,20 @@ public class moreSpecificProfile : aProfile
         transform.LookAt(verticalAdj);
     }
 
+    public void resetBossStats()
+    {
+        totalhp = partyData.hpBoss;
+        currenthp = totalhp;
+        damage = partyData.damageBoss;
+        armor = partyData.armorBoss;
+
+
+        status = 0;
+        shield = 0.0f;
+
+        healthBar.setMaxHealth(currenthp);
+
+    }
     /*
     private void OnDrawGizmos()
     {
