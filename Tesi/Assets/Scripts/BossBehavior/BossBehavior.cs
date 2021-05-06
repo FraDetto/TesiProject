@@ -12,6 +12,11 @@ public class BossBehavior : Agent
     private BossProfile myProfile;
     private Vector3 startPosition;
 
+    private GameObject targetForAttack;
+
+    private bool chainRanged = false;
+    private bool chainRay = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,13 +58,16 @@ public class BossBehavior : Agent
 
         //For the best results when training, we should normalize the components of feature vector to the range [-1, +1] or [0, 1]. 
         //When we normalize the values the PPO neural network can often converge to a solution faster.
-
-        sensor.AddObservation(playersParty[0].transform.position);
-        sensor.AddObservation(playersParty[0].GetComponent<moreSpecificProfile>().publicGetIsDefending());
-        sensor.AddObservation(playersParty[0].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-        sensor.AddObservation(playersParty[0].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        sensor.AddObservation(playersParty[0]);
-
+        for(int i=0; i< playersParty.Length; i++)
+        {
+            sensor.AddObservation(playersParty[i].transform.position);
+            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetIsDefending());
+            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+            sensor.AddObservation(playersParty[i]);
+        }
+        
+        /*
         sensor.AddObservation(playersParty[1].transform.position);
         sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().publicGetIsDefending());
         sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
@@ -76,8 +84,9 @@ public class BossBehavior : Agent
         sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().publicGetIsDefending());
         sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
         sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        sensor.AddObservation(playersParty[3]);
+        sensor.AddObservation(playersParty[3]);*/
 
+        
         
     }
 
@@ -98,7 +107,13 @@ public class BossBehavior : Agent
         /// Number of targets 
         int target = Mathf.FloorToInt(vectorAction[0]);
 
+        targetForAttack = playersParty[target];
+
         int actionForBoss = Mathf.FloorToInt(vectorAction[1]);
+
+        myProfile.hubAttacks(actionForBoss, targetForAttack); 
+
+
         ////RANGED ATTACK////
         ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
         ///Good rew: against healer and After use the ray attack
@@ -133,6 +148,23 @@ public class BossBehavior : Agent
         ///OK:
         ///Bad: start a chain : next attack on a different champ or used on tank while bruiser alive and ranged dead OR used on melee while ranged are alive
         ///
+
+    }
+
+    public IEnumerator timeValueReawrd()
+    {
+        //ricordarsi di gestire i cooldown
+        yield return new WaitForSeconds(0.8f);
+        valueAndApplyReward();
+    }
+
+    public void valueAndApplyReward()
+    {
+
+    }
+
+    public void adjustPlayerArray()
+    {
 
     }
 }

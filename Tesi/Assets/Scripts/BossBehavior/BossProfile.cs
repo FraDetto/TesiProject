@@ -6,7 +6,7 @@ public class BossProfile : moreSpecificProfile
 {
     
     public GameObject[] playersParty;
-    public float speedRangedAttk = 25.0f;
+    public float speedRangedAttk = 30.0f;
 
     public int codeAttack = 0; // 0:swing  1: ahead  2:break    i use it to divide the different attack and apply the correct damage
 
@@ -227,6 +227,53 @@ public class BossProfile : moreSpecificProfile
         }
     }
 
+
+    public void hubAttacks(int attackCode, GameObject player)
+    {
+        int response = 0;
+        isAttacking = true;
+
+        switch (attackCode)
+        {
+            case 0://RANGED 
+                targetPlayer = player;
+                instanceIDtarget = targetPlayer.GetInstanceID();
+
+                StartCoroutine(timeBeforeCastRangedAttack());
+                break;
+            case 1://RAY
+                targetPlayer = player;
+                instanceIDtarget = targetPlayer.GetInstanceID();
+
+                StartCoroutine(timeBeforeCastRayAttack());
+                break;
+            case 2://SWING
+                targetPlayer = player;
+                instanceIDtarget = targetPlayer.GetInstanceID();
+                isUsingAoE = true;
+
+                StartCoroutine(timeBeforeCastSwingAttk());
+                break;
+            case 3://AHEAD
+                targetPlayer = player;
+                instanceIDtarget = targetPlayer.GetInstanceID();
+
+                StartCoroutine(timeBeforeCastAheadAttk());
+                break;
+            case 4://BREAK
+                targetPlayer = player;
+                instanceIDtarget = targetPlayer.GetInstanceID();              
+
+                StartCoroutine(timeBeforeCastBreakAttk());
+                break;
+            default://AoE
+                isUsingAoE = true;
+
+                StartCoroutine(timeBeforeCastAoEAttk());
+                break;
+        }
+
+    }
 
 
 
