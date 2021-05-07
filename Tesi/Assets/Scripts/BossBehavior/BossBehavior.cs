@@ -20,6 +20,8 @@ public class BossBehavior : Agent
     private int previousRangedTargetID;
     private int previousRayTarget;
 
+    private float bonusFutureReward;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -165,10 +167,111 @@ public class BossBehavior : Agent
     {
         if (chainRanged)
         {
+            if (!chainRay)
+            {
+                if (actionForBoss == 1)//RAY ATTACK
+                {
+                    if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                        {
+                            chainRanged = false;
+                            previousRangedTargetID = 0;
+                            this.AddReward(-0.05f);
+                        }
+                        else
+                        {
+                            chainRay = true;
+                            //qua mettere il fatto che non puo' usare stessa azione dopo
+                        }
+                    }
+                    else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        chainRay = true;
+                        //qua mettere il fatto che non puo' usare stessa azione dopo
+                    }
+                    else
+                    {
+                        chainRanged = false;
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.1f);
+                    }
+                }
+                else
+                {
+                    chainRanged = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.05f);
+                }
 
-        }else if (chainRay)
+                
+            }
+            else
+            {
+                if (actionForBoss == 0)//RANGED ATTACK
+                {
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.1f);
+                }
+                else if (actionForBoss == 2)//SWING ATTACK
+                {
+
+                }
+                else if (actionForBoss == 3)//AHEAD ATTACK
+                {
+                    if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                        this.AddReward(-0.12f);
+                    }
+                }
+                else if (actionForBoss == 4)//BREAK ATTACK
+                {
+
+                }
+            }
+            
+            
+        }
+        else if (chainRay)
         {
+            if (actionForBoss == 0)//RANGED ATTACK
+            {
 
+            }
+            else if (actionForBoss == 2)//SWING ATTACK
+            {
+
+            }
+            else if (actionForBoss == 3)//AHEAD ATTACK
+            {
+
+            }
+            else if (actionForBoss == 4)//BREAK ATTACK
+            {
+
+            }
         }
         else
         {
@@ -176,22 +279,37 @@ public class BossBehavior : Agent
             {
                 if (targetForAttack.tag.Equals("Mage"))
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending())
+                    if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
                     {
                         chainRanged = true;
                         previousRangedTargetID = targetForAttack.GetInstanceID();
-                    }
+                        bonusFutureReward = 0.04f;
+                    }//se non difende nujlla neutro
                 }
                 else if (targetForAttack.tag.Equals("Healer"))
                 {
-
+                    chainRanged = true;
+                    previousRangedTargetID = targetForAttack.GetInstanceID();
                 }
                 else
                 {
                     this.AddReward(-0.05f);//neg reward: ranged attack on Bruiser or Tank
                 }
+                //qua mettere il fatto che non puo' usare stessa azione dopo
             }
             else if (actionForBoss == 1)//RAY ATTACK
+            {
+
+            }
+            else if (actionForBoss == 2)//SWING ATTACK
+            {
+
+            }
+            else if (actionForBoss == 3)//AHEAD ATTACK
+            {
+
+            }
+            else if (actionForBoss == 4)//BREAK ATTACK
             {
 
             }
