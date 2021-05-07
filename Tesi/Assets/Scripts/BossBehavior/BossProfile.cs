@@ -159,7 +159,11 @@ public class BossProfile : moreSpecificProfile
         }
     }      
 
-
+    public Transform getSwingAttackPos()
+    {
+        return swingAttackPosition;
+    }
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -225,7 +229,7 @@ public class BossProfile : moreSpecificProfile
             StartCoroutine(timeBeforeCastAoEAttk());
             //AoEAttack();
         }
-    }
+    }*/
 
 
     public void hubAttacks(int attackCode, GameObject player)

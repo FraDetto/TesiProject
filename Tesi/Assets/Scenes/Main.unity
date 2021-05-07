@@ -690,6 +690,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: swordSwingAttk
+      value: 
+      objectReference: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
+    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: m_PlayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 28

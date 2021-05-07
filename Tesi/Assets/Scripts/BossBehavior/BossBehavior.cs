@@ -7,6 +7,8 @@ using Unity.MLAgents.Sensors;
 public class BossBehavior : Agent
 {
     public GameObject[] playersParty;
+    public LayerMask m_PlayerMask;
+    public GameObject swordSwingAttk;
 
     [SerializeField] private string partyList;
     private BossProfile myProfile;
@@ -21,6 +23,12 @@ public class BossBehavior : Agent
     private int previousRayTarget;
 
     private float bonusFutureReward;
+
+    private bool m_HitDetect_swing_right;
+    private bool m_HitDetect_swing_left;
+
+    RaycastHit m_Hit_swing_right;
+    RaycastHit m_Hit_swing_left;
 
     // Start is called before the first frame update
     void Start()
@@ -217,7 +225,53 @@ public class BossBehavior : Agent
                 }
                 else if (actionForBoss == 2)//SWING ATTACK
                 {
-
+                    if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        if (swingRayCastControll())
+                        {
+                            this.AddReward(0.08f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.01f );
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        
+                    }
+                    else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        if (swingRayCastControll())
+                        {
+                            this.AddReward(0.08f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.01f);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                    }
+                    else
+                    {
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                        this.AddReward(-0.1f);
+                    }
                 }
                 else if (actionForBoss == 3)//AHEAD ATTACK
                 {
@@ -248,7 +302,30 @@ public class BossBehavior : Agent
                 }
                 else if (actionForBoss == 4)//BREAK ATTACK
                 {
-
+                    if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        this.AddReward(0.06f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                    {
+                        this.AddReward(0.06f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                        this.AddReward(-0.12f);
+                    }
                 }
             }
             
@@ -314,6 +391,24 @@ public class BossBehavior : Agent
 
             }
         }
+        
+    }
+
+
+    public bool swingRayCastControll()//quando ha fatto catena fino a ray e tira swing su mage o healer se c'e' alemno un altro champ nello spazio di uso dello swing con raycast
+    {
+        m_HitDetect_swing_right = Physics.BoxCast(myProfile.getSwingAttackPos().position, transform.localScale, transform.right, out m_Hit_swing_right, transform.rotation, swordSwingAttk.transform.localScale.x/2, m_PlayerMask);
+        m_HitDetect_swing_left = Physics.BoxCast(myProfile.getSwingAttackPos().position, transform.localScale, -transform.right, out m_Hit_swing_left, transform.rotation, swordSwingAttk.transform.localScale.x/2, m_PlayerMask);
+
+        if (!m_HitDetect_swing_right && !m_HitDetect_swing_left)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
         
     }
 
