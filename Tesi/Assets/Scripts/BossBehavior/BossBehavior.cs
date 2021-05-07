@@ -17,6 +17,9 @@ public class BossBehavior : Agent
     private bool chainRanged = false;
     private bool chainRay = false;
 
+    private int previousRangedTargetID;
+    private int previousRayTarget;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,39 +114,39 @@ public class BossBehavior : Agent
 
         int actionForBoss = Mathf.FloorToInt(vectorAction[1]);
 
-        myProfile.hubAttacks(actionForBoss, targetForAttack); 
+        myProfile.hubAttacks(actionForBoss, targetForAttack);
 
-
-        ////RANGED ATTACK////
+        StartCoroutine(timeValueReawrd(actionForBoss));
+        //// 0 RANGED ATTACK////  
         ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
         ///Good rew: against healer and After use the ray attack
-        ///Bad rew: if use against tank and bruiser OR if after bait spelldef to Mage it attacks an other champ
+        ///Bad rew: if use against tank and bruiser OR if after bait spelldef to Mage it attacks an other champ OR on Healer and after not use ray on Healer
 
-        ////RAY ATTACK////
+        //// 1 RAY ATTACK////
         ///Max rew: on mage after ranged attack which baits def spell  OR agaisnt healer ONLY if after the ray --> attack that implies the same target
         ///little bad: if do on mage with def up and it defends
         ///Bad rew: against bruiser or tank
         ///
 
-        //// ATTACK AoE ////
+        //// 2 ATTACK AoE ////
         ///Max rew: vs 3 or more target
         ///good rew: vs 2 target and ranged pg are dead
         ///bad rew: vs 1 champ OR there are the 2 melee but there are ranged champ alive 
         ///
 
-        //// Swing Attack ////
+        //// 3 Swing Attack ////
         ///Max rew: 2 or more enemies in range of attack && one of them is a rnaged player || 2 enemies and ranged are dead
         ///Ok: if only 1 enemie in range and the previous attack is a ahead 
         ///bad : 1 or 2 enemies none of them ranged && ranged alive
         ///
 
-        //// Ahead Attack ////
+        //// 4 Ahead Attack ////
         ///Max: target in range with low HP OR on Bruiser if tank alive && ranged dead || on a target after break Attack 
         ///Ok: root champ  --> concluding the chains from rayAttack (so ahead attack on the correct target of ray)
         ///Bad: Attack tank or bruiser if healer alive OR attack tank while bruiser alive
         ///
 
-        //// Break Attack ////
+        //// 5 Break Attack ////
         ///Max: root champ  --> concluding the chains from rayAttack (so break attack on the correct target of ray) OR start a good chain on bruiser if ranged dead OR start a good chain on tank if all dead
         ///OK:
         ///Bad: start a chain : next attack on a different champ or used on tank while bruiser alive and ranged dead OR used on melee while ranged are alive
@@ -151,16 +154,49 @@ public class BossBehavior : Agent
 
     }
 
-    public IEnumerator timeValueReawrd()
+    public IEnumerator timeValueReawrd(int actionForBoss)
     {
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(0.8f);
-        valueAndApplyReward();
+        valueAndApplyReward(actionForBoss);
     }
 
-    public void valueAndApplyReward()
+    public void valueAndApplyReward(int actionForBoss)
     {
+        if (chainRanged)
+        {
 
+        }else if (chainRay)
+        {
+
+        }
+        else
+        {
+            if (actionForBoss == 0)// RANGED ATTACK
+            {
+                if (targetForAttack.tag.Equals("Mage"))
+                {
+                    if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending())
+                    {
+                        chainRanged = true;
+                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                    }
+                }
+                else if (targetForAttack.tag.Equals("Healer"))
+                {
+
+                }
+                else
+                {
+                    this.AddReward(-0.05f);//neg reward: ranged attack on Bruiser or Tank
+                }
+            }
+            else if (actionForBoss == 1)//RAY ATTACK
+            {
+
+            }
+        }
+        
     }
 
     public void adjustPlayerArray()
