@@ -237,7 +237,7 @@ public class BossBehavior : Agent
                         }
                         else
                         {
-                            this.AddReward(-0.01f );
+                            this.AddReward(-0.03f );
                             chainRanged = false;
                             chainRay = false;
                             previousRangedTargetID = 0;
@@ -257,7 +257,7 @@ public class BossBehavior : Agent
                         }
                         else
                         {
-                            this.AddReward(-0.01f);
+                            this.AddReward(-0.03f);
                             chainRanged = false;
                             chainRay = false;
                             previousRangedTargetID = 0;
@@ -304,7 +304,7 @@ public class BossBehavior : Agent
                 {
                     if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
-                        this.AddReward(0.06f + bonusFutureReward);
+                        this.AddReward(0.05f + bonusFutureReward);
                         chainRanged = false;
                         chainRay = false;
                         previousRangedTargetID = 0;
@@ -312,7 +312,7 @@ public class BossBehavior : Agent
                     }
                     else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
-                        this.AddReward(0.06f + bonusFutureReward);
+                        this.AddReward(0.05f + bonusFutureReward);
                         chainRanged = false;
                         chainRay = false;
                         previousRangedTargetID = 0;
@@ -335,19 +335,103 @@ public class BossBehavior : Agent
         {
             if (actionForBoss == 0)//RANGED ATTACK
             {
-
+                chainRay = false;
+                bonusFutureReward = 0.0f;
+                previousRangedTargetID = 0;
+                this.AddReward(-0.05f);
             }
             else if (actionForBoss == 2)//SWING ATTACK
             {
+                if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                {
+                    if (swingRayCastControll())
+                    {
+                        this.AddReward(0.05f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.03f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
 
+                }
+                else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                {
+                    if (swingRayCastControll())
+                    {
+                        this.AddReward(0.05f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.03f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                }
+                else
+                {
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                    this.AddReward(-0.1f);
+                }
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
             {
-
+                if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                {
+                    this.AddReward(0.07f + bonusFutureReward);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                {
+                    this.AddReward(0.07f + bonusFutureReward);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else
+                {
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                    this.AddReward(-0.1f);
+                }
             }
             else if (actionForBoss == 4)//BREAK ATTACK
             {
-
+                if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                {
+                    this.AddReward(0.03f + bonusFutureReward);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                {
+                    this.AddReward(0.03f + bonusFutureReward);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else
+                {
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                    this.AddReward(-0.1f);
+                }
             }
         }
         else
