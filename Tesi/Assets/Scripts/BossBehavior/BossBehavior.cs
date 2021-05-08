@@ -128,7 +128,7 @@ public class BossBehavior : Agent
 
         myProfile.hubAttacks(actionForBoss, targetForAttack);
 
-        StartCoroutine(timeValueReawrd(actionForBoss));
+        StartCoroutine(timeValueReward(actionForBoss));
         //// 0 RANGED ATTACK////  
         ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
         ///Good rew: against healer and After use the ray attack
@@ -166,7 +166,7 @@ public class BossBehavior : Agent
 
     }
 
-    public IEnumerator timeValueReawrd(int actionForBoss)
+    public IEnumerator timeValueReward(int actionForBoss)
     {
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(0.8f);
@@ -620,10 +620,206 @@ public class BossBehavior : Agent
                         }
                     }
                 }
+                else
+                {
+                    //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
+                    breakBefore = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.1f);
+                }
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
             {
+                if (targetForAttack.tag.Equals("Bruiser") || targetForAttack.tag.Equals("Tank"))
+                {
+                    if (rangedChampAlive())
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.1f);
+                    }
+                    else
+                    {
+                        if (targetForAttack.tag.Equals("Bruiser"))
+                        {
+                            if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                            {
+                                if (breakBefore)// attacked Bruiser with a break Attack before
+                                {
+                                    if (!swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.12f);
+                                    }
+                                    else
+                                    {
+                                        if(targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife()/100*40))//if low HP
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.12f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.04f);
+                                        }
+                                        
+                                    }
+                                }
+                                else// attacked Bruiser with a NON break Attack before
+                                {
+                                    if (!swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.1f);
+                                    }
+                                    else
+                                    {
+                                        if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.03f);
+                                        }
 
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (previousRangedTargetID == 0)
+                                {
+                                    if (!swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.08f);
+                                    }
+                                    else
+                                    {
+                                        if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.08f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.02f);
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    breakBefore = false;
+                                    previousRangedTargetID = 0;
+                                    this.AddReward(-0.1f);
+                                }
+                            }
+
+                        }
+                        else if (targetForAttack.tag.Equals("Tank"))
+                        {
+                            if (bruiserAlive())
+                            {
+                                breakBefore = false;
+                                previousRangedTargetID = 0;
+                                this.AddReward(-0.1f);
+                            }
+                            else
+                            {
+                                if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                                {
+                                    if (breakBefore)
+                                    {
+                                        if (!swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.12f);
+                                        }
+                                        else
+                                        {
+                                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.12f);
+                                            }
+                                            else
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.04f);
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.1f);
+                                            }
+                                            else
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.03f);
+                                            }
+
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (previousRangedTargetID == 0)
+                                    {
+                                        if (!swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.08f);
+                                        }
+                                        else
+                                        {
+                                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.08f);
+                                            }
+                                            else
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.02f);
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        breakBefore = false;
+                                        previousRangedTargetID = 0;
+                                        this.AddReward(-0.1f);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
+                    previousRangedTargetID = 0;
+                    breakBefore = false;
+                    this.AddReward(-0.1f);
+                }
             }
             else if (actionForBoss == 4)//BREAK ATTACK
             {
@@ -680,7 +876,7 @@ public class BossBehavior : Agent
         return flag;
     }
 
-    public bool isInRange() // true if target in range
+    public bool targetIsInRange() // true if target in range
     {
         if ((targetForAttack.transform.position - transform.position).magnitude < 10.0f)
         {
