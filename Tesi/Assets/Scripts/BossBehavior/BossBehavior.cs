@@ -567,7 +567,54 @@ public class BossBehavior : Agent
                             {
                                 if (targetForAttack.GetInstanceID() == previousRangedTargetID)
                                 {
-
+                                    if (breakBefore)
+                                    {
+                                        if (swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.12f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.04f);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.03f);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (previousRangedTargetID == 0)
+                                    {
+                                        if (swingRayCastControll())
+                                        {
+                                            previousRangedTargetID = targetForAttack.GetInstanceID();
+                                            this.AddReward(0.08f);
+                                        }
+                                        else
+                                        {
+                                            previousRangedTargetID = targetForAttack.GetInstanceID();
+                                            this.AddReward(0.02f);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        breakBefore = false;
+                                        previousRangedTargetID = 0;
+                                        this.AddReward(-0.1f);
+                                    }
                                 }
                             }
                         }
