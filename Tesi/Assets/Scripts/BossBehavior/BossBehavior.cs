@@ -19,6 +19,8 @@ public class BossBehavior : Agent
     private bool chainRanged = false;
     private bool chainRay = false;
 
+    private bool breakBefore = false;
+
     private int previousRangedTargetID;
     private int previousRayTarget;
 
@@ -460,11 +462,117 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 1)//RAY ATTACK
             {
-
+                if (targetForAttack.tag.Equals("Mage"))
+                {
+                    if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.05f);
+                    }
+                    else
+                    {
+                        chainRay = true;
+                        bonusFutureReward = 0.02f;
+                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                        //qua mettere il fatto che non puo' usare stessa azione dopo
+                    }
+                }
+                else if (targetForAttack.tag.Equals("Healer"))
+                {
+                    chainRay = true;
+                    bonusFutureReward = 0.02f;
+                    previousRangedTargetID = targetForAttack.GetInstanceID();
+                }
+                else
+                {
+                    this.AddReward(-0.08f);//neg reward: ranged attack on Bruiser or Tank
+                }
+                //qua mettere il fatto che non puo' usare stessa azione dopo
             }
             else if (actionForBoss == 2)//SWING ATTACK
             {
+                if ( targetForAttack.tag.Equals("Bruiser") || targetForAttack.tag.Equals("Tank"))
+                {
+                    if ( rangedChampAlive() )
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.1f);
+                    }
+                    else
+                    {
+                        if(targetForAttack.tag.Equals("Bruiser"))
+                        {
+                            if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                            {
+                                if (breakBefore)// attacked Bruiser with a break Attack before
+                                {
+                                    if (swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.12f);
+                                    }
+                                    else
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.04f);
+                                    }
+                                }
+                                else// attacked Bruiser with a NON break Attack before
+                                {
+                                    if (swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.1f);
+                                    }
+                                    else
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.03f);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if(previousRangedTargetID == 0)
+                                {
+                                    if (swingRayCastControll())
+                                    {
+                                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                                        this.AddReward(0.08f);
+                                    }
+                                    else
+                                    {
+                                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                                        this.AddReward(0.02f);
+                                    }
+                                }
+                                else
+                                {
+                                    breakBefore = false;
+                                    previousRangedTargetID = 0;
+                                    this.AddReward(-0.1f);
+                                }
+                            }
+                            
+                        }
+                        else if(targetForAttack.tag.Equals("Tank"))
+                        {
+                            if (bruiserAlive())
+                            {
+                                breakBefore = false;
+                                previousRangedTargetID = 0;
+                                this.AddReward(-0.1f);
+                            }
+                            else
+                            {
+                                if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                                {
 
+                                }
+                            }
+                        }
+                    }
+                }
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
             {
@@ -474,6 +582,7 @@ public class BossBehavior : Agent
             {
 
             }
+            /////MANCA AoEEEEEEE OVUNQUE
         }
         
     }
@@ -491,9 +600,49 @@ public class BossBehavior : Agent
         else
         {
             return true;
+        }       
+    }
+
+    public bool rangedChampAlive()
+    {
+        bool flag = false;
+
+        for(int i=0; i<playersParty.Length; i++)
+        {
+            if(playersParty[i].tag.Equals("Mage") || playersParty[i].tag.Equals("Healer"))
+            {
+                flag = true;
+            }
         }
 
-        
+        return flag;
+    }
+
+    public bool bruiserAlive()
+    {
+        bool flag = false;
+
+        for (int i = 0; i < playersParty.Length; i++)
+        {
+            if (playersParty[i].tag.Equals("Bruiser"))
+            {
+                flag = true;
+            }
+        }
+
+        return flag;
+    }
+
+    public bool isInRange() // true if target in range
+    {
+        if ((targetForAttack.transform.position - transform.position).magnitude < 10.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void adjustPlayerArray()

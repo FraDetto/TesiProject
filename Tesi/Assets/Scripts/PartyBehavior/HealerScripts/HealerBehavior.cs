@@ -313,7 +313,7 @@ public class HealerBehavior : MonoBehaviour
 
     public bool attackInRange()
     {
-        if ((boss.transform.position - rb.transform.position).magnitude < 15.0f)
+        if ((boss.transform.position - rb.transform.position).magnitude < 12.0f)
         {
             return true;
         }
