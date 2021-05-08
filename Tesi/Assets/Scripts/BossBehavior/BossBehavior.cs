@@ -306,7 +306,7 @@ public class BossBehavior : Agent
                 {
                     if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
-                        this.AddReward(0.05f + bonusFutureReward);
+                        this.AddReward(0.06f + bonusFutureReward);
                         chainRanged = false;
                         chainRay = false;
                         previousRangedTargetID = 0;
@@ -314,7 +314,7 @@ public class BossBehavior : Agent
                     }
                     else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
-                        this.AddReward(0.05f + bonusFutureReward);
+                        this.AddReward(0.06f + bonusFutureReward);
                         chainRanged = false;
                         chainRay = false;
                         previousRangedTargetID = 0;
@@ -821,9 +821,56 @@ public class BossBehavior : Agent
                     this.AddReward(-0.1f);
                 }
             }
-            else if (actionForBoss == 4)//BREAK ATTACK
+            else if (actionForBoss == 4)//BREAK ATTACK  ricordare di settare correttamente i flag di break a false anche in ranged e ray sopra quando fa casino
             {
+                if (targetForAttack.tag.Equals("Bruiser") || targetForAttack.tag.Equals("Tank"))
+                {
+                    if (rangedChampAlive())
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.1f);
+                    }
+                    else
+                    {
+                        if (targetForAttack.tag.Equals("Bruiser"))
+                        {
+                            if(previousRangedTargetID == 0)
+                            {
+                                breakBefore = true;
+                                previousRangedTargetID = targetForAttack.GetInstanceID();
+                            }
+                            else if(targetForAttack.GetInstanceID() == previousRangedTargetID)
+                            {
+                                if (!breakBefore)
+                                {
+                                    breakBefore = true;
+                                    this.AddReward(0.05f);
+                                }
+                                else
+                                {
+                                    breakBefore = false;
+                                    this.AddReward(-0.05f);
 
+                                }
+                                
+                            }
+                            else
+                            {
+                                previousRangedTargetID = 0;
+                                breakBefore = false;
+                                this.AddReward(-0.1f);
+                            }
+                        }
+                        else // case of tank
+                        {
+
+                        }
+                    }
+                }
+                else
+                {
+
+                }
             }
             /////MANCA AoEEEEEEE OVUNQUE
         }
