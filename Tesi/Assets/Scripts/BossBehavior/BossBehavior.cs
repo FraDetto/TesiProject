@@ -329,6 +329,10 @@ public class BossBehavior : Agent
                         this.AddReward(-0.12f);
                     }
                 }
+                else// ACTION 5 AoE
+                {
+
+                }
             }
             
             
@@ -434,6 +438,10 @@ public class BossBehavior : Agent
                     bonusFutureReward = 0.0f;
                     this.AddReward(-0.1f);
                 }
+            }
+            else /// ATTACK 5 AoE
+            {
+
             }
         }
         else
@@ -909,7 +917,11 @@ public class BossBehavior : Agent
                     this.AddReward(-0.1f);
                 }
             }
-            /////MANCA AoEEEEEEE OVUNQUE
+            else // ACTION 5 AoE attack
+            {
+
+            }
+            
         }
         
     }
