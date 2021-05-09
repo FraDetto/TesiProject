@@ -844,15 +844,13 @@ public class BossBehavior : Agent
                                 if (!breakBefore)
                                 {
                                     breakBefore = true;
-                                    this.AddReward(0.05f);
+                                    this.AddReward(0.06f);
                                 }
                                 else
                                 {
                                     breakBefore = false;
                                     this.AddReward(-0.05f);
-
-                                }
-                                
+                                }                                
                             }
                             else
                             {
@@ -863,13 +861,52 @@ public class BossBehavior : Agent
                         }
                         else // case of tank
                         {
-
+                            if (targetForAttack.tag.Equals("Tank"))
+                            {
+                                if (bruiserAlive())
+                                {
+                                    breakBefore = false;
+                                    previousRangedTargetID = 0;
+                                    this.AddReward(-0.1f);
+                                }
+                                else
+                                {
+                                    if (previousRangedTargetID == 0)
+                                    {
+                                        breakBefore = true;
+                                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                                    }
+                                    else if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                                    {
+                                        if (!breakBefore)
+                                        {
+                                            breakBefore = true;
+                                            this.AddReward(0.06f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(-0.05f);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        previousRangedTargetID = 0;
+                                        breakBefore = false;
+                                        this.AddReward(-0.1f);
+                                    }
+                                }
+                                
+                            }
                         }
                     }
                 }
                 else
                 {
-
+                    //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
+                    previousRangedTargetID = 0;
+                    breakBefore = false;
+                    this.AddReward(-0.1f);
                 }
             }
             /////MANCA AoEEEEEEE OVUNQUE
