@@ -91,6 +91,7 @@ public class TankProfile : moreSpecificProfile
     public void defendWithShield()
     {
         GetComponent<moreSpecificProfile>().publicSetIsDefending(true);
+        GetComponent<moreSpecificProfile>().setDefUsed(true);
         GetComponent<moreSpecificProfile>().turnToBoss();
 
         go = Instantiate(shieldTank, pointSpawnShield.position, transform.rotation, gameObject.transform);
@@ -113,6 +114,7 @@ public class TankProfile : moreSpecificProfile
     {
         yield return new WaitForSeconds(timeCoolDownShield);
         cooldownShield = false;
+        GetComponent<moreSpecificProfile>().setDefUsed(false);
     }
 
     public void specialInAction()

@@ -99,6 +99,7 @@ public class MageProfile : moreSpecificProfile
     public void defendWithSpell()
     {
         GetComponent<moreSpecificProfile>().publicSetIsDefending(true);
+        GetComponent<moreSpecificProfile>().setDefUsed(true);
 
         go = Instantiate(defenseSpellSign, pointSpawnUlt.position, transform.rotation, gameObject.transform);
         cooldownDefense = true;
@@ -133,6 +134,7 @@ public class MageProfile : moreSpecificProfile
     {
         yield return new WaitForSeconds(timeCoolDownDefenseSpell);
         cooldownDefense = false;
+        GetComponent<moreSpecificProfile>().setDefUsed(false);
     }
 
     public void activateUlti()

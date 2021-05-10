@@ -24,6 +24,8 @@ public class BossBehavior : Agent
     private int previousRangedTargetID = 0;
     private int previousRayTarget;
 
+    private int[] actionChoose = new int[1];
+
     private float bonusFutureReward;
 
     private bool m_HitDetect_swing_right;
@@ -77,6 +79,7 @@ public class BossBehavior : Agent
         {
             sensor.AddObservation(playersParty[i].transform.position);
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetIsDefending());
+            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getDefUsed());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
             sensor.AddObservation(playersParty[i]);
@@ -118,7 +121,7 @@ public class BossBehavior : Agent
         ///Th idea is +1 and -1 if boss defeat the party or if it dies respectively
 
         //In detail for each attack of the boss (ideas)
-
+        Debug.Log(" =====OnActionReceived===== ");
         /// Number of targets 
         int target = Mathf.FloorToInt(vectorAction[0]);
 
@@ -126,7 +129,10 @@ public class BossBehavior : Agent
 
         int actionForBoss = Mathf.FloorToInt(vectorAction[1]);
 
+        actionChoose[0] = actionForBoss;
+
         myProfile.hubAttacks(actionForBoss, targetForAttack);
+
 
         StartCoroutine(timeValueReward(actionForBoss));
         //// 0 RANGED ATTACK////  
@@ -172,6 +178,12 @@ public class BossBehavior : Agent
         yield return new WaitForSeconds(0.8f);
         valueAndApplyReward(actionForBoss);
     }
+    
+    public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
+    {
+        Debug.Log(" =====SET MASK===== " + actionChoose);
+        actionMasker.SetMask(1, actionChoose);
+    }
 
     public void valueAndApplyReward(int actionForBoss)
     {
@@ -179,7 +191,36 @@ public class BossBehavior : Agent
         {
             if (!chainRay)
             {
-                if (actionForBoss == 1)//RAY ATTACK
+                if (actionForBoss == 0)//RANGED
+                {
+                    if (targetForAttack.GetComponent<moreSpecificProfile>().getDefUsed())
+                    {
+                        Debug.Log(" RI-USATO RANGED----------- " + actionChoose);
+                        chainRanged = false;
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.1f);
+                    }
+                    else
+                    {
+                        if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                        {
+                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                            {
+                                previousRangedTargetID = targetForAttack.GetInstanceID();
+                                bonusFutureReward = 0.04f;
+                            }//se non difende nujlla neutro
+                        }
+                        else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
+                        {
+                            previousRangedTargetID = targetForAttack.GetInstanceID();
+                        }
+                        else
+                        {
+                            this.AddReward(-0.1f);//neg reward: ranged attack on Bruiser or Tank
+                        }
+                    }
+                }
+                else if (actionForBoss == 1)//RAY ATTACK
                 {
                     if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
@@ -192,6 +233,7 @@ public class BossBehavior : Agent
                         else
                         {
                             chainRay = true;
+                            
                             //qua mettere il fatto che non puo' usare stessa azione dopo
                         }
                     }
@@ -219,6 +261,12 @@ public class BossBehavior : Agent
             else
             {
                 if (actionForBoss == 0)//RANGED ATTACK
+                {
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.1f);
+                }else if (actionForBoss == 1)//RAY
                 {
                     chainRanged = false;
                     chainRay = false;

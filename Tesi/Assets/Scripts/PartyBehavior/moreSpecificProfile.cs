@@ -14,6 +14,8 @@ public class moreSpecificProfile : aProfile
     private bool isDefending;
     private int alive = 0; //0 alive, 1 dead
 
+    private bool usedDef;
+
     private bool m_HitDetect_dash_left;
     private bool m_HitDetect_dash_right;
     private bool m_HitDetect_dash_back;
@@ -453,6 +455,16 @@ public class moreSpecificProfile : aProfile
 
         healthBar.setMaxHealth(currenthp);
 
+    }
+
+    public bool getDefUsed()
+    {
+        return usedDef;
+    }
+
+    public void setDefUsed(bool value)
+    {
+        usedDef = value;
     }
     /*
     private void OnDrawGizmos()
