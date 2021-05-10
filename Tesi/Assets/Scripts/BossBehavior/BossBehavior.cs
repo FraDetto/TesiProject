@@ -187,6 +187,7 @@ public class BossBehavior : Agent
 
     public void valueAndApplyReward(int actionForBoss)
     {
+        Debug.Log(" =====VALUE REWARD===== " + actionChoose);
         if (chainRanged)
         {
             if (!chainRay)
