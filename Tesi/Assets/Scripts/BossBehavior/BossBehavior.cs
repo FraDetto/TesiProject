@@ -965,7 +965,61 @@ public class BossBehavior : Agent
             }
             else // ACTION 5 AoE attack
             {
-
+                if (rangedChampAlive())
+                {
+                    previousRangedTargetID = 0;
+                    breakBefore = false;
+                    this.AddReward(-0.1f);
+                }
+                else
+                {
+                    if (breakBefore)
+                    {
+                        if (targetInAoErange() >= 3)
+                        {
+                            this.AddReward(0.1f);
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            breakBefore = false;
+                        }
+                        else if (targetInAoErange() >= 1 && targetInAoErange() <= 2)
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(0.01f);
+                            breakBefore = false;
+                        }
+                        else
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(-0.1f);
+                            breakBefore = false;
+                        }
+                        //next action can't be that
+                    }
+                    else
+                    {
+                        if (targetInAoErange() >= 3)
+                        {
+                            this.AddReward(0.05f);
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else if (targetInAoErange() >= 1 && targetInAoErange() <= 2)
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(0.01f);
+                        }
+                        else
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(-0.1f);
+                        }
+                    }
+                }
             }
             
         }
