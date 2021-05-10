@@ -21,7 +21,7 @@ public class BossBehavior : Agent
 
     private bool breakBefore = false;
 
-    private int previousRangedTargetID;
+    private int previousRangedTargetID = 0;
     private int previousRayTarget;
 
     private float bonusFutureReward;
@@ -331,7 +331,29 @@ public class BossBehavior : Agent
                 }
                 else// ACTION 5 AoE
                 {
-
+                    if(targetInAoErange() >= 3)
+                    {
+                        this.AddReward(0.07f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }else if (targetInAoErange() >= 1 && targetInAoErange()<=2)
+                    {
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                        this.AddReward(0.01f);
+                    }
+                    else
+                    {
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                        this.AddReward(-0.12f);
+                    }
                 }
             }
             
@@ -419,14 +441,14 @@ public class BossBehavior : Agent
             {
                 if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                 {
-                    this.AddReward(0.03f + bonusFutureReward);
+                    this.AddReward(0.04f + bonusFutureReward);
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
                 }
                 else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                 {
-                    this.AddReward(0.03f + bonusFutureReward);
+                    this.AddReward(0.04f + bonusFutureReward);
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
@@ -441,7 +463,30 @@ public class BossBehavior : Agent
             }
             else /// ATTACK 5 AoE
             {
-
+                if (targetInAoErange() >= 3)
+                {
+                    this.AddReward(0.03f + bonusFutureReward);
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else if (targetInAoErange() >= 1 && targetInAoErange() <= 2)
+                {
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                    this.AddReward(0.01f);
+                }
+                else
+                {
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                    this.AddReward(-0.1f);
+                }
             }
         }
         else
@@ -494,6 +539,7 @@ public class BossBehavior : Agent
                 else
                 {
                     this.AddReward(-0.08f);//neg reward: ranged attack on Bruiser or Tank
+                    previousRangedTargetID = 0;
                 }
                 //qua mettere il fatto che non puo' usare stessa azione dopo
             }
@@ -982,6 +1028,13 @@ public class BossBehavior : Agent
         {
             return false;
         }
+    }
+
+    public int targetInAoErange()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 11.0f, m_PlayerMask);
+
+        return colliders.Length;
     }
 
     public void adjustPlayerArray()
