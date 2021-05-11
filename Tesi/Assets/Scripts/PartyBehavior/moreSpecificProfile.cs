@@ -157,10 +157,12 @@ public class moreSpecificProfile : aProfile
 
     protected override void setLifeAfterDamage(float damage)
     {
+        float effectiveDamage = damage * (100 / (100 + armor)); //formula for scale damage with armor 
+
         if(shield > 0)
         {
             // NEED TO SCALE DAMAGE BASE ON ARMOR (MUST THINK TO A FORMULA)
-            float resultDS = damage - shield;
+            float resultDS = effectiveDamage - shield;
             if( resultDS > 0)
             {
                 resetShield();
@@ -185,7 +187,7 @@ public class moreSpecificProfile : aProfile
         else
         {
             // NEED TO SCALE DAMAGE BASE ON ARMOR (MUST THINK TO A FORMULA)
-            currenthp -= damage;
+            currenthp -= effectiveDamage;
             healthBar.setHealth(currenthp);
         }
         
@@ -204,6 +206,7 @@ public class moreSpecificProfile : aProfile
             if (transform.tag.Equals("Boss"))
             {
                 //// END EPISODE WITH MALUS ///// 
+                GetComponent<BossBehavior>().bossDeath();
                 Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO"); 
             }
             else

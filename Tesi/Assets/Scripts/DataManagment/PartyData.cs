@@ -10,41 +10,41 @@ public class PartyData : ScriptableObject
     /// </summary>
     ///
 
-    public float hpTank = 300.0f;
-    public float damageTank = 40.0f;
-    public float armorTank = 15.0f;
+    public float hpTank = 600.0f;
+    public float damageTank = 110.0f;
+    public float armorTank = 80.0f;
 
     /// <summary>
     /// BRUISER VALUES
     /// </summary>
     /// 
-    public float hpBruiser = 220.0f;
-    public float damageBruiser = 60.0f;
-    public float armorBruiser = 11.0f;
+    public float hpBruiser = 450.0f;
+    public float damageBruiser = 135.0f;
+    public float armorBruiser = 60.0f;
 
     /// <summary>
     /// MAGE VALUES
     /// </summary>
     /// 
-    public float hpMage = 150.0f;
-    public float damageMage = 80.0f;
-    public float armorMage = 9.0f;
+    public float hpMage = 300.0f;
+    public float damageMage = 160.0f;
+    public float armorMage = 45.0f;
 
     /// <summary>
     /// HEALER VALUES
     /// </summary>
     /// 
-    public float hpHealer = 180.0f;
-    public float damageHealer = 25.0f;
-    public float armorHealer = 9.0f;
+    public float hpHealer = 380.0f;
+    public float damageHealer = 90.0f;
+    public float armorHealer = 53.0f;
 
     /// <summary>
     /// BOSS VALUES
     /// </summary>
     /// 
-    public float hpBoss = 300.0f;
-    public float damageBoss = 95.0f;
-    public float armorBoss = 15.0f;
+    public float hpBoss = 3500.0f;
+    public float damageBoss = 200.0f;
+    public float armorBoss = 100.0f;
 
    
 }

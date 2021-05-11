@@ -56,7 +56,7 @@ public class BossBehavior : Agent
             }
             else
             {
-                myProfile.resetBossStats();
+                GetComponent<moreSpecificProfile>().resetBossStats();
             }
         }
 
@@ -75,14 +75,19 @@ public class BossBehavior : Agent
 
         //For the best results when training, we should normalize the components of feature vector to the range [-1, +1] or [0, 1]. 
         //When we normalize the values the PPO neural network can often converge to a solution faster.
-        for(int i=0; i< playersParty.Length; i++)
+        sensor.AddObservation(transform.position);
+        sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+        sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+
+
+        for (int i=0; i< playersParty.Length; i++)
         {
             sensor.AddObservation(playersParty[i].transform.position);
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetIsDefending());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getDefUsed());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-            sensor.AddObservation(playersParty[i]);
+            //sensor.AddObservation(playersParty[i]);
         }
         
         /*
