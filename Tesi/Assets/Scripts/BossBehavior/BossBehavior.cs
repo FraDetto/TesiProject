@@ -1075,6 +1075,12 @@ public class BossBehavior : Agent
         
     }
 
+    public void bossDeath()//BOSS DEAD END EPISODE
+    {
+        this.SetReward(-1.0f);
+        EndEpisode();
+    }
+
 
     public bool swingRayCastControll()//quando ha fatto catena fino a ray e tira swing su mage o healer se c'e' alemno un altro champ nello spazio di uso dello swing con raycast
     {
@@ -1140,8 +1146,15 @@ public class BossBehavior : Agent
         return colliders.Length;
     }
 
-    public void adjustPlayerArray()
+    public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
     {
+        playersParty = newArrayPlay;
+        this.AddReward(0.2f);
 
+        if (playersParty.Length==0)//se KO ALL PLAYERS
+        {
+            SetReward(1.0f);
+            EndEpisode();
+        }
     }
 }

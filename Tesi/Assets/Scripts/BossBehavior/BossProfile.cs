@@ -517,6 +517,8 @@ public class BossProfile : moreSpecificProfile
     public void checkChampDieInFight()
     {
         playersParty = removeChampDieInFight();
+
+        GetComponent<BossBehavior>().adjustPlayerArray(playersParty); // aggiorno array BOSS
         Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  "+ playersParty.Length);
     }
     
