@@ -1077,8 +1077,12 @@ public class BossBehavior : Agent
 
     public void bossDeath()//BOSS DEAD END EPISODE
     {
-        this.SetReward(-1.0f);
-        EndEpisode();
+        if (GetComponent<moreSpecificProfile>().getStatusLifeChamp() != 0)
+        {
+            this.SetReward(-1.0f);
+            EndEpisode();
+        }
+        
     }
 
 
@@ -1149,11 +1153,10 @@ public class BossBehavior : Agent
     public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
     {
         playersParty = newArrayPlay;
-        this.AddReward(0.2f);
 
         if (playersParty.Length==0)//se KO ALL PLAYERS
         {
-            SetReward(1.0f);
+            this.AddReward(1.0f);
             EndEpisode();
         }
     }
