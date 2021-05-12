@@ -10,6 +10,8 @@ public class BossBehavior : Agent
     public LayerMask m_PlayerMask;
     public GameObject swordSwingAttk;
 
+    public GameObject overcomeBattleSign;
+
     [SerializeField] private string partyList;
     private BossProfile myProfile;
     private Vector3 startPosition;
@@ -1084,6 +1086,8 @@ public class BossBehavior : Agent
     {
         if (GetComponent<moreSpecificProfile>().getStatusLifeChamp() != 0)
         {
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+
             this.SetReward(-1.0f);
             EndEpisode();
         }
@@ -1161,6 +1165,8 @@ public class BossBehavior : Agent
 
         if (playersParty.Length==0)//se KO ALL PLAYERS
         {
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
             this.AddReward(1.0f);
             EndEpisode();
         }
