@@ -86,7 +86,7 @@ public class HealerBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmMain = new FSM(takSafeSpot);
 
-        Debug.Log("HEAL " + this.gameObject.GetInstanceID());
+        //Debug.Log("HEAL " + this.gameObject.GetInstanceID());
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -98,7 +98,7 @@ public class HealerBehavior : MonoBehaviour
     // Periodic update, run forever
     public IEnumerator Fight()
     {
-        while (GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+        while (GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && GetComponent<moreSpecificProfile>().flagResetepisode==false)
         {
             fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);

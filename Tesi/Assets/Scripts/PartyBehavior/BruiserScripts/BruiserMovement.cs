@@ -38,44 +38,46 @@ public class BruiserMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (chaseFlag)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
-
-           
-            if ((boss.transform.position - rb.transform.position).magnitude > distanceRange)
+            if (chaseFlag)
             {
-                m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
-                if (m_HitDetect_mov_front)
+                Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+                Vector3 toBossPos = (verticalAdj - transform.position);
+
+
+                if ((boss.transform.position - rb.transform.position).magnitude > distanceRange)
                 {
-                    
-                    Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
-                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-                    rb.MoveRotation(rb.rotation * deltaRotation);
-                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
-                    //good smooth rotation in the other branch
+                    m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
+                    if (m_HitDetect_mov_front)
+                    {
+
+                        Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
+                        Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                        rb.MoveRotation(rb.rotation * deltaRotation);
+                        rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                        //good smooth rotation in the other branch
+                    }
+                    else
+                    {
+                        //transform.LookAt(verticalAdj);
+                        var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
+
+                        // Smoothly rotate towards the target point.
+                        rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
+                        rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                    }
+
+
+
+                    valueOfZAfterMovement = initialPositionZ - transform.position.z;
                 }
                 else
                 {
-                    //transform.LookAt(verticalAdj);
-                    var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
-
-                    // Smoothly rotate towards the target point.
-                    rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
-                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                    chaseFlag = false;
                 }
-
-
-
-                valueOfZAfterMovement = initialPositionZ - transform.position.z;
-            }
-            else
-            {
-                chaseFlag = false;
             }
         }
-
     }
 
     

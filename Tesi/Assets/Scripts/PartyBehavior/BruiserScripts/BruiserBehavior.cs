@@ -83,7 +83,7 @@ public class BruiserBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmMain = new FSM(Chase);
 
-        Debug.Log("BRUISER " + this.gameObject.GetInstanceID());
+        //Debug.Log("BRUISER " + this.gameObject.GetInstanceID());
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -95,7 +95,7 @@ public class BruiserBehavior : MonoBehaviour
     // Periodic update, run forever
     public IEnumerator Fight()
     {
-        while (GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+        while (GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && GetComponent<moreSpecificProfile>().flagResetepisode==false)
         {
             fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);

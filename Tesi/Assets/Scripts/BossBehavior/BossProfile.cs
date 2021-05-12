@@ -62,7 +62,7 @@ public class BossProfile : moreSpecificProfile
 
     public void Start()
     {
-        playersParty = FindObjectOfType<GameManager>().getPartyInGame();
+        //playersParty = FindObjectOfType<GameManager>().getPartyInGame();
         rangedAttackPosition = transform.GetChild(1);
         swingAttackPosition = transform.GetChild(2);
         aheadAttackPosition = transform.GetChild(3);
@@ -513,6 +513,11 @@ public class BossProfile : moreSpecificProfile
         transform.LookAt(verticalAdj);
     }
 
+
+    public void assignPartyForProfile()
+    {
+        playersParty = FindObjectOfType<GameManager>().getParty();
+    }
 
     public void checkChampDieInFight()
     {

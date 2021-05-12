@@ -60,9 +60,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public GameObject[] getPartyInGame()
+    public GameObject[] generatePartyInGame()
     {
         return chooseTeam();
     }
  
+
+    public GameObject[] getParty()
+    {
+        return partyOnRun;
+    }
 }

@@ -18,6 +18,7 @@ public class MageProfile : moreSpecificProfile
 
     public bool rightDefSpellDirection = false;
 
+
     private GameObject boss;
     private Transform pointSpawnFireBall;
     private Transform pointSpawnUlt;
@@ -62,16 +63,20 @@ public class MageProfile : moreSpecificProfile
 
     private void FixedUpdate()
     {
-        if (shooting)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            go.transform.LookAt(boss.transform.position);
-            go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
-        }
+            if (shooting)
+            {
+                go.transform.LookAt(boss.transform.position);
+                go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
+            }
 
-        if (chargingUlt)
-        {
-            go.transform.localScale += scaleChange * Time.deltaTime;
+            if (chargingUlt)
+            {
+                go.transform.localScale += scaleChange * Time.deltaTime;
+            }
         }
+       
     }
 
 

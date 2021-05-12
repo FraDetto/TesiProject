@@ -12,6 +12,8 @@ public class BossBehavior : Agent
 
     public GameObject overcomeBattleSign;
 
+    public bool firstRun = true;
+
     [SerializeField] private string partyList;
     private BossProfile myProfile;
     private Vector3 startPosition;
@@ -40,6 +42,9 @@ public class BossBehavior : Agent
     void Start()
     {
         myProfile = GetComponent<BossProfile>();
+        Academy.Instance.AutomaticSteppingEnabled = false;
+
+        this.OnEpisodeBegin();
     }
 
     public override void OnEpisodeBegin()
@@ -48,21 +53,22 @@ public class BossBehavior : Agent
         //a sequence of actions that are correct and follow the strategies to defeat the single members of the party and the whole party at the end.
         //
         //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
-        moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
-
-        foreach(moreSpecificProfile mr in listOfagents)
+        if (!firstRun)
         {
-            if (!mr.transform.tag.Equals("Boss"))
-            {
-                Destroy(mr);
-            }
-            else
-            {
-                GetComponent<moreSpecificProfile>().resetBossStats();
-            }
-        }
 
-        playersParty = FindObjectOfType<GameManager>().getPartyInGame();
+             GetComponent<moreSpecificProfile>().resetBossStats();
+        }
+        else
+        {
+            firstRun = false;
+        }
+       
+
+        playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+        myProfile.assignPartyForProfile();
+
+        
+        
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -142,6 +148,8 @@ public class BossBehavior : Agent
 
 
         StartCoroutine(timeValueReward(actionForBoss));
+
+        StartCoroutine(timeBeforeAnOtherAction());
         //// 0 RANGED ATTACK////  
         ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
         ///Good rew: against healer and After use the ray attack
@@ -184,6 +192,14 @@ public class BossBehavior : Agent
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(0.8f);
         valueAndApplyReward(actionForBoss);
+    }
+
+    public IEnumerator timeBeforeAnOtherAction()
+    {
+        yield return new WaitForSeconds(2.0f);
+        this.RequestDecision();
+        Academy.Instance.EnvironmentStep();
+        Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");
     }
     
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
@@ -1088,6 +1104,19 @@ public class BossBehavior : Agent
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
+            moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+            foreach (moreSpecificProfile mr in listOfagents)
+            {
+                if (!mr.transform.tag.Equals("Boss"))
+                {
+                    //mr.setTrueFlaResetEpisode();
+                    //Destroy(mr);
+                    mr.detonation();
+                }
+
+            }
+
             this.SetReward(-1.0f);
             EndEpisode();
         }
@@ -1166,6 +1195,18 @@ public class BossBehavior : Agent
         if (playersParty.Length==0)//se KO ALL PLAYERS
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
+            moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+            foreach (moreSpecificProfile mr in listOfagents)
+            {
+                if (!mr.transform.tag.Equals("Boss"))
+                {
+                    //mr.setTrueFlaResetEpisode();
+                    mr.detonation();
+                }
+
+            }
 
             this.AddReward(1.0f);
             EndEpisode();

@@ -69,11 +69,15 @@ public class HealerProfile : moreSpecificProfile
 
     private void FixedUpdate()
     {
-        if (shooting)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            go.transform.LookAt(boss.transform.position);
-            go.transform.position += go.transform.forward * speed * Time.deltaTime;
+            if (shooting)
+            {
+                go.transform.LookAt(boss.transform.position);
+                go.transform.position += go.transform.forward * speed * Time.deltaTime;
+            }
         }
+       
     }
 
     private void Update()

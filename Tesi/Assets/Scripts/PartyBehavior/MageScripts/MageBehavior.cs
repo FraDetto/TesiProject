@@ -14,6 +14,9 @@ public class MageBehavior : MonoBehaviour
     public float distanceRangeDown = 45.0f;
     public float distanceRangeUp = 60.0f;
     public bool firstRush = true;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +90,7 @@ public class MageBehavior : MonoBehaviour
         fsmMain = new FSM(takSafeSpot);
 
 
-        Debug.Log("MAGE " + this.gameObject.GetInstanceID());
+        //Debug.Log("MAGE " + this.gameObject.GetInstanceID());
 
         // Start monitoring
         StartCoroutine(Fight());
@@ -100,7 +103,7 @@ public class MageBehavior : MonoBehaviour
     public IEnumerator Fight()
     {
         //while (true)
-        while(GetComponent<moreSpecificProfile>().getStatusLifeChamp()==0)
+        while(GetComponent<moreSpecificProfile>().getStatusLifeChamp()==0 && GetComponent<moreSpecificProfile>().flagResetepisode ==false)
         {
             fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);

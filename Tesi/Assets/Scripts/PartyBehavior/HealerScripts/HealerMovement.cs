@@ -28,39 +28,40 @@ public class HealerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (distanceFlag)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
-
-            if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
+            if (distanceFlag)
             {
-                transform.LookAt(verticalAdj);
-                myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
+                Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+                Vector3 toBossPos = (verticalAdj - transform.position);
+
+                if ((boss.transform.position - myRB.transform.position).magnitude < distanceRangeDown)
+                {
+                    transform.LookAt(verticalAdj);
+                    myRB.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
+                }
             }
-        }
-        else
-        {
-            distanceFlag = false;
-        }
-
-        if (chaseFlag)
-        {
-            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
-
-            if ((boss.transform.position - myRB.transform.position).magnitude > distanceRangeUp)
+            else
             {
-                transform.LookAt(verticalAdj);
-                myRB.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
+                distanceFlag = false;
             }
+
+            if (chaseFlag)
+            {
+                Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+                Vector3 toBossPos = (verticalAdj - transform.position);
+
+                if ((boss.transform.position - myRB.transform.position).magnitude > distanceRangeUp)
+                {
+                    transform.LookAt(verticalAdj);
+                    myRB.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
+                }
+            }
+            else
+            {
+                chaseFlag = false;
+            }
+
         }
-        else
-        {
-            chaseFlag = false;
-        }
-
-
-
     }
 }

@@ -7,6 +7,9 @@ public class moreSpecificProfile : aProfile
     public PartyData partyData;
     public healthBarScript healthBar;
     public shieldBarScript shieldBar;
+
+    public bool flagResetepisode;
+
     protected string champTag;
     protected float armorReductionDuration = 4.0f;
     protected float woundsDuration = 6.0f;
@@ -93,7 +96,15 @@ public class moreSpecificProfile : aProfile
         {
             shieldBar.setMaxShield(shield);
         }
+
+        flagResetepisode = false;
     }
+
+    /*
+    public void setTrueFlaResetEpisode()
+    {
+        flagResetepisode = true;
+    }*/
 
     protected override float getTotalLife()
     {
@@ -468,6 +479,13 @@ public class moreSpecificProfile : aProfile
     public void setDefUsed(bool value)
     {
         usedDef = value;
+    }
+
+    public void detonation()
+    {
+        flagResetepisode = true;
+
+        Destroy(this.gameObject);
     }
     /*
     private void OnDrawGizmos()

@@ -83,7 +83,7 @@ public class TankBehavior : MonoBehaviour
         // Setup a FSA at initial state
         fsmMain = new FSM(Chase);
 
-        Debug.Log("TANK " + this.gameObject.GetInstanceID());
+        //Debug.Log("TANK " + this.gameObject.GetInstanceID());
         // Start monitoring
         StartCoroutine(Fight());
     }
@@ -94,7 +94,7 @@ public class TankBehavior : MonoBehaviour
     // Periodic update, run forever
     public IEnumerator Fight()
     {
-        while (GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+        while (GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && GetComponent<moreSpecificProfile>().flagResetepisode == false)
         {
             fsmMain.Update();
             yield return new WaitForSeconds(reactionTime);

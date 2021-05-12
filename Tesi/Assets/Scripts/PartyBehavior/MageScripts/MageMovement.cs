@@ -12,6 +12,8 @@ public class MageMovement : MonoBehaviour
     public float speed = 15.0f;
     public bool chaseFlag = false;
     public bool distanceFlag = false;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,63 +28,69 @@ public class MageMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (distanceFlag)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
 
-            if ((boss.transform.position - rb.transform.position).magnitude < distanceRangeDown)
+            if (distanceFlag)
             {
-                transform.LookAt(verticalAdj);
-                rb.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
-            }
-            else
-            {
-                distanceFlag = false;
-            }
-        }
+                Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+                Vector3 toBossPos = (verticalAdj - transform.position);
 
-        if (chaseFlag)
-        {
-            Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
-            Vector3 toBossPos = (verticalAdj - transform.position);
-
-            if ((boss.transform.position - rb.transform.position).magnitude > distanceRangeUp)
-            {
-                transform.LookAt(verticalAdj);
-                rb.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
-            }
-            else
-            {
-                chaseFlag = false;
-            }
-        }
-
-        if (transform.GetComponent<MageProfile>().defenseActive)
-        {
-            if (transform.GetComponent<MageProfile>().rightDefSpellDirection)
-            {
-                if (transform.rotation.y<=0.70f)
+                if ((boss.transform.position - rb.transform.position).magnitude < distanceRangeDown)
                 {
-                    
-                    Vector3 m_EulerAngleVelocity = new Vector3(0f, 60.0f, 0f);
-                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-                    rb.MoveRotation(rb.rotation * deltaRotation);
+                    transform.LookAt(verticalAdj);
+                    rb.MovePosition(transform.position + (-transform.forward) * speed * Time.deltaTime);
                 }
-                
-                rb.MovePosition(transform.position + transform.forward * 12.0f * Time.deltaTime);
-            }
-            else
-            {
-                if (transform.rotation.y >= -0.70f)
+                else
                 {
-                    Vector3 m_EulerAngleVelocity = new Vector3(0f, -60.0f, 0f);
-                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-                    rb.MoveRotation(rb.rotation * deltaRotation);
+                    distanceFlag = false;
                 }
-                   
-                rb.MovePosition(transform.position + transform.forward * 12.0f * Time.deltaTime);
             }
+
+            if (chaseFlag)
+            {
+                Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
+                Vector3 toBossPos = (verticalAdj - transform.position);
+
+                if ((boss.transform.position - rb.transform.position).magnitude > distanceRangeUp)
+                {
+                    transform.LookAt(verticalAdj);
+                    rb.MovePosition(transform.position + (transform.forward) * speed * Time.deltaTime);
+                }
+                else
+                {
+                    chaseFlag = false;
+                }
+            }
+
+            if (transform.GetComponent<MageProfile>().defenseActive)
+            {
+                if (transform.GetComponent<MageProfile>().rightDefSpellDirection)
+                {
+                    if (transform.rotation.y <= 0.70f)
+                    {
+
+                        Vector3 m_EulerAngleVelocity = new Vector3(0f, 60.0f, 0f);
+                        Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                        rb.MoveRotation(rb.rotation * deltaRotation);
+                    }
+
+                    rb.MovePosition(transform.position + transform.forward * 12.0f * Time.deltaTime);
+                }
+                else
+                {
+                    if (transform.rotation.y >= -0.70f)
+                    {
+                        Vector3 m_EulerAngleVelocity = new Vector3(0f, -60.0f, 0f);
+                        Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                        rb.MoveRotation(rb.rotation * deltaRotation);
+                    }
+
+                    rb.MovePosition(transform.position + transform.forward * 12.0f * Time.deltaTime);
+                }
+            }
+
+
         }
 
     }
