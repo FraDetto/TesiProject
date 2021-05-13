@@ -234,7 +234,7 @@ public class BossProfile : moreSpecificProfile
 
     public void hubAttacks(int attackCode, GameObject player)
     {
-        int response = 0;
+
         isAttacking = true;
 
         switch (attackCode)
@@ -284,6 +284,7 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastRangedAttack()
     {
         //ricordarsi di gestire i cooldown
+        originalPositionTarget = targetPlayer.transform.position;
         yield return new WaitForSeconds(timeBeforeCastAttracting);
         rangedAttack();
     }
@@ -292,7 +293,8 @@ public class BossProfile : moreSpecificProfile
     public void rangedAttack()
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
-        originalPositionTarget = targetPlayer.transform.position;
+        //Debug.Log(" RANGED BOSS" + targetPlayer.transform.position);
+        
         turnBossToTargetForRanged();
         go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;

@@ -44,7 +44,9 @@ public class BossBehavior : Agent
         myProfile = GetComponent<BossProfile>();
         Academy.Instance.AutomaticSteppingEnabled = false;
 
-        this.OnEpisodeBegin();
+        //this.OnEpisodeBegin();
+        this.RequestDecision();
+        Academy.Instance.EnvironmentStep();
     }
 
     public override void OnEpisodeBegin()
@@ -68,7 +70,7 @@ public class BossBehavior : Agent
         myProfile.assignPartyForProfile();
 
         
-        
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -134,7 +136,7 @@ public class BossBehavior : Agent
         ///Th idea is +1 and -1 if boss defeat the party or if it dies respectively
 
         //In detail for each attack of the boss (ideas)
-        Debug.Log(" =====OnActionReceived===== ");
+        Debug.Log(" =====OnActionReceived===== "+ " TARGET " + vectorAction[0] + " AZIONE " + vectorAction[1]);
         /// Number of targets 
         int target = Mathf.FloorToInt(vectorAction[0]);
 
@@ -204,13 +206,13 @@ public class BossBehavior : Agent
     
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
     {
-        Debug.Log(" =====SET MASK===== " + actionChoose);
+        Debug.Log(" =====SET MASK===== " + actionChoose[0]);
         actionMasker.SetMask(1, actionChoose);
     }
 
     public void valueAndApplyReward(int actionForBoss)
     {
-        Debug.Log(" =====VALUE REWARD===== " + actionChoose);
+        Debug.Log(" =====VALUE REWARD===== " + actionChoose[0]);
         if (chainRanged)
         {
             if (!chainRay)
