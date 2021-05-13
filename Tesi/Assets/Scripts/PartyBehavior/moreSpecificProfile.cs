@@ -17,6 +17,7 @@ public class moreSpecificProfile : aProfile
     private bool isDefending;
     private int alive = 0; //0 alive, 1 dead
 
+
     private bool usedDef;
 
     private bool m_HitDetect_dash_left;
@@ -165,6 +166,12 @@ public class moreSpecificProfile : aProfile
     {
         addLifeByCure(cure);
     }
+
+    public float getArmor()
+    {
+        return armor;
+    }
+
 
     protected override void setLifeAfterDamage(float damage)
     {
@@ -330,6 +337,31 @@ public class moreSpecificProfile : aProfile
     }
 
 
+    public void incrementStatsUltiTank()
+    {
+        float hpToAdd = (currenthp / 100) * 40;
+
+        float armorToAdd = (armor / 100) * 50;
+
+        currenthp += hpToAdd;
+        healthBar.setHealth(currenthp);
+        healthBar.setMaxHealth(totalhp+hpToAdd);
+
+        armor += armorToAdd;
+        
+
+    }
+
+    public void resetStatsTankUlti(float previousHp, float previousArmor)
+    {
+        float armorToSubtract = (previousArmor / 100) * 50;
+        armor -= armorToSubtract;
+
+        float hpToSubtract = (previousHp / 100) * 40;
+        currenthp -= hpToSubtract;
+        healthBar.setHealth(currenthp);
+        healthBar.setMaxHealth(totalhp - hpToSubtract);
+    }
 
     public void rollAwayChamp(Rigidbody rb, float m_MaxDistance, LayerMask m_PlayerMask, float dashForce)
     {

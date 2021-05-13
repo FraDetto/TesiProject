@@ -38,8 +38,10 @@ public class TankProfile : moreSpecificProfile
 
     private float dashForce = 17.0f;
 
+    private float previousUltiHp = 0.0f;
+    private float previousUltiArmor = 0.0f;
 
-    
+
 
     float m_MaxDistance = 10.0f;
     public LayerMask m_PlayerMask;
@@ -135,6 +137,12 @@ public class TankProfile : moreSpecificProfile
         castingUlt = false;
         ultiRunning = true;
         cooldownSpecial = true;
+
+        previousUltiHp = GetComponent<moreSpecificProfile>().publicGetCurrentLife();
+        previousUltiArmor = GetComponent<moreSpecificProfile>().getArmor();
+
+        GetComponent<moreSpecificProfile>().incrementStatsUltiTank();
+
         StartCoroutine(waitBeforeStopSpecial());
 
         StartCoroutine(waitAfterUlti());
@@ -145,7 +153,13 @@ public class TankProfile : moreSpecificProfile
     {
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(specialDuration);
+
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        GetComponent<moreSpecificProfile>().resetStatsTankUlti(previousUltiHp, previousUltiArmor);
+
+        previousUltiHp = 0.0f;
+        previousUltiArmor = 0.0f;
+
         ultiRunning = false;
         //Debug.Log("ULTI FINITA");
     }

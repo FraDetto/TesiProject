@@ -9,22 +9,30 @@ public class SwordCollider : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         string characterName = transform.parent.tag;
-       
-        switch (characterName)
-        {
-            case "Tank":
-                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                break;          
 
-            default:
-                damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();              
-                break;
-        }
-
-        if (other.tag.Equals("Boss"))
+        if (null != gameObject.GetComponentInParent<moreSpecificProfile>())
         {
-            other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+            switch (characterName)
+            {
+                case "Tank":
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    break;
+
+                default:
+                    damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                    if (gameObject.GetComponentInParent<BruiserProfile>().ultiRunning)
+                    {
+                        damageCharacter += 35.0f;
+                    }
+                    break;
+            }
+
+            if (other.tag.Equals("Boss"))
+            {
+                other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+            }
         }
+        
 
        
     }

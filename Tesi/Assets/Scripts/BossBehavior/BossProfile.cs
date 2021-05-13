@@ -58,7 +58,7 @@ public class BossProfile : moreSpecificProfile
     private float timeCoolDownAheadAttack = 1.6f;
     private float timeCoolDownBreakAttack = 4.4f;
 
-
+    
 
     public void Start()
     {
