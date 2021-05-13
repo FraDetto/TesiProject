@@ -158,6 +158,8 @@ public class MageProfile : moreSpecificProfile
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(specialDuration);
         chargingUlt = false;
+
+        boss.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(200.0f);
         Destroy(go);
         //Debug.Log("ULTI FINITA");
     }
