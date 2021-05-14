@@ -29,6 +29,7 @@ public class BossBehavior : Agent
     private int previousRayTarget;
 
     private int[] actionChoose = new int[1];
+    private int[] actionTarget;
 
     private float bonusFutureReward;
 
@@ -205,7 +206,12 @@ public class BossBehavior : Agent
     {
         if (!firstRun)
         {
-            Debug.Log(" =====SET MASK===== " + actionChoose[0]);
+            Debug.Log(" =====SET MASK ACTION ===== " + actionChoose[0]);
+            if (null != actionTarget)
+            {
+                Debug.Log(" =====SET MASK TARGET===== " + actionTarget[0]);
+                actionMasker.SetMask(0, actionTarget);
+            }         
             actionMasker.SetMask(1, actionChoose);
         }
         else
@@ -1199,6 +1205,8 @@ public class BossBehavior : Agent
     {
         playersParty = newArrayPlay;
 
+       
+
         if (playersParty.Length==0)//se KO ALL PLAYERS
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
@@ -1217,6 +1225,20 @@ public class BossBehavior : Agent
             GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
             this.AddReward(1.0f);
             EndEpisode();
+        }
+        else
+        {
+            int numberOfDiedChamp = 4 - playersParty.Length;
+
+            int[] a = new int[numberOfDiedChamp];
+
+            int targetToMask = 3;
+            for (int i = 0; i < a.Length; i++)
+            {
+                a[i] = targetToMask;
+                targetToMask--;
+            }
+            actionTarget = a;
         }
     }
 }
