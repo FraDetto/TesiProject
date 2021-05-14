@@ -103,11 +103,11 @@ public class moreSpecificProfile : aProfile
         flagResetepisode = false;
     }
 
-    /*
-    public void setTrueFlaResetEpisode()
+    
+    public void setFlaResetEpisode(bool value)
     {
-        flagResetepisode = true;
-    }*/
+        flagResetepisode = value;
+    }
 
     protected override float getTotalLife()
     {
@@ -161,17 +161,20 @@ public class moreSpecificProfile : aProfile
 
     protected override void addLifeByCure(float cure)
     {
-     
-        if ( (currenthp + cure)<= totalhp)
+        float newHp = currenthp;
+        if ( (newHp + cure)<= totalhp)
         {
-            currenthp += cure;
+            newHp += cure;
         }
         else
         {
-            currenthp = totalhp;
+            newHp = totalhp;
         }
-
-        healthBar.setHealth(currenthp);
+        if (alive == 0)//if alive
+        {
+            healthBar.setHealth(newHp);
+        }
+        
     }
 
     public void publicAddLifeByCure(float cure)
@@ -228,7 +231,7 @@ public class moreSpecificProfile : aProfile
             healthBar.setHealth(0);
 
             alive = 1;
-            ////DEATH ANIMATION////
+
             ///DE-ACTIVATION OF REAL CHAMP INSTANTIATION OF DEATH MODEL OR SOMETHING SIMILAR
             
             ///FAR FINIRE EPISODIO SE INVECE E" BOSS O ULTIMO DEL PARTY
@@ -512,7 +515,7 @@ public class moreSpecificProfile : aProfile
         shield = 0.0f;
 
         healthBar.setMaxHealth(currenthp);
-
+        flagResetepisode = false;
     }
 
     public bool getDefUsed()

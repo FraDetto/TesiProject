@@ -76,6 +76,14 @@ public class MageProfile : moreSpecificProfile
                 go.transform.localScale += scaleChange * Time.deltaTime;
             }
         }
+        else
+        {
+            if(null != go)
+            {
+                Destroy(go.gameObject);
+            }
+            
+        }
        
     }
 

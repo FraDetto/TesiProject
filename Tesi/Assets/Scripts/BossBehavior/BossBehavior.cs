@@ -1108,26 +1108,25 @@ public class BossBehavior : Agent
 
     public void bossDeath()//BOSS DEAD END EPISODE
     {
-        if (GetComponent<moreSpecificProfile>().getStatusLifeChamp() != 0)
+
+        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        GetComponent<moreSpecificProfile>().setFlaResetEpisode(false);
+        moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+        foreach (moreSpecificProfile mr in listOfagents)
         {
-            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
-            moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
-
-            foreach (moreSpecificProfile mr in listOfagents)
+            if (!mr.transform.tag.Equals("Boss"))
             {
-                if (!mr.transform.tag.Equals("Boss"))
-                {
-                    //mr.setTrueFlaResetEpisode();
-                    //Destroy(mr);
-                    mr.detonation();
-                }
-
+                //mr.setTrueFlaResetEpisode();
+                //Destroy(mr);
+                mr.detonation();
             }
 
-            this.SetReward(-1.0f);
-            EndEpisode();
         }
+
+        this.SetReward(-1.0f);
+        EndEpisode();
+
         
     }
 
@@ -1215,7 +1214,7 @@ public class BossBehavior : Agent
                 }
 
             }
-
+            GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
             this.AddReward(1.0f);
             EndEpisode();
         }

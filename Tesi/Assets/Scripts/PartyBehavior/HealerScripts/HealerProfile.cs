@@ -77,7 +77,13 @@ public class HealerProfile : moreSpecificProfile
                 go.transform.position += go.transform.forward * speed * Time.deltaTime;
             }
         }
-       
+        else
+        {
+            if (null != go)
+            {
+                Destroy(go.gameObject);
+            }
+        }
     }
     /*
     private void Update()

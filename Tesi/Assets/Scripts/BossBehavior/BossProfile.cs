@@ -78,85 +78,102 @@ public class BossProfile : moreSpecificProfile
 
     private void FixedUpdate()
     {
-        if (isShooting)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            //go.transform.LookAt(new Vector3(originalPositionTarget.x, 1.0f, originalPositionTarget.z));
-            go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
-            //go.GetComponent<Rigidbody>().MovePosition(go.transform.position+ go.transform.forward * speedRangedAttk * Time.deltaTime);
-            //bisogna poi cambiare isShooting in false
-            if(go.transform.position == originalPositionTarget)
+            if (isShooting)
+            {
+                //go.transform.LookAt(new Vector3(originalPositionTarget.x, 1.0f, originalPositionTarget.z));
+                go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
+                //go.GetComponent<Rigidbody>().MovePosition(go.transform.position+ go.transform.forward * speedRangedAttk * Time.deltaTime);
+                //bisogna poi cambiare isShooting in false
+                if((go.transform.position - transform.position).magnitude > (originalPositionTarget - transform.position).magnitude)
+                {
+                    isAttacking = false;
+                    isShooting = false;
+                    Destroy(go.gameObject);
+                }
+            }
+
+
+            if (isAttracting)
+            {
+
+                Vector3 verticalAdjBoss = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
+                Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayer.transform.position.y, transform.position.z);
+                Vector3 toBossPos = (verticalAdj - targetPlayer.transform.position);
+
+                if ((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
+                {
+                    transform.LookAt(verticalAdjBoss);
+                    targetPlayer.transform.LookAt(verticalAdj);
+                    targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityAttraction * Time.deltaTime);
+                }
+                else
+                {
+                    isAttracting = false;
+                    isAttacking = false;
+                    targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
+
+                    targetPlayer = null;
+                    //target = "";
+                    rayAttack();
+                }
+                if (null != targetPlayer)
+                {
+                    if (targetPlayer.tag.Equals("Tank"))
+                    {
+
+                        if (targetPlayer.transform.GetComponent<TankProfile>().shieldActive)
+                        {
+                            isAttracting = false;
+                            //stessa cosa di prima per far vedere che fallisce
+                            isAttacking = false;
+                            targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+
+                            targetPlayer = null;
+                            //target = "";
+                            Debug.Log("FALLITO RAY STA DIFENDENDO");
+                        }
+                    }
+                    else if (targetPlayer.tag.Equals("Mage"))
+                    {
+
+                        if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                        {
+                            isAttracting = false;
+                            //stessa cosa di prima per far vedere che fallisce
+                            isAttacking = false;
+                            targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+
+                            targetPlayer = null;
+                            //target = "";
+                            Debug.Log("FALLITO RAY STA DIFENDENDO");
+                        }
+
+                    }
+                }
+
+
+            }
+
+            if (isCastingAoE)
+            {
+                go.transform.localScale += scaleChange * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if(null != go)
             {
                 isShooting = false;
-                Destroy(go);
-            }
-        }
-
-
-        if (isAttracting)
-        {
-            
-            Vector3 verticalAdjBoss = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
-            Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayer.transform.position.y, transform.position.z);
-            Vector3 toBossPos = (verticalAdj - targetPlayer.transform.position);
-
-            if ((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
-            {
-                transform.LookAt(verticalAdjBoss);
-                targetPlayer.transform.LookAt(verticalAdj);
-                targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityAttraction * Time.deltaTime);
-            }
-            else
-            {
-                isAttracting = false;
                 isAttacking = false;
-                targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
-
                 targetPlayer = null;
-                //target = "";
-                rayAttack();
+                isAttracting = false;
+                isCastingAoE = false;
+                Destroy(go.gameObject);
             }
-            if (null != targetPlayer)
-            {
-                if (targetPlayer.tag.Equals("Tank"))
-                {
-
-                    if (targetPlayer.transform.GetComponent<TankProfile>().shieldActive)
-                    {
-                        isAttracting = false;
-                        //stessa cosa di prima per far vedere che fallisce
-                        isAttacking = false;
-                        targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
-
-                        targetPlayer = null;
-                        //target = "";
-                        Debug.Log("FALLITO RAY STA DIFENDENDO");
-                    }
-                }
-                else if (targetPlayer.tag.Equals("Mage"))
-                {
-
-                    if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
-                    {
-                        isAttracting = false;
-                        //stessa cosa di prima per far vedere che fallisce
-                        isAttacking = false;
-                        targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
-
-                        targetPlayer = null;
-                        //target = "";
-                        Debug.Log("FALLITO RAY STA DIFENDENDO");
-                    }
-
-                }
-            }
-            
-            
         }
-
-        if (isCastingAoE)
-        {
-            go.transform.localScale += scaleChange * Time.deltaTime;
-        }
+       
     }      
 
     public Transform getSwingAttackPos()
