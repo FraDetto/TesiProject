@@ -94,10 +94,6 @@ public class BruiserProfile : moreSpecificProfile
         cooldownSword = false;
     }
 
-    public void calculateDamage(float damage)
-    {
-        setLifeAfterDamage(damage);
-    }
 
     public void healHimSelf()
     {
@@ -111,14 +107,14 @@ public class BruiserProfile : moreSpecificProfile
     private float calculateHeal()
     {
         float total = 0.0f;
-        total = getTotalLife() / 100.0f * 30.0f;
+        total = (GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100.0f) * 30.0f;
         return total;
     }
     public IEnumerator isHealingHimSelf()
     {
         go = Instantiate(HealSign, HealSignSpawnPoint.position, transform.rotation, gameObject.transform);
         yield return new WaitForSeconds(healingHimselfDuration);
-        addLifeByCure(calculateHeal());
+        GetComponent<moreSpecificProfile>().publicAddLifeByCure(calculateHeal());
         isHealing = false;
         Destroy(go);
     }

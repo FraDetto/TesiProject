@@ -7,8 +7,7 @@ public class BruiserMovement : MonoBehaviour
     private GameObject boss;
     private Rigidbody rb;
     private float initialPositionZ;
-    private float dashForce = 14.0f;
-    private bool flagDash;
+
 
     public float valueOfZAfterMovement = 0.0f;
 
