@@ -20,6 +20,8 @@ public class moreSpecificProfile : aProfile
 
     private bool usedDef;
 
+    private bool shooting;
+
     private bool m_HitDetect_dash_left;
     private bool m_HitDetect_dash_right;
     private bool m_HitDetect_dash_back;
@@ -145,6 +147,16 @@ public class moreSpecificProfile : aProfile
     public int publicGetStatus()
     {
         return getStatus();
+    }
+
+    public bool getShooting()
+    {
+        return shooting;
+    }
+
+    public void setShooting(bool value)
+    {
+        shooting = value;
     }
 
     protected override void addLifeByCure(float cure)

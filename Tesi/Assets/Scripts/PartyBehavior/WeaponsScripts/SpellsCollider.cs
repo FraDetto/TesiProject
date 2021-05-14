@@ -18,18 +18,18 @@ public class SpellsCollider : MonoBehaviour
                 {
                     case "Mage":
                         damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                        gameObject.GetComponentInParent<MageProfile>().shooting = false;
+                        //gameObject.GetComponentInParent<MageProfile>().shooting = false;
                         break;
 
                     default:
                         damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
-                        gameObject.GetComponentInParent<HealerProfile>().shooting = false;
+                        //gameObject.GetComponentInParent<HealerProfile>().shooting = false;
                         break;
                 }
 
                 other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
             }
-           
+            gameObject.GetComponentInParent<moreSpecificProfile>().setShooting(false);
             Destroy(this.gameObject);
         }
 

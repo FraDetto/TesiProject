@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealerProfile : moreSpecificProfile
 {
 
-    public bool shooting = false;
+    //public bool shooting = false;
     private bool cooldownAttack = false;
 
     public bool cooldownHeal = false;
@@ -71,7 +71,7 @@ public class HealerProfile : moreSpecificProfile
     {
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            if (shooting)
+            if (GetComponent<moreSpecificProfile>().getShooting())
             {
                 go.transform.LookAt(boss.transform.position);
                 go.transform.position += go.transform.forward * speed * Time.deltaTime;
@@ -79,7 +79,7 @@ public class HealerProfile : moreSpecificProfile
         }
        
     }
-
+    /*
     private void Update()
     {
         if (!cooldownDash)
@@ -90,7 +90,7 @@ public class HealerProfile : moreSpecificProfile
             }
         }
 
-    }
+    }*/
 
     public void attackWithMagic()
     {
@@ -99,7 +99,8 @@ public class HealerProfile : moreSpecificProfile
         {
             GetComponent<moreSpecificProfile>().turnToBoss();
             go = Instantiate(windBall, pointSpawnWindBall.position, transform.rotation, gameObject.transform);
-            shooting = true;
+            //shooting = true;
+            GetComponent<moreSpecificProfile>().setShooting(true);
             cooldownAttack = true;
             StartCoroutine(waitAfterAttack());
         }
@@ -133,7 +134,7 @@ public class HealerProfile : moreSpecificProfile
         {
             moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
 
-            Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
+            //Debug.Log("SONO IN FINDHALLY: " + targetProfile.tag);
             if (!targetProfile)
                 continue;
             if (targetProfile.getStatusLifeChamp()==0)

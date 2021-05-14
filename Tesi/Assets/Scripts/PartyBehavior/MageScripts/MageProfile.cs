@@ -5,7 +5,7 @@ using UnityEngine;
 public class MageProfile : moreSpecificProfile
 {
 
-    public bool shooting = false;
+    //public bool shooting = false;
     private bool cooldown = false;
 
     public bool cooldownDefense = false;
@@ -65,7 +65,7 @@ public class MageProfile : moreSpecificProfile
     {
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            if (shooting)
+            if (GetComponent<moreSpecificProfile>().getShooting())
             {
                 go.transform.LookAt(boss.transform.position);
                 go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
@@ -88,7 +88,8 @@ public class MageProfile : moreSpecificProfile
         {
             GetComponent<moreSpecificProfile>().turnToBoss();
             go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
-            shooting = true;
+            //shooting = true;
+            GetComponent<moreSpecificProfile>().setShooting(true);
             cooldown = true;
             StartCoroutine(waitAfterAttack());
         }
