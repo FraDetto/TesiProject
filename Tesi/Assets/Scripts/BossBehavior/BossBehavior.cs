@@ -55,14 +55,11 @@ public class BossBehavior : Agent
         //a sequence of actions that are correct and follow the strategies to defeat the single members of the party and the whole party at the end.
         //
         //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
+        Debug.Log(" =====OnEPISODE BEGIN===== ");
         if (!firstRun)
         {
 
              GetComponent<moreSpecificProfile>().resetBossStats();
-        }
-        else
-        {
-            firstRun = false;
         }
        
 
@@ -206,8 +203,17 @@ public class BossBehavior : Agent
     
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
     {
-        Debug.Log(" =====SET MASK===== " + actionChoose[0]);
-        actionMasker.SetMask(1, actionChoose);
+        if (!firstRun)
+        {
+            Debug.Log(" =====SET MASK===== " + actionChoose[0]);
+            actionMasker.SetMask(1, actionChoose);
+        }
+        else
+        {
+            Debug.Log(" =====SET MASK FIRST RUN===== " );
+            firstRun = false;
+        }
+       
     }
 
     public void valueAndApplyReward(int actionForBoss)
