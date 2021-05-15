@@ -94,12 +94,16 @@ public class MageProfile : moreSpecificProfile
         //Debug.Log("attackWithMagic");
         if (!cooldown)
         {
-            GetComponent<moreSpecificProfile>().turnToBoss();
-            go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
-            //shooting = true;
-            GetComponent<moreSpecificProfile>().setShooting(true);
-            cooldown = true;
-            StartCoroutine(waitAfterAttack());
+            if (!GetComponent<moreSpecificProfile>().flagResetepisode)
+            {
+                GetComponent<moreSpecificProfile>().turnToBoss();
+                go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
+                //shooting = true;
+                GetComponent<moreSpecificProfile>().setShooting(true);
+                cooldown = true;
+                StartCoroutine(waitAfterAttack());
+            }
+           
         }
     }
 
