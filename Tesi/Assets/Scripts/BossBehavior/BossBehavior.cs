@@ -57,16 +57,18 @@ public class BossBehavior : Agent
         //
         //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
         Debug.Log(" =====OnEPISODE BEGIN===== ");
+        playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+        myProfile.assignPartyForProfile();
+
         if (!firstRun)
         {
 
-             GetComponent<moreSpecificProfile>().resetBossStats();
+            GetComponent<moreSpecificProfile>().resetBossStats();
             takeTheAction();
         }
        
 
-        playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
-        myProfile.assignPartyForProfile();
+        
 
         
 
@@ -1117,7 +1119,7 @@ public class BossBehavior : Agent
     {
 
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        GetComponent<moreSpecificProfile>().setFlaResetEpisode(false);
+        GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
         moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
 
         foreach (moreSpecificProfile mr in listOfagents)
@@ -1130,7 +1132,8 @@ public class BossBehavior : Agent
             }
 
         }
-
+        Debug.Log("===== END EPISODE BOSS DEAD =======");
+        actionTarget = null;
         this.SetReward(-1.0f);
         EndEpisode();
 
@@ -1224,6 +1227,7 @@ public class BossBehavior : Agent
 
             }
             GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
+            actionTarget = null;
             this.AddReward(1.0f);
             EndEpisode();
         }
