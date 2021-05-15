@@ -1226,6 +1226,9 @@ public class BossBehavior : Agent
                 }
 
             }
+
+            Debug.Log("==== PARTY HA PERSO =====");
+
             GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
             actionTarget = null;
             this.AddReward(1.0f);
@@ -1244,6 +1247,11 @@ public class BossBehavior : Agent
                 targetToMask--;
             }
             actionTarget = a;
+
+            for (int i = 0; i < actionTarget.Length; i++)
+            {
+                Debug.Log( "PLAYER KO ACTION TARGET FORMATO DA " + actionTarget[i]); 
+            }
         }
     }
 

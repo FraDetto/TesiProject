@@ -273,7 +273,7 @@ public class moreSpecificProfile : aProfile
         yield return new WaitForSeconds(5.0f);
         resetShield();
         shieldBar.setMaxShield(shield);
-        Debug.Log("Scudo FINITO");
+        //Debug.Log("Scudo FINITO");
     }
 
     protected override void resetShield()
