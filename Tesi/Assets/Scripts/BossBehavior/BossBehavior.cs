@@ -61,6 +61,7 @@ public class BossBehavior : Agent
         {
 
              GetComponent<moreSpecificProfile>().resetBossStats();
+            takeTheAction();
         }
        
 
@@ -1241,4 +1242,11 @@ public class BossBehavior : Agent
             actionTarget = a;
         }
     }
+
+    public void takeTheAction()
+    {
+        this.RequestDecision();
+        Academy.Instance.EnvironmentStep();
+    }
+
 }

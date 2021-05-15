@@ -302,7 +302,7 @@ public class HealerBehavior : MonoBehaviour
 
             if (targetProfile.publicGetCurrentLife() != targetProfile.publicGetTotalLife())
             {
-                Debug.Log("Trovato uno ferito");
+                //Debug.Log("Trovato uno ferito");
                 flag = false;
             }
 
