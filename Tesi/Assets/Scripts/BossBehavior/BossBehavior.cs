@@ -57,14 +57,19 @@ public class BossBehavior : Agent
         //
         //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
         Debug.Log(" =====OnEPISODE BEGIN===== ");
-        playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
-        myProfile.assignPartyForProfile();
+        
 
         if (!firstRun)
         {
-
+            playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+            myProfile.assignPartyForProfile();
             GetComponent<moreSpecificProfile>().resetBossStats();
             takeTheAction();
+        }
+        else
+        {
+            playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+            myProfile.assignPartyForProfile();
         }
        
 
@@ -147,6 +152,8 @@ public class BossBehavior : Agent
 
         actionChoose[0] = actionForBoss;
 
+        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + targetForAttack.tag);
+
         myProfile.hubAttacks(actionForBoss, targetForAttack);
 
 
@@ -199,7 +206,7 @@ public class BossBehavior : Agent
 
     public IEnumerator timeBeforeAnOtherAction()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.8f);
         this.RequestDecision();
         Academy.Instance.EnvironmentStep();
         Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");

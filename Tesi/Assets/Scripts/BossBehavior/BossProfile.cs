@@ -28,6 +28,7 @@ public class BossProfile : moreSpecificProfile
     private GameObject go;
     private GameObject goRanged;
     private GameObject goSwing;
+    private GameObject goAhead;
     private GameObject goAoE;
 
     private Transform rangedAttackPosition;
@@ -58,7 +59,7 @@ public class BossProfile : moreSpecificProfile
     private float timeCoolDownRangedAttack = 6.4f;
     private float timeCoolDownRayAttack = 10.4f;
     private float attractingRootDuration = 2.0f;
-    private float timeBeforeCastAttracting = 0.5f;
+    private float timeBeforeCastAttracting = 0.4f;
     private float AoEDuration = 1.2f;
     private float timeCoolDownAoEAttack = 8.4f;
     private float timeCoolDownSwingAttack= 1.6f;
@@ -188,6 +189,10 @@ public class BossProfile : moreSpecificProfile
 
                 Destroy(goRanged.gameObject);
             }
+            if(null != goAhead)
+            {
+                Destroy(goAhead.gameObject);
+            }
             isAttacking = false;
             targetPlayer = null;
         }
@@ -272,6 +277,8 @@ public class BossProfile : moreSpecificProfile
 
         isAttacking = true;
 
+        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + player.tag);
+
         switch (attackCode)
         {
             case 0://RANGED 
@@ -329,7 +336,13 @@ public class BossProfile : moreSpecificProfile
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
         //Debug.Log(" RANGED BOSS" + targetPlayer.transform.position);
-        
+
+        if (null != goRanged)
+        {
+            Debug.Log(" go RANGED ERA PIENO LO DISTRUGGO");
+            Destroy(goRanged);
+        }
+
         turnBossToTargetForRanged();
         goRanged = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
@@ -438,7 +451,13 @@ public class BossProfile : moreSpecificProfile
     public void swingAttack()
     {
         Debug.Log("HO ATTIVATO SWING " + targetPlayer);
-        Debug.Log("SU NOME: " + targetPlayer.tag); 
+        Debug.Log("SU NOME: " + targetPlayer.tag);
+
+        if (null != goSwing)
+        {
+            Debug.Log(" go SWING ERA PIENO LO DISTRUGGO");
+            Destroy(goSwing);
+        }
 
         turnBossToTarget();
         goSwing = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
@@ -459,12 +478,19 @@ public class BossProfile : moreSpecificProfile
 
     public void aheadAttack()
     {
+        
+
+        if(null != goAhead)
+        {
+            Debug.Log(" go AhEAD ERA PIENO LO DISTRUGGO");
+            Destroy(goAhead);
+        }
         turnBossToTarget();
-        go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
+        goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
 
-        go.transform.LookAt(verticalAdj);
+        goAhead.transform.LookAt(verticalAdj);
         //isAttacking = true;
         codeAttack = 1;
         StartCoroutine(waitBeforeRemoveSword(0));
@@ -492,7 +518,14 @@ public class BossProfile : moreSpecificProfile
         }
         else
         {
-            Destroy(go.gameObject);
+            if(null != goAhead)
+            {
+                Destroy(goAhead.gameObject);
+            }
+            else
+            {
+                Destroy(go.gameObject);
+            }
         }
         //target = "";
     }
@@ -524,23 +557,23 @@ public class BossProfile : moreSpecificProfile
 
     public IEnumerator timeBeforeCastSwingAttk()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         swingAttack();
     }
     public IEnumerator timeBeforeCastAheadAttk()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         aheadAttack();
     }
     public IEnumerator timeBeforeCastBreakAttk()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         breakAttack();
     }
 
     public IEnumerator timeBeforeCastAoEAttk()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         AoEAttack();
     }
 

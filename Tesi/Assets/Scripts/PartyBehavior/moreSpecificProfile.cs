@@ -510,12 +510,13 @@ public class moreSpecificProfile : aProfile
         currenthp = totalhp;
         damage = partyData.damageBoss;
         armor = partyData.armorBoss;
-
+        healthBar.setMaxHealth(currenthp);
 
         status = 0;
         shield = 0.0f;
+        alive = 0;
 
-        healthBar.setMaxHealth(currenthp);
+        
         flagResetepisode = false;
     }
 
