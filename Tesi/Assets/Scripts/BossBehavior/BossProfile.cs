@@ -22,6 +22,7 @@ public class BossProfile : moreSpecificProfile
     public int instanceIDtarget;
     //public string target;
     private GameObject go;
+    private GameObject goAoE;
 
     private Transform rangedAttackPosition;
     private Transform swingAttackPosition;
@@ -52,7 +53,7 @@ public class BossProfile : moreSpecificProfile
     private float timeCoolDownRayAttack = 10.4f;
     private float attractingRootDuration = 2.0f;
     private float timeBeforeCastAttracting = 0.5f;
-    private float AoEDuration = 1.8f;
+    private float AoEDuration = 1.2f;
     private float timeCoolDownAoEAttack = 8.4f;
     private float timeCoolDownSwingAttack= 1.6f;
     private float timeCoolDownAheadAttack = 1.6f;
@@ -71,7 +72,7 @@ public class BossProfile : moreSpecificProfile
 
         rb = GetComponent<Rigidbody>();
 
-        scaleChange = new Vector3(0.18f, 0.02f, 0.18f);
+        scaleChange = new Vector3(0.16f, 0.018f, 0.16f);
 
     }
 
@@ -158,7 +159,7 @@ public class BossProfile : moreSpecificProfile
 
             if (isCastingAoE)
             {
-                go.transform.localScale += scaleChange * Time.deltaTime;
+                goAoE.transform.localScale += scaleChange * Time.deltaTime;
             }
         }
         else
@@ -169,8 +170,15 @@ public class BossProfile : moreSpecificProfile
                 isAttacking = false;
                 targetPlayer = null;
                 isAttracting = false;
-                isCastingAoE = false;
                 Destroy(go.gameObject);
+            }
+            if(null != goAoE)
+            {
+                isAttacking = false;
+                targetPlayer = null;
+                isAttracting = false;
+                isCastingAoE = false;
+                Destroy(goAoE.gameObject);
             }
         }
        
@@ -341,7 +349,8 @@ public class BossProfile : moreSpecificProfile
 
     public void LaunchRay()
     {
-        Debug.Log("HO ATTIVATO RAY");
+        Debug.Log("HO ATTIVATO RAY " + targetPlayer );
+        Debug.Log("SU NOME: " + targetPlayer.tag);
         //turnBossToTarget();
 
         bool enemyIsDefending;
@@ -392,7 +401,7 @@ public class BossProfile : moreSpecificProfile
 
     public void AoEAttack()
     {
-        go = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
+        goAoE = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
         isCastingAoE = true;
         //isAttacking = true;
         cooldownAoEAttk = true;
@@ -404,9 +413,9 @@ public class BossProfile : moreSpecificProfile
     {
         yield return new WaitForSeconds(AoEDuration);
         isCastingAoE = false;
-        Destroy(go);
         isAttacking = false;
         isUsingAoE = false;
+        Destroy(goAoE);
 
     }
 
@@ -418,6 +427,9 @@ public class BossProfile : moreSpecificProfile
 
     public void swingAttack()
     {
+        Debug.Log("HO ATTIVATO SWING " + targetPlayer);
+        Debug.Log("SU NOME: " + targetPlayer.tag); 
+
         turnBossToTarget();
         go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
 
