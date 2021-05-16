@@ -779,7 +779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1852354071, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: speedRangedAttk
-      value: 30
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1852354072, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: healthBar

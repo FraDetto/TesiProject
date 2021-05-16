@@ -6,7 +6,7 @@ public class BossProfile : moreSpecificProfile
 {
     
     public GameObject[] playersParty;
-    public float speedRangedAttk = 30.0f;
+    public float speedRangedAttk = 35.0f;
 
     public int codeAttack = 0; // 0:swing  1: ahead  2:break    i use it to divide the different attack and apply the correct damage
 

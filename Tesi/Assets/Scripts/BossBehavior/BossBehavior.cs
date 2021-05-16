@@ -1152,7 +1152,23 @@ public class BossBehavior : Agent
         }
         else
         {
-            return true;
+            if (m_HitDetect_swing_right)
+            {
+                if (m_Hit_swing_right.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+                {
+                    return true;
+                }
+            }
+
+            if(m_HitDetect_swing_left)
+            {
+                if (m_Hit_swing_left.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)//see if the ray hit is an alive champ
+                {
+                    return true;
+                }
+            }
+            return false;
+           
         }       
     }
 

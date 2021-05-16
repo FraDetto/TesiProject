@@ -244,6 +244,7 @@ public class moreSpecificProfile : aProfile
             }
             else
             {
+                //this.gameObject.layer = 0; //dead champ --> layer from player to Default to avoid problem with raycast
                 /// BOSS HAS TO REMOVE THE CHAMP FROM THE ARRAY 
                 FindObjectOfType<BossProfile>().checkChampDieInFight();
             }
