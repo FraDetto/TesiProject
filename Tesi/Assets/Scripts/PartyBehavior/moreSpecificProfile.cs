@@ -533,6 +533,7 @@ public class moreSpecificProfile : aProfile
     {
         flagResetepisode = true;
 
+
         Destroy(this.gameObject);
     }
     /*

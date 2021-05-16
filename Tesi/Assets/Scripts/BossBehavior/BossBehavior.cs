@@ -193,13 +193,13 @@ public class BossBehavior : Agent
     public IEnumerator timeValueReward(int actionForBoss)
     {
         //ricordarsi di gestire i cooldown
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
         valueAndApplyReward(actionForBoss);
     }
 
     public IEnumerator timeBeforeAnOtherAction()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.5f);
         this.RequestDecision();
         Academy.Instance.EnvironmentStep();
         Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");

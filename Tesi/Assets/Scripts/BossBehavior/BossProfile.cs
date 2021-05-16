@@ -19,9 +19,15 @@ public class BossProfile : moreSpecificProfile
 
     private Rigidbody rb;
     public GameObject targetPlayer;
+
+    public GameObject targetPlayerForRay;
+
+
     public int instanceIDtarget;
     //public string target;
     private GameObject go;
+    private GameObject goRanged;
+    private GameObject goSwing;
     private GameObject goAoE;
 
     private Transform rangedAttackPosition;
@@ -31,7 +37,7 @@ public class BossProfile : moreSpecificProfile
     private Vector3 scaleChange;
     private Vector3 originalPositionTarget;
 
-    private float velocityAttraction = 25.0f;
+    private float velocityAttraction = 26.0f;
 
     private bool cooldownRangedAttk = false;
     private bool cooldownRayAttk = false;
@@ -84,14 +90,14 @@ public class BossProfile : moreSpecificProfile
             if (isShooting)
             {
                 //go.transform.LookAt(new Vector3(originalPositionTarget.x, 1.0f, originalPositionTarget.z));
-                go.transform.position += go.transform.forward * speedRangedAttk * Time.deltaTime;
+                goRanged.transform.position += goRanged.transform.forward * speedRangedAttk * Time.deltaTime;
                 //go.GetComponent<Rigidbody>().MovePosition(go.transform.position+ go.transform.forward * speedRangedAttk * Time.deltaTime);
                 //bisogna poi cambiare isShooting in false
-                if((go.transform.position - transform.position).magnitude > (originalPositionTarget - transform.position).magnitude)
+                if((goRanged.transform.position - transform.position).magnitude > (originalPositionTarget - transform.position).magnitude)
                 {
                     isAttacking = false;
                     isShooting = false;
-                    Destroy(go.gameObject);
+                    Destroy(goRanged.gameObject);
                 }
             }
 
@@ -99,54 +105,54 @@ public class BossProfile : moreSpecificProfile
             if (isAttracting)
             {
 
-                Vector3 verticalAdjBoss = new Vector3(targetPlayer.transform.position.x, transform.position.y, targetPlayer.transform.position.z);
-                Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayer.transform.position.y, transform.position.z);
-                Vector3 toBossPos = (verticalAdj - targetPlayer.transform.position);
+                Vector3 verticalAdjBoss = new Vector3(targetPlayerForRay.transform.position.x, transform.position.y, targetPlayerForRay.transform.position.z);
+                Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayerForRay.transform.position.y, transform.position.z);
+                Vector3 toBossPos = (verticalAdj - targetPlayerForRay.transform.position);
 
-                if ((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
+                if ((transform.position - targetPlayerForRay.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
                 {
                     transform.LookAt(verticalAdjBoss);
-                    targetPlayer.transform.LookAt(verticalAdj);
-                    targetPlayer.GetComponent<Rigidbody>().MovePosition(targetPlayer.transform.position + (targetPlayer.transform.forward) * velocityAttraction * Time.deltaTime);
+                    targetPlayerForRay.transform.LookAt(verticalAdj);
+                    targetPlayerForRay.GetComponent<Rigidbody>().MovePosition(targetPlayerForRay.transform.position + (targetPlayerForRay.transform.forward) * velocityAttraction * Time.deltaTime);
                 }
                 else
                 {
                     isAttracting = false;
                     isAttacking = false;
-                    targetPlayer.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
+                    targetPlayerForRay.GetComponent<moreSpecificProfile>().publicAddRootStatus(attractingRootDuration);//root player
 
-                    targetPlayer = null;
+                    targetPlayerForRay = null;
                     //target = "";
                     rayAttack();
                 }
-                if (null != targetPlayer)
+                if (null != targetPlayerForRay)
                 {
-                    if (targetPlayer.tag.Equals("Tank"))
+                    if (targetPlayerForRay.tag.Equals("Tank"))
                     {
 
-                        if (targetPlayer.transform.GetComponent<TankProfile>().shieldActive)
+                        if (targetPlayerForRay.transform.GetComponent<TankProfile>().shieldActive)
                         {
                             isAttracting = false;
                             //stessa cosa di prima per far vedere che fallisce
                             isAttacking = false;
-                            targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+                            targetPlayerForRay.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
 
-                            targetPlayer = null;
+                            targetPlayerForRay = null;
                             //target = "";
                             Debug.Log("FALLITO RAY STA DIFENDENDO");
                         }
                     }
-                    else if (targetPlayer.tag.Equals("Mage"))
+                    else if (targetPlayerForRay.tag.Equals("Mage"))
                     {
 
-                        if (targetPlayer.transform.GetComponent<MageProfile>().defenseActive)
+                        if (targetPlayerForRay.transform.GetComponent<MageProfile>().defenseActive)
                         {
                             isAttracting = false;
                             //stessa cosa di prima per far vedere che fallisce
                             isAttacking = false;
-                            targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+                            targetPlayerForRay.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
 
-                            targetPlayer = null;
+                            targetPlayerForRay = null;
                             //target = "";
                             Debug.Log("FALLITO RAY STA DIFENDENDO");
                         }
@@ -167,19 +173,23 @@ public class BossProfile : moreSpecificProfile
             if(null != go)
             {
                 isShooting = false;
-                isAttacking = false;
-                targetPlayer = null;
                 isAttracting = false;
                 Destroy(go.gameObject);
             }
             if(null != goAoE)
             {
-                isAttacking = false;
-                targetPlayer = null;
                 isAttracting = false;
                 isCastingAoE = false;
                 Destroy(goAoE.gameObject);
             }
+            if(null != goRanged)
+            {
+                isShooting = false;
+
+                Destroy(goRanged.gameObject);
+            }
+            isAttacking = false;
+            targetPlayer = null;
         }
        
     }      
@@ -271,8 +281,8 @@ public class BossProfile : moreSpecificProfile
                 StartCoroutine(timeBeforeCastRangedAttack());
                 break;
             case 1://RAY
-                targetPlayer = player;
-                instanceIDtarget = targetPlayer.GetInstanceID();
+                targetPlayerForRay = player;
+                instanceIDtarget = targetPlayerForRay.GetInstanceID();
 
                 StartCoroutine(timeBeforeCastRayAttack());
                 break;
@@ -321,9 +331,9 @@ public class BossProfile : moreSpecificProfile
         //Debug.Log(" RANGED BOSS" + targetPlayer.transform.position);
         
         turnBossToTargetForRanged();
-        go = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
+        goRanged = Instantiate(goRangedAttk, rangedAttackPosition.position, transform.rotation, gameObject.transform);
         isShooting = true;
-        go.transform.LookAt(new Vector3(originalPositionTarget.x, 2.0f, originalPositionTarget.z));
+        goRanged.transform.LookAt(new Vector3(originalPositionTarget.x, 2.0f, originalPositionTarget.z));
 
         cooldownRangedAttk = true;
         StartCoroutine(startCooldownRangedAttk());//gestire distruzione proiettile
@@ -349,21 +359,21 @@ public class BossProfile : moreSpecificProfile
 
     public void LaunchRay()
     {
-        Debug.Log("HO ATTIVATO RAY " + targetPlayer );
-        Debug.Log("SU NOME: " + targetPlayer.tag);
+        Debug.Log("HO ATTIVATO RAY " + targetPlayerForRay);
+        Debug.Log("SU NOME: " + targetPlayerForRay.tag);
         //turnBossToTarget();
 
         bool enemyIsDefending;
 
-        switch (targetPlayer.tag)
+        switch (targetPlayerForRay.tag)
         {
             case "Tank":
-                enemyIsDefending = targetPlayer.transform.GetComponent<TankProfile>().shieldActive;
+                enemyIsDefending = targetPlayerForRay.transform.GetComponent<TankProfile>().shieldActive;
 
                 break;
 
             case "Mage":
-                enemyIsDefending = targetPlayer.transform.GetComponent<MageProfile>().defenseActive;
+                enemyIsDefending = targetPlayerForRay.transform.GetComponent<MageProfile>().defenseActive;
                 break;
 
             default:
@@ -373,13 +383,13 @@ public class BossProfile : moreSpecificProfile
         if (!enemyIsDefending)
         {
             isAttracting = true;
-            targetPlayer.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(1);
-            targetPlayer.GetComponent<moreSpecificProfile>().impulseFromRay((transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude, m_PlayerMask);
+            targetPlayerForRay.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(1);
+            targetPlayerForRay.GetComponent<moreSpecificProfile>().impulseFromRay((transform.position - targetPlayerForRay.GetComponent<Rigidbody>().transform.position).magnitude, m_PlayerMask);
         }
         else
         {
             //fai qualcosa epr far vedere che e' fallito il ray ma se sta difendendo bad reward
-            targetPlayer = null;
+            targetPlayerForRay = null;
             instanceIDtarget = 0;
             //target = "";
             Debug.Log("FALLITO RAY STA DIFENDENDO");
@@ -431,7 +441,7 @@ public class BossProfile : moreSpecificProfile
         Debug.Log("SU NOME: " + targetPlayer.tag); 
 
         turnBossToTarget();
-        go = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
+        goSwing = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
 
         
         //isAttacking = true;
@@ -471,13 +481,18 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator waitBeforeRemoveSword(int code)
     {
         yield return new WaitForSeconds(1.0f);
-        Destroy(go);
+
         isAttacking = false;
         targetPlayer = null;
         instanceIDtarget = 0;
         if (code == 1)
         {
+            Destroy(goSwing.gameObject);
             isUsingAoE = false;
+        }
+        else
+        {
+            Destroy(go.gameObject);
         }
         //target = "";
     }
