@@ -456,10 +456,10 @@ public class BossProfile : moreSpecificProfile
         if (null != goSwing)
         {
             Debug.Log(" go SWING ERA PIENO LO DISTRUGGO");
-            Destroy(goSwing);
+            Destroy(goSwing.gameObject);
         }
 
-        turnBossToTarget();
+        //turnBossToTarget();
         goSwing = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
 
         
@@ -483,9 +483,9 @@ public class BossProfile : moreSpecificProfile
         if(null != goAhead)
         {
             Debug.Log(" go AhEAD ERA PIENO LO DISTRUGGO");
-            Destroy(goAhead);
+            Destroy(goAhead.gameObject);
         }
-        turnBossToTarget();
+        //turnBossToTarget();
         goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goAhead.transform.position.y, targetPlayer.transform.position.z);
@@ -532,7 +532,12 @@ public class BossProfile : moreSpecificProfile
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
-        turnBossToTarget();
+        if (null != go)
+        {
+            Destroy(go.gameObject);
+        }
+
+        //turnBossToTarget();
 
         //isAttacking = true;
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
@@ -601,7 +606,15 @@ public class BossProfile : moreSpecificProfile
     public void checkChampDieInFight()
     {
         playersParty = removeChampDieInFight();
-        Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  " + playersParty.Length);
+        if(null != playersParty)
+        {
+
+            Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  " + playersParty.Length);
+        }
+        else
+        {
+            Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  ZERO "); 
+        }
         GetComponent<BossBehavior>().adjustPlayerArray(playersParty); // aggiorno array BOSS
         
     }

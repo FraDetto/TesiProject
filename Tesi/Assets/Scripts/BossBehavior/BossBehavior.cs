@@ -154,6 +154,8 @@ public class BossBehavior : Agent
 
         Debug.Log("PLAYER PER PROSSIMO ATTACCO " + targetForAttack.tag);
 
+        turnBossToTarget();
+
         myProfile.hubAttacks(actionForBoss, targetForAttack);
 
 
@@ -1277,6 +1279,14 @@ public class BossBehavior : Agent
             }
         }
     }
+
+    public void turnBossToTarget()
+    {
+        Vector3 verticalAdj = new Vector3(targetForAttack.transform.position.x, transform.position.y, targetForAttack.transform.position.z);
+
+        transform.LookAt(verticalAdj);
+    }
+
 
     public void takeTheAction()
     {

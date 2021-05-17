@@ -21,8 +21,8 @@ public class HealerProfile : moreSpecificProfile
     private GameObject bruiser;
     private GameObject mage;
 
-    private Transform pointSpawnWindBall;
-    private Transform pointSpawnHealHealer;
+    public Transform pointSpawnWindBall;
+    public Transform pointSpawnHealHealer;
     private Rigidbody rb;
     private GameObject go;
     private GameObject hs;
@@ -53,8 +53,8 @@ public class HealerProfile : moreSpecificProfile
     void Start()
     {
 
-        pointSpawnWindBall = transform.GetChild(1);
-        pointSpawnHealHealer = transform.GetChild(2);
+        //pointSpawnWindBall = transform.GetChild(1);
+        //pointSpawnHealHealer = transform.GetChild(2);
 
         boss = GameObject.FindGameObjectWithTag("Boss");
 

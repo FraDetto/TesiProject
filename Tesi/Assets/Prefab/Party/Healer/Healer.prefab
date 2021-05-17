@@ -135,6 +135,7 @@ MonoBehaviour:
   partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
   healthBar: {fileID: 4763972071848420541}
   shieldBar: {fileID: 877811672138206444}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -194,6 +195,7 @@ MonoBehaviour:
   partyData: {fileID: 0}
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -201,13 +203,14 @@ MonoBehaviour:
   armor: 0
   status: 0
   woundsActive: 0
-  shooting: 0
   cooldownHeal: 0
   cooldownSpecial: 1
   healActive: 0
   chargingUlt: 0
   cooldownDash: 0
   isDashing: 0
+  pointSpawnWindBall: {fileID: 8343963312369735543}
+  pointSpawnHealHealer: {fileID: 6921424698161907159}
   healingText: {fileID: 5004143338378178936, guid: 85ff0493af34b0b4dad70ccb13b9f189, type: 3}
   windBall: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
   m_HealRadius: 100

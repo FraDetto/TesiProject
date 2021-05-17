@@ -20,8 +20,8 @@ public class MageProfile : moreSpecificProfile
 
 
     private GameObject boss;
-    private Transform pointSpawnFireBall;
-    private Transform pointSpawnUlt;
+    public Transform pointSpawnFireBall;
+    public Transform pointSpawnUlt;
     private Rigidbody rb;
     private GameObject go;
 
@@ -49,8 +49,8 @@ public class MageProfile : moreSpecificProfile
     // Start is called before the first frame update
     void Start()
     {
-        pointSpawnFireBall = transform.GetChild(1);
-        pointSpawnUlt = transform.GetChild(2);
+        //pointSpawnFireBall = transform.GetChild(1);
+        //pointSpawnUlt = transform.GetChild(2);
 
         boss = GameObject.FindGameObjectWithTag("Boss");
         scaleChange = new Vector3(0.1f, 0.1f, 0.1f);
@@ -97,6 +97,10 @@ public class MageProfile : moreSpecificProfile
             if (!GetComponent<moreSpecificProfile>().flagResetepisode)
             {
                 GetComponent<moreSpecificProfile>().turnToBoss();
+                Debug.Log("MAGE ATTACK 1 FIREBALL " + fireBall);
+                Debug.Log("MAGE ATTACK 2 FIREBALL " + pointSpawnFireBall.position);
+                Debug.Log("MAGE ATTACK 3 FIREBALL " + transform.rotation);
+                Debug.Log("MAGE ATTACK 4 FIREBALL " + gameObject.transform);
                 go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
                 //shooting = true;
                 GetComponent<moreSpecificProfile>().setShooting(true);
