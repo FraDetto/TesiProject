@@ -206,10 +206,11 @@ public class BossBehavior : Agent
 
     public IEnumerator timeBeforeAnOtherAction()
     {
+        Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");
         yield return new WaitForSeconds(2.8f);
         this.RequestDecision();
         Academy.Instance.EnvironmentStep();
-        Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");
+        
     }
     
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
@@ -1124,9 +1125,9 @@ public class BossBehavior : Agent
 
     public void bossDeath()//BOSS DEAD END EPISODE
     {
-
+        Debug.Log("===== END EPISODE BOSS DEAD =======");
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
+
         moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
 
         foreach (moreSpecificProfile mr in listOfagents)
@@ -1139,7 +1140,8 @@ public class BossBehavior : Agent
             }
 
         }
-        Debug.Log("===== END EPISODE BOSS DEAD =======");
+        
+        GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
         actionTarget = null;
         this.SetReward(-1.0f);
         EndEpisode();
@@ -1230,12 +1232,10 @@ public class BossBehavior : Agent
 
     public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
     {
-        playersParty = newArrayPlay;
-
-       
-
-        if (playersParty.Length==0)//se KO ALL PLAYERS
+        if (null == newArrayPlay)//se KO ALL PLAYERS
         {
+            Debug.Log("==== PARTY HA PERSO =====");
+
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
             moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
@@ -1250,8 +1250,6 @@ public class BossBehavior : Agent
 
             }
 
-            Debug.Log("==== PARTY HA PERSO =====");
-
             GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
             actionTarget = null;
             this.AddReward(1.0f);
@@ -1259,6 +1257,8 @@ public class BossBehavior : Agent
         }
         else
         {
+            playersParty = newArrayPlay;
+
             int numberOfDiedChamp = 4 - playersParty.Length;
 
             int[] a = new int[numberOfDiedChamp];

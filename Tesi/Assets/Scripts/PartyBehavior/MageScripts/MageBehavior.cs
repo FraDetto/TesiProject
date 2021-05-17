@@ -283,7 +283,7 @@ public class MageBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-        if (!firstRush)
+        if (!firstRush && GetComponent<moreSpecificProfile>().flagResetepisode == false)
         {
            // Debug.Log("ATTACK BOSS !FIRSTRUSH");
             GetComponent<MageProfile>().attackWithMagic();

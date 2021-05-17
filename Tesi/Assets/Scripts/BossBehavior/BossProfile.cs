@@ -488,7 +488,7 @@ public class BossProfile : moreSpecificProfile
         turnBossToTarget();
         goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
 
-        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
+        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goAhead.transform.position.y, targetPlayer.transform.position.z);
 
         goAhead.transform.LookAt(verticalAdj);
         //isAttacking = true;
@@ -601,26 +601,34 @@ public class BossProfile : moreSpecificProfile
     public void checkChampDieInFight()
     {
         playersParty = removeChampDieInFight();
-
+        Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  " + playersParty.Length);
         GetComponent<BossBehavior>().adjustPlayerArray(playersParty); // aggiorno array BOSS
-        Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  "+ playersParty.Length);
+        
     }
     
     public GameObject[] removeChampDieInFight()
     {
-        GameObject[] arrNew = new GameObject[playersParty.Length - 1];
-        int count = 0;
-
-        for(int i=0; i<playersParty.Length; i++)
+        if (playersParty.Length==1)
         {
-            if (playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp()!=1)
-            {
-                arrNew[count] = playersParty[i];
-                count++;
-            }
+            return null;
         }
+        else
+        {
+            GameObject[] arrNew = new GameObject[playersParty.Length - 1];
+            int count = 0;
 
-        return arrNew;
+            for (int i = 0; i < playersParty.Length; i++)
+            {
+                if (playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp() != 1)
+                {
+                    arrNew[count] = playersParty[i];
+                    count++;
+                }
+            }
+
+            return arrNew;
+        }
+        
     }
 
 }

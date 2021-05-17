@@ -256,7 +256,7 @@ public class HealerBehavior : MonoBehaviour
 
     public void AttackBoss()
     {
-        if (!firstRush)
+        if (!firstRush && GetComponent<moreSpecificProfile>().flagResetepisode == false)
         {
            // Debug.Log("ATTACK BOSS !FIRSTRUSH");
             GetComponent<HealerProfile>().attackWithMagic();

@@ -238,9 +238,9 @@ public class moreSpecificProfile : aProfile
             ///
             if (transform.tag.Equals("Boss"))
             {
+                Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO");
                 //// END EPISODE WITH MALUS ///// 
                 GetComponent<BossBehavior>().bossDeath();
-                Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO"); 
             }
             else
             {
