@@ -41,6 +41,7 @@ public class BossBehavior : Agent
 
 
     Coroutine co;
+    Coroutine re;
 
     // Start is called before the first frame update
     void Start()
@@ -163,7 +164,7 @@ public class BossBehavior : Agent
         myProfile.hubAttacks(actionForBoss, targetForAttack);
 
 
-        StartCoroutine(timeValueReward(actionForBoss));
+        re = StartCoroutine(timeValueReward(actionForBoss));
 
 
         
@@ -1142,6 +1143,8 @@ public class BossBehavior : Agent
     {
         Debug.Log("===== END EPISODE BOSS DEAD =======");
         StopCoroutine(co);
+        StopCoroutine(re);
+        myProfile.endEpStopAll();
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
         moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
@@ -1252,6 +1255,9 @@ public class BossBehavior : Agent
         {
             Debug.Log("==== PARTY HA PERSO =====");
             StopCoroutine(co);
+            StopCoroutine(re);
+            myProfile.endEpStopAll();
+
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
             moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();

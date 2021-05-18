@@ -448,6 +448,12 @@ public class BossProfile : moreSpecificProfile
 
     public void AoEAttack()
     {
+        if (null != goSwing)
+        {
+            Debug.Log(" go AoE ERA PIENO LO DISTRUGGO");
+            Destroy(goAoE.gameObject);
+        }
+
         goAoE = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
         isCastingAoE = true;
         //isAttacking = true;
@@ -474,7 +480,7 @@ public class BossProfile : moreSpecificProfile
 
     public void swingAttack()
     {
-        Debug.Log("HO ATTIVATO SWING " + targetPlayer);
+        //Debug.Log("HO ATTIVATO SWING " + targetPlayer);
         //Debug.Log("SU NOME: " + targetPlayer.tag);
 
         if (null != goSwing)
@@ -683,6 +689,15 @@ public class BossProfile : moreSpecificProfile
         }
         
     }
+
+    public void endEpStopAll()
+    {
+        isCastingAoE = false;
+        isAttracting = false;
+        isAttacking = false;
+        StopAllCoroutines();
+    }
+
 
 }
 
