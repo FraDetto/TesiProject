@@ -9,12 +9,14 @@ public class AoEDamageBehavior : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        bool flag = false;
-
+        //bool flag = false;
+        float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
         if (null!=other.GetComponent<moreSpecificProfile>())
         {
-            if (other.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+            if (other.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && !other.GetComponent<moreSpecificProfile>().publicGetIsDefending() )
             {
+                other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(((damageCharacter / 100) * 50));
+                /*
                 for (int i = 0; i < playersHit.Length; i++)
                 {
                     if (null != playersHit && other.gameObject.GetInstanceID() == playersHit[i].GetInstanceID())
@@ -30,7 +32,7 @@ public class AoEDamageBehavior : MonoBehaviour
 
                     //other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage( ((damageCharacter/100)*50) );
                     cont++;
-                }
+                }*/
             }
             
         }
@@ -38,6 +40,7 @@ public class AoEDamageBehavior : MonoBehaviour
        
     }
 
+    /*
     void OnDestroy()
     {
         float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
@@ -51,5 +54,5 @@ public class AoEDamageBehavior : MonoBehaviour
              
        
         }
-    }
+    }*/
 }

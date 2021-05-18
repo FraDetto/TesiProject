@@ -70,7 +70,7 @@ public class BossProfile : moreSpecificProfile
 
     public void Start()
     {
-        //playersParty = FindObjectOfType<GameManager>().getPartyInGame();
+        //playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
         rangedAttackPosition = transform.GetChild(1);
         swingAttackPosition = transform.GetChild(2);
         aheadAttackPosition = transform.GetChild(3);
@@ -106,14 +106,15 @@ public class BossProfile : moreSpecificProfile
             if (isAttracting)
             {
 
-                Vector3 verticalAdjBoss = new Vector3(targetPlayerForRay.transform.position.x, transform.position.y, targetPlayerForRay.transform.position.z);
-                Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayerForRay.transform.position.y, transform.position.z);
-                Vector3 toBossPos = (verticalAdj - targetPlayerForRay.transform.position);
+                //Vector3 verticalAdjBoss = new Vector3(targetPlayerForRay.transform.position.x, transform.position.y, targetPlayerForRay.transform.position.z);
+
+                //Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayerForRay.transform.position.y, transform.position.z);
+                //Vector3 toBossPos = (verticalAdj - targetPlayerForRay.transform.position);
 
                 if ((transform.position - targetPlayerForRay.GetComponent<Rigidbody>().transform.position).magnitude > 8.0f)
                 {
-                    transform.LookAt(verticalAdjBoss);
-                    targetPlayerForRay.transform.LookAt(verticalAdj);
+                    //transform.LookAt(verticalAdjBoss);
+                    //targetPlayerForRay.transform.LookAt(verticalAdj);
                     targetPlayerForRay.GetComponent<Rigidbody>().MovePosition(targetPlayerForRay.transform.position + (targetPlayerForRay.transform.forward) * velocityAttraction * Time.deltaTime);
                 }
                 else
@@ -203,6 +204,7 @@ public class BossProfile : moreSpecificProfile
     {
         return swingAttackPosition;
     }
+    
     /*
     private void Update()
     {
@@ -222,8 +224,8 @@ public class BossProfile : moreSpecificProfile
             int rand = Random.Range(0, playersParty.Length);
 
             //targetPlayer = FindObjectOfType<MageProfile>().gameObject;
-            targetPlayer = playersParty[rand];
-            instanceIDtarget = targetPlayer.GetInstanceID();
+            targetPlayerForRay = playersParty[rand];
+            instanceIDtarget = targetPlayerForRay.GetInstanceID();
             isAttacking = true;
             StartCoroutine(timeBeforeCastRayAttack());
         }
@@ -269,8 +271,8 @@ public class BossProfile : moreSpecificProfile
             StartCoroutine(timeBeforeCastAoEAttk());
             //AoEAttack();
         }
-    }*/
-
+    }
+    */
 
     public void hubAttacks(int attackCode, GameObject player)
     {
@@ -395,6 +397,11 @@ public class BossProfile : moreSpecificProfile
         }
         if (!enemyIsDefending)
         {
+            Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayerForRay.transform.position.y, transform.position.z);
+            Vector3 toBossPos = (verticalAdj - targetPlayerForRay.transform.position);
+            targetPlayerForRay.transform.LookAt(verticalAdj);
+
+
             isAttracting = true;
             targetPlayerForRay.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(1);
             targetPlayerForRay.GetComponent<moreSpecificProfile>().impulseFromRay((transform.position - targetPlayerForRay.GetComponent<Rigidbody>().transform.position).magnitude, m_PlayerMask);

@@ -97,10 +97,10 @@ public class MageProfile : moreSpecificProfile
             if (!GetComponent<moreSpecificProfile>().flagResetepisode)
             {
                 GetComponent<moreSpecificProfile>().turnToBoss();
-                Debug.Log("MAGE ATTACK 1 FIREBALL " + fireBall);
+                /*Debug.Log("MAGE ATTACK 1 FIREBALL " + fireBall);
                 Debug.Log("MAGE ATTACK 2 FIREBALL " + pointSpawnFireBall.position);
                 Debug.Log("MAGE ATTACK 3 FIREBALL " + transform.rotation);
-                Debug.Log("MAGE ATTACK 4 FIREBALL " + gameObject.transform);
+                Debug.Log("MAGE ATTACK 4 FIREBALL " + gameObject.transform);*/
                 go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
                 //shooting = true;
                 GetComponent<moreSpecificProfile>().setShooting(true);
