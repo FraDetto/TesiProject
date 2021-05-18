@@ -31,10 +31,10 @@ public class BossProfile : moreSpecificProfile
     private GameObject goAhead;
     private GameObject goAoE;
 
-    private Transform rangedAttackPosition;
-    private Transform swingAttackPosition;
-    private Transform aheadAttackPosition;//stessa posizione usata per il break
-    private Transform AoEAttackPosition;
+    public Transform rangedAttackPosition;
+    public Transform swingAttackPosition;
+    public Transform aheadAttackPosition;//stessa posizione usata per il break
+    public Transform AoEAttackPosition;
     private Vector3 scaleChange;
     private Vector3 originalPositionTarget;
 
@@ -71,10 +71,10 @@ public class BossProfile : moreSpecificProfile
     public void Start()
     {
         //playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
-        rangedAttackPosition = transform.GetChild(1);
-        swingAttackPosition = transform.GetChild(2);
-        aheadAttackPosition = transform.GetChild(3);
-        AoEAttackPosition = transform.GetChild(4);
+        //rangedAttackPosition = transform.GetChild(1);
+        //swingAttackPosition = transform.GetChild(2);
+        //aheadAttackPosition = transform.GetChild(3);
+        //AoEAttackPosition = transform.GetChild(4);
         //assign i player all'array
 
         rb = GetComponent<Rigidbody>();
@@ -375,7 +375,7 @@ public class BossProfile : moreSpecificProfile
     public void LaunchRay()
     {
         Debug.Log("HO ATTIVATO RAY " + targetPlayerForRay);
-        Debug.Log("SU NOME: " + targetPlayerForRay.tag);
+        //Debug.Log("SU NOME: " + targetPlayerForRay.tag);
         //turnBossToTarget();
 
         bool enemyIsDefending;
@@ -458,7 +458,7 @@ public class BossProfile : moreSpecificProfile
     public void swingAttack()
     {
         Debug.Log("HO ATTIVATO SWING " + targetPlayer);
-        Debug.Log("SU NOME: " + targetPlayer.tag);
+        //Debug.Log("SU NOME: " + targetPlayer.tag);
 
         if (null != goSwing)
         {

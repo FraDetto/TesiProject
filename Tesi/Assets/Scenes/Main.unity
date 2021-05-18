@@ -356,28 +356,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 39.071, y: 0, z: 0}
---- !u!114 &1000762095 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3240921345829186205, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-  m_PrefabInstance: {fileID: 5475297297734807884}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1000762096 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6959553118988679632, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-  m_PrefabInstance: {fileID: 5475297297734807884}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a9dfccefc7612c4a89c57854f477510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1023409889
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,58 +755,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1852354071, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: speedRangedAttk
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 1852354072, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1000762096}
     - target: {fileID: 3359959793238077300, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: MaxStep
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: swordSwingAttk
-      value: 
-      objectReference: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
-    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: overcomeBattleSign
       value: 
       objectReference: {fileID: 1023409889}
-    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_PlayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_BehaviorName
-      value: BossCombact
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_BrainParameters.VectorObservationSize
-      value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5475297297734807888, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.data[1]
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5617987301070202409, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -881,10 +815,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6959553118988679632, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
-      propertyPath: slider
-      value: 
-      objectReference: {fileID: 1000762095}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
 --- !u!1001 &6511954190391844738

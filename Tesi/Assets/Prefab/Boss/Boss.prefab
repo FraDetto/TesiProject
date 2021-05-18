@@ -196,15 +196,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 33
     NumStackedVectorObservations: 1
-    VectorActionSize: 01000000
+    VectorActionSize: 0400000006000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: BossCombact
   TeamId: 0
   m_UseChildSensors: 1
 --- !u!114 &5475297297734807887
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3359959793238077300}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf074f68fb5ad654d95cf8551ec05c39, type: 3}
   m_Name: 
@@ -222,7 +222,14 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 1000
+  playersParty: []
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
+  overcomeBattleSign: {fileID: 0}
+  firstRun: 1
   partyList: 
 --- !u!114 &5475297297734807886
 MonoBehaviour:
@@ -251,8 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 6959553118988679632}
   shieldBar: {fileID: 0}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -275,6 +283,7 @@ MonoBehaviour:
   partyData: {fileID: 0}
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -283,7 +292,7 @@ MonoBehaviour:
   status: 0
   woundsActive: 0
   playersParty: []
-  speedRangedAttk: 25
+  speedRangedAttk: 35
   codeAttack: 0
   goRangedAttk: {fileID: 3598328088470394854, guid: 9e391bc03674c8c44b2e6001fd26ff37, type: 3}
   swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
@@ -293,7 +302,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   targetPlayer: {fileID: 0}
+  targetPlayerForRay: {fileID: 0}
   instanceIDtarget: 0
+  rangedAttackPosition: {fileID: 5668220218237637415}
+  swingAttackPosition: {fileID: 9046850513472922660}
+  aheadAttackPosition: {fileID: 1701052497020445118}
+  AoEAttackPosition: {fileID: 9162836987991956521}
   isAttacking: 0
   isUsingAoE: 0
   isShooting: 0
@@ -657,6 +671,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6956262088789942207, guid: 158faf21178be84408b6ddd670dff016, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 3240921345829186205}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 158faf21178be84408b6ddd670dff016, type: 3}
 --- !u!224 &2003437210340080646 stripped
@@ -664,3 +682,25 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2004511627847785065, guid: 158faf21178be84408b6ddd670dff016, type: 3}
   m_PrefabInstance: {fileID: 8117916379604591}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3240921345829186205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3235493255801883890, guid: 158faf21178be84408b6ddd670dff016, type: 3}
+  m_PrefabInstance: {fileID: 8117916379604591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6959553118988679632 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6956262088789942207, guid: 158faf21178be84408b6ddd670dff016, type: 3}
+  m_PrefabInstance: {fileID: 8117916379604591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9dfccefc7612c4a89c57854f477510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
