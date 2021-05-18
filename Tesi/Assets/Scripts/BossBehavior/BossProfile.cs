@@ -276,50 +276,58 @@ public class BossProfile : moreSpecificProfile
 
     public void hubAttacks(int attackCode, GameObject player)
     {
-
-        isAttacking = true;
-
-        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + player.tag);
-
-        switch (attackCode)
+        if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            case 0://RANGED 
-                targetPlayer = player;
-                instanceIDtarget = targetPlayer.GetInstanceID();
+            isAttacking = true;
 
-                StartCoroutine(timeBeforeCastRangedAttack());
-                break;
-            case 1://RAY
-                targetPlayerForRay = player;
-                instanceIDtarget = targetPlayerForRay.GetInstanceID();
+            Debug.Log("PLAYER PER PROSSIMO ATTACCO " + player.tag);
 
-                StartCoroutine(timeBeforeCastRayAttack());
-                break;
-            case 2://SWING
-                targetPlayer = player;
-                instanceIDtarget = targetPlayer.GetInstanceID();
-                isUsingAoE = true;
+            switch (attackCode)
+            {
+                case 0://RANGED 
+                    targetPlayer = player;
+                    instanceIDtarget = targetPlayer.GetInstanceID();
 
-                StartCoroutine(timeBeforeCastSwingAttk());
-                break;
-            case 3://AHEAD
-                targetPlayer = player;
-                instanceIDtarget = targetPlayer.GetInstanceID();
+                    StartCoroutine(timeBeforeCastRangedAttack());
+                    break;
+                case 1://RAY
+                    targetPlayerForRay = player;
+                    instanceIDtarget = targetPlayerForRay.GetInstanceID();
 
-                StartCoroutine(timeBeforeCastAheadAttk());
-                break;
-            case 4://BREAK
-                targetPlayer = player;
-                instanceIDtarget = targetPlayer.GetInstanceID();              
+                    StartCoroutine(timeBeforeCastRayAttack());
+                    break;
+                case 2://SWING
+                    targetPlayer = player;
+                    instanceIDtarget = targetPlayer.GetInstanceID();
+                    isUsingAoE = true;
 
-                StartCoroutine(timeBeforeCastBreakAttk());
-                break;
-            default://AoE
-                isUsingAoE = true;
+                    StartCoroutine(timeBeforeCastSwingAttk());
+                    break;
+                case 3://AHEAD
+                    targetPlayer = player;
+                    instanceIDtarget = targetPlayer.GetInstanceID();
 
-                StartCoroutine(timeBeforeCastAoEAttk());
-                break;
+                    StartCoroutine(timeBeforeCastAheadAttk());
+                    break;
+                case 4://BREAK
+                    targetPlayer = player;
+                    instanceIDtarget = targetPlayer.GetInstanceID();
+
+                    StartCoroutine(timeBeforeCastBreakAttk());
+                    break;
+                default://AoE
+                    isUsingAoE = true;
+
+                    StartCoroutine(timeBeforeCastAoEAttk());
+                    break;
+            }
         }
+        else
+        {
+            Debug.Log("SONO IN HUB MA EP FINITPO " + GetComponent<moreSpecificProfile>().flagResetepisode);
+
+        }
+
 
     }
 
@@ -330,7 +338,10 @@ public class BossProfile : moreSpecificProfile
         //ricordarsi di gestire i cooldown
         originalPositionTarget = targetPlayer.transform.position;
         yield return new WaitForSeconds(timeBeforeCastAttracting);
+
         rangedAttack();
+
+
     }
 
 
@@ -338,7 +349,7 @@ public class BossProfile : moreSpecificProfile
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
         //Debug.Log(" RANGED BOSS" + targetPlayer.transform.position);
-
+      
         if (null != goRanged)
         {
             Debug.Log(" go RANGED ERA PIENO LO DISTRUGGO");
@@ -369,7 +380,10 @@ public class BossProfile : moreSpecificProfile
     {
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(timeBeforeCastAttracting);
+
         LaunchRay();
+
+
     }
 
     public void LaunchRay()
@@ -397,6 +411,9 @@ public class BossProfile : moreSpecificProfile
         }
         if (!enemyIsDefending)
         {
+            Debug.Log("BOSS RAYATTACK 1  " + transform.position.x);
+            Debug.Log("BOSS RAYATTACK 2  " + targetPlayerForRay.transform.position.y);
+
             Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayerForRay.transform.position.y, transform.position.z);
             Vector3 toBossPos = (verticalAdj - targetPlayerForRay.transform.position);
             targetPlayerForRay.transform.LookAt(verticalAdj);
@@ -495,6 +512,10 @@ public class BossProfile : moreSpecificProfile
         //turnBossToTarget();
         goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
 
+        Debug.Log("BOSS AHEADATTACK 1  " + targetPlayer.transform.position.x);
+        Debug.Log("BOSS AHEADATTACK 2  " + goAhead.transform.position.y);
+
+
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goAhead.transform.position.y, targetPlayer.transform.position.z);
 
         goAhead.transform.LookAt(verticalAdj);
@@ -549,6 +570,10 @@ public class BossProfile : moreSpecificProfile
         //isAttacking = true;
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
 
+        Debug.Log("BOSS BREAKATTACK 1  " + targetPlayer.transform.position.x);
+        Debug.Log("BOSS BREAKATTACK 2  " + go.transform.position.y);
+
+
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
 
         go.transform.LookAt(verticalAdj);
@@ -570,23 +595,31 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastSwingAttk()
     {
         yield return new WaitForSeconds(0.4f);
+
         swingAttack();
+
     }
     public IEnumerator timeBeforeCastAheadAttk()
     {
         yield return new WaitForSeconds(0.4f);
+
         aheadAttack();
+
     }
     public IEnumerator timeBeforeCastBreakAttk()
     {
         yield return new WaitForSeconds(0.4f);
+
         breakAttack();
+
     }
 
     public IEnumerator timeBeforeCastAoEAttk()
     {
         yield return new WaitForSeconds(0.4f);
+
         AoEAttack();
+
     }
 
     public void turnBossToTarget()

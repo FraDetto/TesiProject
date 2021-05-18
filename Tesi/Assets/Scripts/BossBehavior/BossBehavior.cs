@@ -39,6 +39,9 @@ public class BossBehavior : Agent
     RaycastHit m_Hit_swing_right;
     RaycastHit m_Hit_swing_left;
 
+
+    Coroutine co;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -142,7 +145,8 @@ public class BossBehavior : Agent
         ///Th idea is +1 and -1 if boss defeat the party or if it dies respectively
 
         //In detail for each attack of the boss (ideas)
-        Debug.Log(" =====OnActionReceived===== "+ " TARGET " + vectorAction[0] + " AZIONE " + vectorAction[1]);
+
+        Debug.Log(" =====OnActionReceived===== " + " TARGET " + vectorAction[0] + " AZIONE " + vectorAction[1]);
         /// Number of targets 
         int target = Mathf.FloorToInt(vectorAction[0]);
 
@@ -161,7 +165,12 @@ public class BossBehavior : Agent
 
         StartCoroutine(timeValueReward(actionForBoss));
 
-        StartCoroutine(timeBeforeAnOtherAction());
+
+        
+
+        //StartCoroutine(timeBeforeAnOtherAction());
+
+
         //// 0 RANGED ATTACK////  
         ///Max rew: if used against mage( for bait defense spell ) and After use the ray attack
         ///Good rew: against healer and After use the ray attack
@@ -210,8 +219,10 @@ public class BossBehavior : Agent
     {
         Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");
         yield return new WaitForSeconds(2.8f);
+
         this.RequestDecision();
         Academy.Instance.EnvironmentStep();
+
         
     }
     
@@ -1122,12 +1133,15 @@ public class BossBehavior : Agent
             }
             
         }
-        
+
+        co = StartCoroutine(timeBeforeAnOtherAction());
+
     }
 
     public void bossDeath()//BOSS DEAD END EPISODE
     {
         Debug.Log("===== END EPISODE BOSS DEAD =======");
+        StopCoroutine(co);
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
         moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
@@ -1237,7 +1251,7 @@ public class BossBehavior : Agent
         if (null == newArrayPlay)//se KO ALL PLAYERS
         {
             Debug.Log("==== PARTY HA PERSO =====");
-
+            StopCoroutine(co);
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
             moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
