@@ -299,12 +299,15 @@ public class HealerBehavior : MonoBehaviour
             if (!targetProfile)
                 continue;
 
-
-            if (targetProfile.publicGetCurrentLife() != targetProfile.publicGetTotalLife())
+            if (targetProfile.getStatusLifeChamp() == 0)
             {
-                //Debug.Log("Trovato uno ferito");
-                flag = false;
+                if (targetProfile.publicGetCurrentLife() != targetProfile.publicGetTotalLife())
+                {
+                    //Debug.Log("Trovato uno ferito");
+                    flag = false;
+                }
             }
+               
 
         }
 

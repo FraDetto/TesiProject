@@ -1244,9 +1244,20 @@ public class BossBehavior : Agent
 
     public int targetInAoErange()
     {
+        int cont = 0;
         Collider[] colliders = Physics.OverlapSphere(transform.position, 11.0f, m_PlayerMask);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
 
-        return colliders.Length;
+            if (targetProfile.getStatusLifeChamp() == 0)
+            {
+                cont++;
+            }
+
+
+        }
+        return cont;
     }
 
     public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
