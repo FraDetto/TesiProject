@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameObject boss;
     public GameObject[] poolOfCLasses;
     public GameObject[] partyOnRun = new GameObject[4];
     public float m_HealRadius = 6.0f;
@@ -25,8 +27,11 @@ public class GameManager : MonoBehaviour
 
         while (flag)
         {
-            randomX = Random.Range(-35.0f, 35.0f);
-            randomZ = Random.Range(-10.0f, -60.0f);
+            //randomX = Random.Range(-35.0f, 35.0f);
+            //randomZ = Random.Range(-10.0f, -60.0f);
+            randomX = Random.Range(boss.transform.position.x-35.0f, boss.transform.position.x+35.0f);
+            randomZ = Random.Range(boss.transform.position.z-10.0f, boss.transform.position.z-60.0f);
+
             if (n == 0)
             {
                 flag = false;

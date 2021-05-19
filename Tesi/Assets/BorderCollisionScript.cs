@@ -10,9 +10,11 @@ public class BorderCollisionScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+       
         if (null != other.GetComponent<moreSpecificProfile>())
         {
-            other.transform.GetComponent<Rigidbody>().position = takeRandomPos();
+            Debug.Log("COLLISIONEEE " +other.transform.position);
+            other.transform.position = takeRandomPos();
         }
     }
 
@@ -24,8 +26,8 @@ public class BorderCollisionScript : MonoBehaviour
 
         while (flag)
         {
-            randomX = Random.Range(-35.0f, 35.0f);
-            randomZ = Random.Range(-10.0f, -60.0f);
+            randomX = Random.Range(boss.transform.position.x - 35.0f, boss.transform.position.x + 35.0f);
+            randomZ = Random.Range(boss.transform.position.z - 10.0f, boss.transform.position.z - 60.0f);
 
             Collider[] colliders = Physics.OverlapSphere(new Vector3(randomX, 2.8f, randomZ), m_HealRadius, m_PlayerMask);
             if (colliders.Length == 0)
