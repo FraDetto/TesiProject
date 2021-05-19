@@ -60,6 +60,39 @@ public class GameManager : MonoBehaviour
 
             partyOnRun[n] = Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity);
             Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
+
+
+            switch (partyOnRun[n].tag)
+            {
+                case "Tank":
+                    partyOnRun[n].GetComponent<TankBehavior>().setBoss(boss);
+                    partyOnRun[n].GetComponent<TankMovement>().setBoss(boss);
+                    partyOnRun[n].GetComponent<TankProfile>().setBoss(boss);
+                    break;
+
+                case "Bruiser":
+                    partyOnRun[n].GetComponent<BruiserBehavior>().setBoss(boss);
+                    partyOnRun[n].GetComponent<BruiserMovement>().setBoss(boss);
+                    partyOnRun[n].GetComponent<BruiserProfile>().setBoss(boss);
+                    break;
+
+                case "Mage":
+                    partyOnRun[n].GetComponent<MageBehavior>().setBoss(boss);
+                    partyOnRun[n].GetComponent<MageMovement>().setBoss(boss);
+                    partyOnRun[n].GetComponent<MageProfile>().setBoss(boss);
+                    break;
+
+                case "Healer":
+                    partyOnRun[n].GetComponent<HealerBehavior>().setBoss(boss);
+                    partyOnRun[n].GetComponent<HealerMovement>().setBoss(boss);
+                    partyOnRun[n].GetComponent<HealerProfile>().setBoss(boss);
+                    break;
+
+                default:
+                    Debug.Log("CHARACTER UNKNOWN");
+                    break;
+            }
+
         }
         return partyOnRun;
     }
@@ -75,4 +108,6 @@ public class GameManager : MonoBehaviour
     {
         return partyOnRun;
     }
+
+
 }

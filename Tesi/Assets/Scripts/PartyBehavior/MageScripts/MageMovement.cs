@@ -17,7 +17,7 @@ public class MageMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
 
         rb = GetComponent<Rigidbody>();
 
@@ -93,5 +93,11 @@ public class MageMovement : MonoBehaviour
 
         }
 
+    }
+
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
     }
 }

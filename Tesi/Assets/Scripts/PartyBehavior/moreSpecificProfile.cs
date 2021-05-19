@@ -498,9 +498,9 @@ public class moreSpecificProfile : aProfile
         return alive;
     }
 
-    public void turnToBoss()
+    public void turnToBoss(GameObject boss)
     {
-        Vector3 verticalAdj = new Vector3(FindObjectOfType<BossProfile>().transform.position.x, transform.position.y, FindObjectOfType<BossProfile>().transform.position.z);
+        Vector3 verticalAdj = new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z);
         //Vector3 verticalAdj = new Vector3(originalPositionTarget.x, transform.position.y, originalPositionTarget.z);
 
         transform.LookAt(verticalAdj);
@@ -539,6 +539,7 @@ public class moreSpecificProfile : aProfile
 
         Destroy(this.gameObject);
     }
+
     /*
     private void OnDrawGizmos()
     {

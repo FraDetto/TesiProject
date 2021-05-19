@@ -21,7 +21,7 @@ public class MageBehavior : MonoBehaviour
     void Start()
     {
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
         rb = GetComponent<Rigidbody>();
 
 
@@ -342,6 +342,11 @@ public class MageBehavior : MonoBehaviour
             return false;
         }
 
+    }
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
     }
 
 }

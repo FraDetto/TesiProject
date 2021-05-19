@@ -19,6 +19,7 @@ public class BruiserProfile : moreSpecificProfile
     public GameObject sword;
     public GameObject HealSign;
 
+    private GameObject boss;
     private GameObject go;
     private Transform pointSpawnSword;
     private Transform HealSignSpawnPoint;
@@ -66,7 +67,7 @@ public class BruiserProfile : moreSpecificProfile
     {
         if (!cooldownSword)
         {
-            GetComponent<moreSpecificProfile>().turnToBoss();
+            GetComponent<moreSpecificProfile>().turnToBoss(boss);
             go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
             if (ultiRunning)
             {
@@ -192,5 +193,11 @@ public class BruiserProfile : moreSpecificProfile
     public void correctRoll()
     {
         GetComponent<moreSpecificProfile>().rollAwayChamp(rb, m_MaxDistance, m_PlayerMask, dashForce);
+    }
+
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
     }
 }

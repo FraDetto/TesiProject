@@ -56,7 +56,7 @@ public class HealerProfile : moreSpecificProfile
         //pointSpawnWindBall = transform.GetChild(1);
         //pointSpawnHealHealer = transform.GetChild(2);
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
 
         tank = GameObject.FindGameObjectWithTag("Tank");
         mage = GameObject.FindGameObjectWithTag("Mage");
@@ -105,7 +105,7 @@ public class HealerProfile : moreSpecificProfile
         {
             if (!GetComponent<moreSpecificProfile>().flagResetepisode)
             {
-                GetComponent<moreSpecificProfile>().turnToBoss();
+                GetComponent<moreSpecificProfile>().turnToBoss(boss);
                 go = Instantiate(windBall, pointSpawnWindBall.position, transform.rotation, gameObject.transform);
                 //shooting = true;
                 GetComponent<moreSpecificProfile>().setShooting(true);
@@ -265,6 +265,11 @@ public class HealerProfile : moreSpecificProfile
     public void correctRoll()
     {
         GetComponent<moreSpecificProfile>().rollAwayChamp(rb, m_MaxDistance, m_PlayerMask_Roll, dashForce);
+    }
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
     }
 
 }

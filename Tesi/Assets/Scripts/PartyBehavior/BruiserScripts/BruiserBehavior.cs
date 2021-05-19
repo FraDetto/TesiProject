@@ -17,7 +17,7 @@ public class BruiserBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
         myRB = transform.GetComponent<Rigidbody>();
 
 
@@ -278,5 +278,11 @@ public class BruiserBehavior : MonoBehaviour
     public void ActiveSpecial()
     {
         GetComponent<BruiserProfile>().activateUlti();
+    }
+
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
     }
 }

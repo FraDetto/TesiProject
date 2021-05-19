@@ -19,7 +19,7 @@ public class TankMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
 
         rb = GetComponent<Rigidbody>();
 
@@ -66,23 +66,28 @@ public class TankMovement : MonoBehaviour
         }   
        
     }
-        /*
-            private void OnDrawGizmos()
+    /*
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            if (m_HitDetect_mov_front)
             {
-                Gizmos.color = Color.red;
-                if (m_HitDetect_mov_front)
-                {
-                    Gizmos.DrawRay(transform.position, transform.forward * m_Hit_mov_front.distance);
-                    Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_mov_front.distance, transform.localScale);
-                }
-                else
-                {
-                    //Draw a Ray forward from GameObject toward the maximum distance
-                    Gizmos.DrawRay(transform.position, transform.forward * 50.0f);
-                    //Draw a cube at the maximum distance
-                    Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
-                }
+                Gizmos.DrawRay(transform.position, transform.forward * m_Hit_mov_front.distance);
+                Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_mov_front.distance, transform.localScale);
             }
-        */
+            else
+            {
+                //Draw a Ray forward from GameObject toward the maximum distance
+                Gizmos.DrawRay(transform.position, transform.forward * 50.0f);
+                //Draw a cube at the maximum distance
+                Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
+            }
+        }
+    */
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
+    }
 
 }

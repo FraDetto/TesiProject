@@ -16,7 +16,7 @@ public class HealerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
 
         myRB = GetComponent<Rigidbody>();
 
@@ -64,4 +64,12 @@ public class HealerMovement : MonoBehaviour
 
         }
     }
+
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
+    }
+
+
 }

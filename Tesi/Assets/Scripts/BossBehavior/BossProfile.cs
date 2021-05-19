@@ -35,6 +35,8 @@ public class BossProfile : moreSpecificProfile
     public Transform swingAttackPosition;
     public Transform aheadAttackPosition;//stessa posizione usata per il break
     public Transform AoEAttackPosition;
+    public GameManager gameManager;
+
     private Vector3 scaleChange;
     private Vector3 originalPositionTarget;
 
@@ -411,9 +413,6 @@ public class BossProfile : moreSpecificProfile
         }
         if (!enemyIsDefending)
         {
-            Debug.Log("BOSS RAYATTACK 1  " + transform.position.x);
-            Debug.Log("BOSS RAYATTACK 2  " + targetPlayerForRay.transform.position.y);
-
             Vector3 verticalAdj = new Vector3(transform.position.x, targetPlayerForRay.transform.position.y, transform.position.z);
             Vector3 toBossPos = (verticalAdj - targetPlayerForRay.transform.position);
             targetPlayerForRay.transform.LookAt(verticalAdj);
@@ -518,8 +517,8 @@ public class BossProfile : moreSpecificProfile
         //turnBossToTarget();
         goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
 
-        Debug.Log("BOSS AHEADATTACK 1  " + targetPlayer.transform.position.x);
-        Debug.Log("BOSS AHEADATTACK 2  " + goAhead.transform.position.y);
+        //Debug.Log("BOSS AHEADATTACK 1  " + targetPlayer.transform.position.x);
+        //Debug.Log("BOSS AHEADATTACK 2  " + goAhead.transform.position.y);
 
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goAhead.transform.position.y, targetPlayer.transform.position.z);
@@ -576,8 +575,8 @@ public class BossProfile : moreSpecificProfile
         //isAttacking = true;
         go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
 
-        Debug.Log("BOSS BREAKATTACK 1  " + targetPlayer.transform.position.x);
-        Debug.Log("BOSS BREAKATTACK 2  " + go.transform.position.y);
+        //Debug.Log("BOSS BREAKATTACK 1  " + targetPlayer.transform.position.x);
+        //Debug.Log("BOSS BREAKATTACK 2  " + go.transform.position.y);
 
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
@@ -646,7 +645,8 @@ public class BossProfile : moreSpecificProfile
 
     public void assignPartyForProfile()
     {
-        playersParty = FindObjectOfType<GameManager>().getParty();
+        //playersParty = FindObjectOfType<GameManager>().getParty();
+        playersParty = gameManager.getParty();
     }
 
     public void checkChampDieInFight()

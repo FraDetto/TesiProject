@@ -19,7 +19,7 @@ public class TankProfile : moreSpecificProfile
     public GameObject sword;
     public GameObject shieldTank;
 
-
+    private GameObject boss;
     private Rigidbody rb;
     private GameObject go;
     private Transform pointSpawnSword;
@@ -66,7 +66,7 @@ public class TankProfile : moreSpecificProfile
         //Debug.Log("attackWithSword");
         if (!cooldownSword)
         {
-            GetComponent<moreSpecificProfile>().turnToBoss();
+            GetComponent<moreSpecificProfile>().turnToBoss(boss);
             go = Instantiate(sword, pointSpawnSword.position, transform.rotation, gameObject.transform);
             cooldownSword = true;
             swordActive = true;
@@ -94,7 +94,7 @@ public class TankProfile : moreSpecificProfile
     {
         GetComponent<moreSpecificProfile>().publicSetIsDefending(true);
         GetComponent<moreSpecificProfile>().setDefUsed(true);
-        GetComponent<moreSpecificProfile>().turnToBoss();
+        GetComponent<moreSpecificProfile>().turnToBoss(boss);
 
         go = Instantiate(shieldTank, pointSpawnShield.position, transform.rotation, gameObject.transform);
         cooldownShield = true;
@@ -203,6 +203,10 @@ public class TankProfile : moreSpecificProfile
         GetComponent<moreSpecificProfile>().rollAwayChamp(rb, m_MaxDistance, m_PlayerMask, dashForce);       
     }
 
-    
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
+    }
 
 }

@@ -52,7 +52,7 @@ public class MageProfile : moreSpecificProfile
         //pointSpawnFireBall = transform.GetChild(1);
         //pointSpawnUlt = transform.GetChild(2);
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
         scaleChange = new Vector3(0.1f, 0.1f, 0.1f);
 
         rb = GetComponent<Rigidbody>();
@@ -96,7 +96,7 @@ public class MageProfile : moreSpecificProfile
         {
             if (!GetComponent<moreSpecificProfile>().flagResetepisode)
             {
-                GetComponent<moreSpecificProfile>().turnToBoss();
+                GetComponent<moreSpecificProfile>().turnToBoss(boss);
                 /*Debug.Log("MAGE ATTACK 1 FIREBALL " + fireBall);
                 Debug.Log("MAGE ATTACK 2 FIREBALL " + pointSpawnFireBall.position);
                 Debug.Log("MAGE ATTACK 3 FIREBALL " + transform.rotation);
@@ -149,7 +149,7 @@ public class MageProfile : moreSpecificProfile
         defenseActive = false;
         Destroy(go);
         GetComponent<moreSpecificProfile>().publicSetIsDefending(false);
-        GetComponent<moreSpecificProfile>().turnToBoss();
+        GetComponent<moreSpecificProfile>().turnToBoss(boss);
     }
 
     public IEnumerator cooldownSpellDefense()
@@ -161,7 +161,7 @@ public class MageProfile : moreSpecificProfile
 
     public void activateUlti()
     {
-        GetComponent<moreSpecificProfile>().turnToBoss();
+        GetComponent<moreSpecificProfile>().turnToBoss(boss);
         cooldownSpecial = true;
 
         StartCoroutine(chargingSpecialDuration());
@@ -217,4 +217,11 @@ public class MageProfile : moreSpecificProfile
     {
         GetComponent<moreSpecificProfile>().rollAwayChamp(rb, m_MaxDistance, m_PlayerMask, dashForce);
     }
+
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
+    }
+
 }

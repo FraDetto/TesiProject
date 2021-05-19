@@ -21,7 +21,7 @@ public class HealerBehavior : MonoBehaviour
     void Start()
     {
 
-        boss = GameObject.FindGameObjectWithTag("Boss");
+        //boss = GameObject.FindGameObjectWithTag("Boss");
         rb = GetComponent<Rigidbody>();
 
 
@@ -326,4 +326,11 @@ public class HealerBehavior : MonoBehaviour
         }
 
     }
+
+
+    public void setBoss(GameObject bo)
+    {
+        boss = bo;
+    }
+
 }
