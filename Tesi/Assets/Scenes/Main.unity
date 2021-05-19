@@ -1256,6 +1256,10 @@ PrefabInstance:
       value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 352907238}
+    - target: {fileID: 5475297297734807887, guid: ff29bbd4da401cc4e9953968ddb3bf47, type: 3}
       propertyPath: overcomeBattleSign
       value: 
       objectReference: {fileID: 1023409889}

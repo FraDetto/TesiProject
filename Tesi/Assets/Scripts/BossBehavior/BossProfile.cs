@@ -25,7 +25,7 @@ public class BossProfile : moreSpecificProfile
 
     public int instanceIDtarget;
     //public string target;
-    private GameObject go;
+    private GameObject goBreak;
     private GameObject goRanged;
     private GameObject goSwing;
     private GameObject goAhead;
@@ -174,11 +174,11 @@ public class BossProfile : moreSpecificProfile
         }
         else
         {
-            if(null != go)
+            if(null != goBreak)
             {
                 isShooting = false;
                 isAttracting = false;
-                Destroy(go.gameObject);
+                Destroy(goBreak.gameObject);
             }
             if(null != goAoE)
             {
@@ -447,7 +447,7 @@ public class BossProfile : moreSpecificProfile
 
     public void AoEAttack()
     {
-        if (null != goSwing)
+        if (null != goAoE)
         {
             Debug.Log(" go AoE ERA PIENO LO DISTRUGGO");
             Destroy(goAoE.gameObject);
@@ -557,7 +557,7 @@ public class BossProfile : moreSpecificProfile
             }
             else
             {
-                Destroy(go.gameObject);
+                Destroy(goBreak.gameObject);
             }
         }
         //target = "";
@@ -565,23 +565,23 @@ public class BossProfile : moreSpecificProfile
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
-        if (null != go)
+        if (null != goBreak)
         {
-            Destroy(go.gameObject);
+            Destroy(goBreak.gameObject);
         }
 
         //turnBossToTarget();
 
         //isAttacking = true;
-        go = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
+        goBreak = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
 
         //Debug.Log("BOSS BREAKATTACK 1  " + targetPlayer.transform.position.x);
         //Debug.Log("BOSS BREAKATTACK 2  " + go.transform.position.y);
 
 
-        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, go.transform.position.y, targetPlayer.transform.position.z);
+        Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goBreak.transform.position.y, targetPlayer.transform.position.z);
 
-        go.transform.LookAt(verticalAdj);
+        goBreak.transform.LookAt(verticalAdj);
         targetPlayer.GetComponent<moreSpecificProfile>().applyWound();//apply wounds
         targetPlayer.GetComponent<moreSpecificProfile>().reduceArmor();//apply armor reduction
         codeAttack = 2;
@@ -696,6 +696,8 @@ public class BossProfile : moreSpecificProfile
         isAttracting = false;
         isAttacking = false;
         StopAllCoroutines();
+
+
     }
 
 

@@ -2,17 +2,17 @@
     "BossCombact": {
         "checkpoints": [
             {
-                "steps": 306,
-                "file_path": "results\\ppo\\BossCombact\\BossCombact-306.onnx",
-                "reward": -1.2833333710829418,
-                "creation_time": 1621442603.9843712
+                "steps": 325,
+                "file_path": "results\\ppo\\BossCombact\\BossCombact-325.onnx",
+                "reward": -2.5374999940395355,
+                "creation_time": 1621444399.5242927
             }
         ],
         "final_checkpoint": {
-            "steps": 306,
+            "steps": 325,
             "file_path": "results\\ppo\\BossCombact.onnx",
-            "reward": -1.2833333710829418,
-            "creation_time": 1621442603.9843712
+            "reward": -2.5374999940395355,
+            "creation_time": 1621444399.5242927
         }
     },
     "metadata": {

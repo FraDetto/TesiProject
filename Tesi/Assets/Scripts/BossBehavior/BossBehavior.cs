@@ -12,6 +12,8 @@ public class BossBehavior : Agent
 
     public GameObject overcomeBattleSign;
 
+    public GameManager gameManager;
+
     public bool firstRun = true;
 
     [SerializeField] private string partyList;
@@ -39,6 +41,7 @@ public class BossBehavior : Agent
     RaycastHit m_Hit_swing_right;
     RaycastHit m_Hit_swing_left;
 
+    private GameObject[] arrayForEnd;
 
     Coroutine co;
     Coroutine re;
@@ -65,19 +68,19 @@ public class BossBehavior : Agent
 
         if (!firstRun)
         {
-            playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+            playersParty = gameManager.generatePartyInGame();
             myProfile.assignPartyForProfile();
             GetComponent<moreSpecificProfile>().resetBossStats();
             takeTheAction();
         }
         else
         {
-            playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+            playersParty = gameManager.generatePartyInGame();
             myProfile.assignPartyForProfile();
         }
-       
 
-        
+
+        arrayForEnd = playersParty;
 
         
 
@@ -1147,15 +1150,14 @@ public class BossBehavior : Agent
         myProfile.endEpStopAll();
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
-        moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+        //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
 
-        foreach (moreSpecificProfile mr in listOfagents)
+        foreach (GameObject go in arrayForEnd)
         {
-            if (!mr.transform.tag.Equals("Boss"))
+            if (!go.transform.tag.Equals("Boss"))
             {
-                //mr.setTrueFlaResetEpisode();
-                //Destroy(mr);
-                mr.detonation();
+                //mr.detonation();
+                go.GetComponent<moreSpecificProfile>().detonation();
             }
 
         }
@@ -1271,14 +1273,14 @@ public class BossBehavior : Agent
 
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-            moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
 
-            foreach (moreSpecificProfile mr in listOfagents)
+            foreach (GameObject go in arrayForEnd)
             {
-                if (!mr.transform.tag.Equals("Boss"))
+                if (!go.transform.tag.Equals("Boss"))
                 {
-                    //mr.setTrueFlaResetEpisode();
-                    mr.detonation();
+                    //mr.detonation();
+                    go.GetComponent<moreSpecificProfile>().detonation();
                 }
 
             }
