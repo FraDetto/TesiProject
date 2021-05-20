@@ -295,7 +295,7 @@ public class BossProfile : moreSpecificProfile
                 case 1://RAY
                     targetPlayerForRay = player;
                     instanceIDtarget = targetPlayerForRay.GetInstanceID();
-
+                    Debug.Log("SONO IN RAY IN HUB " + targetPlayerForRay + " ID CON " + instanceIDtarget);
                     StartCoroutine(timeBeforeCastRayAttack());
                     break;
                 case 2://SWING
@@ -314,7 +314,7 @@ public class BossProfile : moreSpecificProfile
                 case 4://BREAK
                     targetPlayer = player;
                     instanceIDtarget = targetPlayer.GetInstanceID();
-
+                    Debug.Log("SONO IN BREAK IN HUB " + targetPlayer + " ID CON " + instanceIDtarget);
                     StartCoroutine(timeBeforeCastBreakAttk());
                     break;
                 default://AoE
@@ -340,6 +340,7 @@ public class BossProfile : moreSpecificProfile
         //ricordarsi di gestire i cooldown
         originalPositionTarget = targetPlayer.transform.position;
         yield return new WaitForSeconds(timeBeforeCastAttracting);
+        removePreviousGo();
 
         rangedAttack();
 
@@ -351,11 +352,9 @@ public class BossProfile : moreSpecificProfile
     {
         //target gia' scelto? o lo sceglie qua?se facessi due brain una per target una per azioni vere e do' reward combinato?
         //Debug.Log(" RANGED BOSS" + targetPlayer.transform.position);
-      
         if (null != goRanged)
         {
-            Debug.Log(" go RANGED ERA PIENO LO DISTRUGGO");
-            Destroy(goRanged);
+            Destroy(goRanged.gameObject);
         }
 
         turnBossToTargetForRanged();
@@ -383,6 +382,9 @@ public class BossProfile : moreSpecificProfile
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(timeBeforeCastAttracting);
 
+        Debug.Log("SONO IN PRE RAY  " + targetPlayerForRay + " ID CON " + instanceIDtarget);
+        removePreviousGo();
+        Debug.Log("SONO IN PRE RAY POST GO DESTR" + targetPlayerForRay + " ID CON " + instanceIDtarget);
         LaunchRay();
 
 
@@ -391,6 +393,7 @@ public class BossProfile : moreSpecificProfile
     public void LaunchRay()
     {
         Debug.Log("HO ATTIVATO RAY " + targetPlayerForRay);
+        Debug.Log("SONO IN RAY  ID CON " + instanceIDtarget);
         //Debug.Log("SU NOME: " + targetPlayerForRay.tag);
         //turnBossToTarget();
 
@@ -447,11 +450,6 @@ public class BossProfile : moreSpecificProfile
 
     public void AoEAttack()
     {
-        if (null != goAoE)
-        {
-            Debug.Log(" go AoE ERA PIENO LO DISTRUGGO");
-            Destroy(goAoE.gameObject);
-        }
 
         goAoE = Instantiate(containerAoEAttk, AoEAttackPosition.position, transform.rotation, gameObject.transform);
         isCastingAoE = true;
@@ -479,14 +477,6 @@ public class BossProfile : moreSpecificProfile
 
     public void swingAttack()
     {
-        //Debug.Log("HO ATTIVATO SWING " + targetPlayer);
-        //Debug.Log("SU NOME: " + targetPlayer.tag);
-
-        if (null != goSwing)
-        {
-            Debug.Log(" go SWING ERA PIENO LO DISTRUGGO");
-            Destroy(goSwing.gameObject);
-        }
 
         //turnBossToTarget();
         goSwing = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
@@ -507,19 +497,9 @@ public class BossProfile : moreSpecificProfile
 
     public void aheadAttack()
     {
-        
 
-        if(null != goAhead)
-        {
-            Debug.Log(" go AhEAD ERA PIENO LO DISTRUGGO");
-            Destroy(goAhead.gameObject);
-        }
         //turnBossToTarget();
         goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
-
-        //Debug.Log("BOSS AHEADATTACK 1  " + targetPlayer.transform.position.x);
-        //Debug.Log("BOSS AHEADATTACK 2  " + goAhead.transform.position.y);
-
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goAhead.transform.position.y, targetPlayer.transform.position.z);
 
@@ -565,18 +545,14 @@ public class BossProfile : moreSpecificProfile
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
-        if (null != goBreak)
-        {
-            Destroy(goBreak.gameObject);
-        }
 
         //turnBossToTarget();
 
         //isAttacking = true;
         goBreak = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
-
-        //Debug.Log("BOSS BREAKATTACK 1  " + targetPlayer.transform.position.x);
-        //Debug.Log("BOSS BREAKATTACK 2  " + go.transform.position.y);
+        Debug.Log("SONO IN BREAK  ID CON " + instanceIDtarget);
+        Debug.Log("BREAK ATTACK SU " + targetPlayer.GetInstanceID());
+        Debug.Log("BREAK ATTACK IN POS " + goBreak.transform.position);
 
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goBreak.transform.position.y, targetPlayer.transform.position.z);
@@ -600,21 +576,23 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastSwingAttk()
     {
         yield return new WaitForSeconds(0.4f);
-
+        removePreviousGo();
         swingAttack();
 
     }
     public IEnumerator timeBeforeCastAheadAttk()
     {
         yield return new WaitForSeconds(0.4f);
-
+        removePreviousGo();
         aheadAttack();
 
     }
     public IEnumerator timeBeforeCastBreakAttk()
     {
         yield return new WaitForSeconds(0.4f);
-
+        Debug.Log("SONO IN PRE BREAK " + targetPlayer + " ID CON " + instanceIDtarget);
+        removePreviousGo();
+        Debug.Log("SONO IN PRE BREAK POST GO DESTR " + targetPlayer + " ID CON " + instanceIDtarget);
         breakAttack();
 
     }
@@ -622,7 +600,7 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastAoEAttk()
     {
         yield return new WaitForSeconds(0.4f);
-
+        removePreviousGo();
         AoEAttack();
 
     }
@@ -698,6 +676,27 @@ public class BossProfile : moreSpecificProfile
         StopAllCoroutines();
 
 
+    }
+
+
+    public void removePreviousGo()
+    {
+        if (null != goSwing)
+        {
+            Destroy(goSwing.gameObject);
+        }
+        if (null != goAhead)
+        {
+            Destroy(goAhead.gameObject);
+        }
+        if (null != goBreak)
+        {
+            Destroy(goBreak.gameObject);
+        }
+        if (null != goAoE)
+        {
+            Destroy(goAoE.gameObject);
+        }
     }
 
 

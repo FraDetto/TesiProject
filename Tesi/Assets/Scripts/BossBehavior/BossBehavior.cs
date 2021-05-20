@@ -160,7 +160,7 @@ public class BossBehavior : Agent
 
         actionChoose[0] = actionForBoss;
 
-        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + targetForAttack.tag);
+        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + targetForAttack.tag + " CON ID "+ targetForAttack.GetInstanceID());
 
         turnBossToTarget();
 
@@ -1142,33 +1142,7 @@ public class BossBehavior : Agent
 
     }
 
-    public void bossDeath()//BOSS DEAD END EPISODE
-    {
-        Debug.Log("===== END EPISODE BOSS DEAD =======");
-        StopCoroutine(co);
-        StopCoroutine(re);
-        myProfile.endEpStopAll();
-        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
-        //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
-
-        foreach (GameObject go in arrayForEnd)
-        {
-            if (!go.transform.tag.Equals("Boss"))
-            {
-                //mr.detonation();
-                go.GetComponent<moreSpecificProfile>().detonation();
-            }
-
-        }
-        
-        GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
-        actionTarget = null;
-        this.SetReward(-1.0f);
-        EndEpisode();
-
-        
-    }
 
 
     public bool swingRayCastControll()//quando ha fatto catena fino a ray e tira swing su mage o healer se c'e' alemno un altro champ nello spazio di uso dello swing con raycast
@@ -1261,6 +1235,36 @@ public class BossBehavior : Agent
         }
         return cont;
     }
+
+    public void bossDeath()//BOSS DEAD END EPISODE
+    {
+        Debug.Log("===== END EPISODE BOSS DEAD =======");
+        StopCoroutine(co);
+        StopCoroutine(re);
+        myProfile.endEpStopAll();
+        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+
+        //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+        foreach (GameObject go in arrayForEnd)
+        {
+            if (!go.transform.tag.Equals("Boss"))
+            {
+                //mr.detonation();
+                go.GetComponent<moreSpecificProfile>().detonation();
+            }
+
+        }
+
+        GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
+        actionTarget = null;
+        this.SetReward(-1.0f);
+        EndEpisode();
+
+
+    }
+
+
 
     public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
     {

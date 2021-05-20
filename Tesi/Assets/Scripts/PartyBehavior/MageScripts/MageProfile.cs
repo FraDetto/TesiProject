@@ -73,7 +73,11 @@ public class MageProfile : moreSpecificProfile
 
             if (chargingUlt)
             {
-                go.transform.localScale += scaleChange * Time.deltaTime;
+                if (null!=go)//to catch a destroy problem
+                {
+                    go.transform.localScale += scaleChange * Time.deltaTime;
+                }
+                
             }
         }
         else
