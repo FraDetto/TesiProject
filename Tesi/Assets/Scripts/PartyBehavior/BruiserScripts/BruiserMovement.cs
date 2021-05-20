@@ -8,9 +8,6 @@ public class BruiserMovement : MonoBehaviour
     private Rigidbody rb;
     private float initialPositionZ;
 
-
-    public float valueOfZAfterMovement = 0.0f;
-
     public float distanceRange = 7.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
@@ -67,9 +64,6 @@ public class BruiserMovement : MonoBehaviour
                         rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
                     }
 
-
-
-                    valueOfZAfterMovement = initialPositionZ - transform.position.z;
                 }
                 else
                 {

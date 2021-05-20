@@ -17,9 +17,9 @@ public class HealerProfile : moreSpecificProfile
     public bool isDashing = false;
 
     private GameObject boss;
-    private GameObject tank;
-    private GameObject bruiser;
-    private GameObject mage;
+    //private GameObject tank;
+    //private GameObject bruiser;
+    //private GameObject mage;
 
     public Transform pointSpawnWindBall;
     public Transform pointSpawnHealHealer;
@@ -58,9 +58,9 @@ public class HealerProfile : moreSpecificProfile
 
         //boss = GameObject.FindGameObjectWithTag("Boss");
 
-        tank = GameObject.FindGameObjectWithTag("Tank");
+        /*tank = GameObject.FindGameObjectWithTag("Tank");
         mage = GameObject.FindGameObjectWithTag("Mage");
-        bruiser = GameObject.FindGameObjectWithTag("Bruiser");
+        bruiser = GameObject.FindGameObjectWithTag("Bruiser");*/
 
         rb = GetComponent<Rigidbody>();
 
