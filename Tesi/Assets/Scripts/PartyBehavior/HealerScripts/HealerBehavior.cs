@@ -15,7 +15,7 @@ public class HealerBehavior : MonoBehaviour
     public float distanceRangeUp = 60.0f;
     public bool firstRush = true;
 
-    public float m_HealRadius = 100f;
+    public float m_HealRadius = 80f;
     public LayerMask m_PlayerMask;
     // Start is called before the first frame update
     void Start()

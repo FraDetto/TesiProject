@@ -31,7 +31,7 @@ public class HealerProfile : moreSpecificProfile
     public GameObject windBall;
 
 
-    public float m_HealRadius = 100f;
+    public float m_HealRadius = 80f;
     public LayerMask m_PlayerMask;
 
     public float speed = 25.0f;
