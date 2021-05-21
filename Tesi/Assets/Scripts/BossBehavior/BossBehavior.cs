@@ -16,6 +16,8 @@ public class BossBehavior : Agent
 
     public bool firstRun = true;
 
+    public int champsKO;
+
     [SerializeField] private string partyList;
     private BossProfile myProfile;
     private Vector3 startPosition;
@@ -42,6 +44,8 @@ public class BossBehavior : Agent
     RaycastHit m_Hit_swing_left;
 
     private GameObject[] arrayForEnd;
+
+   
 
     Coroutine co;
     Coroutine re;
@@ -79,7 +83,7 @@ public class BossBehavior : Agent
             myProfile.assignPartyForProfile();
         }
 
-
+        champsKO = 0;
         arrayForEnd = playersParty;
 
         
@@ -101,7 +105,7 @@ public class BossBehavior : Agent
         sensor.AddObservation(transform.position);
         sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
         sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-
+        sensor.AddObservation(champsKO);
 
         for (int i=0; i< playersParty.Length; i++)
         {
@@ -1238,44 +1242,13 @@ public class BossBehavior : Agent
 
     public void bossDeath()//BOSS DEAD END EPISODE
     {
-        Debug.Log("===== END EPISODE BOSS DEAD =======");
-        StopCoroutine(co);
-        StopCoroutine(re);
-        myProfile.endEpStopAll();
-        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
-        //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
-
-        foreach (GameObject go in arrayForEnd)
+        if (GetComponent<moreSpecificProfile>().publicGetCurrentLife()==0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp()==1 & champsKO<4)
         {
-            if (!go.transform.tag.Equals("Boss"))
-            {
-                //mr.detonation();
-                go.GetComponent<moreSpecificProfile>().detonation();
-            }
-
-        }
-
-        GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
-        actionTarget = null;
-        this.SetReward(-1.0f);
-        EndEpisode();
-
-
-    }
-
-
-
-    public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
-    {
-        if (null == newArrayPlay)//se KO ALL PLAYERS
-        {
-            Debug.Log("==== PARTY HA PERSO =====");
+            Debug.Log("===== END EPISODE BOSS DEAD =======");
             StopCoroutine(co);
             StopCoroutine(re);
             myProfile.endEpStopAll();
-
-            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
             //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
 
@@ -1291,8 +1264,46 @@ public class BossBehavior : Agent
 
             GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
             actionTarget = null;
-            this.AddReward(1.0f);
+            this.AddReward(-10.0f);
             EndEpisode();
+        }
+        
+
+
+    }
+
+
+
+    public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
+    {
+        champsKO++;
+        if (null == newArrayPlay )//se KO ALL PLAYERS
+        {
+            if (GetComponent<moreSpecificProfile>().publicGetCurrentLife() >= 0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && champsKO==4) { 
+                Debug.Log("==== PARTY HA PERSO =====");
+                StopCoroutine(co);
+                StopCoroutine(re);
+                myProfile.endEpStopAll();
+
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
+                //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+                foreach (GameObject go in arrayForEnd)
+                {
+                    if (!go.transform.tag.Equals("Boss"))
+                    {
+                        //mr.detonation();
+                        go.GetComponent<moreSpecificProfile>().detonation();
+                    }
+
+                }
+
+                GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
+                actionTarget = null;
+                this.AddReward(10.0f);
+                EndEpisode();
+            }
         }
         else
         {

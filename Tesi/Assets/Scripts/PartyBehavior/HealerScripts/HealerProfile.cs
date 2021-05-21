@@ -71,7 +71,7 @@ public class HealerProfile : moreSpecificProfile
     {
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            if (GetComponent<moreSpecificProfile>().getShooting())
+            if (GetComponent<moreSpecificProfile>().getShooting() && null!=go)
             {
                 go.transform.LookAt(boss.transform.position);
                 go.transform.position += go.transform.forward * speed * Time.deltaTime;
