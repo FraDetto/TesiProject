@@ -29,14 +29,14 @@ public class BorderCollisionScript : MonoBehaviour
             randomX = Random.Range(boss.transform.position.x - 35.0f, boss.transform.position.x + 35.0f);
             randomZ = Random.Range(boss.transform.position.z - 10.0f, boss.transform.position.z - 60.0f);
 
-            Collider[] colliders = Physics.OverlapSphere(new Vector3(randomX, 2.8f, randomZ), m_HealRadius, m_PlayerMask);
+            Collider[] colliders = Physics.OverlapSphere(new Vector3(randomX, 3.5f, randomZ), m_HealRadius, m_PlayerMask);
             if (colliders.Length == 0)
             {
                 flag = false;
             }
 
         }
-        return new Vector3(randomX, 2.8f, randomZ);
+        return new Vector3(randomX, 3.5f, randomZ);
 
 
     }
