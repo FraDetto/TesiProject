@@ -68,6 +68,9 @@ public class BossProfile : moreSpecificProfile
     private float timeCoolDownAheadAttack = 1.6f;
     private float timeCoolDownBreakAttack = 4.4f;
 
+
+    private GameObject reserveVarTarget;
+    private int reserveVarIDtarget;
     
 
     public void Start()
@@ -282,7 +285,10 @@ public class BossProfile : moreSpecificProfile
         {
             isAttacking = true;
 
-            Debug.Log("PLAYER PER PROSSIMO ATTACCO " + player.tag);
+            Debug.Log("PLAYER PER PROSSIMO ATTACCO " + player.tag + " ID " + player.GetInstanceID());
+            reserveVarIDtarget = player.GetInstanceID();
+            reserveVarTarget = player;
+            Debug.Log("PLAYER RISERVA " + reserveVarTarget.tag + " ID " + reserveVarIDtarget);
 
             switch (attackCode)
             {
@@ -382,9 +388,9 @@ public class BossProfile : moreSpecificProfile
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(timeBeforeCastAttracting);
 
-        Debug.Log("SONO IN PRE RAY  " + targetPlayerForRay + " ID CON " + instanceIDtarget);
+        //Debug.Log("SONO IN PRE RAY  " + targetPlayerForRay + " ID CON " + instanceIDtarget);
         removePreviousGo();
-        Debug.Log("SONO IN PRE RAY POST GO DESTR" + targetPlayerForRay + " ID CON " + instanceIDtarget);
+        //Debug.Log("SONO IN PRE RAY POST GO DESTR" + targetPlayerForRay + " ID CON " + instanceIDtarget);
         LaunchRay();
 
 
@@ -392,9 +398,13 @@ public class BossProfile : moreSpecificProfile
 
     public void LaunchRay()
     {
-        Debug.Log("HO ATTIVATO RAY " + targetPlayerForRay);
-        Debug.Log("SONO IN RAY  ID CON " + instanceIDtarget);
-        //Debug.Log("SU NOME: " + targetPlayerForRay.tag);
+        //Debug.Log("HO ATTIVATO RAY " + targetPlayerForRay);
+        //Debug.Log("SONO IN RAY  ID CON " + instanceIDtarget);
+        if(targetPlayerForRay == null)
+        {
+            targetPlayerForRay = reserveVarTarget;
+            instanceIDtarget = reserveVarIDtarget;
+        }
         //turnBossToTarget();
 
         bool enemyIsDefending;
@@ -497,9 +507,17 @@ public class BossProfile : moreSpecificProfile
 
     public void aheadAttack()
     {
-
+        if (targetPlayer == null)
+        {
+            targetPlayer = reserveVarTarget;
+            instanceIDtarget = reserveVarIDtarget;
+        }
         //turnBossToTarget();
         goAhead = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
+
+        /*Debug.Log("SONO IN AHEAD  ID CON " + instanceIDtarget);
+        Debug.Log("AHEAD ATTACK SU " + targetPlayer.GetInstanceID());
+        Debug.Log("AHEAD ATTACK IN POS " + goAhead.transform.position);*/
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goAhead.transform.position.y, targetPlayer.transform.position.z);
 
@@ -545,14 +563,18 @@ public class BossProfile : moreSpecificProfile
 
     public void breakAttack()//wounds that limits healing and reduce armor for tot sec.
     {
-
+        if (targetPlayer == null)
+        {
+            targetPlayer = reserveVarTarget;
+            instanceIDtarget = reserveVarIDtarget;
+        }
         //turnBossToTarget();
 
         //isAttacking = true;
-        goBreak = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);//per il momento uguale a aheadAttack poi va cambiato
-        Debug.Log("SONO IN BREAK  ID CON " + instanceIDtarget);
+        goBreak = Instantiate(swordAheadAttk, aheadAttackPosition.position, transform.rotation, gameObject.transform);
+        /*Debug.Log("SONO IN BREAK  ID CON " + instanceIDtarget);
         Debug.Log("BREAK ATTACK SU " + targetPlayer.GetInstanceID());
-        Debug.Log("BREAK ATTACK IN POS " + goBreak.transform.position);
+        Debug.Log("BREAK ATTACK IN POS " + goBreak.transform.position);*/
 
 
         Vector3 verticalAdj = new Vector3(targetPlayer.transform.position.x, goBreak.transform.position.y, targetPlayer.transform.position.z);
@@ -583,16 +605,18 @@ public class BossProfile : moreSpecificProfile
     public IEnumerator timeBeforeCastAheadAttk()
     {
         yield return new WaitForSeconds(0.4f);
+        //Debug.Log("SONO IN PRE AHEAD " + targetPlayer + " ID CON " + instanceIDtarget);
         removePreviousGo();
+        //Debug.Log("SONO IN PRE AHEAD POST GO DESTR " + targetPlayer + " ID CON " + instanceIDtarget);
         aheadAttack();
 
     }
     public IEnumerator timeBeforeCastBreakAttk()
     {
         yield return new WaitForSeconds(0.4f);
-        Debug.Log("SONO IN PRE BREAK " + targetPlayer + " ID CON " + instanceIDtarget);
+        //Debug.Log("SONO IN PRE BREAK " + targetPlayer + " ID CON " + instanceIDtarget);
         removePreviousGo();
-        Debug.Log("SONO IN PRE BREAK POST GO DESTR " + targetPlayer + " ID CON " + instanceIDtarget);
+        //Debug.Log("SONO IN PRE BREAK POST GO DESTR " + targetPlayer + " ID CON " + instanceIDtarget);
         breakAttack();
 
     }
@@ -698,7 +722,6 @@ public class BossProfile : moreSpecificProfile
             Destroy(goAoE.gameObject);
         }
     }
-
 
 }
 
