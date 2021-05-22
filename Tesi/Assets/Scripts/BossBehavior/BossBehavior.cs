@@ -106,6 +106,8 @@ public class BossBehavior : Agent
         sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
         sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
         sensor.AddObservation(champsKO);
+        sensor.AddObservation(chainRanged);
+        sensor.AddObservation(chainRay);
 
         for (int i=0; i< playersParty.Length; i++)
         {
@@ -294,18 +296,27 @@ public class BossBehavior : Agent
                 {
                     if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
-                        if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                        if (targetForAttack.GetComponent<moreSpecificProfile>().getDefUsed())
                         {
-                            chainRanged = false;
-                            previousRangedTargetID = 0;
-                            this.AddReward(-0.05f);
+                            chainRay = true;
+                            this.AddReward(0.02f);
                         }
                         else
                         {
-                            chainRay = true;
-                            
-                            //qua mettere il fatto che non puo' usare stessa azione dopo
+                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                            {
+                                chainRanged = false;
+                                previousRangedTargetID = 0;
+                                this.AddReward(-0.1f);
+                            }
+                            else
+                            {
+                                chainRay = true;
+
+                                //qua mettere il fatto che non puo' usare stessa azione dopo
+                            }
                         }
+                       
                     }
                     else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                     {
@@ -316,14 +327,14 @@ public class BossBehavior : Agent
                     {
                         chainRanged = false;
                         previousRangedTargetID = 0;
-                        this.AddReward(-0.1f);
+                        this.AddReward(-0.25f);
                     }
                 }
                 else
                 {
                     chainRanged = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.05f);
+                    this.AddReward(-0.1f);
                 }
 
                 
