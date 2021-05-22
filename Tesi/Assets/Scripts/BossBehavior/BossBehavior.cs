@@ -627,7 +627,7 @@ public class BossBehavior : Agent
                 }
                 else
                 {
-                    this.AddReward(-0.05f);//neg reward: ranged attack on Bruiser or Tank
+                    this.AddReward(-0.1f);//neg reward: ranged attack on Bruiser or Tank
                 }
                 //qua mettere il fatto che non puo' usare stessa azione dopo
             }
@@ -643,7 +643,7 @@ public class BossBehavior : Agent
                     else
                     {
                         chainRay = true;
-                        bonusFutureReward = 0.02f;
+                        bonusFutureReward = 0.06f;
                         previousRangedTargetID = targetForAttack.GetInstanceID();
                         //qua mettere il fatto che non puo' usare stessa azione dopo
                     }
@@ -651,12 +651,12 @@ public class BossBehavior : Agent
                 else if (targetForAttack.tag.Equals("Healer"))
                 {
                     chainRay = true;
-                    bonusFutureReward = 0.02f;
+                    bonusFutureReward = 0.06f;
                     previousRangedTargetID = targetForAttack.GetInstanceID();
                 }
                 else
                 {
-                    this.AddReward(-0.08f);//neg reward: ranged attack on Bruiser or Tank
+                    this.AddReward(-0.12f);//neg reward: ranged attack on Bruiser or Tank
                     previousRangedTargetID = 0;
                 }
                 //qua mettere il fatto che non puo' usare stessa azione dopo
@@ -668,7 +668,7 @@ public class BossBehavior : Agent
                     if ( rangedChampAlive() )
                     {
                         previousRangedTargetID = 0;
-                        this.AddReward(-0.1f);
+                        this.AddReward(-0.2f);
                     }
                     else
                     {
@@ -681,7 +681,7 @@ public class BossBehavior : Agent
                                     if (swingRayCastControll())
                                     {
                                         breakBefore = false;
-                                        this.AddReward(0.12f);
+                                        this.AddReward(0.15f);
                                     }
                                     else
                                     {
@@ -744,7 +744,7 @@ public class BossBehavior : Agent
                                         if (swingRayCastControll())
                                         {
                                             breakBefore = false;
-                                            this.AddReward(0.12f);
+                                            this.AddReward(0.15f);
                                         }
                                         else
                                         {
@@ -797,7 +797,7 @@ public class BossBehavior : Agent
                     //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
                     breakBefore = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
@@ -807,7 +807,7 @@ public class BossBehavior : Agent
                     if (rangedChampAlive())
                     {
                         previousRangedTargetID = 0;
-                        this.AddReward(-0.1f);
+                        this.AddReward(-0.2f);
                     }
                     else
                     {
@@ -820,7 +820,7 @@ public class BossBehavior : Agent
                                     if (!swingRayCastControll())
                                     {
                                         breakBefore = false;
-                                        this.AddReward(0.12f);
+                                        this.AddReward(0.14f);
                                     }
                                     else
                                     {
@@ -990,7 +990,7 @@ public class BossBehavior : Agent
                     //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
                     previousRangedTargetID = 0;
                     breakBefore = false;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
             else if (actionForBoss == 4)//BREAK ATTACK  ricordare di settare correttamente i flag di break a false anche in ranged e ray sopra quando fa casino
@@ -1000,7 +1000,7 @@ public class BossBehavior : Agent
                     if (rangedChampAlive())
                     {
                         previousRangedTargetID = 0;
-                        this.AddReward(-0.1f);
+                        this.AddReward(-0.2f);
                     }
                     else
                     {
@@ -1078,7 +1078,7 @@ public class BossBehavior : Agent
                     //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
                     previousRangedTargetID = 0;
                     breakBefore = false;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
             else // ACTION 5 AoE attack
@@ -1087,7 +1087,7 @@ public class BossBehavior : Agent
                 {
                     previousRangedTargetID = 0;
                     breakBefore = false;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
                 else
                 {
@@ -1104,14 +1104,14 @@ public class BossBehavior : Agent
                         {
                             previousRangedTargetID = 0;
                             bonusFutureReward = 0.0f;
-                            this.AddReward(0.01f);
+                            this.AddReward(0.02f);
                             breakBefore = false;
                         }
                         else
                         {
                             previousRangedTargetID = 0;
                             bonusFutureReward = 0.0f;
-                            this.AddReward(-0.1f);
+                            this.AddReward(-0.2f);
                             breakBefore = false;
                         }
                         //next action can't be that
@@ -1134,7 +1134,7 @@ public class BossBehavior : Agent
                         {
                             previousRangedTargetID = 0;
                             bonusFutureReward = 0.0f;
-                            this.AddReward(-0.1f);
+                            this.AddReward(-0.2f);
                         }
                     }
                 }
