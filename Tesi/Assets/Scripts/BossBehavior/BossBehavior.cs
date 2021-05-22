@@ -30,7 +30,6 @@ public class BossBehavior : Agent
     private bool breakBefore = false;
 
     private int previousRangedTargetID = 0;
-    private int previousRayTarget;
 
     private int[] actionChoose = new int[1];
     private int[] actionTarget;
@@ -108,6 +107,7 @@ public class BossBehavior : Agent
         sensor.AddObservation(champsKO);
         sensor.AddObservation(chainRanged);
         sensor.AddObservation(chainRay);
+        sensor.AddObservation(previousRangedTargetID);
 
         for (int i=0; i< playersParty.Length; i++)
         {
@@ -116,7 +116,7 @@ public class BossBehavior : Agent
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getDefUsed());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-            //sensor.AddObservation(playersParty[i]);
+            sensor.AddObservation(playersParty[i].GetInstanceID());
         }
         
         /*
@@ -334,7 +334,7 @@ public class BossBehavior : Agent
                 {
                     chainRanged = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
 
                 
@@ -346,13 +346,13 @@ public class BossBehavior : Agent
                     chainRanged = false;
                     chainRay = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }else if (actionForBoss == 1)//RAY
                 {
                     chainRanged = false;
                     chainRay = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
                 else if (actionForBoss == 2)//SWING ATTACK
                 {
