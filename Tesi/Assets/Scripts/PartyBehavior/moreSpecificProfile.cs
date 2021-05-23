@@ -17,6 +17,7 @@ public class moreSpecificProfile : aProfile
     private bool isDefending;
     private int alive = 0; //0 alive, 1 dead
 
+    private int typeCode; //0 TANK, 1 BRUISER, 2 MAGE, 3 HEALER
 
     private bool usedDef;
 
@@ -56,6 +57,8 @@ public class moreSpecificProfile : aProfile
                 currenthp = totalhp;
                 damage = partyData.damageTank;
                 armor = partyData.armorTank;
+
+                typeCode = 0;
                 break;
 
             case "Bruiser":
@@ -63,6 +66,8 @@ public class moreSpecificProfile : aProfile
                 currenthp = totalhp;
                 damage = partyData.damageBruiser;
                 armor = partyData.armorBruiser;
+
+                typeCode = 1;
                 break;
 
             case "Mage":
@@ -70,6 +75,8 @@ public class moreSpecificProfile : aProfile
                 currenthp = totalhp;
                 damage = partyData.damageMage;
                 armor = partyData.armorMage;
+
+                typeCode = 2;
                 break;
 
             case "Healer":
@@ -77,6 +84,8 @@ public class moreSpecificProfile : aProfile
                 currenthp = totalhp;
                 damage = partyData.damageHealer;
                 armor = partyData.armorHealer;
+
+                typeCode = 3;
                 break;
 
             case "Boss":

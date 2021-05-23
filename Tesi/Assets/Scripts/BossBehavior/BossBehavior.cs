@@ -495,7 +495,7 @@ public class BossBehavior : Agent
                 chainRay = false;
                 bonusFutureReward = 0.0f;
                 previousRangedTargetID = 0;
-                this.AddReward(-0.05f);
+                this.AddReward(-0.1f);
             }
             else if (actionForBoss == 2)//SWING ATTACK
             {
@@ -510,7 +510,7 @@ public class BossBehavior : Agent
                     }
                     else
                     {
-                        this.AddReward(-0.03f);
+                        this.AddReward(-0.08f);
                         chainRay = false;
                         previousRangedTargetID = 0;
                         bonusFutureReward = 0.0f;
@@ -528,7 +528,7 @@ public class BossBehavior : Agent
                     }
                     else
                     {
-                        this.AddReward(-0.03f);
+                        this.AddReward(-0.08f);
                         chainRay = false;
                         previousRangedTargetID = 0;
                         bonusFutureReward = 0.0f;
@@ -539,21 +539,21 @@ public class BossBehavior : Agent
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
             {
                 if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                 {
-                    this.AddReward(0.07f + bonusFutureReward);
+                    this.AddReward(0.08f + bonusFutureReward);
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
                 }
                 else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                 {
-                    this.AddReward(0.07f + bonusFutureReward);
+                    this.AddReward(0.08f + bonusFutureReward);
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
@@ -563,22 +563,24 @@ public class BossBehavior : Agent
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
             else if (actionForBoss == 4)//BREAK ATTACK
             {
                 if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                 {
-                    this.AddReward(0.04f + bonusFutureReward);
+                    this.AddReward(0.05f + bonusFutureReward);
                     chainRay = false;
+                    breakBefore = true;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
                 }
                 else if (targetForAttack.tag.Equals("Healer") && targetForAttack.GetInstanceID() == previousRangedTargetID)
                 {
-                    this.AddReward(0.04f + bonusFutureReward);
+                    this.AddReward(0.05f + bonusFutureReward);
                     chainRay = false;
+                    breakBefore = true;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
                 }
@@ -587,14 +589,14 @@ public class BossBehavior : Agent
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
             else /// ATTACK 5 AoE
             {
                 if (targetInAoErange() >= 3)
                 {
-                    this.AddReward(0.03f + bonusFutureReward);
+                    this.AddReward(0.05f + bonusFutureReward);
                     chainRanged = false;
                     chainRay = false;
                     previousRangedTargetID = 0;
@@ -614,7 +616,7 @@ public class BossBehavior : Agent
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
-                    this.AddReward(-0.1f);
+                    this.AddReward(-0.2f);
                 }
             }
         }
