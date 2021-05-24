@@ -67,8 +67,12 @@ public class MageProfile : moreSpecificProfile
         {
             if (GetComponent<moreSpecificProfile>().getShooting())
             {
-                go.transform.LookAt(boss.transform.position);
-                go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
+                if (null != go)
+                {
+                    go.transform.LookAt(boss.transform.position);
+                    go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
+                }
+
             }
 
             if (chargingUlt)
