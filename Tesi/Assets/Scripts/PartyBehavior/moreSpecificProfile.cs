@@ -118,6 +118,11 @@ public class moreSpecificProfile : aProfile
         flagResetepisode = value;
     }
 
+    public int getTypeCode()
+    {
+        return typeCode;
+    }
+
     protected override float getTotalLife()
     {
         return totalhp;
