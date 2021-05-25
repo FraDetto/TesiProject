@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7037773906dad164dae2ba435e34c85f, type: 3}
-  m_Name: 
+  m_Name: Data
   m_EditorClassIdentifier: 
   hpTank: 600
   damageTank: 110
