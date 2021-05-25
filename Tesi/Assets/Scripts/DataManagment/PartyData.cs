@@ -42,7 +42,7 @@ public class PartyData : ScriptableObject
     /// BOSS VALUES
     /// </summary>
     /// 
-    public float hpBoss = 3650.0f;
+    public float hpBoss = 3900.0f;
     public float damageBoss = 200.0f;
     public float armorBoss = 120.0f;
 

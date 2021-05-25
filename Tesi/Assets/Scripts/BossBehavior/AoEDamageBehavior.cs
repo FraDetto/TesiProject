@@ -15,7 +15,7 @@ public class AoEDamageBehavior : MonoBehaviour
         {
             if (other.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && !other.GetComponent<moreSpecificProfile>().publicGetIsDefending() )
             {
-                other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(((damageCharacter / 100) * 50));
+                other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(((damageCharacter / 100) * 55));
                 /*
                 for (int i = 0; i < playersHit.Length; i++)
                 {
