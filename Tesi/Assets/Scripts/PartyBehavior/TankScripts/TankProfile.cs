@@ -30,9 +30,9 @@ public class TankProfile : moreSpecificProfile
     private float swordDuration = 1.0f;
     private float timeCoolDownSwordAttack = 2.0f;
     private float shieldDuration = 2.0f;
-    private float timeCoolDownShield = 10.0f;
+    private float timeCoolDownShield = 12.0f;
     private float specialDuration = 6.0f;
-    private float timeCoolDownSpecial = 16.0f;
+    private float timeCoolDownSpecial = 22.0f;
 
     private float timeRollCooldown = 2.0f;
 

@@ -33,11 +33,11 @@ public class MageProfile : moreSpecificProfile
 
     public float speedSpells = 25.0f;
 
-    private float timeCoolDownMagicAttack = 2.0f;
+    private float timeCoolDownMagicAttack = 2.5f;
     private float defenseSpellDuration = 2.0f;
-    private float timeCoolDownDefenseSpell = 10.0f;
+    private float timeCoolDownDefenseSpell = 12.0f;
     private float specialDuration = 3.0f;
-    private float timeCoolDownSpecial = 16.0f;
+    private float timeCoolDownSpecial = 30.0f;
 
     private float timeRollCooldown = 2.0f;
 

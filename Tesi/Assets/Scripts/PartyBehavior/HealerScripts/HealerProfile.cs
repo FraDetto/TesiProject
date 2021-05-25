@@ -39,9 +39,9 @@ public class HealerProfile : moreSpecificProfile
 
     private float timeCoolDownMagicAttack = 2.0f;
     private float healingActivation = 1.5f;
-    private float timeCoolDownheal = 10.0f;
+    private float timeCoolDownheal = 8.0f;
     private float timeSpecialActivation = 0.8f;
-    private float timeCoolDownSpecial = 16.0f;
+    private float timeCoolDownSpecial = 20.0f;
 
     private float timeRollCooldown = 2.0f;
 

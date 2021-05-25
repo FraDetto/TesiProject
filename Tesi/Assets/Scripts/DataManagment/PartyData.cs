@@ -19,7 +19,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpBruiser = 450.0f;
-    public float damageBruiser = 135.0f;
+    public float damageBruiser = 130.0f;
     public float armorBruiser = 60.0f;
 
     /// <summary>
@@ -27,7 +27,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpMage = 300.0f;
-    public float damageMage = 160.0f;
+    public float damageMage = 155.0f;
     public float armorMage = 45.0f;
 
     /// <summary>

@@ -16,10 +16,10 @@ MonoBehaviour:
   damageTank: 110
   armorTank: 80
   hpBruiser: 450
-  damageBruiser: 135
+  damageBruiser: 130
   armorBruiser: 60
   hpMage: 300
-  damageMage: 160
+  damageMage: 155
   armorMage: 45
   hpHealer: 380
   damageHealer: 90
