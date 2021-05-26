@@ -20,7 +20,7 @@ public class TankProfile : moreSpecificProfile
     public GameObject shieldTank;
 
     private GameObject boss;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private GameObject go;
     private Transform pointSpawnSword;
     private Transform pointSpawnShield;
@@ -50,7 +50,7 @@ public class TankProfile : moreSpecificProfile
     void Start()
     {
 
-        rb = GetComponent<Rigidbody>();
+       // rb = GetComponent<Rigidbody>();
         pointSpawnSword = transform.GetChild(1);
         pointSpawnShield = transform.GetChild(2);
         pointSpawnHealHealer = transform.GetChild(3);

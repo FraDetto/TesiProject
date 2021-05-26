@@ -22,7 +22,7 @@ public class MageProfile : moreSpecificProfile
     private GameObject boss;
     public Transform pointSpawnFireBall;
     public Transform pointSpawnUlt;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private GameObject go;
 
     private Vector3 scaleChange;
@@ -55,7 +55,7 @@ public class MageProfile : moreSpecificProfile
         //boss = GameObject.FindGameObjectWithTag("Boss");
         scaleChange = new Vector3(0.1f, 0.1f, 0.1f);
 
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
 
         StartCoroutine(waitAfterUlti());
     }

@@ -332,6 +332,7 @@ MonoBehaviour:
   partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
   healthBar: {fileID: 6412984799792422469}
   shieldBar: {fileID: 587697858632238180}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -366,7 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7419a19b1f79d56459db34fba1691488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueOfZAfterMovement: 0
   distanceRange: 7
   speed: 15
   chaseFlag: 0
@@ -389,6 +389,7 @@ MonoBehaviour:
   partyData: {fileID: 0}
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -406,6 +407,7 @@ MonoBehaviour:
   isDashing: 0
   sword: {fileID: 1550275239034851887, guid: 8567d0e39591fde4691b8fdac17d7528, type: 3}
   HealSign: {fileID: 5657558105343175916, guid: d747bdf1c4480b046844659c73a95af2, type: 3}
+  rb: {fileID: 1274155969209294689}
   m_PlayerMask:
     serializedVersion: 2
     m_Bits: 64

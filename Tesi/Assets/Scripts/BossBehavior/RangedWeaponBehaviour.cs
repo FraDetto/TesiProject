@@ -18,21 +18,31 @@ public class RangedWeaponBehaviour : MonoBehaviour
 
                 //this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
                 //this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                this.transform.GetComponentInParent<BossProfile>().isShooting = false;
+                this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
+                this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
+                this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                Destroy(this.gameObject);
             }
             else
             {
                 if (other.GetComponent<moreSpecificProfile>().publicGetIsDefending())
                 {
                     Debug.Log("PLAYER SI STA DIFENDENDO SDDDDDDDDDDOOOOOONG SPLAASH");
+                    this.transform.GetComponentInParent<BossProfile>().isShooting = false;
+                    this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
+                    this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
+                    this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
+                    Destroy(this.gameObject);
                 }
 
 
             }
-            this.transform.GetComponentInParent<BossProfile>().isShooting = false;
+            /*this.transform.GetComponentInParent<BossProfile>().isShooting = false;
             this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
             this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
             this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
-            Destroy(this.gameObject);
+            Destroy(this.gameObject);*/
         }
         else
         {

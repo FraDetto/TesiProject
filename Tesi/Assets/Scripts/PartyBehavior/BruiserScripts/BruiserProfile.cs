@@ -23,7 +23,7 @@ public class BruiserProfile : moreSpecificProfile
     private GameObject go;
     private Transform pointSpawnSword;
     private Transform HealSignSpawnPoint;
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     private float swordDuration = 1.4f;
     private float timeCoolDownSwordAttack = 2.5f;
@@ -44,7 +44,7 @@ public class BruiserProfile : moreSpecificProfile
     {
         pointSpawnSword = transform.GetChild(1);
         HealSignSpawnPoint = transform.GetChild(2);
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
 
         StartCoroutine(waitAfterUlti());
     }

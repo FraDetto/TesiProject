@@ -211,6 +211,7 @@ MonoBehaviour:
   isDashing: 0
   pointSpawnWindBall: {fileID: 8343963312369735543}
   pointSpawnHealHealer: {fileID: 6921424698161907159}
+  rb: {fileID: 1169127070104546554}
   healingText: {fileID: 5004143338378178936, guid: 85ff0493af34b0b4dad70ccb13b9f189, type: 3}
   windBall: {fileID: 3661356220469770728, guid: 012e12d9b3e683f4493a507f0a55dc57, type: 3}
   m_HealRadius: 100

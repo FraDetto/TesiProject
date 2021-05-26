@@ -288,7 +288,7 @@ public class BossProfile : moreSpecificProfile
             Debug.Log("PLAYER PER PROSSIMO ATTACCO " + player.tag + " ID " + player.GetInstanceID());
             reserveVarIDtarget = player.GetInstanceID();
             reserveVarTarget = player;
-            Debug.Log("PLAYER RISERVA " + reserveVarTarget.tag + " ID " + reserveVarIDtarget);
+            //Debug.Log("PLAYER RISERVA " + reserveVarTarget.tag + " ID " + reserveVarIDtarget);
 
             switch (attackCode)
             {

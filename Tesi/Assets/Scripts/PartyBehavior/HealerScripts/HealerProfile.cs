@@ -23,7 +23,7 @@ public class HealerProfile : moreSpecificProfile
 
     public Transform pointSpawnWindBall;
     public Transform pointSpawnHealHealer;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private GameObject go;
     private GameObject hs;
 
@@ -62,7 +62,7 @@ public class HealerProfile : moreSpecificProfile
         mage = GameObject.FindGameObjectWithTag("Mage");
         bruiser = GameObject.FindGameObjectWithTag("Bruiser");*/
 
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
 
         StartCoroutine(waitAfterUlti());
     }

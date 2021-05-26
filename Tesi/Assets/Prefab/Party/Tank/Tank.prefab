@@ -422,6 +422,7 @@ MonoBehaviour:
   partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
   healthBar: {fileID: 8236881134542758348}
   shieldBar: {fileID: 3689986232581402290}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -477,6 +478,7 @@ MonoBehaviour:
   partyData: {fileID: 0}
   healthBar: {fileID: 0}
   shieldBar: {fileID: 0}
+  flagResetepisode: 0
   totalhp: 0
   currenthp: 0
   shield: 0
@@ -494,6 +496,7 @@ MonoBehaviour:
   isDashing: 0
   sword: {fileID: 2565423017887597707, guid: 972f7d13836cad947a1da879d0bb07b3, type: 3}
   shieldTank: {fileID: 5527568933421180270, guid: 131af02ddd423e94f94a18a6b9c84ea4, type: 3}
+  rb: {fileID: 9151073715155477595}
   m_PlayerMask:
     serializedVersion: 2
     m_Bits: 64
