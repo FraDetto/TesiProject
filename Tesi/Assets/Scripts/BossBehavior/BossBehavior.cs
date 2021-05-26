@@ -22,7 +22,8 @@ public class BossBehavior : Agent
     private BossProfile myProfile;
     private Vector3 startPosition;
 
-    private GameObject targetForAttack;
+    //private GameObject targetForAttack;
+    private int target;
 
     private bool chainRanged = false;
     private bool chainRay = false;
@@ -167,19 +168,20 @@ public class BossBehavior : Agent
 
         Debug.Log(" =====OnActionReceived===== " + " TARGET " + vectorAction[0] + " AZIONE " + vectorAction[1]);
         /// Number of targets 
-        int target = Mathf.FloorToInt(vectorAction[0]);
+        target = Mathf.FloorToInt(vectorAction[0]);
 
-        targetForAttack = playersParty[target];
+        //targetForAttack = playersParty[target];
+
 
         int actionForBoss = Mathf.FloorToInt(vectorAction[1]);
 
         actionChoose[0] = actionForBoss;
 
-        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + targetForAttack.tag + " CON ID "+ targetForAttack.GetInstanceID());
+        Debug.Log("PLAYER PER PROSSIMO ATTACCO " + playersParty[target].tag + " CON ID "+ playersParty[target].GetInstanceID());
 
         turnBossToTarget();
 
-        myProfile.hubAttacks(actionForBoss, targetForAttack);
+        myProfile.hubAttacks(actionForBoss, playersParty[target]);
 
 
         re = StartCoroutine(timeValueReward(actionForBoss));
@@ -274,7 +276,7 @@ public class BossBehavior : Agent
             {
                 if (actionForBoss == 0)//RANGED
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().getDefUsed())
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getDefUsed())
                     {
                         Debug.Log(" RI-USATO RANGED----------- " + actionChoose);
                         chainRanged = false;
@@ -284,17 +286,17 @@ public class BossBehavior : Agent
                     else
                     {
                         //if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
-                        if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                         {
-                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
                             {
-                                previousRangedTargetID = targetForAttack.GetInstanceID();
+                                previousRangedTargetID = playersParty[target].GetInstanceID();
                                 bonusFutureReward = 0.04f;
                             }//se non difende nujlla neutro
                         }
-                        else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                        else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                         {
-                            previousRangedTargetID = targetForAttack.GetInstanceID();
+                            previousRangedTargetID = playersParty[target].GetInstanceID();
                         }
                         else
                         {
@@ -304,16 +306,16 @@ public class BossBehavior : Agent
                 }
                 else if (actionForBoss == 1)//RAY ATTACK
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                     {
-                        if (targetForAttack.GetComponent<moreSpecificProfile>().getDefUsed())
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getDefUsed())
                         {
                             chainRay = true;
                             this.AddReward(0.1f);
                         }
                         else
                         {
-                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
                             {
                                 chainRanged = false;
                                 previousRangedTargetID = 0;
@@ -328,7 +330,7 @@ public class BossBehavior : Agent
                         }
                        
                     }
-                    else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                     {
                         chainRay = true;
                         //qua mettere il fatto che non puo' usare stessa azione dopo
@@ -357,7 +359,7 @@ public class BossBehavior : Agent
                     chainRanged = false;
                     chainRay = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.15f);
+                    this.AddReward(-0.18f);
                 }else if (actionForBoss == 1)//RAY
                 {
                     chainRanged = false;
@@ -367,7 +369,7 @@ public class BossBehavior : Agent
                 }
                 else if (actionForBoss == 2)//SWING ATTACK
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                     {
                         if (swingRayCastControll())
                         {
@@ -387,7 +389,7 @@ public class BossBehavior : Agent
                         }
                         
                     }
-                    else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                     {
                         if (swingRayCastControll())
                         {
@@ -417,7 +419,7 @@ public class BossBehavior : Agent
                 }
                 else if (actionForBoss == 3)//AHEAD ATTACK
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                     {
                         if (!swingRayCastControll())
                         {
@@ -428,7 +430,7 @@ public class BossBehavior : Agent
                             this.AddReward(-0.12f);
                         }
                     }
-                    else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                     {
                         if (!swingRayCastControll())
                         {
@@ -452,11 +454,11 @@ public class BossBehavior : Agent
                 }
                 else if (actionForBoss == 4)//BREAK ATTACK
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                     {
                         this.AddReward(0.08f + bonusFutureReward);
                     }
-                    else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                     {
                         this.AddReward(0.08f + bonusFutureReward);
                     }
@@ -511,11 +513,11 @@ public class BossBehavior : Agent
                 chainRay = false;
                 bonusFutureReward = 0.0f;
                 previousRangedTargetID = 0;
-                this.AddReward(-0.15f);
+                this.AddReward(-0.18f);
             }
             else if (actionForBoss == 2)//SWING ATTACK
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                 {
                     if (swingRayCastControll())
                     {
@@ -533,7 +535,7 @@ public class BossBehavior : Agent
                     }
 
                 }
-                else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                 {
                     if (swingRayCastControll())
                     {
@@ -560,7 +562,7 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                 {
                     if (!swingRayCastControll())
                     {
@@ -571,7 +573,7 @@ public class BossBehavior : Agent
                         this.AddReward(-0.08f);
                     }
                 }
-                else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                 {
                     if (!swingRayCastControll())
                     {
@@ -592,7 +594,7 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 4)//BREAK ATTACK
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==2 && targetForAttack.GetInstanceID() == previousRangedTargetID)//MAGE
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                 {
                     this.AddReward(0.06f + bonusFutureReward);
                     chainRay = false;
@@ -600,7 +602,7 @@ public class BossBehavior : Agent
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
                 }
-                else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode()==3 && targetForAttack.GetInstanceID() == previousRangedTargetID)//HEALER
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                 {
                     this.AddReward(0.06f + bonusFutureReward);
                     chainRay = false;
@@ -654,20 +656,20 @@ public class BossBehavior : Agent
             {
                 //Debug.Log("FACCIO CONTROLLO METODI RANGED ALIVE " + rangedChampAlive() + " NUMERO ATTORONO " + targetInAoErange());
 
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
                     {
                         bonusFutureReward = 0.04f;     
                     }
-                    previousRangedTargetID = targetForAttack.GetInstanceID();
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
                     chainRanged = true;
                     this.AddReward(0.1f);
                 }
-                else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
                 {
                     chainRanged = true;
-                    previousRangedTargetID = targetForAttack.GetInstanceID();
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
                     this.AddReward(0.1f);
                 }
                 else
@@ -678,9 +680,9 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 1)//RAY ATTACK
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
                 {
-                    if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
                     {
                         previousRangedTargetID = 0;
                         this.AddReward(-0.05f);
@@ -690,16 +692,16 @@ public class BossBehavior : Agent
                         chainRay = true;
                         bonusFutureReward = 0.06f;
                         this.AddReward(0.15f);
-                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                        previousRangedTargetID = playersParty[target].GetInstanceID();
                         //qua mettere il fatto che non puo' usare stessa azione dopo
                     }
                 }
-                else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
                 {
                     chainRay = true;
                     bonusFutureReward = 0.06f;
                     this.AddReward(0.15f);
-                    previousRangedTargetID = targetForAttack.GetInstanceID();
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
                 }
                 else
                 {
@@ -710,7 +712,7 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 2)//SWING ATTACK
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 1 || targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1 || playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
                 {
                     if ( rangedChampAlive() )
                     {
@@ -719,9 +721,9 @@ public class BossBehavior : Agent
                     }
                     else
                     {
-                        if(targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
+                        if(playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
                         {
-                            if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                            if (playersParty[target].GetInstanceID() == previousRangedTargetID)
                             {
                                 if (breakBefore)// attacked Bruiser with a break Attack before
                                 {
@@ -753,12 +755,12 @@ public class BossBehavior : Agent
                                 {
                                     if (swingRayCastControll())
                                     {
-                                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                                        previousRangedTargetID = playersParty[target].GetInstanceID();
                                         this.AddReward(0.1f);
                                     }
                                     else
                                     {
-                                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                                        previousRangedTargetID = playersParty[target].GetInstanceID();
                                         this.AddReward(-0.08f);
                                     }
                                 }
@@ -771,7 +773,7 @@ public class BossBehavior : Agent
                             }
                             
                         }
-                        else if(targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
+                        else if(playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
                         {
                             if (bruiserAlive())
                             {
@@ -781,7 +783,7 @@ public class BossBehavior : Agent
                             }
                             else
                             {
-                                if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                                if (playersParty[target].GetInstanceID() == previousRangedTargetID)
                                 {
                                     if (breakBefore)
                                     {
@@ -814,12 +816,12 @@ public class BossBehavior : Agent
                                     {
                                         if (swingRayCastControll())
                                         {
-                                            previousRangedTargetID = targetForAttack.GetInstanceID();
+                                            previousRangedTargetID = playersParty[target].GetInstanceID();
                                             this.AddReward(0.1f);
                                         }
                                         else
                                         {
-                                            previousRangedTargetID = targetForAttack.GetInstanceID();
+                                            previousRangedTargetID = playersParty[target].GetInstanceID();
                                             this.AddReward(-0.08f);
                                         }
                                     }
@@ -844,7 +846,7 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 1 || targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1 || playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
                 {
                     if (rangedChampAlive())
                     {
@@ -853,9 +855,9 @@ public class BossBehavior : Agent
                     }
                     else
                     {
-                        if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
                         {
-                            if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                            if (playersParty[target].GetInstanceID() == previousRangedTargetID)
                             {
                                 if (breakBefore)// attacked Bruiser with a break Attack before
                                 {
@@ -866,7 +868,7 @@ public class BossBehavior : Agent
                                     }
                                     else
                                     {
-                                        if(targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife()/100*40))//if low HP
+                                        if(playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife()/100*40))//if low HP
                                         {
                                             breakBefore = false;
                                             this.AddReward(0.15f);
@@ -887,7 +889,7 @@ public class BossBehavior : Agent
                                     }
                                     else
                                     {
-                                        if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
                                         {
                                             this.AddReward(0.1f);
                                         }
@@ -910,7 +912,7 @@ public class BossBehavior : Agent
                                     }
                                     else
                                     {
-                                        if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
                                         {
                                             breakBefore = false;
                                             this.AddReward(0.1f);
@@ -932,7 +934,7 @@ public class BossBehavior : Agent
                             }
 
                         }
-                        else if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
+                        else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
                         {
                             if (bruiserAlive())
                             {
@@ -942,7 +944,7 @@ public class BossBehavior : Agent
                             }
                             else
                             {
-                                if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                                if (playersParty[target].GetInstanceID() == previousRangedTargetID)
                                 {
                                     if (breakBefore)
                                     {
@@ -953,7 +955,7 @@ public class BossBehavior : Agent
                                         }
                                         else
                                         {
-                                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
                                             {
                                                 breakBefore = false;
                                                 this.AddReward(0.15f);
@@ -974,7 +976,7 @@ public class BossBehavior : Agent
                                         }
                                         else
                                         {
-                                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
                                             {
                                                 this.AddReward(0.1f);
                                             }
@@ -997,7 +999,7 @@ public class BossBehavior : Agent
                                         }
                                         else
                                         {
-                                            if (targetForAttack.GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (targetForAttack.GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
                                             {
                                                 breakBefore = false;
                                                 this.AddReward(0.1f);
@@ -1031,7 +1033,7 @@ public class BossBehavior : Agent
             }
             else if (actionForBoss == 4)//BREAK ATTACK  ricordare di settare correttamente i flag di break a false anche in ranged e ray sopra quando fa casino
             {
-                if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 1|| targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1|| playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
                 {
                     if (rangedChampAlive())
                     {
@@ -1040,15 +1042,15 @@ public class BossBehavior : Agent
                     }
                     else
                     {
-                        if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
                         {
                             if(previousRangedTargetID == 0)
                             {
                                 breakBefore = true;
-                                previousRangedTargetID = targetForAttack.GetInstanceID();
+                                previousRangedTargetID = playersParty[target].GetInstanceID();
                                 this.AddReward(0.07f);
                             }
-                            else if(targetForAttack.GetInstanceID() == previousRangedTargetID)
+                            else if(playersParty[target].GetInstanceID() == previousRangedTargetID)
                             {
                                 if (!breakBefore)
                                 {
@@ -1070,7 +1072,7 @@ public class BossBehavior : Agent
                         }
                         else // case of tank
                         {
-                            if (targetForAttack.GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
+                            if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
                             {
                                 if (bruiserAlive())
                                 {
@@ -1083,10 +1085,10 @@ public class BossBehavior : Agent
                                     if (previousRangedTargetID == 0)
                                     {
                                         breakBefore = true;
-                                        previousRangedTargetID = targetForAttack.GetInstanceID();
+                                        previousRangedTargetID = playersParty[target].GetInstanceID();
                                         this.AddReward(0.07f);
                                     }
-                                    else if (targetForAttack.GetInstanceID() == previousRangedTargetID)
+                                    else if (playersParty[target].GetInstanceID() == previousRangedTargetID)
                                     {
                                         if (!breakBefore)
                                         {
@@ -1250,7 +1252,7 @@ public class BossBehavior : Agent
 
     public bool targetIsInRange() // true if target in range
     {
-        if ((targetForAttack.transform.position - transform.position).magnitude < 10.0f)
+        if ((playersParty[target].transform.position - transform.position).magnitude < 10.0f)
         {
             return true;
         }
@@ -1368,7 +1370,7 @@ public class BossBehavior : Agent
 
     public void turnBossToTarget()
     {
-        Vector3 verticalAdj = new Vector3(targetForAttack.transform.position.x, transform.position.y, targetForAttack.transform.position.z);
+        Vector3 verticalAdj = new Vector3(playersParty[target].transform.position.x, transform.position.y, playersParty[target].transform.position.z);
 
         transform.LookAt(verticalAdj);
     }
