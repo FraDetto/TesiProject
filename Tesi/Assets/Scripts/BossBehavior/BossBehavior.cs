@@ -73,14 +73,16 @@ public class BossBehavior : Agent
 
         if (!firstRun)
         {
-            playersParty = gameManager.generatePartyInGame();
+            //playersParty = gameManager.generatePartyInGame();
+            playersParty = gameManager.generateStandardPartyInGame();
             myProfile.assignPartyForProfile();
             GetComponent<moreSpecificProfile>().resetBossStats();
             takeTheAction();
         }
         else
         {
-            playersParty = gameManager.generatePartyInGame();
+            //playersParty = gameManager.generatePartyInGame();
+            playersParty = gameManager.generateStandardPartyInGame();
             myProfile.assignPartyForProfile();
         }
 
