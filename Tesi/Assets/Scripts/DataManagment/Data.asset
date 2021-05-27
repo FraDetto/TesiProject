@@ -24,6 +24,6 @@ MonoBehaviour:
   hpHealer: 380
   damageHealer: 90
   armorHealer: 53
-  hpBoss: 3650
+  hpBoss: 3900
   damageBoss: 200
   armorBoss: 120

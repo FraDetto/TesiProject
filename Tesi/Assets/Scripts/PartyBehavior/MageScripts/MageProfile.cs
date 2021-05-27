@@ -37,7 +37,7 @@ public class MageProfile : moreSpecificProfile
     private float defenseSpellDuration = 2.0f;
     private float timeCoolDownDefenseSpell = 12.0f;
     private float specialDuration = 3.0f;
-    private float timeCoolDownSpecial = 30.0f;
+    private float timeCoolDownSpecial = 35.0f;
 
     private float timeRollCooldown = 2.0f;
 

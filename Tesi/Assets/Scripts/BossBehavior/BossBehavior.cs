@@ -73,16 +73,16 @@ public class BossBehavior : Agent
 
         if (!firstRun)
         {
-            //playersParty = gameManager.generatePartyInGame();
-            playersParty = gameManager.generateStandardPartyInGame();
+            playersParty = gameManager.generatePartyInGame();
+            //playersParty = gameManager.generateStandardPartyInGame();
             myProfile.assignPartyForProfile();
             GetComponent<moreSpecificProfile>().resetBossStats();
             takeTheAction();
         }
         else
         {
-            //playersParty = gameManager.generatePartyInGame();
-            playersParty = gameManager.generateStandardPartyInGame();
+            playersParty = gameManager.generatePartyInGame();
+            //playersParty = gameManager.generateStandardPartyInGame();
             myProfile.assignPartyForProfile();
         }
 
@@ -109,7 +109,7 @@ public class BossBehavior : Agent
         Debug.Log(" =====CollectObservations===== ");
 
 
-       sensor.AddObservation(transform.position);
+        sensor.AddObservation(transform.position);
         sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
         sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
         sensor.AddObservation(champsKO);
@@ -122,33 +122,12 @@ public class BossBehavior : Agent
 
         for (int i=0; i< playersParty.Length; i++)
         {
-            sensor.AddObservation(playersParty[i].transform.position);
-            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetIsDefending());
-            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getDefUsed());
+            sensor.AddObservation(playersParty[i].transform.position);;
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
             sensor.AddObservation(playersParty[i].GetInstanceID());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
         }
-        
-        /*
-        sensor.AddObservation(playersParty[1].transform.position);
-        sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().publicGetIsDefending());
-        sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-        sensor.AddObservation(playersParty[1].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        sensor.AddObservation(playersParty[1]);
-
-        sensor.AddObservation(playersParty[2].transform.position);
-        sensor.AddObservation(playersParty[2].GetComponent<moreSpecificProfile>().publicGetIsDefending());
-        sensor.AddObservation(playersParty[2].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-        sensor.AddObservation(playersParty[2].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        sensor.AddObservation(playersParty[2]);
-
-        sensor.AddObservation(playersParty[3].transform.position);
-        sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().publicGetIsDefending());
-        sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-        sensor.AddObservation(playersParty[3].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        sensor.AddObservation(playersParty[3]);*/
 
         
         
@@ -186,10 +165,10 @@ public class BossBehavior : Agent
         myProfile.hubAttacks(actionForBoss, playersParty[target]);
 
 
-        re = StartCoroutine(timeValueReward(actionForBoss));
+        //re = StartCoroutine(timeValueReward(actionForBoss));
 
 
-        
+
 
         //StartCoroutine(timeBeforeAnOtherAction());
 
@@ -229,14 +208,871 @@ public class BossBehavior : Agent
         ///Bad: start a chain : next attack on a different champ or used on tank while bruiser alive and ranged dead OR used on melee while ranged are alive
         ///
 
-    }
 
+        Debug.Log(" =====VALUE REWARD===== " + actionChoose[0]);
+        if (chainRanged)
+        {
+            if (!chainRay)
+            {
+                if (actionForBoss == 1)//RAY ATTACK
+                {
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                    {
+                        chainRay = true;
+                        this.AddReward(0.15f);
+                        //qua mettere il fatto che non puo' usare stessa azione dopo                     
+                    }
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                    {
+                        chainRay = true;
+                        //qua mettere il fatto che non puo' usare stessa azione dopo
+                        this.AddReward(0.15f);
+                    }
+                    else
+                    {
+                        chainRanged = false;
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.15f);
+                    }
+                }
+                else
+                {
+                    chainRanged = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.15f);
+                }
+
+
+            }
+            else
+            {
+                if (actionForBoss == 0)//RANGED ATTACK
+                {
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.15f);
+                }
+                else if (actionForBoss == 1)//RAY
+                {
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.15f);
+                }
+                else if (actionForBoss == 2)//SWING ATTACK
+                {
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                    {
+                        if (swingRayCastControll())
+                        {
+                            this.AddReward(0.12f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.21f);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+
+                    }
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                    {
+                        if (swingRayCastControll())
+                        {
+                            this.AddReward(0.12f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.12f);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                    }
+                    else
+                    {
+                        this.AddReward(-0.15f);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                }
+                else if (actionForBoss == 3)//AHEAD ATTACK
+                {
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                    {
+                        if (!swingRayCastControll())
+                        {
+                            this.AddReward(0.12f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.12f);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                    }
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                    {
+                        if (!swingRayCastControll())
+                        {
+                            this.AddReward(0.12f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.12f);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                    }
+                    else
+                    {
+                        this.AddReward(-0.2f);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+
+
+                }
+                else if (actionForBoss == 4)//BREAK ATTACK
+                {
+                    if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                    {
+                        this.AddReward(0.08f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                    {
+                        this.AddReward(0.08f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.15f);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                }
+                else// ACTION 5 AoE
+                {
+
+                    this.AddReward(-0.15f);
+                    chainRanged = false;
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+            }
+
+
+        }
+        else if (chainRay)
+        {
+            if (actionForBoss == 0)//RANGED ATTACK
+            {
+                this.AddReward(-0.18f);
+                chainRay = false;
+                bonusFutureReward = 0.0f;
+                previousRangedTargetID = 0;
+            }
+            else if (actionForBoss == 2)//SWING ATTACK
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                {
+                    if (swingRayCastControll())
+                    {
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.08f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+
+                }
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                {
+                    if (swingRayCastControll())
+                    {
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.08f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                }
+                else
+                {
+                    this.AddReward(-0.2f);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+            }
+            else if (actionForBoss == 3)//AHEAD ATTACK
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                {
+                    if (!swingRayCastControll())
+                    {
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.08f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                }
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                {
+                    if (!swingRayCastControll())
+                    {
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                    else
+                    {
+                        this.AddReward(-0.08f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
+                    }
+                }
+                else
+                {
+                    this.AddReward(-0.2f);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+
+            }
+            else if (actionForBoss == 4)//BREAK ATTACK
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
+                {
+                    this.AddReward(0.06f + bonusFutureReward);
+                    chainRay = false;
+                    breakBefore = true;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
+                {
+                    this.AddReward(0.06f + bonusFutureReward);
+                    chainRay = false;
+                    breakBefore = true;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                }
+                else
+                {
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
+                    this.AddReward(-0.15f);
+                }
+            }
+            else /// ATTACK 5 AoE
+            {
+
+                this.AddReward(-0.15f);
+                chainRay = false;
+                previousRangedTargetID = 0;
+                bonusFutureReward = 0.0f;
+            }
+        }
+        else
+        {
+            if (actionForBoss == 0)// RANGED ATTACK
+            {
+                //Debug.Log("FACCIO CONTROLLO METODI RANGED ALIVE " + rangedChampAlive() + " NUMERO ATTORONO " + targetInAoErange());
+
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
+                {
+                    this.AddReward(0.1f);
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
+                    chainRanged = true;
+                    bonusFutureReward = 0.04f;
+                }
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
+                {
+                    this.AddReward(0.1f);
+                    chainRanged = true;
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
+                    bonusFutureReward = 0.04f;
+                }
+                else
+                {
+                    this.AddReward(-0.15f);//neg reward: ranged attack on Bruiser or Tank
+                }
+                //qua mettere il fatto che non puo' usare stessa azione dopo
+            }
+            else if (actionForBoss == 1)//RAY ATTACK
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
+                {
+                    this.AddReward(0.12f);
+                    chainRay = true;
+                    bonusFutureReward = 0.06f;
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
+                }
+                else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
+                {
+                    this.AddReward(0.12f);
+                    chainRay = true;
+                    bonusFutureReward = 0.06f;
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
+                }
+                else
+                {
+                    this.AddReward(-0.15f);//neg reward: ranged attack on Bruiser or Tank
+                    previousRangedTargetID = 0;
+                }
+                //qua mettere il fatto che non puo' usare stessa azione dopo
+            }
+            else if (actionForBoss == 2)//SWING ATTACK
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1 || playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
+                {
+                    if (rangedChampAlive())
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.15f);
+                    }
+                    else
+                    {
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
+                        {
+                            if (playersParty[target].GetInstanceID() == previousRangedTargetID)
+                            {
+                                if (breakBefore)// attacked Bruiser with a break Attack before
+                                {
+                                    if (swingRayCastControll())
+                                    {
+                                        this.AddReward(0.15f);
+                                    }
+                                    else
+                                    {
+                                        this.AddReward(-0.08f);
+                                    }
+                                }
+                                else// attacked Bruiser with a NON break Attack before
+                                {
+                                    if (swingRayCastControll())
+                                    {
+                                        this.AddReward(0.1f);
+                                    }
+                                    else
+                                    {
+                                        this.AddReward(-0.08f);
+                                    }
+                                }
+                                breakBefore = false;
+                            }
+                            else
+                            {
+                                if (previousRangedTargetID == 0)
+                                {
+                                    if (swingRayCastControll())
+                                    {
+                                        previousRangedTargetID = playersParty[target].GetInstanceID();
+                                        this.AddReward(0.1f);
+                                    }
+                                    else
+                                    {
+                                        previousRangedTargetID = playersParty[target].GetInstanceID();
+                                        this.AddReward(-0.08f);
+                                    }
+                                }
+                                else
+                                {
+                                    breakBefore = false;
+                                    previousRangedTargetID = 0;
+                                    this.AddReward(-0.15f);
+                                }
+                            }
+
+                        }
+                        else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
+                        {
+                            if (bruiserAlive())
+                            {
+                                breakBefore = false;
+                                previousRangedTargetID = 0;
+                                this.AddReward(-0.15f);
+                            }
+                            else
+                            {
+                                if (playersParty[target].GetInstanceID() == previousRangedTargetID)
+                                {
+                                    if (breakBefore)
+                                    {
+                                        if (swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.15f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(-0.08f);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (swingRayCastControll())
+                                        {
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            this.AddReward(-0.08f);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (previousRangedTargetID == 0)
+                                    {
+                                        if (swingRayCastControll())
+                                        {
+                                            previousRangedTargetID = playersParty[target].GetInstanceID();
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            previousRangedTargetID = playersParty[target].GetInstanceID();
+                                            this.AddReward(-0.08f);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        breakBefore = false;
+                                        previousRangedTargetID = 0;
+                                        this.AddReward(-0.15f);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
+                    breakBefore = false;
+                    previousRangedTargetID = 0;
+                    this.AddReward(-0.15f);
+                }
+            }
+            else if (actionForBoss == 3)//AHEAD ATTACK
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1 || playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
+                {
+                    if (rangedChampAlive())
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.15f);
+                    }
+                    else
+                    {
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
+                        {
+                            if (playersParty[target].GetInstanceID() == previousRangedTargetID)
+                            {
+                                if (breakBefore)// attacked Bruiser with a break Attack before
+                                {
+                                    if (!swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.15f);
+                                    }
+                                    else
+                                    {
+                                        if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.15f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(-0.08f);
+                                        }
+
+                                    }
+                                }
+                                else// attacked Bruiser with a NON break Attack before
+                                {
+                                    if (!swingRayCastControll())
+                                    {
+                                        this.AddReward(0.1f);
+                                    }
+                                    else
+                                    {
+                                        if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        {
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            this.AddReward(-0.08f);
+                                        }
+
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (previousRangedTargetID == 0)
+                                {
+                                    if (!swingRayCastControll())
+                                    {
+                                        breakBefore = false;
+                                        this.AddReward(0.1f);
+                                    }
+                                    else
+                                    {
+                                        if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(-0.08f);
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    breakBefore = false;
+                                    previousRangedTargetID = 0;
+                                    this.AddReward(-0.15f);
+                                }
+                            }
+
+                        }
+                        else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
+                        {
+                            if (bruiserAlive())
+                            {
+                                breakBefore = false;
+                                previousRangedTargetID = 0;
+                                this.AddReward(-0.15f);
+                            }
+                            else
+                            {
+                                if (playersParty[target].GetInstanceID() == previousRangedTargetID)
+                                {
+                                    if (breakBefore)
+                                    {
+                                        if (!swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.15f);
+                                        }
+                                        else
+                                        {
+                                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.15f);
+                                            }
+                                            else
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(-0.08f);
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!swingRayCastControll())
+                                        {
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            {
+                                                this.AddReward(0.1f);
+                                            }
+                                            else
+                                            {
+                                                this.AddReward(-0.08f);
+                                            }
+
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (previousRangedTargetID == 0)
+                                    {
+                                        if (!swingRayCastControll())
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(0.1f);
+                                        }
+                                        else
+                                        {
+                                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetCurrentLife() <= (playersParty[target].GetComponent<moreSpecificProfile>().publicGetTotalLife() / 100 * 40))//if low HP
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(0.1f);
+                                            }
+                                            else
+                                            {
+                                                breakBefore = false;
+                                                this.AddReward(-0.08f);
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        breakBefore = false;
+                                        previousRangedTargetID = 0;
+                                        this.AddReward(-0.15f);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
+                    previousRangedTargetID = 0;
+                    breakBefore = false;
+                    this.AddReward(-0.2f);
+                }
+            }
+            else if (actionForBoss == 4)//BREAK ATTACK  ricordare di settare correttamente i flag di break a false anche in ranged e ray sopra quando fa casino
+            {
+                if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1 || playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//BRUISER OR TANK
+                {
+                    if (rangedChampAlive())
+                    {
+                        previousRangedTargetID = 0;
+                        this.AddReward(-0.15f);
+                    }
+                    else
+                    {
+                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 1)//BRUISER
+                        {
+                            if (previousRangedTargetID == 0)
+                            {
+                                breakBefore = true;
+                                previousRangedTargetID = playersParty[target].GetInstanceID();
+                                this.AddReward(0.07f);
+                            }
+                            else if (playersParty[target].GetInstanceID() == previousRangedTargetID)
+                            {
+                                if (!breakBefore)
+                                {
+                                    breakBefore = true;
+                                    this.AddReward(0.08f);
+                                }
+                                else
+                                {
+                                    breakBefore = false;
+                                    this.AddReward(-0.08f);
+                                }
+                            }
+                            else
+                            {
+                                previousRangedTargetID = 0;
+                                breakBefore = false;
+                                this.AddReward(-0.15f);
+                            }
+                        }
+                        else // case of tank
+                        {
+                            if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 0)//TANK
+                            {
+                                if (bruiserAlive())
+                                {
+                                    breakBefore = false;
+                                    previousRangedTargetID = 0;
+                                    this.AddReward(-0.15f);
+                                }
+                                else
+                                {
+                                    if (previousRangedTargetID == 0)
+                                    {
+                                        breakBefore = true;
+                                        previousRangedTargetID = playersParty[target].GetInstanceID();
+                                        this.AddReward(0.07f);
+                                    }
+                                    else if (playersParty[target].GetInstanceID() == previousRangedTargetID)
+                                    {
+                                        if (!breakBefore)
+                                        {
+                                            breakBefore = true;
+                                            this.AddReward(0.08f);
+                                        }
+                                        else
+                                        {
+                                            breakBefore = false;
+                                            this.AddReward(-0.08f);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        previousRangedTargetID = 0;
+                                        breakBefore = false;
+                                        this.AddReward(-0.15f);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //attack's target: MAGE or HEALER and obv not in range because is a single attack not after a RAY
+                    previousRangedTargetID = 0;
+                    breakBefore = false;
+                    this.AddReward(-0.15f);
+                }
+            }
+            else // ACTION 5 AoE attack
+            {
+                if (rangedChampAlive())
+                {
+                    previousRangedTargetID = 0;
+                    breakBefore = false;
+                    this.AddReward(-0.15f);
+                }
+                else
+                {
+                    if (breakBefore)
+                    {
+                        if (targetInAoErange() >= 3)
+                        {
+                            this.AddReward(0.15f);
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            breakBefore = false;
+                        }
+                        else if (targetInAoErange() >= 1 && targetInAoErange() <= 2)
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(-0.08f);
+                            breakBefore = false;
+                        }
+                        else
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(-0.15f);
+                            breakBefore = false;
+                        }
+                        //next action can't be that
+                    }
+                    else
+                    {
+                        if (targetInAoErange() >= 3)
+                        {
+                            this.AddReward(0.1f);
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                        }
+                        else if (targetInAoErange() >= 1 && targetInAoErange() <= 2)
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(-0.08f);
+                        }
+                        else
+                        {
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
+                            this.AddReward(-0.15f);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        co = StartCoroutine(timeBeforeAnOtherAction());
+
+
+
+
+
+
+
+
+    }
+    /*
     public IEnumerator timeValueReward(int actionForBoss)
     {
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(0.5f);
         valueAndApplyReward(actionForBoss);
-    }
+    }*/
 
     public IEnumerator timeBeforeAnOtherAction()
     {
@@ -269,6 +1105,7 @@ public class BossBehavior : Agent
        
     }
 
+    /*
     public void valueAndApplyReward(int actionForBoss)
     {
         Debug.Log(" =====VALUE REWARD===== " + actionChoose[0]);
@@ -276,67 +1113,19 @@ public class BossBehavior : Agent
         {
             if (!chainRay)
             {
-                if (actionForBoss == 0)//RANGED
-                {
-                    if (playersParty[target].GetComponent<moreSpecificProfile>().getDefUsed())
-                    {
-                        Debug.Log(" RI-USATO RANGED----------- " + actionChoose);
-                        chainRanged = false;
-                        previousRangedTargetID = 0;
-                        this.AddReward(-0.1f);
-                    }
-                    else
-                    {
-                        //if (targetForAttack.tag.Equals("Mage") && targetForAttack.GetInstanceID() == previousRangedTargetID)
-                        if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
-                        {
-                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
-                            {
-                                previousRangedTargetID = playersParty[target].GetInstanceID();
-                                bonusFutureReward = 0.04f;
-                            }//se non difende nujlla neutro
-                        }
-                        else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
-                        {
-                            previousRangedTargetID = playersParty[target].GetInstanceID();
-                        }
-                        else
-                        {
-                            this.AddReward(-0.15f);//neg reward: ranged attack on Bruiser or Tank
-                        }
-                    }
-                }
-                else if (actionForBoss == 1)//RAY ATTACK
+                if (actionForBoss == 1)//RAY ATTACK
                 {
                     if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
-                    {
-                        if (playersParty[target].GetComponent<moreSpecificProfile>().getDefUsed())
-                        {
-                            chainRay = true;
-                            this.AddReward(0.1f);
-                        }
-                        else
-                        {
-                            if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
-                            {
-                                chainRanged = false;
-                                previousRangedTargetID = 0;
-                                this.AddReward(-0.1f);
-                            }
-                            else
-                            {
-                                chainRay = true;
-                                this.AddReward(0.1f);
-                                //qua mettere il fatto che non puo' usare stessa azione dopo
-                            }
-                        }
-                       
+                    {                       
+                        chainRay = true;
+                        this.AddReward(0.15f);
+                        //qua mettere il fatto che non puo' usare stessa azione dopo                     
                     }
                     else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                     {
                         chainRay = true;
                         //qua mettere il fatto che non puo' usare stessa azione dopo
-                        this.AddReward(0.1f);
+                        this.AddReward(0.15f);
                     }
                     else
                     {
@@ -361,7 +1150,7 @@ public class BossBehavior : Agent
                     chainRanged = false;
                     chainRay = false;
                     previousRangedTargetID = 0;
-                    this.AddReward(-0.18f);
+                    this.AddReward(-0.15f);
                 }else if (actionForBoss == 1)//RAY
                 {
                     chainRanged = false;
@@ -375,7 +1164,7 @@ public class BossBehavior : Agent
                     {
                         if (swingRayCastControll())
                         {
-                            this.AddReward(0.1f + bonusFutureReward);
+                            this.AddReward(0.12f + bonusFutureReward);
                             chainRanged = false;
                             chainRay = false;
                             previousRangedTargetID = 0;
@@ -383,7 +1172,7 @@ public class BossBehavior : Agent
                         }
                         else
                         {
-                            this.AddReward(-0.1f );
+                            this.AddReward(-0.21f );
                             chainRanged = false;
                             chainRay = false;
                             previousRangedTargetID = 0;
@@ -412,11 +1201,11 @@ public class BossBehavior : Agent
                     }
                     else
                     {
+                        this.AddReward(-0.15f);
                         chainRanged = false;
                         chainRay = false;
                         previousRangedTargetID = 0;
                         bonusFutureReward = 0.0f;
-                        this.AddReward(-0.15f);
                     }
                 }
                 else if (actionForBoss == 3)//AHEAD ATTACK
@@ -426,10 +1215,18 @@ public class BossBehavior : Agent
                         if (!swingRayCastControll())
                         {
                             this.AddReward(0.12f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
                         }
                         else
                         {
                             this.AddReward(-0.12f);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
                         }
                     }
                     else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
@@ -437,72 +1234,66 @@ public class BossBehavior : Agent
                         if (!swingRayCastControll())
                         {
                             this.AddReward(0.12f + bonusFutureReward);
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
                         }
                         else
                         {
                             this.AddReward(-0.12f);
-
+                            chainRanged = false;
+                            chainRay = false;
+                            previousRangedTargetID = 0;
+                            bonusFutureReward = 0.0f;
                         }
                     }
                     else
                     {
                         this.AddReward(-0.2f);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
 
-                    chainRanged = false;
-                    chainRay = false;
-                    previousRangedTargetID = 0;
-                    bonusFutureReward = 0.0f;
+                    
                 }
                 else if (actionForBoss == 4)//BREAK ATTACK
                 {
                     if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==2 && playersParty[target].GetInstanceID() == previousRangedTargetID)//MAGE
                     {
                         this.AddReward(0.08f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
                     else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
                     {
                         this.AddReward(0.08f + bonusFutureReward);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
                     else
                     {
                         this.AddReward(-0.15f);
+                        chainRanged = false;
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
-                    chainRanged = false;
-                    chainRay = false;
-                    previousRangedTargetID = 0;
-                    bonusFutureReward = 0.0f;
                 }
                 else// ACTION 5 AoE
                 {
-                    /*   if (targetInAoErange() >= 3)
-                       {
-                           this.AddReward(0.08f + bonusFutureReward);
-                           chainRanged = false;
-                           chainRay = false;
-                           previousRangedTargetID = 0;
-                           bonusFutureReward = 0.0f;
-                       }else if (targetInAoErange() >= 1 && targetInAoErange()<=2)
-                       {
-                           chainRanged = false;
-                           chainRay = false;
-                           previousRangedTargetID = 0;
-                           bonusFutureReward = 0.0f;
-                           this.AddReward(-0.04f);
-                       }
-                       else
-                       {
-                           chainRanged = false;
-                           chainRay = false;
-                           previousRangedTargetID = 0;
-                           bonusFutureReward = 0.0f;
-                           this.AddReward(-0.2f);
-                       }*/
+
+                    this.AddReward(-0.15f);
                     chainRanged = false;
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
-                    this.AddReward(-0.15f);
                 }
             }
             
@@ -512,10 +1303,10 @@ public class BossBehavior : Agent
         {
             if (actionForBoss == 0)//RANGED ATTACK
             {
+                this.AddReward(-0.18f);
                 chainRay = false;
                 bonusFutureReward = 0.0f;
                 previousRangedTargetID = 0;
-                this.AddReward(-0.18f);
             }
             else if (actionForBoss == 2)//SWING ATTACK
             {
@@ -556,10 +1347,10 @@ public class BossBehavior : Agent
                 }
                 else
                 {
+                    this.AddReward(-0.2f);
                     chainRay = false;
                     previousRangedTargetID = 0;
                     bonusFutureReward = 0.0f;
-                    this.AddReward(-0.25f);
                 }
             }
             else if (actionForBoss == 3)//AHEAD ATTACK
@@ -568,11 +1359,17 @@ public class BossBehavior : Agent
                 {
                     if (!swingRayCastControll())
                     {
-                        this.AddReward(0.1f + bonusFutureReward);                       
+                        this.AddReward(0.1f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
                     else
                     {
                         this.AddReward(-0.08f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
                 }
                 else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode()==3 && playersParty[target].GetInstanceID() == previousRangedTargetID)//HEALER
@@ -580,19 +1377,26 @@ public class BossBehavior : Agent
                     if (!swingRayCastControll())
                     {
                         this.AddReward(0.1f + bonusFutureReward);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
                     else
                     {
                         this.AddReward(-0.08f);
+                        chainRay = false;
+                        previousRangedTargetID = 0;
+                        bonusFutureReward = 0.0f;
                     }
                 }
                 else
                 {
-                    this.AddReward(-0.25f);
+                    this.AddReward(-0.2f);
+                    chainRay = false;
+                    previousRangedTargetID = 0;
+                    bonusFutureReward = 0.0f;
                 }
-                chainRay = false;
-                previousRangedTargetID = 0;
-                bonusFutureReward = 0.0f;
+
             }
             else if (actionForBoss == 4)//BREAK ATTACK
             {
@@ -622,34 +1426,11 @@ public class BossBehavior : Agent
             }
             else /// ATTACK 5 AoE
             {
-                /*   if (targetInAoErange() >= 3)
-                   {
-                       this.AddReward(0.07f + bonusFutureReward);
-                       chainRanged = false;
-                       chainRay = false;
-                       previousRangedTargetID = 0;
-                       bonusFutureReward = 0.0f;
-                   }
-                   else if (targetInAoErange() >= 1 && targetInAoErange() <= 2)
-                   {
-                       chainRanged = false;
-                       chainRay = false;
-                       previousRangedTargetID = 0;
-                       bonusFutureReward = 0.0f;
-                       this.AddReward(-0.04f);
-                   }
-                   else
-                   {
-                       chainRanged = false;
-                       chainRay = false;
-                       previousRangedTargetID = 0;
-                       bonusFutureReward = 0.0f;
-                       this.AddReward(-0.25f);
-                   }*/
+
+                this.AddReward(-0.15f);
                 chainRay = false;
                 previousRangedTargetID = 0;
                 bonusFutureReward = 0.0f;
-                this.AddReward(-0.15f);
             }
         }
         else
@@ -660,19 +1441,17 @@ public class BossBehavior : Agent
 
                 if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
                 {
-                    if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
-                    {
-                        bonusFutureReward = 0.04f;     
-                    }
+                    this.AddReward(0.1f);
                     previousRangedTargetID = playersParty[target].GetInstanceID();
                     chainRanged = true;
-                    this.AddReward(0.1f);
+                    bonusFutureReward = 0.04f;
                 }
                 else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
                 {
+                    this.AddReward(0.1f);
                     chainRanged = true;
                     previousRangedTargetID = playersParty[target].GetInstanceID();
-                    this.AddReward(0.1f);
+                    bonusFutureReward = 0.04f;
                 }
                 else
                 {
@@ -684,25 +1463,16 @@ public class BossBehavior : Agent
             {
                 if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 2)//MAGE
                 {
-                    if (playersParty[target].GetComponent<moreSpecificProfile>().publicGetIsDefending()) //chain for mage starts only if he used defense spell?
-                    {
-                        previousRangedTargetID = 0;
-                        this.AddReward(-0.05f);
-                    }
-                    else
-                    {
-                        chainRay = true;
-                        bonusFutureReward = 0.06f;
-                        this.AddReward(0.15f);
-                        previousRangedTargetID = playersParty[target].GetInstanceID();
-                        //qua mettere il fatto che non puo' usare stessa azione dopo
-                    }
+                    this.AddReward(0.12f);
+                    chainRay = true;
+                    bonusFutureReward = 0.06f;
+                    previousRangedTargetID = playersParty[target].GetInstanceID();
                 }
                 else if (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode() == 3)//HEALER
                 {
+                    this.AddReward(0.12f);
                     chainRay = true;
                     bonusFutureReward = 0.06f;
-                    this.AddReward(0.15f);
                     previousRangedTargetID = playersParty[target].GetInstanceID();
                 }
                 else
@@ -1186,7 +1956,7 @@ public class BossBehavior : Agent
 
         co = StartCoroutine(timeBeforeAnOtherAction());
 
-    }
+    }*/
 
 
 
@@ -1288,7 +2058,7 @@ public class BossBehavior : Agent
         {
             Debug.Log("===== END EPISODE BOSS DEAD =======");
             StopCoroutine(co);
-            StopCoroutine(re);
+            //StopCoroutine(re);
             myProfile.endEpStopAll();
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
@@ -1324,7 +2094,7 @@ public class BossBehavior : Agent
             if (GetComponent<moreSpecificProfile>().publicGetCurrentLife() >= 0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0 && champsKO==4) { 
                 Debug.Log("==== PARTY HA PERSO =====");
                 StopCoroutine(co);
-                StopCoroutine(re);
+                //StopCoroutine(re);
                 myProfile.endEpStopAll();
 
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
