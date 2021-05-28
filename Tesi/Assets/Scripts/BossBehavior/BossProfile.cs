@@ -17,7 +17,7 @@ public class BossProfile : moreSpecificProfile
 
     public LayerMask m_PlayerMask;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     public GameObject targetPlayer;
 
     public GameObject targetPlayerForRay;
@@ -37,7 +37,7 @@ public class BossProfile : moreSpecificProfile
     public Transform AoEAttackPosition;
     public GameManager gameManager;
 
-    private Vector3 scaleChange;
+    private Vector3 scaleChange = new Vector3(0.16f, 0.018f, 0.16f);
     private Vector3 originalPositionTarget;
 
     private float velocityAttraction = 26.0f;
@@ -75,16 +75,14 @@ public class BossProfile : moreSpecificProfile
 
     public void Start()
     {
-        //playersParty = FindObjectOfType<GameManager>().generatePartyInGame();
+        //playersParty = gameManager.generatePartyInGame();
         //rangedAttackPosition = transform.GetChild(1);
         //swingAttackPosition = transform.GetChild(2);
         //aheadAttackPosition = transform.GetChild(3);
         //AoEAttackPosition = transform.GetChild(4);
         //assign i player all'array
 
-        rb = GetComponent<Rigidbody>();
 
-        scaleChange = new Vector3(0.16f, 0.018f, 0.16f);
 
     }
 
@@ -222,6 +220,9 @@ public class BossProfile : moreSpecificProfile
             instanceIDtarget = targetPlayer.GetInstanceID();
             Debug.Log("ID TARGET " + instanceIDtarget);
             isAttacking = true;
+
+            reserveVarIDtarget = playersParty[rand].GetInstanceID();
+            reserveVarTarget = playersParty[rand];
             StartCoroutine(timeBeforeCastRangedAttack());
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -232,6 +233,9 @@ public class BossProfile : moreSpecificProfile
             targetPlayerForRay = playersParty[rand];
             instanceIDtarget = targetPlayerForRay.GetInstanceID();
             isAttacking = true;
+
+            reserveVarIDtarget = playersParty[rand].GetInstanceID();
+            reserveVarTarget = playersParty[rand];
             StartCoroutine(timeBeforeCastRayAttack());
         }
         if (Input.GetKeyDown(KeyCode.E))
@@ -241,7 +245,10 @@ public class BossProfile : moreSpecificProfile
             targetPlayer = playersParty[rand];
             instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
-            isUsingAoE = true; 
+            isUsingAoE = true;
+
+            reserveVarIDtarget = playersParty[rand].GetInstanceID();
+            reserveVarTarget = playersParty[rand];
             StartCoroutine(timeBeforeCastSwingAttk());
             //swingAttack();
         }
@@ -253,7 +260,9 @@ public class BossProfile : moreSpecificProfile
             targetPlayer = playersParty[rand];
             instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
-           
+
+            reserveVarIDtarget = playersParty[rand].GetInstanceID();
+            reserveVarTarget = playersParty[rand];
             StartCoroutine(timeBeforeCastAheadAttk());
             //aheadAttack();
         }
@@ -265,6 +274,9 @@ public class BossProfile : moreSpecificProfile
             targetPlayer = playersParty[rand];
             instanceIDtarget = targetPlayer.GetInstanceID();
             isAttacking = true;
+
+            reserveVarIDtarget = playersParty[rand].GetInstanceID();
+            reserveVarTarget = playersParty[rand];
             StartCoroutine(timeBeforeCastBreakAttk());
             //breakAttack();
         }
@@ -276,8 +288,9 @@ public class BossProfile : moreSpecificProfile
             StartCoroutine(timeBeforeCastAoEAttk());
             //AoEAttack();
         }
-    }
-    */
+        
+    }*/
+    
 
     public void hubAttacks(int attackCode, GameObject player)
     {
@@ -663,7 +676,7 @@ public class BossProfile : moreSpecificProfile
         {
             Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  ZERO "); 
         }
-        GetComponent<BossBehavior>().adjustPlayerArray(playersParty); // aggiorno array BOSS
+        //GetComponent<BossBehavior>().adjustPlayerArray(playersParty); // aggiorno array BOSS
         
     }
     

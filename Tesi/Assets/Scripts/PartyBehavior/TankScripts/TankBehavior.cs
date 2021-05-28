@@ -183,7 +183,7 @@ public class TankBehavior : MonoBehaviour
     public bool AttkToDef()
     {
         //if( (!GetComponent<TankProfile>().cooldownShield || !GetComponent<TankProfile>().cooldownDash) && (boss.GetComponent<BossProfile>().isAttacking && boss.GetComponent<BossProfile>().target.Equals(transform.tag)) && !GetComponent<TankProfile>().swordActive)
-        if( (!GetComponent<TankProfile>().cooldownShield || (!GetComponent<TankProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&  (boss.GetComponent<BossProfile>().isAttacking && ( boss.GetComponent<BossProfile>().instanceIDtarget == this.gameObject.GetInstanceID() || boss.GetComponent<BossProfile>().isUsingAoE) ) )
+        if( (!GetComponent<TankProfile>().cooldownShield || (!GetComponent<TankProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&  (boss.GetComponent<BossBehavior>().isAttacking && ( boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() || boss.GetComponent<BossBehavior>().isUsingAoE) ) )
         {
             return true;
         }

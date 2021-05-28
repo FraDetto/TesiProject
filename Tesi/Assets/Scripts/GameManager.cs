@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour
 
             Vector3 spawmPos = takeRandomPos(n);
 
-            partyOnRun[n] = Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity);
-            Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
+            partyOnRun[n] = Instantiate(poolOfCLasses[rand], spawmPos, Quaternion.identity, transform.parent);
+            //Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
 
 
             switch (partyOnRun[n].tag)
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("CHARACTER UNKNOWN");
                     break;
             }
-
+            partyOnRun[n].GetComponent<moreSpecificProfile>().setBossRef(boss);
         }
         return partyOnRun;
     }
@@ -104,8 +104,8 @@ public class GameManager : MonoBehaviour
 
             Vector3 spawmPos = takeRandomPos(n);
 
-            partyOnRun[n] = Instantiate(poolOfCLasses[n], spawmPos, Quaternion.identity);
-            Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
+            partyOnRun[n] = Instantiate(poolOfCLasses[n], spawmPos, Quaternion.identity, transform.parent);
+           // Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
 
 
             switch (partyOnRun[n].tag)
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("CHARACTER UNKNOWN");
                     break;
             }
-
+            partyOnRun[n].GetComponent<moreSpecificProfile>().setBossRef(boss);
         }
         return partyOnRun;
     }

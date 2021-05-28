@@ -168,7 +168,7 @@ public class HealerProfile : moreSpecificProfile
         colliders[index].GetComponent<moreSpecificProfile>().publicAddLifeByCure(cure);
         hs = Instantiate(healingText, colliders[index].transform.Find("pointSpawnHealHealer").position, colliders[index].transform.rotation, colliders[index].transform);
         
-        Debug.Log("STO HEALANDO: " + colliders[index].tag);
+        //Debug.Log("STO HEALANDO: " + colliders[index].tag);
     }
 
 

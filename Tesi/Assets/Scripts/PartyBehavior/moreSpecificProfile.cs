@@ -10,6 +10,8 @@ public class moreSpecificProfile : aProfile
 
     public bool flagResetepisode;
 
+    private GameObject bossRef;
+
     protected string champTag;
     protected float armorReductionDuration = 4.0f;
     protected float woundsDuration = 6.0f;
@@ -252,7 +254,7 @@ public class moreSpecificProfile : aProfile
             ///
             if (transform.tag.Equals("Boss"))
             {
-                Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO");
+                //Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO");
                 //// END EPISODE WITH MALUS ///// 
                 GetComponent<BossBehavior>().bossDeath();
             }
@@ -262,7 +264,8 @@ public class moreSpecificProfile : aProfile
                 isDefending = false;
                 usedDef = false;
                 /// BOSS HAS TO REMOVE THE CHAMP FROM THE ARRAY 
-                FindObjectOfType<BossProfile>().checkChampDieInFight();
+                bossRef.GetComponent<BossBehavior>().checkChampDieInFight();
+
             }
         }
         //Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
@@ -493,7 +496,7 @@ public class moreSpecificProfile : aProfile
 
         if (m_HitDetect_onRay_front)
         {
-            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(34.0f, FindObjectOfType<BossProfile>().transform.position, 15.0f, 2.2F, ForceMode.Impulse);
+            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(34.0f, bossRef.transform.position, 15.0f, 2.2F, ForceMode.Impulse);
         }
     }
 
@@ -552,6 +555,12 @@ public class moreSpecificProfile : aProfile
 
 
         Destroy(this.gameObject);
+    }
+
+
+    public void setBossRef(GameObject bo)
+    {
+        bossRef = bo;
     }
 
     /*
