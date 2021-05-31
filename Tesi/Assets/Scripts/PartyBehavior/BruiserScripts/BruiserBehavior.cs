@@ -172,7 +172,7 @@ public class BruiserBehavior : MonoBehaviour
     public bool AttkToHeal()
     {
         if (!GetComponent<BruiserProfile>().swordActive && ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) ||
-            ( (!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossBehavior>().isAttacking && (boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() || (boss.GetComponent<BossBehavior>().isUsingAoE)) ) ) )
+            ( (!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossAttackBehavior>().isAttacking && (boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() || (boss.GetComponent<BossAttackBehavior>().isUsingAoE)) ) ) )
         {
             return true;
         }
@@ -222,7 +222,7 @@ public class BruiserBehavior : MonoBehaviour
     public bool SpecToAttk()
     {
         if ( (!GetComponent<BruiserProfile>().lifeUnderSixty() || GetComponent<BruiserProfile>().cooldownHeal) ||
-            ((GetComponent<BruiserProfile>().cooldownDash || GetComponent<moreSpecificProfile>().publicGetStatus() != 0) || !boss.GetComponent<BossBehavior>().isAttacking || (boss.GetComponent<BossBehavior>().instanceIDtarget != this.gameObject.GetInstanceID() || (!boss.GetComponent<BossBehavior>().isUsingAoE))))
+            ((GetComponent<BruiserProfile>().cooldownDash || GetComponent<moreSpecificProfile>().publicGetStatus() != 0) || !boss.GetComponent<BossAttackBehavior>().isAttacking || (boss.GetComponent<BossBehavior>().instanceIDtarget != this.gameObject.GetInstanceID() || (!boss.GetComponent<BossAttackBehavior>().isUsingAoE))))
         {
             return true;
         }
@@ -235,7 +235,7 @@ public class BruiserBehavior : MonoBehaviour
     public bool SpecToHeal()
     {
         if ( (GetComponent<BruiserProfile>().lifeUnderSixty() && !GetComponent<BruiserProfile>().cooldownHeal) ||
-            ((!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossBehavior>().isAttacking && (boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() || (boss.GetComponent<BossBehavior>().isUsingAoE))))
+            ((!GetComponent<BruiserProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && boss.GetComponent<BossAttackBehavior>().isAttacking && (boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() || (boss.GetComponent<BossAttackBehavior>().isUsingAoE))))
         {
             return true;
         }

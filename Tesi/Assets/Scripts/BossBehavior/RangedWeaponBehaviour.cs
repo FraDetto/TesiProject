@@ -18,10 +18,10 @@ public class RangedWeaponBehaviour : MonoBehaviour
 
                 //this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
                 //this.transform.GetComponentInParent<BossProfile>().instanceIDtarget = 0;
-                this.transform.GetComponentInParent<BossBehavior>().isShooting = false;
-                this.transform.GetComponentInParent<BossBehavior>().isAttacking = false;
-                this.transform.GetComponentInParent<BossBehavior>().targetPlayer = null;
-                this.transform.GetComponentInParent<BossBehavior>().instanceIDtarget = 0;
+                this.transform.GetComponentInParent<BossAttackBehavior>().isShooting = false;
+                this.transform.GetComponentInParent<BossAttackBehavior>().isAttacking = false;
+                this.transform.GetComponentInParent<BossAttackBehavior>().targetPlayer = null;
+                this.transform.GetComponentInParent<BossAttackBehavior>().instanceIDtarget = 0;
                 Destroy(this.gameObject);
             }
             else
@@ -29,10 +29,10 @@ public class RangedWeaponBehaviour : MonoBehaviour
                 if (other.GetComponent<moreSpecificProfile>().publicGetIsDefending())
                 {
                     Debug.Log("PLAYER SI STA DIFENDENDO SDDDDDDDDDDOOOOOONG SPLAASH");
-                    this.transform.GetComponentInParent<BossBehavior>().isShooting = false;
-                    this.transform.GetComponentInParent<BossBehavior>().isAttacking = false;
-                    this.transform.GetComponentInParent<BossBehavior>().targetPlayer = null;
-                    this.transform.GetComponentInParent<BossBehavior>().instanceIDtarget = 0;
+                    this.transform.GetComponentInParent<BossAttackBehavior>().isShooting = false;
+                    this.transform.GetComponentInParent<BossAttackBehavior>().isAttacking = false;
+                    this.transform.GetComponentInParent<BossAttackBehavior>().targetPlayer = null;
+                    this.transform.GetComponentInParent<BossAttackBehavior>().instanceIDtarget = 0;
                     Destroy(this.gameObject);
                 }
 
@@ -50,10 +50,10 @@ public class RangedWeaponBehaviour : MonoBehaviour
             {
 
                 //this.transform.GetComponentInParent<BossProfile>().target = "";
-                this.transform.GetComponentInParent<BossBehavior>().isShooting = false;
-                this.transform.GetComponentInParent<BossBehavior>().isAttacking = false;
-                this.transform.GetComponentInParent<BossBehavior>().targetPlayer = null;
-                this.transform.GetComponentInParent<BossBehavior>().instanceIDtarget = 0;
+                this.transform.GetComponentInParent<BossAttackBehavior>().isShooting = false;
+                this.transform.GetComponentInParent<BossAttackBehavior>().isAttacking = false;
+                this.transform.GetComponentInParent<BossAttackBehavior>().targetPlayer = null;
+                this.transform.GetComponentInParent<BossAttackBehavior>().instanceIDtarget = 0;
                 Destroy(this.gameObject);
             }
             

@@ -12,7 +12,7 @@ public class WeaponsBossBehavior : MonoBehaviour
         {
             if (!other.GetComponent<moreSpecificProfile>().publicGetIsDefending() && other.GetComponent<moreSpecificProfile>().getStatusLifeChamp()==0)
             {
-                int codeAttack = gameObject.GetComponentInParent<BossBehavior>().codeAttack;
+                int codeAttack = gameObject.GetComponentInParent<BossAttackBehavior>().codeAttack;
                 float damageCharacter = 0.0f;
 
                 switch (codeAttack)
