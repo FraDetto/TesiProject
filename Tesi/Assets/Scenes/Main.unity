@@ -384,6 +384,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 8ec5a3587bd39bf4d8311c22d71b53ef, type: 3}
+    - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BrainParameters.NumStackedVectorObservations
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8780630783191882149, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_RootOrder
       value: 3

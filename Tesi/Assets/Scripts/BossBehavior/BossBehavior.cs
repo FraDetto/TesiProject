@@ -130,17 +130,17 @@ public class BossBehavior : Agent
 
         if (!firstRun)
         {
-           // playersParty = gameManager.generatePartyInGame();
-            playersParty = gameManager.generateStandardPartyInGame();
+           playersParty = gameManager.generatePartyInGame();
+            //playersParty = gameManager.generateStandardPartyInGame();
             GetComponent<moreSpecificProfile>().resetBossStats();
             takeTheAction();
             
         }
         else
         {
-            //playersParty = gameManager.generatePartyInGame();
-            playersParty = gameManager.generateStandardPartyInGame();
-            firstRun = false;
+            playersParty = gameManager.generatePartyInGame();
+            //playersParty = gameManager.generateStandardPartyInGame();
+            //firstRun = false;
         }
 
         champsKO = 0;
@@ -169,8 +169,8 @@ public class BossBehavior : Agent
 
         //sensor.AddObservation(transform.position);
         //sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-        sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        sensor.AddObservation(champsKO);
+        //sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+        //sensor.AddObservation(champsKO);
         //sensor.AddObservation(chainRanged);
         //sensor.AddObservation(chainRay);
         sensor.AddObservation(previousTargetID);
@@ -182,7 +182,7 @@ public class BossBehavior : Agent
         {
             //sensor.AddObservation(playersParty[i].transform.position);
             //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+            //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
             sensor.AddObservation(playersParty[i].GetInstanceID());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
         }
@@ -234,54 +234,27 @@ public class BossBehavior : Agent
         //myProfile.hubAttacks(actionForBoss, playersParty[target]);
 
         //0 TANK, 1 BRUISER, 2 MAGE, 3 HEALER
-        if (playersParty[target].GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 1)
+        /*if (playersParty[target].GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 1)
         {
             this.AddReward(-1f);
             countRewardRun += -1f;
         }
         else
+        {*/
+        switch (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode())
         {
-            switch (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode())
-            {
-                case 0:
-                    if (rangedChampAlive())
+            case 0:
+                if (rangedChampAlive())
+                {
+                    this.AddReward(-0.5f);
+                    countRewardRun += -0.5f;
+                }
+                else
+                {
+                    if (bruiserAlive())
                     {
-                        this.AddReward(-1f);
-                        countRewardRun += -1f;
-                    }
-                    else
-                    {
-                        if (bruiserAlive())
-                        {
-                            this.AddReward(-1f);
-                            countRewardRun += -1f;
-                        }
-                        else
-                        {
-                            if (previousTargetID == targetPlayer.GetInstanceID())
-                            {
-                                this.AddReward(+1f);
-                                countRewardRun += 1f;
-                            }
-                            else if (previousTargetID == 0)
-                            {
-                                this.AddReward(+1f);
-                                countRewardRun += 1f;
-                            }
-                            else
-                            {
-                                this.AddReward(-1f);
-                                countRewardRun += -1f;
-                            }
-                        }
-                    }
-                    break;
-
-                case 1:
-                    if (rangedChampAlive())
-                    {
-                        this.AddReward(-1f);
-                        countRewardRun += -1f;
+                        this.AddReward(-0.5f);
+                        countRewardRun += -0.5f;
                     }
                     else
                     {
@@ -297,32 +270,21 @@ public class BossBehavior : Agent
                         }
                         else
                         {
-                            this.AddReward(-1f);
-                            countRewardRun += -1f;
+                            this.AddReward(-0.5f);
+                            countRewardRun += -0.5f;
                         }
                     }
-                    break;
+                }
+                break;
 
-                case 2:
-                    if (previousTargetID == targetPlayer.GetInstanceID())
-                    {
-                        this.AddReward(+1f);
-                        countRewardRun += 1f;
-                    }
-                    else if(previousTargetID == 0)
-                    {
-                        this.AddReward(+1f);
-                        countRewardRun += 1f;
-                    }
-                    else
-                    {
-                        this.AddReward(-1f);
-                        countRewardRun += -1f;
-                    }
-                    
-                    break;
-
-                case 3:
+            case 1:
+                if (rangedChampAlive())
+                {
+                    this.AddReward(-0.5f);
+                    countRewardRun += -0.5f;
+                }
+                else
+                {
                     if (previousTargetID == targetPlayer.GetInstanceID())
                     {
                         this.AddReward(+1f);
@@ -335,22 +297,60 @@ public class BossBehavior : Agent
                     }
                     else
                     {
-                        this.AddReward(-1f);
-                        countRewardRun += -1f;
+                        this.AddReward(-0.5f);
+                        countRewardRun += -0.5f;
                     }
-                    break;
+                }
+                break;
 
-                default:
-                    Debug.Log("CHARACTER UNKNOWN");
-                    break;
-            }
+            case 2:
+                if (previousTargetID == targetPlayer.GetInstanceID())
+                {
+                    this.AddReward(+1f);
+                    countRewardRun += 1f;
+                }
+                else if(previousTargetID == 0)
+                {
+                    this.AddReward(+1f);
+                    countRewardRun += 1f;
+                }
+                else
+                {
+                    this.AddReward(-0.5f);
+                    countRewardRun += -0.5f;
+                }
+                    
+                break;
 
-            isAttacking = true;
-            targetPlayer = playersParty[target];
-            instanceIDtarget = targetPlayer.GetInstanceID();
-            previousTargetID = targetPlayer.GetInstanceID();
-            StartCoroutine(timeBeforeDamageTarget());
+            case 3:
+                if (previousTargetID == targetPlayer.GetInstanceID())
+                {
+                    this.AddReward(+1f);
+                    countRewardRun += 1f;
+                }
+                else if (previousTargetID == 0)
+                {
+                    this.AddReward(+1f);
+                    countRewardRun += 1f;
+                }
+                else
+                {
+                    this.AddReward(-0.5f);
+                    countRewardRun += -0.5f;
+                }
+                break;
+
+            default:
+                Debug.Log("CHARACTER UNKNOWN");
+                break;
         }
+
+        isAttacking = true;
+        targetPlayer = playersParty[target];
+        instanceIDtarget = targetPlayer.GetInstanceID();
+        previousTargetID = targetPlayer.GetInstanceID();
+        StartCoroutine(timeBeforeDamageTarget());
+    
         
 
 
@@ -1333,18 +1333,18 @@ public class BossBehavior : Agent
         damageCharacter = ((damageCharacter / 100) * 75);
         playersParty[target].GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
     }
-    /*
+    
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
     {
         if (!firstRun)
         {
-            Debug.Log(" =====SET MASK ACTION ===== " + actionChoose[0]);
+            //Debug.Log(" =====SET MASK ACTION ===== " + actionChoose[0]);
             if (null != actionTarget)
             {
                 Debug.Log(" =====SET MASK TARGET===== " + actionTarget[0]);
                 actionMasker.SetMask(0, actionTarget);
             }       
-            actionMasker.SetMask(1, actionChoose);
+            //actionMasker.SetMask(1, actionChoose);
         }
         else
         {
@@ -1352,7 +1352,7 @@ public class BossBehavior : Agent
             firstRun = false;
         }
        
-    }*/
+    }
 
 
     private void FixedUpdate()
@@ -1685,17 +1685,10 @@ public class BossBehavior : Agent
         transform.LookAt(verticalAdj);
     }
 
-    /*public void checkChampDieInFight()
+    public void checkChampDieInFight()
     {
         GameObject[] arrayPlayerForAdjustment = removeChampDieInFight();
-        if (null != arrayPlayerForAdjustment)
-        {
-            Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  " + arrayPlayerForAdjustment.Length);
-        }
-        else
-        {
-            Debug.Log("ORA IL CONTEGGIO DEI GIOCATORI E'  ZERO ");
-        }
+
         adjustPlayerArray(arrayPlayerForAdjustment); // aggiorno array BOSS
     }
 
@@ -1722,7 +1715,7 @@ public class BossBehavior : Agent
             return arrNew;
         }
 
-    }*/
+    }
 
     public void endEpStopAll()
     {
@@ -1872,7 +1865,7 @@ public class BossBehavior : Agent
             endEpStopAll();
 
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-            if (countRewardRun > 0)
+            if (countRewardRun >= 19)
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
             }
@@ -1906,8 +1899,7 @@ public class BossBehavior : Agent
 
 
 
-    //public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array
-    public void checkChampDieInFight()
+    public void adjustPlayerArray(GameObject[] newArrayPlay)/// use that when a player is KO to reduce the number of players in the array    
     {
         champsKO++;
         previousTargetID = 0;
@@ -1926,7 +1918,7 @@ public class BossBehavior : Agent
 
                 overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-                if (countRewardRun > 0)
+                if (countRewardRun >= 19)
                 {
                     overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
                 }
@@ -1952,7 +1944,7 @@ public class BossBehavior : Agent
                 //this.AddReward(1.0f);
                 EndEpisode();
             }
-        }/*
+        }
         else
         {
             playersParty = newArrayPlay;
@@ -1973,7 +1965,7 @@ public class BossBehavior : Agent
             {
                 Debug.Log( "PLAYER KO ACTION TARGET FORMATO DA " + actionTarget[i]); 
             }
-        }*/
+        }
     }
 
     public void turnBossToTarget()
