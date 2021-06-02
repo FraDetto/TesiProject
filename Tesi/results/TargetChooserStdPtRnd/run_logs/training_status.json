@@ -1,0 +1,23 @@
+{
+    "TargetChooser": {
+        "checkpoints": [
+            {
+                "steps": 150658,
+                "file_path": "results\\TargetChooserStdPtRnd\\TargetChooser\\TargetChooser-150658.onnx",
+                "reward": 20.24641833810888,
+                "creation_time": 1622642709.2679906
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 150658,
+            "file_path": "results\\TargetChooserStdPtRnd\\TargetChooser.onnx",
+            "reward": 20.24641833810888,
+            "creation_time": 1622642709.2679906
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

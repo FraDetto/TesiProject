@@ -422,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884577549024150187, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 2884577549024150187, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: gameManager
@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 9023322312652241315, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 403859d8284ca88459147e23a717b1c2, type: 3}
     - target: {fileID: 9023322312652241315, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorName
       value: TargetChooser
