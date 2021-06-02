@@ -179,8 +179,8 @@ public class HealerBehavior : MonoBehaviour
 
     public bool AttkToHeal()
     {
-        if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossAttackBehavior>().isUsingAoE) ) ||
-            ( (!GetComponent<HealerProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && (boss.GetComponent<BossAttackBehavior>().isAttacking && ( (boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponent<BossAttackBehavior>().isShooting) ) || (boss.GetComponent<BossAttackBehavior>().isUsingAoE && attackInRange())  ))) )
+        if ( ( !GetComponent<HealerProfile>().cooldownHeal && !allFullLife() && (GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponentInChildren<BossBehavior>().isUsingAoE) ) ||
+            ( (!GetComponent<HealerProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) && (boss.GetComponentInChildren<BossBehavior>().isAttacking && ( (boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponentInChildren<BossBehavior>().isShooting) ) || (boss.GetComponentInChildren<BossBehavior>().isUsingAoE && attackInRange())  ))) )
         {
             //Debug.Log("SONO IN VADo HEAL");
             return true;
@@ -193,7 +193,7 @@ public class HealerBehavior : MonoBehaviour
 
     public bool AttkToSpec()
     {
-        if ( !GetComponent<HealerProfile>().cooldownSpecial && boss.GetComponent<BossAttackBehavior>().isUsingAoE)
+        if ( !GetComponent<HealerProfile>().cooldownSpecial && boss.GetComponentInChildren<BossBehavior>().isUsingAoE)
         {
             return true;
         }
@@ -205,7 +205,7 @@ public class HealerBehavior : MonoBehaviour
 
     public bool HealToAttk()
     {
-        if ( GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponent<BossAttackBehavior>().isUsingAoE)
+        if ( GetComponent<HealerProfile>().cooldownSpecial || !boss.GetComponentInChildren<BossBehavior>().isUsingAoE)
         {
             return true;
         }
@@ -217,7 +217,7 @@ public class HealerBehavior : MonoBehaviour
 
     public bool HealToSpec()
     {
-        if (!GetComponent<HealerProfile>().cooldownSpecial && boss.GetComponent<BossAttackBehavior>().isUsingAoE)
+        if (!GetComponent<HealerProfile>().cooldownSpecial && boss.GetComponentInChildren<BossBehavior>().isUsingAoE)
         {
             return true;
         }

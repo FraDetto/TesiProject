@@ -204,7 +204,7 @@ public class MageBehavior : MonoBehaviour
     public bool AttkToDef()
     {
         
-        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponent<BossAttackBehavior>().isAttacking && ( (boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponent<BossAttackBehavior>().isShooting) ) || (boss.GetComponent<BossAttackBehavior>().isUsingAoE && attackInRange()) )   ))
+        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponentInChildren<BossBehavior>().isAttacking && ( (boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponentInChildren<BossBehavior>().isShooting) ) || (boss.GetComponentInChildren<BossBehavior>().isUsingAoE && attackInRange()) )   ))
         {
             return true;
         }
@@ -255,7 +255,7 @@ public class MageBehavior : MonoBehaviour
     public bool SpecToAttk()
     {
         if (!GetComponent<MageProfile>().chargingUlt && ( GetComponent<MageProfile>().cooldownDefense || ( GetComponent<moreSpecificProfile>().publicGetStatus() == 1) ||
-            (!boss.GetComponent<BossAttackBehavior>().isAttacking || boss.GetComponent<BossBehavior>().instanceIDtarget != this.gameObject.GetInstanceID() || (boss.GetComponent<BossAttackBehavior>().isUsingAoE && !attackInRange()) ) ))
+            (!boss.GetComponentInChildren<BossBehavior>().isAttacking || boss.GetComponentInChildren<BossBehavior>().instanceIDtarget != this.gameObject.GetInstanceID() || (boss.GetComponentInChildren<BossBehavior>().isUsingAoE && !attackInRange()) ) ))
         {
             return true;
         }
@@ -268,7 +268,7 @@ public class MageBehavior : MonoBehaviour
     public bool SpecToDef()
     {
         if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&
-            (boss.GetComponent<BossAttackBehavior>().isAttacking && ((boss.GetComponent<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && attackInRange()) || boss.GetComponent<BossAttackBehavior>().isUsingAoE || boss.GetComponent<BossAttackBehavior>().isShooting)))
+            (boss.GetComponentInChildren<BossBehavior>().isAttacking && ((boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && attackInRange()) || boss.GetComponentInChildren<BossBehavior>().isUsingAoE || boss.GetComponentInChildren<BossBehavior>().isShooting)))
         {
             return true;
         }

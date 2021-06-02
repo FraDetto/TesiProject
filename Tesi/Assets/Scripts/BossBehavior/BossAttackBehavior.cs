@@ -6,7 +6,7 @@ using Unity.MLAgents.Sensors;
 
 public class BossAttackBehavior : Agent
 {
-    //public GameObject[] playersParty;
+    public GameObject[] playersParty;
     public float speedRangedAttk = 35.0f;
 
     public int codeAttack = 0; // 0:swing  1: ahead  2:break    i use it to divide the different attack and apply the correct damage
@@ -22,12 +22,15 @@ public class BossAttackBehavior : Agent
     //public LayerMask m_PlayerMask;
 
     public Rigidbody rb;
+
+    public GameObject overcomeBattleSignEndRun;
+
     public GameObject targetPlayer;
 
     public GameObject targetPlayerForRay;
-    
-
     public int instanceIDtarget;
+
+
     //public string target;
     private GameObject goBreak;
     private GameObject goRanged;
@@ -40,6 +43,16 @@ public class BossAttackBehavior : Agent
     public Transform aheadAttackPosition;//stessa posizione usata per il break
     public Transform AoEAttackPosition;
     //public GameManager gameManager;
+
+    private int target;
+    private int previousTargetID;
+
+    private bool m_HitDetect_swing_right;
+    private bool m_HitDetect_swing_left;
+
+    RaycastHit m_Hit_swing_right;
+    RaycastHit m_Hit_swing_left;
+
 
     private Vector3 scaleChange = new Vector3(0.16f, 0.018f, 0.16f);
     private Vector3 originalPositionTarget;
@@ -58,23 +71,103 @@ public class BossAttackBehavior : Agent
     private float timeBeforeCastAttracting = 0.4f;
 
 
+    private bool firstRun = true;
+
     private GameObject reserveVarTarget;
     private int reserveVarIDtarget;
 
-
+    public int champsKO;
 
     private bool chainRanged = false;
     private bool chainRay = false;
 
+    private GameObject[] endArray;
+
+    private BossBehavior targetBehavior;
+
+    private int[] actionChoose;
+
+    void Start()
+    {
+        targetBehavior = GetComponentInChildren<BossBehavior>();
+        Academy.Instance.AutomaticSteppingEnabled = false;
+
+        //this.OnEpisodeBegin();
+        /*this.RequestDecision();
+        Academy.Instance.EnvironmentStep();*/
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        Debug.Log(" =====OnEPISODE BEGIN  ATTACK=====  ");
+        if (!firstRun)
+        {
+            GetComponent<moreSpecificProfile>().resetBossStats();
+        }
+        previousTargetID = 0;
+        champsKO = 0;
+
+        targetBehavior.OnEpisodeBegin();
+
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        Debug.Log(" =====CollectObservations ATTACK===== ");
 
 
+        sensor.AddObservation(transform.position);
+        //sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+        //sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+        //sensor.AddObservation(champsKO);
+        //sensor.AddObservation(chainRanged);
+        //sensor.AddObservation(chainRay);
+        sensor.AddObservation(previousTargetID);
+        //sensor.AddObservation(targetInAoErange());
+        sensor.AddObservation(targetBehavior.rangedChampAlive());
 
+
+        for (int i = 0; i < playersParty.Length; i++)
+        {
+            sensor.AddObservation(playersParty[i].transform.position);
+            //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
+            //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
+            sensor.AddObservation(playersParty[i].GetInstanceID());
+            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
+            sensor.AddObservation((this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude);
+            Debug.Log(" =====DSITANZA PLAYERS ===== " + playersParty[i].tag + "   " + (this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude );
+        }
+
+    }
+
+
+    public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
+    {
+        if (!firstRun)
+        {
+            Debug.Log(" =====SET MASK ACTION ATTACK===== " );
+
+            actionMasker.SetMask(0, actionChoose);
+        }
+        else
+        {
+            firstRun = false;
+        }
+    }
 
 
 
     public override void OnActionReceived(float[] vectorAction)
     {
         Debug.Log(" =====OnActionReceived===== " + " ATTACK " + vectorAction[0]);
+        isAttacking = true;
+        targetPlayer = playersParty[target];
+        instanceIDtarget = targetPlayer.GetInstanceID();
+
+        reserveVarTarget = playersParty[target];
+        reserveVarIDtarget = targetPlayer.GetInstanceID();
+
+        StartCoroutine(timeBeforeDamageTarget());
         /*
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
@@ -132,6 +225,138 @@ public class BossAttackBehavior : Agent
         }
         */
     }
+
+    public IEnumerator timeBeforeDamageTarget()
+    {
+        Debug.Log(" =====DANNEGGIO TARGET ===== " + playersParty[target].tag);
+        yield return new WaitForSeconds(timeBeforeCastAttracting);
+        float damageCharacter = GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+        damageCharacter = ((damageCharacter / 100) * 75);
+        playersParty[target].GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+
+        previousTargetID = targetPlayer.GetInstanceID();
+    }
+
+
+    public void bossDeath()//BOSS DEAD END EPISODE
+    {
+        if (GetComponent<moreSpecificProfile>().publicGetCurrentLife() == 0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 1 & champsKO < 4)
+        {
+            Debug.Log("===== END EPISODE BOSS DEAD =======");
+
+
+            targetBehavior.endEpStopAll();
+            targetBehavior.setActionTargetNull();
+
+            endEpStopAll();
+
+            overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+
+
+
+            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+            foreach (GameObject go in endArray)
+            {
+                if (!go.transform.tag.Equals("Boss"))
+                {
+                    //mr.detonation();
+                    go.GetComponent<moreSpecificProfile>().detonation();
+                }
+
+            }
+
+            GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
+            actionChoose = null;
+            
+            //this.AddReward(-1.0f);
+            EndEpisode();
+        }
+
+    }
+
+
+    public void partyDeath()
+    {
+        if (GetComponent<moreSpecificProfile>().publicGetCurrentLife() >= 0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+        {
+            Debug.Log("==== PARTY HA PERSO =====");
+            //StopCoroutine(this.co);
+            //StopCoroutine(re);
+            //myProfile.endEpStopAll();
+
+            targetBehavior.setActionTargetNull();
+
+            endEpStopAll();
+            overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+
+
+            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+
+            foreach (GameObject go in this.endArray)
+            {
+                if (!go.transform.tag.Equals("Boss"))
+                {
+                    //mr.detonation();
+                    go.GetComponent<moreSpecificProfile>().detonation();
+                }
+
+            }
+
+            GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
+            actionChoose = null;
+            //this.AddReward(1.0f);
+            EndEpisode();
+        }
+    }
+
+
+    public void setParty(GameObject[] arrayPlayers)
+    {
+        playersParty = arrayPlayers;
+    }
+
+    public void setEndArray()
+    {
+        endArray = playersParty;
+    }
+
+    public void setAllTargetInfo(int targetPost)
+    {
+        target = targetPost;
+    }
+
+    public bool swingRayCastControll()//quando ha fatto catena fino a ray e tira swing su mage o healer se c'e' alemno un altro champ nello spazio di uso dello swing con raycast
+    {
+        m_HitDetect_swing_right = Physics.BoxCast(swingAttackPosition.position, transform.localScale, transform.right, out m_Hit_swing_right, transform.rotation, swordSwingAttk.transform.localScale.x / 2, m_PlayerMask);
+        m_HitDetect_swing_left = Physics.BoxCast(swingAttackPosition.position, transform.localScale, -transform.right, out m_Hit_swing_left, transform.rotation, swordSwingAttk.transform.localScale.x / 2, m_PlayerMask);
+
+        if (!m_HitDetect_swing_right && !m_HitDetect_swing_left)
+        {
+            return false;
+        }
+        else
+        {
+            if (m_HitDetect_swing_right)
+            {
+                if (m_Hit_swing_right.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+                {
+                    return true;
+                }
+            }
+
+            if (m_HitDetect_swing_left)
+            {
+                if (m_Hit_swing_left.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)//see if the ray hit is an alive champ
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+    }
+
 
 
     private void FixedUpdate()

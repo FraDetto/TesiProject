@@ -30,6 +30,91 @@ Transform:
   m_Father: {fileID: 5617987301070202409}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &185567306854502572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5507742788220207014}
+  - component: {fileID: 5701133934335511348}
+  - component: {fileID: 1886774262222991420}
+  m_Layer: 0
+  m_Name: TargetChooser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5507742788220207014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185567306854502572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5617987301070202409}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5701133934335511348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185567306854502572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 11
+    NumStackedVectorObservations: 2
+    VectorActionSize: 04000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+  m_Model: {fileID: 5022602860645237092, guid: 8ec5a3587bd39bf4d8311c22d71b53ef, type: 3}
+  m_InferenceDevice: 0
+  m_BehaviorType: 2
+  m_BehaviorName: BossCombact
+  TeamId: 0
+  m_UseChildSensors: 1
+--- !u!114 &1886774262222991420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185567306854502572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf074f68fb5ad654d95cf8551ec05c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  playersParty: []
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
+  gameManager: {fileID: 0}
+  firstRun: 1
+  champsKO: 0
+  countRewardRun: 0
+  partyList: 
+  targetPlayer: {fileID: 0}
+  instanceIDtarget: 0
+  swingAttackPosition: {fileID: 9046850513472922660}
 --- !u!1 &2421681866626765582
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +159,7 @@ GameObject:
   - component: {fileID: 2438159072496211589}
   - component: {fileID: 3355486365531466470}
   - component: {fileID: 5475297297734807888}
-  - component: {fileID: 5475297297734807887}
+  - component: {fileID: 2306292997450395161}
   - component: {fileID: 5475297297734807886}
   - component: {fileID: 1852354072}
   m_Layer: 0
@@ -101,6 +186,7 @@ Transform:
   - {fileID: 1701052497020445118}
   - {fileID: 9162836987991956521}
   - {fileID: 3842690301064606493}
+  - {fileID: 5507742788220207014}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -206,7 +292,7 @@ MonoBehaviour:
   m_BehaviorName: BossCombact
   TeamId: 0
   m_UseChildSensors: 1
---- !u!114 &5475297297734807887
+--- !u!114 &2306292997450395161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,30 +301,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3359959793238077300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf074f68fb5ad654d95cf8551ec05c39, type: 3}
+  m_Script: {fileID: 11500000, guid: 0366fdf5b86287d459312bf52edbcc1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
+  MaxStep: 0
   playersParty: []
-  m_PlayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  swordSwingAttk: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
-  overcomeBattleSign: {fileID: 0}
-  gameManager: {fileID: 0}
-  firstRun: 1
-  champsKO: 0
-  partyList: 
-  myProfile: {fileID: 0}
   speedRangedAttk: 35
   codeAttack: 0
   goRangedAttk: {fileID: 0}
+  swordSwingAttk: {fileID: 0}
   swordAheadAttk: {fileID: 0}
   containerAoEAttk: {fileID: 0}
+  m_PlayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  gameManager: {fileID: 0}
   rb: {fileID: 0}
+  overcomeBattleSignEndRun: {fileID: 0}
   targetPlayer: {fileID: 0}
   targetPlayerForRay: {fileID: 0}
   instanceIDtarget: 0
@@ -251,6 +333,7 @@ MonoBehaviour:
   isShooting: 0
   isAttracting: 0
   isCastingAoE: 0
+  champsKO: 0
 --- !u!114 &5475297297734807886
 MonoBehaviour:
   m_ObjectHideFlags: 0

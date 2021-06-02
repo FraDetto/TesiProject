@@ -256,7 +256,9 @@ public class moreSpecificProfile : aProfile
             {
                 //Debug.Log("SAREBBE MORTO IL BOSS PROSEGUIAMO");
                 //// END EPISODE WITH MALUS ///// 
-                GetComponent<BossBehavior>().bossDeath();
+                //GetComponent<BossAttackBehavior>().bossDeath();
+                GetComponentInChildren<BossBehavior>().bossDeath();
+
             }
             else
             {
@@ -264,7 +266,7 @@ public class moreSpecificProfile : aProfile
                 isDefending = false;
                 usedDef = false;
                 /// BOSS HAS TO REMOVE THE CHAMP FROM THE ARRAY 
-                bossRef.GetComponent<BossBehavior>().checkChampDieInFight();
+                bossRef.GetComponentInChildren<BossBehavior>().checkChampDieInFight();
 
             }
         }
