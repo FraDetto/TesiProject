@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] partyOnRun = new GameObject[4];
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
+    private int numb;
 
     // Start is called before the first frame update
     void Start()
@@ -99,46 +100,58 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] takeStandardTeam()
     {
+        int[] a = { 0, 1, 2, 3 };
+
         for (int n = 0; n < partyOnRun.Length; n++)
         {
+            if (a.Length == 1)
+            {
+                numb = a[0];
+            }
+            else
+            {
+                a = removePos(a);
+            }
+            
 
             Vector3 spawmPos = takeRandomPos(n);
 
-            partyOnRun[n] = Instantiate(poolOfCLasses[n], spawmPos, Quaternion.identity, transform.parent);
-           // Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
+            partyOnRun[numb] = Instantiate(poolOfCLasses[n], spawmPos, Quaternion.identity, transform.parent);
+            // Debug.Log("ID GIOCATORI " + partyOnRun[n].GetInstanceID() + " TAG " + partyOnRun[n].tag);
 
 
-            switch (partyOnRun[n].tag)
+
+            switch (partyOnRun[numb].tag)
             {
                 case "Tank":
-                    partyOnRun[n].GetComponent<TankBehavior>().setBoss(boss);
-                    partyOnRun[n].GetComponent<TankMovement>().setBoss(boss);
-                    partyOnRun[n].GetComponent<TankProfile>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<TankBehavior>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<TankMovement>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<TankProfile>().setBoss(boss);
                     break;
 
                 case "Bruiser":
-                    partyOnRun[n].GetComponent<BruiserBehavior>().setBoss(boss);
-                    partyOnRun[n].GetComponent<BruiserMovement>().setBoss(boss);
-                    partyOnRun[n].GetComponent<BruiserProfile>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<BruiserBehavior>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<BruiserMovement>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<BruiserProfile>().setBoss(boss);
                     break;
 
                 case "Mage":
-                    partyOnRun[n].GetComponent<MageBehavior>().setBoss(boss);
-                    partyOnRun[n].GetComponent<MageMovement>().setBoss(boss);
-                    partyOnRun[n].GetComponent<MageProfile>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<MageBehavior>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<MageMovement>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<MageProfile>().setBoss(boss);
                     break;
 
                 case "Healer":
-                    partyOnRun[n].GetComponent<HealerBehavior>().setBoss(boss);
-                    partyOnRun[n].GetComponent<HealerMovement>().setBoss(boss);
-                    partyOnRun[n].GetComponent<HealerProfile>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<HealerBehavior>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<HealerMovement>().setBoss(boss);
+                    partyOnRun[numb].GetComponent<HealerProfile>().setBoss(boss);
                     break;
 
                 default:
                     Debug.Log("CHARACTER UNKNOWN");
                     break;
             }
-            partyOnRun[n].GetComponent<moreSpecificProfile>().setBossRef(boss);
+            partyOnRun[numb].GetComponent<moreSpecificProfile>().setBossRef(boss);
         }
         return partyOnRun;
     }
@@ -159,5 +172,25 @@ public class GameManager : MonoBehaviour
         return partyOnRun;
     }
 
+    public int[] removePos(int[] a)// to rondomize the positions in the array
+    {
+        int rand = Random.Range(0, a.Length);
+        int[] newA = new int[a.Length - 1];
+
+        int cont = 0;
+
+        numb = a[rand];
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (a[i] != numb)
+            {
+                newA[cont] = a[i];
+                cont++;
+            }
+        }
+
+        return newA;
+    }
 
 }
