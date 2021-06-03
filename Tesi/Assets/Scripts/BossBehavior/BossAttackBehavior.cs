@@ -81,12 +81,14 @@ public class BossAttackBehavior : Agent
 
     private BossBehavior targetBehavior;
 
-    private int[] actionChoose;
+    private int[] actionChoose = new int[1];
+
 
     void Start()
     {
         targetBehavior = GetComponentInChildren<BossBehavior>();
-        Academy.Instance.AutomaticSteppingEnabled = false;
+
+        
 
         //this.OnEpisodeBegin();
         /*this.RequestDecision();
@@ -102,10 +104,10 @@ public class BossAttackBehavior : Agent
         }
         previousTargetID = 0;
 
-
         //targetBehavior.OnEpisodeBegin();
 
     }
+
 
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -131,7 +133,7 @@ public class BossAttackBehavior : Agent
             sensor.AddObservation(playersParty[i].GetInstanceID());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
             sensor.AddObservation((this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude);
-            Debug.Log(" =====DISTANZA PLAYERS ===== " + playersParty[i].tag + "   " + (this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude );
+            //Debug.Log(" =====DISTANZA PLAYERS ===== " + playersParty[i].tag + "   " + (this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude );
         }
 
     }
@@ -141,12 +143,13 @@ public class BossAttackBehavior : Agent
     {
         if (!firstRun)
         {
-            Debug.Log(" =====SET MASK ACTION ATTACK===== " );
+            Debug.Log(" =====SET MASK ACTION ATTACK===== " + actionChoose[0]);
 
             actionMasker.SetMask(0, actionChoose);
         }
         else
         {
+            Debug.Log(" =====SET MASK FIRST RUN ATTACK===== ");
             firstRun = false;
         }
     }
@@ -155,15 +158,21 @@ public class BossAttackBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        Debug.Log(" =====OnActionReceived===== " + " ATTACK " + vectorAction[0]);
+        Debug.Log(" =====OnActionReceived===== " + " ATTACK " + vectorAction[0] + " =====ATTACK IL TARGET E===== " + target);
         isAttacking = true;
+
         targetPlayer = playersParty[target];
         instanceIDtarget = targetPlayer.GetInstanceID();
 
         reserveVarTarget = playersParty[target];
         reserveVarIDtarget = targetPlayer.GetInstanceID();
 
+        int actionForBoss = Mathf.FloorToInt(vectorAction[0]);
+
+        actionChoose[0] = actionForBoss;
+
         StartCoroutine(timeBeforeDamageTarget());
+        StartCoroutine(timeBeforeAnOtherAction());
         /*
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
@@ -222,6 +231,11 @@ public class BossAttackBehavior : Agent
         */
     }
 
+    public void endEpAttkBe()
+    {
+        EndEpisode();
+    }
+
     public IEnumerator timeBeforeDamageTarget()
     {
         Debug.Log(" =====DANNEGGIO TARGET ===== " + playersParty[target].tag);
@@ -233,12 +247,24 @@ public class BossAttackBehavior : Agent
         previousTargetID = targetPlayer.GetInstanceID();
     }
 
+    public IEnumerator timeBeforeAnOtherAction()
+    {
+        Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE ATTACK===== ");
+        yield return new WaitForSeconds(2.4f);
 
+        targetBehavior.actionForTarget();
+    }
 
+    public void takeTheAction()
+    {
+        this.RequestDecision();
+        Academy.Instance.EnvironmentStep();
+    }
 
 
     public void setParty(GameObject[] arrayPlayers)
     {
+        Debug.Log(" =====SETTO PARTY ATTACK===== ");
         playersParty = arrayPlayers;
     }
 
@@ -617,7 +643,6 @@ public class BossAttackBehavior : Agent
         isAttracting = false;
         isAttacking = false;
         StopAllCoroutines();
-        actionChoose = null;
     }
 
 

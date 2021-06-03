@@ -27,8 +27,6 @@ public class BossBehavior : Agent
     private int target;
 
 
-    private bool breakBefore = false;
-
     private int previousTargetID;
 
 
@@ -47,7 +45,7 @@ public class BossBehavior : Agent
     public int instanceIDtarget;
     public Transform swingAttackPosition;
 
-    private float timeBeforeCastAttracting = 0.4f;
+   // private float timeBeforeCastAttracting = 0.4f;
 
     private BossAttackBehavior attackBehavior;
 
@@ -83,29 +81,24 @@ public class BossBehavior : Agent
         //
         //At the beginnning of an episode party members are chosen randomly  to enhance the boss's learning
         Debug.Log(" =====OnEPISODE BEGIN  TARGET=====  ");
-        
 
-        if (!firstRun)
-        {
-            playersParty = gameManager.generatePartyInGame();
-            //playersParty = gameManager.generateStandardPartyInGame();
-            GetComponentInParent<moreSpecificProfile>().resetBossStats();
-            takeTheAction();
-            
-        }
-        else
-        {
-            playersParty = gameManager.generatePartyInGame();
-            //playersParty = gameManager.generateStandardPartyInGame();
-            //firstRun = false;
-        }
 
+        playersParty = gameManager.generatePartyInGame();
         attackBehavior.setParty(playersParty);
 
         champsKO = 0;
         previousTargetID = 0;
         countRewardRun = 0.0f;
         endArray = playersParty;
+        if (!firstRun)
+        {          
+            //playersParty = gameManager.generateStandardPartyInGame();
+            //GetComponentInParent<moreSpecificProfile>().resetBossStats();           
+            takeTheAction();            
+        }
+
+
+        
 
 
     }
@@ -281,31 +274,45 @@ public class BossBehavior : Agent
         previousTargetID = targetPlayer.GetInstanceID();
 
         attackBehavior.setAllTargetInfo(target);
-        //attackBehavior.RequestDecision();
+        //actionForAttack();
+        attackBehavior.RequestDecision();
         //Academy.Instance.EnvironmentStep();
 
-        //StartCoroutine(timeBeforeDamageTarget());
+       // StartCoroutine(timeBeforeActionTarget());
 
 
 
 
-        StartCoroutine(timeBeforeAnOtherAction());
+        //StartCoroutine(timeBeforeAnOtherAction());
+
+
         //this.co = StartCoroutine(timeBeforeAnOtherAction());
 
 
 
     }
-    /*
-    public IEnumerator timeValueReward(int actionForBoss)
+    
+    public IEnumerator timeBeforeActionTarget()
     {
         //ricordarsi di gestire i cooldown
         yield return new WaitForSeconds(0.5f);
-        valueAndApplyReward(actionForBoss);
-    }*/
+        actionForAttack();
+    }
+
+    public void actionForTarget()
+    {
+        this.RequestDecision();
+        Academy.Instance.EnvironmentStep();
+    }
+
+    public void actionForAttack()
+    {
+        attackBehavior.takeTheAction();
+    }
 
     public IEnumerator timeBeforeAnOtherAction()
     {
-        //Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE TARGET===== ");
+        Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE TARGET===== ");
         yield return new WaitForSeconds(2.4f);
 
         this.RequestDecision();
@@ -322,7 +329,7 @@ public class BossBehavior : Agent
         damageCharacter = ((damageCharacter / 100) * 75);
         playersParty[target].GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
     }*/
-    
+
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
     {
         if (!firstRun)
@@ -335,7 +342,7 @@ public class BossBehavior : Agent
         }
         else
         {
-            Debug.Log(" =====SET MASK FIRST RUN===== " );
+            Debug.Log(" =====SET MASK FIRST RUN TARGET===== " );
             firstRun = false;
         }
        
@@ -364,7 +371,7 @@ public class BossBehavior : Agent
         {
             GameObject[] arrNew = new GameObject[playersParty.Length - 1];
             int count = 0;
-
+            //Debug.Log(" LUNGHEZZA PLAYERPARTY TARGET " + playersParty.Length);
             for (int i = 0; i < playersParty.Length; i++)
             {
                 if (playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp() != 1)
@@ -414,7 +421,7 @@ public class BossBehavior : Agent
 
             GetComponentInParent<moreSpecificProfile>().setFlaResetEpisode(true);
 
-
+            attackBehavior.endEpAttkBe();
             //this.AddReward(-1.0f);
             EndEpisode();
         }
@@ -448,7 +455,8 @@ public class BossBehavior : Agent
             }
 
             GetComponentInParent<moreSpecificProfile>().setFlaResetEpisode(true);
-            
+
+            attackBehavior.endEpAttkBe();
             //this.AddReward(1.0f);
             EndEpisode();
         }
@@ -536,6 +544,8 @@ public class BossBehavior : Agent
         else
         {
             playersParty = newArrayPlay;
+
+            attackBehavior.setParty(playersParty);
 
             int numberOfDiedChamp = 4 - playersParty.Length;
 

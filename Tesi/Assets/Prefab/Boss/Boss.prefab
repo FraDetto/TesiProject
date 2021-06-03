@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 5507742788220207014}
   - component: {fileID: 5701133934335511348}
   - component: {fileID: 1886774262222991420}
+  - component: {fileID: 8794362565545888080}
   m_Layer: 0
   m_Name: TargetChooser
   m_TagString: Untagged
@@ -117,6 +118,20 @@ MonoBehaviour:
   swingAttackPosition: {fileID: 9046850513472922660}
   overcomeBattleSign: {fileID: 0}
   overcomeBattleSignEndRun: {fileID: 0}
+--- !u!114 &8794362565545888080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185567306854502572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &2421681866626765582
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +178,6 @@ GameObject:
   - component: {fileID: 1852354072}
   - component: {fileID: 9083445642244276418}
   - component: {fileID: 177374019950360106}
-  - component: {fileID: 4703337778457828943}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -345,7 +359,6 @@ MonoBehaviour:
     m_Bits: 0
   gameManager: {fileID: 0}
   rb: {fileID: 0}
-  overcomeBattleSignEndRun: {fileID: 0}
   targetPlayer: {fileID: 0}
   targetPlayerForRay: {fileID: 0}
   instanceIDtarget: 0
@@ -358,21 +371,6 @@ MonoBehaviour:
   isShooting: 0
   isAttracting: 0
   isCastingAoE: 0
-  champsKO: 0
---- !u!114 &4703337778457828943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3359959793238077300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
 --- !u!1 &4012549927593715571
 GameObject:
   m_ObjectHideFlags: 0
