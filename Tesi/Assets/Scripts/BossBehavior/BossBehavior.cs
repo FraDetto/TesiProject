@@ -55,17 +55,18 @@ public class BossBehavior : Agent
     public GameObject overcomeBattleSign;
     public GameObject overcomeBattleSignEndRun;
     private GameObject[] endArray;
-    public bool isAttacking = false;
+
+    /*public bool isAttacking = false;
     public bool isUsingAoE = false;
 
     public bool isShooting = false;
     public bool isAttracting = false;
-    public bool isCastingAoE = false;
+    public bool isCastingAoE = false;*/
 
     // Start is called before the first frame update
     void Start()
     {
-        //attackBehavior = GetComponentInParent<BossAttackBehavior>();
+        attackBehavior = GetComponentInParent<BossAttackBehavior>();
 
         Academy.Instance.AutomaticSteppingEnabled = false;
 
@@ -99,8 +100,7 @@ public class BossBehavior : Agent
             //firstRun = false;
         }
 
-        //attackBehavior.setParty(playersParty);
-        //attackBehavior.setEndArray();
+        attackBehavior.setParty(playersParty);
 
         champsKO = 0;
         previousTargetID = 0;
@@ -125,29 +125,15 @@ public class BossBehavior : Agent
 
         Debug.Log(" =====CollectObservations TARGET===== ");
 
-
-        //sensor.AddObservation(transform.position);
-        //sensor.AddObservation(GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-        //sensor.AddObservation(GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-        //sensor.AddObservation(champsKO);
-        //sensor.AddObservation(chainRanged);
-        //sensor.AddObservation(chainRay);
         sensor.AddObservation(previousTargetID);
-        //sensor.AddObservation(targetInAoErange());
         sensor.AddObservation(rangedChampAlive());
         sensor.AddObservation(bruiserAlive());
 
         for (int i=0; i< playersParty.Length; i++)
         {
-            //sensor.AddObservation(playersParty[i].transform.position);
-            //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
-            //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
             sensor.AddObservation(playersParty[i].GetInstanceID());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
-        }
-
-        
-        
+        }      
     }
 
 
@@ -289,16 +275,16 @@ public class BossBehavior : Agent
                 break;
         }
 
-        isAttacking = true;
+        //isAttacking = true;
         targetPlayer = playersParty[target];
         instanceIDtarget = targetPlayer.GetInstanceID();
         previousTargetID = targetPlayer.GetInstanceID();
 
-        /*attackBehavior.setAllTargetInfo(target);
-        attackBehavior.RequestDecision();
-        Academy.Instance.EnvironmentStep();*/
+        attackBehavior.setAllTargetInfo(target);
+        //attackBehavior.RequestDecision();
+        //Academy.Instance.EnvironmentStep();
 
-        StartCoroutine(timeBeforeDamageTarget());
+        //StartCoroutine(timeBeforeDamageTarget());
 
 
 
@@ -319,14 +305,14 @@ public class BossBehavior : Agent
 
     public IEnumerator timeBeforeAnOtherAction()
     {
-        //Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE===== ");
+        //Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE TARGET===== ");
         yield return new WaitForSeconds(2.4f);
 
         this.RequestDecision();
         Academy.Instance.EnvironmentStep();   
     }
 
-
+    /*
     public IEnumerator timeBeforeDamageTarget()
     {
         //ricordarsi di gestire i cooldown
@@ -335,19 +321,17 @@ public class BossBehavior : Agent
         float damageCharacter = GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
         damageCharacter = ((damageCharacter / 100) * 75);
         playersParty[target].GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
-    }
+    }*/
     
     public override void CollectDiscreteActionMasks(DiscreteActionMasker actionMasker)
     {
         if (!firstRun)
         {
-            //Debug.Log(" =====SET MASK ACTION ===== " + actionChoose[0]);
             if (null != actionTarget)
             {
                 Debug.Log(" =====SET MASK TARGET===== " + actionTarget[0]);
                 actionMasker.SetMask(0, actionTarget);
             }       
-            //actionMasker.SetMask(1, actionChoose);
         }
         else
         {
@@ -397,12 +381,7 @@ public class BossBehavior : Agent
 
     public void endEpStopAll()
     {
-        /*isCastingAoE = false;
-        isAttracting = false;*/
-        isAttacking = false;
         StopAllCoroutines();
-
-
     }
 
 
@@ -414,26 +393,20 @@ public class BossBehavior : Agent
         {
             Debug.Log("===== END EPISODE BOSS DEAD =======");
 
+            attackBehavior.endEpStopAll();
+
             endEpStopAll();
             setActionTargetNull();
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
-            if (countRewardRun>=19)
-            {
-                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
-            }
-            else
-            {
-                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
-            }
-            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+           
+
 
             foreach (GameObject go in endArray)
             {
                 if (!go.transform.tag.Equals("Boss"))
                 {
-                    //mr.detonation();
                     go.GetComponent<moreSpecificProfile>().detonation();
                 }
 
@@ -454,30 +427,21 @@ public class BossBehavior : Agent
         if (GetComponentInParent<moreSpecificProfile>().publicGetCurrentLife() >= 0 && GetComponentInParent<moreSpecificProfile>().getStatusLifeChamp() == 0)
         {
             Debug.Log("==== PARTY HA PERSO =====");
-            //StopCoroutine(this.co);
-            //StopCoroutine(re);
-            //myProfile.endEpStopAll();
+
+            attackBehavior.endEpStopAll();
 
             endEpStopAll();
             setActionTargetNull();
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-            if (countRewardRun >= 19)
-            {
-                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
-            }
-            else
-            {
-                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
-            }
-            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
+            
+     
 
             foreach (GameObject go in this.endArray)
             {
                 if (!go.transform.tag.Equals("Boss"))
                 {
-                    //mr.detonation();
                     go.GetComponent<moreSpecificProfile>().detonation();
                 }
 

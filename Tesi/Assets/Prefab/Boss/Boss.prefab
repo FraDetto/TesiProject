@@ -80,7 +80,7 @@ MonoBehaviour:
     VectorActionSize: 04000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 8ec5a3587bd39bf4d8311c22d71b53ef, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 403859d8284ca88459147e23a717b1c2, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 2
   m_BehaviorName: BossCombact
@@ -115,6 +115,8 @@ MonoBehaviour:
   targetPlayer: {fileID: 0}
   instanceIDtarget: 0
   swingAttackPosition: {fileID: 9046850513472922660}
+  overcomeBattleSign: {fileID: 0}
+  overcomeBattleSignEndRun: {fileID: 0}
 --- !u!1 &2421681866626765582
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,10 +160,10 @@ GameObject:
   - component: {fileID: 3181115330687859850}
   - component: {fileID: 2438159072496211589}
   - component: {fileID: 3355486365531466470}
-  - component: {fileID: 5475297297734807888}
-  - component: {fileID: 2306292997450395161}
-  - component: {fileID: 5475297297734807886}
   - component: {fileID: 1852354072}
+  - component: {fileID: 9083445642244276418}
+  - component: {fileID: 177374019950360106}
+  - component: {fileID: 4703337778457828943}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -268,7 +270,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5475297297734807888
+--- !u!114 &1852354072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359959793238077300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
+  healthBar: {fileID: 6959553118988679632}
+  shieldBar: {fileID: 0}
+  flagResetepisode: 0
+  totalhp: 0
+  currenthp: 0
+  shield: 0
+  damage: 0
+  armor: 0
+  status: 0
+  woundsActive: 0
+--- !u!114 &9083445642244276418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,18 +306,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 33
+    VectorObservationSize: 1
     NumStackedVectorObservations: 1
-    VectorActionSize: 0400000006000000
+    VectorActionSize: 01000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: BossCombact
+  m_BehaviorName: My Behavior
   TeamId: 0
   m_UseChildSensors: 1
---- !u!114 &2306292997450395161
+--- !u!114 &177374019950360106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,7 +359,7 @@ MonoBehaviour:
   isAttracting: 0
   isCastingAoE: 0
   champsKO: 0
---- !u!114 &5475297297734807886
+--- !u!114 &4703337778457828943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,29 +373,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
---- !u!114 &1852354072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3359959793238077300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f8b551ab7f14f4b99cfe1d01a97865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partyData: {fileID: 11400000, guid: 79d2ea3816e0102408c21c952a4a430e, type: 2}
-  healthBar: {fileID: 6959553118988679632}
-  shieldBar: {fileID: 0}
-  flagResetepisode: 0
-  totalhp: 0
-  currenthp: 0
-  shield: 0
-  damage: 0
-  armor: 0
-  status: 0
-  woundsActive: 0
 --- !u!1 &4012549927593715571
 GameObject:
   m_ObjectHideFlags: 0

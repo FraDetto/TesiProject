@@ -19,11 +19,9 @@ public class BossAttackBehavior : Agent
     public LayerMask m_PlayerMask;
     public GameManager gameManager;
 
-    //public LayerMask m_PlayerMask;
 
     public Rigidbody rb;
-
-    public GameObject overcomeBattleSignEndRun;
+    
 
     public GameObject targetPlayer;
 
@@ -42,7 +40,6 @@ public class BossAttackBehavior : Agent
     public Transform swingAttackPosition;
     public Transform aheadAttackPosition;//stessa posizione usata per il break
     public Transform AoEAttackPosition;
-    //public GameManager gameManager;
 
     private int target;
     private int previousTargetID;
@@ -76,7 +73,6 @@ public class BossAttackBehavior : Agent
     private GameObject reserveVarTarget;
     private int reserveVarIDtarget;
 
-    public int champsKO;
 
     private bool chainRanged = false;
     private bool chainRay = false;
@@ -105,9 +101,9 @@ public class BossAttackBehavior : Agent
             GetComponent<moreSpecificProfile>().resetBossStats();
         }
         previousTargetID = 0;
-        champsKO = 0;
 
-        targetBehavior.OnEpisodeBegin();
+
+        //targetBehavior.OnEpisodeBegin();
 
     }
 
@@ -124,7 +120,7 @@ public class BossAttackBehavior : Agent
         //sensor.AddObservation(chainRay);
         sensor.AddObservation(previousTargetID);
         //sensor.AddObservation(targetInAoErange());
-        sensor.AddObservation(targetBehavior.rangedChampAlive());
+        //sensor.AddObservation(targetBehavior.rangedChampAlive());
 
 
         for (int i = 0; i < playersParty.Length; i++)
@@ -135,7 +131,7 @@ public class BossAttackBehavior : Agent
             sensor.AddObservation(playersParty[i].GetInstanceID());
             sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
             sensor.AddObservation((this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude);
-            Debug.Log(" =====DSITANZA PLAYERS ===== " + playersParty[i].tag + "   " + (this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude );
+            Debug.Log(" =====DISTANZA PLAYERS ===== " + playersParty[i].tag + "   " + (this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude );
         }
 
     }
@@ -238,77 +234,7 @@ public class BossAttackBehavior : Agent
     }
 
 
-    public void bossDeath()//BOSS DEAD END EPISODE
-    {
-        if (GetComponent<moreSpecificProfile>().publicGetCurrentLife() == 0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 1 & champsKO < 4)
-        {
-            Debug.Log("===== END EPISODE BOSS DEAD =======");
 
-
-            targetBehavior.endEpStopAll();
-            targetBehavior.setActionTargetNull();
-
-            endEpStopAll();
-
-            overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
-
-
-            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
-
-            foreach (GameObject go in endArray)
-            {
-                if (!go.transform.tag.Equals("Boss"))
-                {
-                    //mr.detonation();
-                    go.GetComponent<moreSpecificProfile>().detonation();
-                }
-
-            }
-
-            GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
-            actionChoose = null;
-            
-            //this.AddReward(-1.0f);
-            EndEpisode();
-        }
-
-    }
-
-
-    public void partyDeath()
-    {
-        if (GetComponent<moreSpecificProfile>().publicGetCurrentLife() >= 0 && GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
-        {
-            Debug.Log("==== PARTY HA PERSO =====");
-            //StopCoroutine(this.co);
-            //StopCoroutine(re);
-            //myProfile.endEpStopAll();
-
-            targetBehavior.setActionTargetNull();
-
-            endEpStopAll();
-            overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-
-
-            //moreSpecificProfile[] listOfagents = FindObjectsOfType<moreSpecificProfile>();
-
-            foreach (GameObject go in this.endArray)
-            {
-                if (!go.transform.tag.Equals("Boss"))
-                {
-                    //mr.detonation();
-                    go.GetComponent<moreSpecificProfile>().detonation();
-                }
-
-            }
-
-            GetComponent<moreSpecificProfile>().setFlaResetEpisode(true);
-            actionChoose = null;
-            //this.AddReward(1.0f);
-            EndEpisode();
-        }
-    }
 
 
     public void setParty(GameObject[] arrayPlayers)
@@ -316,10 +242,6 @@ public class BossAttackBehavior : Agent
         playersParty = arrayPlayers;
     }
 
-    public void setEndArray()
-    {
-        endArray = playersParty;
-    }
 
     public void setAllTargetInfo(int targetPost)
     {
@@ -695,8 +617,7 @@ public class BossAttackBehavior : Agent
         isAttracting = false;
         isAttacking = false;
         StopAllCoroutines();
-
-
+        actionChoose = null;
     }
 
 

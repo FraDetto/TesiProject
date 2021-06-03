@@ -204,7 +204,7 @@ public class MageBehavior : MonoBehaviour
     public bool AttkToDef()
     {
         
-        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponentInChildren<BossBehavior>().isAttacking && ( (boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponentInChildren<BossBehavior>().isShooting) ) || (boss.GetComponentInChildren<BossBehavior>().isUsingAoE && attackInRange()) )   ))
+        if ( (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus()==0) ) && ( boss.GetComponentInChildren<BossAttackBehavior>().isAttacking && ( (boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && (attackInRange() || boss.GetComponentInChildren<BossAttackBehavior>().isShooting) ) || (boss.GetComponentInChildren<BossAttackBehavior>().isUsingAoE && attackInRange()) )   ))
         {
             return true;
         }
@@ -255,7 +255,7 @@ public class MageBehavior : MonoBehaviour
     public bool SpecToAttk()
     {
         if (!GetComponent<MageProfile>().chargingUlt && ( GetComponent<MageProfile>().cooldownDefense || ( GetComponent<moreSpecificProfile>().publicGetStatus() == 1) ||
-            (!boss.GetComponentInChildren<BossBehavior>().isAttacking || boss.GetComponentInChildren<BossBehavior>().instanceIDtarget != this.gameObject.GetInstanceID() || (boss.GetComponentInChildren<BossBehavior>().isUsingAoE && !attackInRange()) ) ))
+            (!boss.GetComponentInChildren<BossAttackBehavior>().isAttacking || boss.GetComponentInChildren<BossBehavior>().instanceIDtarget != this.gameObject.GetInstanceID() || (boss.GetComponentInChildren<BossAttackBehavior>().isUsingAoE && !attackInRange()) ) ))
         {
             return true;
         }
@@ -268,7 +268,7 @@ public class MageBehavior : MonoBehaviour
     public bool SpecToDef()
     {
         if (!GetComponent<MageProfile>().chargingUlt  && (!GetComponent<MageProfile>().cooldownDefense || (!GetComponent<MageProfile>().cooldownDash && GetComponent<moreSpecificProfile>().publicGetStatus() == 0) ) &&
-            (boss.GetComponentInChildren<BossBehavior>().isAttacking && ((boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && attackInRange()) || boss.GetComponentInChildren<BossBehavior>().isUsingAoE || boss.GetComponentInChildren<BossBehavior>().isShooting)))
+            (boss.GetComponentInChildren<BossAttackBehavior>().isAttacking && ((boss.GetComponentInChildren<BossBehavior>().instanceIDtarget == this.gameObject.GetInstanceID() && attackInRange()) || boss.GetComponentInChildren<BossAttackBehavior>().isUsingAoE || boss.GetComponentInChildren<BossAttackBehavior>().isShooting)))
         {
             return true;
         }

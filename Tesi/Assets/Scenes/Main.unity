@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &12917876 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8975296440724988336, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &295141805 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8780630781810388029, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
@@ -320,6 +325,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 22.175, y: 0, z: 0}
+--- !u!4 &1031354551 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2719157080684598057, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578572134
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +396,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1747581642 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2068891505189918833, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1792172725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3509567130510910011, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
@@ -405,6 +420,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
+--- !u!4 &1868196801 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5552893806360293054, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2106439039 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5740935392427595443, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8780630781457581019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -418,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1307910370949602446, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2884577549024150187, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: MaxStep
@@ -436,6 +461,66 @@ PrefabInstance:
       propertyPath: overcomeBattleSignEndRun
       value: 
       objectReference: {fileID: 678105424}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1747581642}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: MaxStep
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 295141805}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: goRangedAttk
+      value: 
+      objectReference: {fileID: 3598328088470394854, guid: 9e391bc03674c8c44b2e6001fd26ff37, type: 3}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: swordAheadAttk
+      value: 
+      objectReference: {fileID: 6814415977512439784, guid: ef3906f6ae01225418b896a3c2bdec84, type: 3}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: swordSwingAttk
+      value: 
+      objectReference: {fileID: 1203210700866940167, guid: 886a3f9313e4ad2498661b05cb81464c, type: 3}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: containerAoEAttk
+      value: 
+      objectReference: {fileID: 1880339284888658300, guid: f0621d70328ce4441a2b3c36e4efa403, type: 3}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: AoEAttackPosition
+      value: 
+      objectReference: {fileID: 1868196801}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: aheadAttackPosition
+      value: 
+      objectReference: {fileID: 1031354551}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_PlayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: swingAttackPosition
+      value: 
+      objectReference: {fileID: 2106439039}
+    - target: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: rangedAttackPosition
+      value: 
+      objectReference: {fileID: 12917876}
+    - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BehaviorName
+      value: AttackBehavior
+      objectReference: {fileID: 0}
+    - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BrainParameters.NumStackedVectorObservations
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6995341067626672297, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -450,7 +535,7 @@ PrefabInstance:
       objectReference: {fileID: 5022602860645237092, guid: 8ec5a3587bd39bf4d8311c22d71b53ef, type: 3}
     - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -518,10 +603,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9023322312652241315, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 8780630781457581017, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
     - {fileID: 1307910370949602446, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
     - {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+    - {fileID: 8780630781457581017, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
