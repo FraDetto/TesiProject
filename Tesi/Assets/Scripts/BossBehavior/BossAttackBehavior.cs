@@ -63,7 +63,7 @@ public class BossAttackBehavior : Agent
     public bool isAttracting = false;
     public bool isCastingAoE = false;
 
-    private float AoEDuration = 1.2f;
+    private float AoEDuration = 1f;
     private float attractingRootDuration = 2.0f;
     private float timeBeforeCastAttracting = 0.4f;
 
@@ -121,7 +121,7 @@ public class BossAttackBehavior : Agent
         //sensor.AddObservation(chainRanged);
         //sensor.AddObservation(chainRay);
         sensor.AddObservation(previousTargetID);
-        //sensor.AddObservation(targetInAoErange());
+        sensor.AddObservation(targetInAoErange());
         //sensor.AddObservation(targetBehavior.rangedChampAlive());
 
 
@@ -171,7 +171,87 @@ public class BossAttackBehavior : Agent
 
         actionChoose[0] = actionForBoss;
 
-        StartCoroutine(timeBeforeDamageTarget());
+        //StartCoroutine(timeBeforeDamageTarget());
+        float distanceFromTarget = (this.transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude;
+
+        switch (actionForBoss)
+        {
+            case 0: // RANGED
+                if (distanceFromTarget > 8)
+                {
+                    this.AddReward(+1f);
+                }
+                else
+                {
+                    this.AddReward(-0.5f);
+                }
+                break;
+            case 1: // RAY
+                if (distanceFromTarget > 8)
+                {
+                    this.AddReward(+1f);
+                }
+                else
+                {
+                    this.AddReward(-0.5f);
+                }
+                break;
+            case 2:// SWING
+                if (distanceFromTarget > 8)
+                {
+                    this.AddReward(-0.5f);
+                }
+                else
+                {/*
+                    if ()
+                    {
+
+                    }
+                    else
+                    {
+                        this.AddReward(+1f);
+                    }*/
+                }
+                break;
+            case 3:// AHEAD
+                if (distanceFromTarget > 8)
+                {
+                    this.AddReward(-0.5f);
+                }
+                else
+                {/*
+                    if ()
+                    {
+
+                    }
+                    else
+                    {
+                        this.AddReward(+1f);
+                    }*/
+                }
+                break;
+            case 4:// AoE
+                if (distanceFromTarget > 8)
+                {
+                    this.AddReward(-0.5f);
+                }
+                else
+                {
+                    if (targetInAoErange()<3)
+                    {
+                        this.AddReward(-0.5f);
+                    }
+                    else
+                    {
+                        this.AddReward(+1f);
+                    }
+                }
+                break;
+            default:
+                Debug.Log("CHARACTER UNKNOWN");
+                break;
+        }
+
         StartCoroutine(timeBeforeAnOtherAction());
         /*
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
@@ -303,6 +383,24 @@ public class BossAttackBehavior : Agent
             return false;
 
         }
+    }
+
+    public int targetInAoErange()
+    {
+        int cont = 0;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 8.0f, m_PlayerMask);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
+
+            if (targetProfile.getStatusLifeChamp() == 0)
+            {
+                cont++;
+            }
+
+
+        }
+        return cont;
     }
 
 

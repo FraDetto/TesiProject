@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6995341067626672297, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_AnchorMax.x

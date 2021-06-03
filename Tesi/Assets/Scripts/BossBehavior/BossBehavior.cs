@@ -509,23 +509,7 @@ public class BossBehavior : Agent
         }
     }
 
-    public int targetInAoErange()
-    {
-        int cont = 0;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 11.0f, m_PlayerMask);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            moreSpecificProfile targetProfile = colliders[i].GetComponent<moreSpecificProfile>();
 
-            if (targetProfile.getStatusLifeChamp() == 0)
-            {
-                cont++;
-            }
-
-
-        }
-        return cont;
-    }
 
   
 
