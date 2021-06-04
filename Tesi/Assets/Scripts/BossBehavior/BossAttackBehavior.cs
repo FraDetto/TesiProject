@@ -119,7 +119,7 @@ public class BossAttackBehavior : Agent
         //sensor.AddObservation(champsKO);
         //sensor.AddObservation(chainRanged);
         //sensor.AddObservation(chainRay);
-        sensor.AddObservation(previousTargetID);
+        //sensor.AddObservation(previousTargetID);
         sensor.AddObservation(targetInAoErange());
         sensor.AddObservation(cooldownAoE);
         //sensor.AddObservation(targetBehavior.rangedChampAlive());
@@ -371,7 +371,7 @@ public class BossAttackBehavior : Agent
 
     public void setParty(GameObject[] arrayPlayers)
     {
-        Debug.Log(" =====SETTO PARTY ATTACK===== ");
+        //Debug.Log(" =====SETTO PARTY ATTACK===== ");
         playersParty = arrayPlayers;
     }
 

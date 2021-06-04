@@ -14,6 +14,9 @@ public class BruiserMovement : MonoBehaviour
 
     public bool directionRight = false;
 
+    private float maxAngle = 60f;
+    private float currentAngleR = 0f;
+    private float currentAngleL = 0f;
 
     private bool m_HitDetect_mov_front;
 
@@ -47,12 +50,39 @@ public class BruiserMovement : MonoBehaviour
                     m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
                     if (m_HitDetect_mov_front)
                     {
+                        if (currentAngleR + 30.0f <= maxAngle)
+                        {
+                            Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
+                            Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                            rb.MoveRotation(rb.rotation * deltaRotation);
+                            rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                            currentAngleR += 30f;
+                            //good smooth rotation in the other branch
+                        }
+                        else
+                        {
+                            if (boss.transform.rotation.y - transform.rotation.y <= 90f)
+                            {
+                                if (currentAngleL + 15.0f <= maxAngle)
+                                {
+                                    Vector3 m_EulerAngleVelocity = new Vector3(0f, -15.0f, 0f);
+                                    Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+                                    rb.MoveRotation(rb.rotation * deltaRotation);
+                                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                                    currentAngleL += 15f;
+                                    //good smooth rotation in the other branch
+                                }
+                                else
+                                {
+                                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                                }
+                            }
+                            else
+                            {
+                                rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+                            }
+                        }
 
-                        Vector3 m_EulerAngleVelocity = new Vector3(0f, 30.0f, 0f);
-                        Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
-                        rb.MoveRotation(rb.rotation * deltaRotation);
-                        rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
-                        //good smooth rotation in the other branch
                     }
                     else
                     {
@@ -68,6 +98,8 @@ public class BruiserMovement : MonoBehaviour
                 else
                 {
                     chaseFlag = false;
+                    currentAngleR = 0f;
+                    currentAngleL = 0f;
                 }
             }
         }
