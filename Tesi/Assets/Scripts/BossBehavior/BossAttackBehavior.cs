@@ -44,11 +44,7 @@ public class BossAttackBehavior : Agent
     private int target;
     private int previousTargetID;
 
-    private bool m_HitDetect_swing_right;
-    private bool m_HitDetect_swing_left;
 
-    RaycastHit m_Hit_swing_right;
-    RaycastHit m_Hit_swing_left;
 
 
     private Vector3 scaleChange = new Vector3(0.16f, 0.018f, 0.16f);
@@ -66,6 +62,9 @@ public class BossAttackBehavior : Agent
     private float AoEDuration = 1f;
     private float attractingRootDuration = 2.0f;
     private float timeBeforeCastAttracting = 0.4f;
+
+    private float timeForCooldownAoE = 10f;
+    private bool cooldownAoE = false;
 
 
     private bool firstRun = true;
@@ -122,6 +121,7 @@ public class BossAttackBehavior : Agent
         //sensor.AddObservation(chainRay);
         sensor.AddObservation(previousTargetID);
         sensor.AddObservation(targetInAoErange());
+        sensor.AddObservation(cooldownAoE);
         //sensor.AddObservation(targetBehavior.rangedChampAlive());
 
 
@@ -185,6 +185,9 @@ public class BossAttackBehavior : Agent
                 {
                     this.AddReward(-0.5f);
                 }
+
+                StartCoroutine(timeBeforeCastRangedAttack());
+
                 break;
             case 1: // RAY
                 if (distanceFromTarget > 8)
@@ -195,6 +198,10 @@ public class BossAttackBehavior : Agent
                 {
                     this.AddReward(-0.5f);
                 }
+
+                targetPlayerForRay = playersParty[target];
+                StartCoroutine(timeBeforeCastRayAttack());
+
                 break;
             case 2:// SWING
                 if (distanceFromTarget > 8)
@@ -202,16 +209,20 @@ public class BossAttackBehavior : Agent
                     this.AddReward(-0.5f);
                 }
                 else
-                {/*
-                    if ()
+                {
+                    if (targetPlayer.GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask))
                     {
-
+                        this.AddReward(+1f);
                     }
                     else
                     {
-                        this.AddReward(+1f);
-                    }*/
+                        this.AddReward(-0.5f);
+                    }
                 }
+
+                isUsingAoE = true;
+
+                StartCoroutine(timeBeforeCastSwingAttk());
                 break;
             case 3:// AHEAD
                 if (distanceFromTarget > 8)
@@ -219,25 +230,8 @@ public class BossAttackBehavior : Agent
                     this.AddReward(-0.5f);
                 }
                 else
-                {/*
-                    if ()
-                    {
-
-                    }
-                    else
-                    {
-                        this.AddReward(+1f);
-                    }*/
-                }
-                break;
-            case 4:// AoE
-                if (distanceFromTarget > 8)
                 {
-                    this.AddReward(-0.5f);
-                }
-                else
-                {
-                    if (targetInAoErange()<3)
+                    if (targetPlayer.GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask))
                     {
                         this.AddReward(-0.5f);
                     }
@@ -246,6 +240,39 @@ public class BossAttackBehavior : Agent
                         this.AddReward(+1f);
                     }
                 }
+
+                StartCoroutine(timeBeforeCastAheadAttk());
+
+                break;
+            case 4:// AoE
+                if (cooldownAoE)
+                {
+                    this.AddReward(-0.5f);
+                }
+                else
+                {
+                    if (distanceFromTarget > 8)
+                    {
+                        this.AddReward(-0.5f);
+                    }
+                    else
+                    {
+                        if (targetInAoErange() < 3)
+                        {
+                            this.AddReward(-0.5f);
+                        }
+                        else
+                        {
+                            this.AddReward(+1f);
+                        }
+                    }
+
+                    isUsingAoE = true;
+
+                    StartCoroutine(timeBeforeCastAoEAttk());
+                }
+               
+
                 break;
             default:
                 Debug.Log("CHARACTER UNKNOWN");
@@ -354,36 +381,7 @@ public class BossAttackBehavior : Agent
         target = targetPost;
     }
 
-    public bool swingRayCastControll()//quando ha fatto catena fino a ray e tira swing su mage o healer se c'e' alemno un altro champ nello spazio di uso dello swing con raycast
-    {
-        m_HitDetect_swing_right = Physics.BoxCast(swingAttackPosition.position, transform.localScale, transform.right, out m_Hit_swing_right, transform.rotation, swordSwingAttk.transform.localScale.x / 2, m_PlayerMask);
-        m_HitDetect_swing_left = Physics.BoxCast(swingAttackPosition.position, transform.localScale, -transform.right, out m_Hit_swing_left, transform.rotation, swordSwingAttk.transform.localScale.x / 2, m_PlayerMask);
-
-        if (!m_HitDetect_swing_right && !m_HitDetect_swing_left)
-        {
-            return false;
-        }
-        else
-        {
-            if (m_HitDetect_swing_right)
-            {
-                if (m_Hit_swing_right.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
-                {
-                    return true;
-                }
-            }
-
-            if (m_HitDetect_swing_left)
-            {
-                if (m_Hit_swing_left.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)//see if the ray hit is an alive champ
-                {
-                    return true;
-                }
-            }
-            return false;
-
-        }
-    }
+    
 
     public int targetInAoErange()
     {
@@ -402,6 +400,7 @@ public class BossAttackBehavior : Agent
         }
         return cont;
     }
+
 
 
 
@@ -622,10 +621,19 @@ public class BossAttackBehavior : Agent
         isUsingAoE = false;
         Destroy(goAoE);
 
+        cooldownAoE = true;
+        StartCoroutine(corForCooldownAoE());
+
+    }
+
+    public IEnumerator corForCooldownAoE()
+    {
+        yield return new WaitForSeconds(timeForCooldownAoE);
+        cooldownAoE = false;
     }
 
 
-    public void swingAttack()
+        public void swingAttack()
     {
         goSwing = Instantiate(swordSwingAttk, swingAttackPosition.position, transform.rotation, gameObject.transform);
 

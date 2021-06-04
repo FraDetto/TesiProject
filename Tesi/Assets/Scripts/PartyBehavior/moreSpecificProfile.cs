@@ -31,6 +31,14 @@ public class moreSpecificProfile : aProfile
 
     private bool m_HitDetect_onRay_front;
 
+
+    private bool m_HitDetect_swing_right;
+    private bool m_HitDetect_swing_left;
+
+    RaycastHit m_Hit_swing_right;
+    RaycastHit m_Hit_swing_left;
+
+
     RaycastHit m_Hit_dash_left;
     RaycastHit m_Hit_dash_right;
     RaycastHit m_Hit_dash_back;
@@ -565,21 +573,59 @@ public class moreSpecificProfile : aProfile
         bossRef = bo;
     }
 
+
+    public bool swingRayCastControll(GameObject swordSwingAttk, LayerMask m_PlayerMask)//if at least one other champ in the swing's space return true
+    {
+        m_HitDetect_swing_right = Physics.BoxCast(transform.position, swordSwingAttk.transform.localScale, transform.right, out m_Hit_swing_right, transform.rotation, swordSwingAttk.transform.localScale.x, m_PlayerMask);
+        m_HitDetect_swing_left = Physics.BoxCast(transform.position, swordSwingAttk.transform.localScale, -transform.right, out m_Hit_swing_left, transform.rotation, swordSwingAttk.transform.localScale.x, m_PlayerMask);
+
+        if (!m_HitDetect_swing_right && !m_HitDetect_swing_left)
+        {
+            Debug.Log("SWING CONTROLLO NO HIT " + swordSwingAttk.transform.localScale.x);
+            return false;
+        }
+        else
+        {
+            if (m_HitDetect_swing_right)
+            {
+                if (m_Hit_swing_right.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
+                {
+                    Debug.Log("SWING CONTROLLO HIT DESTRA");
+                    return true;
+                }
+            }
+
+            if (m_HitDetect_swing_left)
+            {
+                if (m_Hit_swing_left.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)//see if the ray hit is an alive champ
+                {
+                    Debug.Log("SWING CONTROLLO HIT SINISTRA");
+                    return true;
+                }
+            }
+            Debug.Log("SWING CONTROLLO NO HIT PERCHE KO");
+            return false;
+
+        }
+    }
+
+
     /*
+    
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        if (m_HitDetect_onRay_front)
+        Gizmos.color = Color.blue;
+        if (m_HitDetect_swing_right)
         {
-            Gizmos.DrawRay(transform.position, transform.forward * m_Hit_onRay_front.distance);
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit_onRay_front.distance, transform.localScale);
+            Gizmos.DrawRay(transform.position, transform.right * m_Hit_swing_right.distance);
+            Gizmos.DrawWireCube(transform.position + transform.right * m_Hit_swing_right.distance, transform.localScale);
         }
         else
         {
             //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.forward * 50.0f);
+            Gizmos.DrawRay(transform.position, transform.right * 7f);
             //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.forward * 50.0f, transform.localScale);
+            Gizmos.DrawWireCube(transform.position + transform.right * 7f, transform.localScale);
         }
     }
     */

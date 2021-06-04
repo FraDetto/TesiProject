@@ -33,7 +33,7 @@ public class WeaponsBossBehavior : MonoBehaviour
                 other.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
             }else
             {
-                Debug.Log("PLAYER SI STA DIFENDENDO SDOOOOONG");
+                Debug.Log("PLAYER SI STA DIFENDENDO O GIA KO");
             }
             
         }
