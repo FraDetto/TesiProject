@@ -990,3 +990,168 @@ System memory in use after: 83.6 MB.
 Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2101.
 Total: 1.941700 ms (FindLiveObjects: 0.198900 ms CreateObjectMapping: 0.050900 ms MarkObjects: 1.634000 ms  DeleteObjects: 0.056800 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003392 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.957 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.8 MB.
+System memory in use after: 83.9 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2103.
+Total: 2.835700 ms (FindLiveObjects: 0.326700 ms CreateObjectMapping: 0.120400 ms MarkObjects: 2.326200 ms  DeleteObjects: 0.060800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003429 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.924 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.0 MB.
+System memory in use after: 84.1 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2105.
+Total: 2.476400 ms (FindLiveObjects: 0.184100 ms CreateObjectMapping: 0.055200 ms MarkObjects: 2.137500 ms  DeleteObjects: 0.098600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 4088.310559 seconds.
+  path: Assets/Scripts/BossBehavior/WeaponsBossBehavior.cs
+  artifactKey: Guid(99ea2f3246e6a6341b51adeb6059b311) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BossBehavior/WeaponsBossBehavior.cs using Guid(99ea2f3246e6a6341b51adeb6059b311) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '308e9b96cf52aa7fe85da866ce65ee68') in 0.093982 seconds
+  Import took 0.097493 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003505 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.36 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.972 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 84.1 MB.
+System memory in use after: 84.2 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2107.
+Total: 2.332700 ms (FindLiveObjects: 0.182600 ms CreateObjectMapping: 0.060200 ms MarkObjects: 2.024900 ms  DeleteObjects: 0.063900 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 313.563081 seconds.
+  path: Assets/Scripts/BossBehavior/RangedWeaponBehaviour.cs
+  artifactKey: Guid(cf346aa735f044b459e7c15ad8cb249d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BossBehavior/RangedWeaponBehaviour.cs using Guid(cf346aa735f044b459e7c15ad8cb249d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e2d3b1d4c1139b39ea2cbb55e14d3c1') in 0.006679 seconds
+  Import took 0.009232 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000797 seconds.
+  path: Assets/Scripts/BossBehavior/RangedWeaponBehaviour.cs
+  artifactKey: Guid(cf346aa735f044b459e7c15ad8cb249d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/BossBehavior/RangedWeaponBehaviour.cs using Guid(cf346aa735f044b459e7c15ad8cb249d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e2d3b1d4c1139b39ea2cbb55e14d3c1') in 0.001686 seconds
+  Import took 0.004043 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 966.417342 seconds.
+  path: Assets/Scripts/PartyBehavior/HealerScripts/HealerBehavior.cs
+  artifactKey: Guid(03086febb7bc53d4aa77b21fe8294a72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/HealerScripts/HealerBehavior.cs using Guid(03086febb7bc53d4aa77b21fe8294a72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f122a9c14e6f1fc90e664e9cfab1ac26') in 0.002533 seconds
+  Import took 0.005300 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 26.131303 seconds.
+  path: Assets/Scripts/PartyBehavior/BruiserScripts/BruiserBehavior.cs
+  artifactKey: Guid(5c2d7d580672afd41b0c255ea378ce55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/BruiserScripts/BruiserBehavior.cs using Guid(5c2d7d580672afd41b0c255ea378ce55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58232a384ed8f460424517ee66a7505e') in 0.001735 seconds
+  Import took 0.004302 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000358 seconds.
+  path: Assets/Scripts/PartyBehavior/BruiserScripts/BruiserBehavior.cs
+  artifactKey: Guid(5c2d7d580672afd41b0c255ea378ce55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/BruiserScripts/BruiserBehavior.cs using Guid(5c2d7d580672afd41b0c255ea378ce55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58232a384ed8f460424517ee66a7505e') in 0.001515 seconds
+  Import took 0.003921 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 70.275424 seconds.
+  path: Assets/Scripts/PartyBehavior/MageScripts/MageBehavior.cs
+  artifactKey: Guid(5af2ce2b1bb365148aa90a3e9914e266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/MageScripts/MageBehavior.cs using Guid(5af2ce2b1bb365148aa90a3e9914e266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31ab9dbc68e71527623b919deca2124b') in 0.017907 seconds
+  Import took 0.020342 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003713 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.62 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.947 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.4 MB.
+System memory in use after: 83.5 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2109.
+Total: 2.519700 ms (FindLiveObjects: 0.267500 ms CreateObjectMapping: 0.061200 ms MarkObjects: 2.087900 ms  DeleteObjects: 0.102000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 4192.885584 seconds.
+  path: Assets/Scripts/DataManagment/PartyData.cs
+  artifactKey: Guid(7037773906dad164dae2ba435e34c85f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/DataManagment/PartyData.cs using Guid(7037773906dad164dae2ba435e34c85f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e7dcd93cbf70aa584d6486d16b5ed24') in 0.003951 seconds
+  Import took 0.006514 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.517152 seconds.
+  path: Assets/Scripts/DataManagment/Data.asset
+  artifactKey: Guid(79d2ea3816e0102408c21c952a4a430e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/DataManagment/Data.asset using Guid(79d2ea3816e0102408c21c952a4a430e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13c91f6809ec1fb132e48e438fb01c34') in 0.061676 seconds
+  Import took 0.064759 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

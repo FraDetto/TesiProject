@@ -12,7 +12,7 @@ public class PartyData : ScriptableObject
 
     public float hpTank = 600.0f;
     public float damageTank = 110.0f;
-    public float armorTank = 80.0f;
+    public float armorTank = 85.0f;
 
     /// <summary>
     /// BRUISER VALUES
@@ -42,9 +42,9 @@ public class PartyData : ScriptableObject
     /// BOSS VALUES
     /// </summary>
     /// 
-    public float hpBoss = 4000.0f;
+    public float hpBoss = 4150.0f;
     public float damageBoss = 200.0f;
-    public float armorBoss = 120.0f;
+    public float armorBoss = 110.0f;
 
    
 }

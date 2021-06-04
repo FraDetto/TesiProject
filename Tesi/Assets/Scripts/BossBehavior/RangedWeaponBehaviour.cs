@@ -13,7 +13,7 @@ public class RangedWeaponBehaviour : MonoBehaviour
                 float damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
 
                 //this.transform.GetComponentInParent<BossProfile>().isShooting = false;
-                other.transform.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+                other.transform.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(((damageCharacter / 100) * 65));
                 //this.transform.GetComponentInParent<BossProfile>().isAttacking = false;
 
                 //this.transform.GetComponentInParent<BossProfile>().targetPlayer = null;
