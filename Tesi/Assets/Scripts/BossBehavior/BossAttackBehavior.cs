@@ -130,9 +130,10 @@ public class BossAttackBehavior : Agent
             sensor.AddObservation(playersParty[i].transform.position);
             //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().publicGetCurrentLife());
             //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getStatusLifeChamp());
-            sensor.AddObservation(playersParty[i].GetInstanceID());
-            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
+            //sensor.AddObservation(playersParty[i].GetInstanceID());
+            //sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().getTypeCode());
             sensor.AddObservation((this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude);
+            sensor.AddObservation(playersParty[i].GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask));
             //Debug.Log(" =====DISTANZA PLAYERS ===== " + playersParty[i].tag + "   " + (this.transform.position - playersParty[i].GetComponent<Rigidbody>().transform.position).magnitude );
         }
 
