@@ -581,7 +581,7 @@ public class moreSpecificProfile : aProfile
 
         if (!m_HitDetect_swing_right && !m_HitDetect_swing_left)
         {
-            Debug.Log("SWING CONTROLLO NO HIT " + swordSwingAttk.transform.localScale.x);
+            //Debug.Log("SWING CONTROLLO NO HIT " + swordSwingAttk.transform.localScale.x);
             return false;
         }
         else
@@ -590,7 +590,7 @@ public class moreSpecificProfile : aProfile
             {
                 if (m_Hit_swing_right.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)
                 {
-                    Debug.Log("SWING CONTROLLO HIT DESTRA");
+                    //Debug.Log("SWING CONTROLLO HIT DESTRA");
                     return true;
                 }
             }
@@ -599,11 +599,11 @@ public class moreSpecificProfile : aProfile
             {
                 if (m_Hit_swing_left.collider.gameObject.GetComponent<moreSpecificProfile>().getStatusLifeChamp() == 0)//see if the ray hit is an alive champ
                 {
-                    Debug.Log("SWING CONTROLLO HIT SINISTRA");
+                    //Debug.Log("SWING CONTROLLO HIT SINISTRA");
                     return true;
                 }
             }
-            Debug.Log("SWING CONTROLLO NO HIT PERCHE KO");
+            //Debug.Log("SWING CONTROLLO NO HIT PERCHE KO");
             return false;
 
         }

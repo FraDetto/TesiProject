@@ -76,7 +76,9 @@ public class BossAttackBehavior : Agent
     private bool chainRanged = false;
     private bool chainRay = false;
 
-    private GameObject[] endArray;
+    private bool swingPrevious = false;
+    private bool aheadPrevious = false;
+
 
     private BossBehavior targetBehavior;
 
@@ -122,6 +124,8 @@ public class BossAttackBehavior : Agent
         //sensor.AddObservation(previousTargetID);
         sensor.AddObservation(targetInAoErange());
         sensor.AddObservation(cooldownAoE);
+        sensor.AddObservation(swingPrevious);
+        sensor.AddObservation(aheadPrevious);
         //sensor.AddObservation(targetBehavior.rangedChampAlive());
 
 
@@ -187,6 +191,8 @@ public class BossAttackBehavior : Agent
                     this.AddReward(-0.5f);
                 }
 
+                aheadPrevious = false; 
+                swingPrevious = false;
                 StartCoroutine(timeBeforeCastRangedAttack());
 
                 break;
@@ -201,6 +207,9 @@ public class BossAttackBehavior : Agent
                 }
 
                 targetPlayerForRay = playersParty[target];
+                aheadPrevious = false;
+                swingPrevious = false;
+
                 StartCoroutine(timeBeforeCastRayAttack());
 
                 break;
@@ -211,14 +220,25 @@ public class BossAttackBehavior : Agent
                 }
                 else
                 {
-                    if (targetPlayer.GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask))
+                    if (aheadPrevious)
                     {
                         this.AddReward(+1f);
+                        swingPrevious = true;
+                        aheadPrevious = false;
                     }
                     else
                     {
-                        this.AddReward(-0.5f);
+                        if (targetPlayer.GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask))
+                        {
+                            this.AddReward(+1f);
+                            swingPrevious = true;
+                        }
+                        else
+                        {
+                            this.AddReward(-0.5f);
+                        }
                     }
+                    
                 }
 
                 isUsingAoE = true;
@@ -232,14 +252,25 @@ public class BossAttackBehavior : Agent
                 }
                 else
                 {
-                    if (targetPlayer.GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask))
+                    if (swingPrevious)
                     {
-                        this.AddReward(-0.5f);
+                        this.AddReward(+1f);
+                        aheadPrevious = true;
+                        swingPrevious = false;
                     }
                     else
                     {
-                        this.AddReward(+1f);
+                        if (targetPlayer.GetComponent<moreSpecificProfile>().swingRayCastControll(swordSwingAttk, m_PlayerMask))
+                        {
+                            this.AddReward(-0.5f);
+                        }
+                        else
+                        {
+                            this.AddReward(+1f);
+                            aheadPrevious = true;
+                        }
                     }
+                   
                 }
 
                 StartCoroutine(timeBeforeCastAheadAttk());
@@ -268,6 +299,8 @@ public class BossAttackBehavior : Agent
                         }
                     }
 
+                    aheadPrevious = false;
+                    swingPrevious = false;
                     isUsingAoE = true;
 
                     StartCoroutine(timeBeforeCastAoEAttk());

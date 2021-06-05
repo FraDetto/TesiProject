@@ -1,0 +1,23 @@
+{
+    "AttackBehavior": {
+        "checkpoints": [
+            {
+                "steps": 222,
+                "file_path": "results\\Test28\\AttackBehavior\\AttackBehavior-222.onnx",
+                "reward": 1.2857142857142858,
+                "creation_time": 1622887445.9535825
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 222,
+            "file_path": "results\\Test28\\AttackBehavior.onnx",
+            "reward": 1.2857142857142858,
+            "creation_time": 1622887445.9535825
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
