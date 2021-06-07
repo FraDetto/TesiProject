@@ -487,7 +487,7 @@ MonoBehaviour:
   status: 0
   woundsActive: 0
   cooldownShield: 0
-  cooldownSpecial: 1
+  cooldownSpecial: 0
   shieldActive: 0
   swordActive: 0
   ultiRunning: 0
