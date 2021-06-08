@@ -84,6 +84,7 @@ public class BossBehavior : Agent
 
 
         playersParty = gameManager.generatePartyInGame();
+        //playersParty = gameManager.generateStandardPartyInGame();
         attackBehavior.setParty(playersParty);
 
         champsKO = 0;
@@ -278,7 +279,7 @@ public class BossBehavior : Agent
         attackBehavior.RequestDecision();
         //Academy.Instance.EnvironmentStep();
 
-       // StartCoroutine(timeBeforeActionTarget());
+
 
 
 
@@ -291,13 +292,7 @@ public class BossBehavior : Agent
 
 
     }
-    
-    public IEnumerator timeBeforeActionTarget()
-    {
-        //ricordarsi di gestire i cooldown
-        yield return new WaitForSeconds(0.5f);
-        actionForAttack();
-    }
+
 
     public void actionForTarget()
     {
@@ -305,10 +300,6 @@ public class BossBehavior : Agent
         Academy.Instance.EnvironmentStep();
     }
 
-    public void actionForAttack()
-    {
-        attackBehavior.takeTheAction();
-    }
 
     public IEnumerator timeBeforeAnOtherAction()
     {
@@ -407,7 +398,14 @@ public class BossBehavior : Agent
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
-           
+            if (countRewardRun > 19.5f)
+            {
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            }
+            else
+            {
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+            }
 
 
             foreach (GameObject go in endArray)
@@ -442,8 +440,15 @@ public class BossBehavior : Agent
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-            
-     
+
+            if (countRewardRun > 19.5f)
+            {
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            }
+            else
+            {
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+            }
 
             foreach (GameObject go in this.endArray)
             {
