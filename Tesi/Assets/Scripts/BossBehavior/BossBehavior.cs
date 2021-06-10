@@ -83,8 +83,8 @@ public class BossBehavior : Agent
         Debug.Log(" =====OnEPISODE BEGIN  TARGET=====  ");
 
 
-        playersParty = gameManager.generatePartyInGame();
-        //playersParty = gameManager.generateStandardPartyInGame();
+        //playersParty = gameManager.generatePartyInGame();
+        playersParty = gameManager.generateStandardPartyInGame();
         attackBehavior.setParty(playersParty);
 
         champsKO = 0;
@@ -397,8 +397,8 @@ public class BossBehavior : Agent
             setActionTargetNull();
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
-            /*
+        
+            
             if (countRewardRun > 19.5f)
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
@@ -406,7 +406,7 @@ public class BossBehavior : Agent
             else
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
-            }*/
+            }
 
 
             foreach (GameObject go in endArray)
@@ -441,7 +441,7 @@ public class BossBehavior : Agent
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-            /*
+            
             if (countRewardRun > 19.5f)
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
@@ -449,7 +449,7 @@ public class BossBehavior : Agent
             else
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
-            }*/
+            }
 
             foreach (GameObject go in this.endArray)
             {

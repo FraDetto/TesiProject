@@ -1,0 +1,23 @@
+{
+    "targetChooserSac": {
+        "checkpoints": [
+            {
+                "steps": 1985,
+                "file_path": "results\\Test1Sac\\targetChooserSac\\targetChooserSac-1985.onnx",
+                "reward": null,
+                "creation_time": 1623339336.2341933
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1985,
+            "file_path": "results\\Test1Sac\\targetChooserSac.onnx",
+            "reward": null,
+            "creation_time": 1623339336.2341933
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

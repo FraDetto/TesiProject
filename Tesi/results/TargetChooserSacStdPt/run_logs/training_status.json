@@ -1,0 +1,23 @@
+{
+    "targetChooserSac": {
+        "checkpoints": [
+            {
+                "steps": 130594,
+                "file_path": "results\\TargetChooserSacStdPt\\targetChooserSac\\targetChooserSac-130594.onnx",
+                "reward": null,
+                "creation_time": 1623352088.3682578
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 130594,
+            "file_path": "results\\TargetChooserSacStdPt\\targetChooserSac.onnx",
+            "reward": null,
+            "creation_time": 1623352088.3682578
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
