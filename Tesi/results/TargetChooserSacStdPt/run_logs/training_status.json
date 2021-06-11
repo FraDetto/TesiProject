@@ -6,13 +6,19 @@
                 "file_path": "results\\TargetChooserSacStdPt\\targetChooserSac\\targetChooserSac-130594.onnx",
                 "reward": null,
                 "creation_time": 1623352088.3682578
+            },
+            {
+                "steps": 272989,
+                "file_path": "results\\TargetChooserSacStdPt\\targetChooserSac\\targetChooserSac-272989.onnx",
+                "reward": null,
+                "creation_time": 1623412476.7347612
             }
         ],
         "final_checkpoint": {
-            "steps": 130594,
+            "steps": 272989,
             "file_path": "results\\TargetChooserSacStdPt\\targetChooserSac.onnx",
             "reward": null,
-            "creation_time": 1623352088.3682578
+            "creation_time": 1623412476.7347612
         }
     },
     "metadata": {
