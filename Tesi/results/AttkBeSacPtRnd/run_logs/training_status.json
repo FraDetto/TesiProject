@@ -6,13 +6,19 @@
                 "file_path": "results\\AttkBeSacPtRnd\\attackBehaviorSac\\attackBehaviorSac-350884.onnx",
                 "reward": null,
                 "creation_time": 1623519019.006306
+            },
+            {
+                "steps": 420166,
+                "file_path": "results\\AttkBeSacPtRnd\\attackBehaviorSac\\attackBehaviorSac-420166.onnx",
+                "reward": null,
+                "creation_time": 1623529862.7159803
             }
         ],
         "final_checkpoint": {
-            "steps": 350884,
+            "steps": 420166,
             "file_path": "results\\AttkBeSacPtRnd\\attackBehaviorSac.onnx",
             "reward": null,
-            "creation_time": 1623519019.006306
+            "creation_time": 1623529862.7159803
         }
     },
     "metadata": {
