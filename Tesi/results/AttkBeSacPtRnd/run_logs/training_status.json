@@ -1,0 +1,23 @@
+{
+    "attackBehaviorSac": {
+        "checkpoints": [
+            {
+                "steps": 350884,
+                "file_path": "results\\AttkBeSacPtRnd\\attackBehaviorSac\\attackBehaviorSac-350884.onnx",
+                "reward": null,
+                "creation_time": 1623519019.006306
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 350884,
+            "file_path": "results\\AttkBeSacPtRnd\\attackBehaviorSac.onnx",
+            "reward": null,
+            "creation_time": 1623519019.006306
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
