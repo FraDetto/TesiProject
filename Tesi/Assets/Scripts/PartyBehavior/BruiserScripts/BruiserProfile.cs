@@ -29,7 +29,7 @@ public class BruiserProfile : moreSpecificProfile
     private float timeCoolDownSwordAttack = 2.5f;
     private float healingHimselfDuration = 1.2f;
     private float timeCoolDownheal = 10.0f;
-    private float specialDuration = 6.2f;
+    private float specialDuration = 5.5f;
     private float timeCoolDownSpecial = 25.0f;
 
     private float timeRollCooldown = 2.0f;

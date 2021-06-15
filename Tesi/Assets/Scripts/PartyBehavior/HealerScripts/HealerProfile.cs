@@ -216,7 +216,7 @@ public class HealerProfile : moreSpecificProfile
                 continue;
             if (targetProfile.getStatusLifeChamp() == 0)
             {
-                float shieldToApply = (targetProfile.publicGetTotalLife() / 100) * 50;
+                float shieldToApply = (targetProfile.publicGetTotalLife() / 100) * 40;
                 targetProfile.publicAddShield(shieldToApply);
             }
 
