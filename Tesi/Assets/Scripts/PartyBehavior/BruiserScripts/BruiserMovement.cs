@@ -93,8 +93,8 @@ public class BruiserMovement : MonoBehaviour
                         rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
                         rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
                     }*/
-                    var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
-
+                    //var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
+                    var targetRotation = Quaternion.LookRotation((new Vector3(boss.transform.position.x, transform.position.y, boss.transform.position.z)) - rb.transform.position);
                     // Smoothly rotate towards the target point.
                     rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 10.0f * Time.deltaTime));
                     rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);

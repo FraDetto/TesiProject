@@ -282,3 +282,298 @@ Received Import Request.
 Start importing Assets/Prefab/Party/Bruiser/Bruiser.prefab using Guid(f8982895849c30849b054ab374beeb7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4e77a645165b877cd46b226894aa6d2') in 0.076426 seconds
   Import took 0.079468 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003490 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.946 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.6 MB.
+System memory in use after: 83.7 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 2044.
+Total: 2.640700 ms (FindLiveObjects: 0.172200 ms CreateObjectMapping: 0.049600 ms MarkObjects: 2.352400 ms  DeleteObjects: 0.065100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003559 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.912 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.8 MB.
+System memory in use after: 83.9 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2046.
+Total: 2.370500 ms (FindLiveObjects: 0.155600 ms CreateObjectMapping: 0.051400 ms MarkObjects: 2.110500 ms  DeleteObjects: 0.052200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003624 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.36 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.965 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.9 MB.
+System memory in use after: 84.0 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2048.
+Total: 2.317400 ms (FindLiveObjects: 0.167000 ms CreateObjectMapping: 0.053700 ms MarkObjects: 2.043700 ms  DeleteObjects: 0.052000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 507.655561 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankBehavior.cs
+  artifactKey: Guid(af6629b19206fba4985730fcc096fe07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankBehavior.cs using Guid(af6629b19206fba4985730fcc096fe07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8545c7479d019c8f3162837e437eb30') in 0.016422 seconds
+  Import took 0.019445 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000503 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankBehavior.cs
+  artifactKey: Guid(af6629b19206fba4985730fcc096fe07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankBehavior.cs using Guid(af6629b19206fba4985730fcc096fe07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8545c7479d019c8f3162837e437eb30') in 0.002312 seconds
+  Import took 0.005600 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003504 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.921 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.3 MB.
+System memory in use after: 83.4 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2050.
+Total: 2.517600 ms (FindLiveObjects: 0.179900 ms CreateObjectMapping: 0.073700 ms MarkObjects: 2.205900 ms  DeleteObjects: 0.057200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003490 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.911 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.5 MB.
+System memory in use after: 83.6 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2052.
+Total: 2.703500 ms (FindLiveObjects: 0.285900 ms CreateObjectMapping: 0.115500 ms MarkObjects: 2.243900 ms  DeleteObjects: 0.056000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 219.839504 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankMovement.cs
+  artifactKey: Guid(3bfff4c340b150d4f86a6b0ff864c985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankMovement.cs using Guid(3bfff4c340b150d4f86a6b0ff864c985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd775c8d94fa63330f55593ec5fd1f7a') in 0.003619 seconds
+  Import took 0.005984 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002822 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankMovement.cs
+  artifactKey: Guid(3bfff4c340b150d4f86a6b0ff864c985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankMovement.cs using Guid(3bfff4c340b150d4f86a6b0ff864c985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd775c8d94fa63330f55593ec5fd1f7a') in 0.001595 seconds
+  Import took 0.003972 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003460 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.936 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.31 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.7 MB.
+System memory in use after: 83.8 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2054.
+Total: 2.609100 ms (FindLiveObjects: 0.272700 ms CreateObjectMapping: 0.096100 ms MarkObjects: 2.186700 ms  DeleteObjects: 0.052700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 149.739864 seconds.
+  path: Assets/Scripts/PartyBehavior/TankScripts/TankMovement.cs
+  artifactKey: Guid(3bfff4c340b150d4f86a6b0ff864c985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/TankScripts/TankMovement.cs using Guid(3bfff4c340b150d4f86a6b0ff864c985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4c51574b1521a6d4db6507650813bdc') in 0.003735 seconds
+  Import took 0.005942 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004902 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.926 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.9 MB.
+System memory in use after: 84.0 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2056.
+Total: 2.160400 ms (FindLiveObjects: 0.169200 ms CreateObjectMapping: 0.060200 ms MarkObjects: 1.880600 ms  DeleteObjects: 0.049600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003695 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.928 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.9 MB.
+System memory in use after: 84.0 MB.
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 2058.
+Total: 2.623000 ms (FindLiveObjects: 0.187800 ms CreateObjectMapping: 0.054100 ms MarkObjects: 2.286400 ms  DeleteObjects: 0.093700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 35.531764 seconds.
+  path: Assets/Scripts/PartyBehavior/BruiserScripts/BruiserMovement.cs
+  artifactKey: Guid(7419a19b1f79d56459db34fba1691488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PartyBehavior/BruiserScripts/BruiserMovement.cs using Guid(7419a19b1f79d56459db34fba1691488) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2bc1cf6e57fc100d58ffd02bdcfec7e8') in 0.004158 seconds
+  Import took 0.007128 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 51.561899 seconds.
+  path: Assets/Prefab/Party/Tank/Tank.prefab
+  artifactKey: Guid(94c699b3c9d96b84892399f10f53ee8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Party/Tank/Tank.prefab using Guid(94c699b3c9d96b84892399f10f53ee8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6462a1317775b4a8178a67ee77f88211') in 0.063895 seconds
+  Import took 0.066455 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004456 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.33 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.903 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.4 MB.
+System memory in use after: 83.5 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 2061.
+Total: 2.638600 ms (FindLiveObjects: 0.166100 ms CreateObjectMapping: 0.063400 ms MarkObjects: 2.349400 ms  DeleteObjects: 0.059000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.644546 seconds.
+  path: Assets/Prefab/Party/Tank/Tank.prefab
+  artifactKey: Guid(94c699b3c9d96b84892399f10f53ee8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/Party/Tank/Tank.prefab using Guid(94c699b3c9d96b84892399f10f53ee8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79809b8ff94607c1b6dd857ada205488') in 0.066527 seconds
+  Import took 0.069052 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003365 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.32 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.923 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.34 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1586 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 83.6 MB.
+System memory in use after: 83.7 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 2064.
+Total: 2.578300 ms (FindLiveObjects: 0.182900 ms CreateObjectMapping: 0.051200 ms MarkObjects: 2.275600 ms  DeleteObjects: 0.067600 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
