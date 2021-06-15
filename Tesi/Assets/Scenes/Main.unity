@@ -493,14 +493,14 @@ PrefabInstance:
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 6e2c597807c359f42add131e046028a8, type: 3}
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorName
-      value: attackBehaviorSac
+      value: AttackBehavior
       objectReference: {fileID: 0}
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -589,10 +589,10 @@ PrefabInstance:
     - target: {fileID: 9023322312652241315, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: abeecd42c5f5ebc4699667ff09ff474e, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: e86ee753f766da2418ece85f7fb7801a, type: 3}
     - target: {fileID: 9023322312652241315, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorName
-      value: targetChooserSac
+      value: TargetChooser
       objectReference: {fileID: 0}
     - target: {fileID: 9023322312652241315, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorType

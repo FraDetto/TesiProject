@@ -47,7 +47,7 @@ public class BruiserMovement : MonoBehaviour
 
                 if ((boss.transform.position - rb.transform.position).magnitude > distanceRange)
                 {
-                    m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
+                    /*m_HitDetect_mov_front = Physics.BoxCast(transform.position, transform.localScale, (boss.transform.position - rb.transform.position), out m_Hit_mov_front, transform.rotation, (boss.transform.position - rb.transform.position).magnitude, m_PlayerMask);
                     if (m_HitDetect_mov_front)
                     {
                         if (currentAngleR + 30.0f <= maxAngle)
@@ -92,8 +92,12 @@ public class BruiserMovement : MonoBehaviour
                         // Smoothly rotate towards the target point.
                         rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime));
                         rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
-                    }
+                    }*/
+                    var targetRotation = Quaternion.LookRotation(boss.transform.position - rb.transform.position);
 
+                    // Smoothly rotate towards the target point.
+                    rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, 10.0f * Time.deltaTime));
+                    rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
                 }
                 else
                 {

@@ -138,10 +138,10 @@ public class TankProfile : moreSpecificProfile
         ultiRunning = true;
         cooldownSpecial = true;
 
-        previousUltiHp = GetComponent<moreSpecificProfile>().publicGetCurrentLife();
-        previousUltiArmor = GetComponent<moreSpecificProfile>().getArmor();
+        previousUltiHp = this.GetComponent<moreSpecificProfile>().publicGetCurrentLife();
+        previousUltiArmor = this.GetComponent<moreSpecificProfile>().getArmor();
 
-        GetComponent<moreSpecificProfile>().incrementStatsUltiTank();
+        this.GetComponent<moreSpecificProfile>().incrementStatsUltiTank();
 
         StartCoroutine(waitBeforeStopSpecial());
 
@@ -155,7 +155,7 @@ public class TankProfile : moreSpecificProfile
         yield return new WaitForSeconds(specialDuration);
 
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        GetComponent<moreSpecificProfile>().resetStatsTankUlti(previousUltiHp, previousUltiArmor);
+        this.GetComponent<moreSpecificProfile>().resetStatsTankUlti(previousUltiHp, previousUltiArmor);
 
         previousUltiHp = 0.0f;
         previousUltiArmor = 0.0f;
