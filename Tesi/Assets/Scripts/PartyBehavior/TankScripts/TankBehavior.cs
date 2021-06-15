@@ -13,6 +13,7 @@ public class TankBehavior : MonoBehaviour
     public float reactionTime = 1.2f;
     public float distanceRange = 7.0f;
     public bool firstRush = true;
+    private bool firstTimeUlti = true;
 
     //public bool shieldUp;
     // Start is called before the first frame update
@@ -200,7 +201,15 @@ public class TankBehavior : MonoBehaviour
         if (!GetComponent<TankProfile>().cooldownSpecial && !GetComponent<TankProfile>().swordActive)
         {
             //Debug.Log("ATTKSPEC");
-            return true;
+            if (firstTimeUlti)
+            {
+                StartCoroutine(waitForUlti());
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
         {
@@ -292,7 +301,7 @@ public class TankBehavior : MonoBehaviour
     public void ActiveSpecial()
     {
 
-     GetComponent<TankProfile>().specialInAction();
+        GetComponent<TankProfile>().specialInAction();
        
     }
 
@@ -300,6 +309,14 @@ public class TankBehavior : MonoBehaviour
     public void setBoss(GameObject bo)
     {
         boss = bo;
+    }
+
+    public IEnumerator waitForUlti()
+    {
+        //Debug.Log("ULTI IN COOLDOWN");
+        yield return new WaitForSeconds(GetComponent<TankProfile>().timeCoolDownSpecial);
+        firstTimeUlti = false;
+        //Debug.Log("ULTI UP");
     }
 
 }

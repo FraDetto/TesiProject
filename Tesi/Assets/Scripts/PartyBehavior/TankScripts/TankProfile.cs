@@ -32,7 +32,7 @@ public class TankProfile : moreSpecificProfile
     private float shieldDuration = 2.0f;
     private float timeCoolDownShield = 12.0f;
     private float specialDuration = 6.0f;
-    private float timeCoolDownSpecial = 22.0f;
+    public float timeCoolDownSpecial = 22.0f;
 
     private float timeRollCooldown = 2.0f;
 
@@ -140,7 +140,7 @@ public class TankProfile : moreSpecificProfile
 
         previousUltiHp = this.GetComponent<moreSpecificProfile>().publicGetCurrentLife();
         previousUltiArmor = this.GetComponent<moreSpecificProfile>().getArmor();
-
+        Debug.Log("ULTIIIII TANKKK PREVIOUS HP E ARMOR " + previousUltiHp + "   " + previousUltiArmor);
         this.GetComponent<moreSpecificProfile>().incrementStatsUltiTank();
 
         StartCoroutine(waitBeforeStopSpecial());
@@ -155,6 +155,7 @@ public class TankProfile : moreSpecificProfile
         yield return new WaitForSeconds(specialDuration);
 
         transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        Debug.Log("ULTIIIII TANKKK PREVIOUS HP E ARMOR " + previousUltiHp + "   " + previousUltiArmor);
         this.GetComponent<moreSpecificProfile>().resetStatsTankUlti(previousUltiHp, previousUltiArmor);
 
         previousUltiHp = 0.0f;
