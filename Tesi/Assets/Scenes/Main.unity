@@ -538,6 +538,30 @@ PrefabInstance:
       propertyPath: m_BrainParameters.NumStackedVectorObservations
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8780630782241136993, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -348
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630782244770172, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630782244770172, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630782664888224, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630782803892818, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780630783180237164, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 348
+      objectReference: {fileID: 0}
     - target: {fileID: 8780630783191882149, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_RootOrder
       value: 3
