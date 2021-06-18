@@ -114,10 +114,11 @@ public class moreSpecificProfile : aProfile
         shield = 0.0f;
 
         healthBar.setMaxHealth(currenthp);
-        if (!champTag.Equals("Boss"))
+        shieldBar.setMaxShield(shield);
+        /*if (!champTag.Equals("Boss"))
         {
-            shieldBar.setMaxShield(shield);
-        }
+            
+        }*/
 
         flagResetepisode = false;
     }
