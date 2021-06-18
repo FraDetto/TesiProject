@@ -70,12 +70,28 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ableRoutineForObstacles()
+    {
+        StartCoroutine(respawnObstacles());
+    }
+
+    public IEnumerator respawnObstacles()
+    {
+        yield return new WaitForSeconds(3.0f);
+        Vector3 postObs = takePosForObstacles();
+
+        refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
+        refObstacles.GetComponentInChildren<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
+        refObstacles.GetComponentInChildren<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
+    }
+
     public GameObject[] chooseTeam()
     {
         Vector3 postObs = takePosForObstacles();
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refObstacles.transform.GetComponentInChildren<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
+        refObstacles.GetComponentInChildren<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
+        refObstacles.GetComponentInChildren<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
 
         for (int n=0; n< partyOnRun.Length; n++)
         {

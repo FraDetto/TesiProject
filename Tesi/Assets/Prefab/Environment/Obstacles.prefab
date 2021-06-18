@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 647281242923414685}
   - component: {fileID: 647281242923414686}
   - component: {fileID: 647281242923414687}
+  - component: {fileID: 8873322628648514368}
   m_Layer: 0
   m_Name: Shield Capsule
   m_TagString: Untagged
@@ -96,6 +97,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8873322628648514368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647281242923414680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35300f6b37c53c4d804f301ee01b36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossRef: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &6879057499823031750
 GameObject:
   m_ObjectHideFlags: 0
