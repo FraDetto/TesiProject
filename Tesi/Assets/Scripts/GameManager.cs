@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject boss;
     public GameObject[] poolOfCLasses;
     public GameObject[] partyOnRun = new GameObject[4];
+    public GameObject obstaclesGO;
+    public GameObject refObstacles;
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
     private int numb;
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
             //randomX = Random.Range(-35.0f, 35.0f);
             //randomZ = Random.Range(-10.0f, -60.0f);
             randomX = Random.Range(boss.transform.position.x-35.0f, boss.transform.position.x+35.0f);
-            randomZ = Random.Range(boss.transform.position.z-10.0f, boss.transform.position.z-60.0f);
+            randomZ = Random.Range(boss.transform.position.z-15.0f, boss.transform.position.z-60.0f);
 
             if (n == 0)
             {
@@ -51,9 +53,31 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public Vector3 takePosForObstacles()
+    {
+
+        float randomX = 0.0f;
+        float randomZ = 0.0f;
+
+
+        //randomX = Random.Range(-35.0f, 35.0f);
+        //randomZ = Random.Range(-10.0f, -60.0f);
+        randomX = Random.Range(boss.transform.position.x - 80.0f, boss.transform.position.x + 80.0f);
+        randomZ = Random.Range(boss.transform.position.z - 10.0f, boss.transform.position.z + 40.0f);
+
+        return new Vector3(randomX, 4.8f, randomZ);
+
+
+    }
+
     public GameObject[] chooseTeam()
     {
-       for(int n=0; n< partyOnRun.Length; n++)
+        Vector3 postObs = takePosForObstacles();
+
+        refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
+        refObstacles.transform.GetComponentInChildren<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
+
+        for (int n=0; n< partyOnRun.Length; n++)
         {
             int rand = Random.Range(0, poolOfCLasses.Length);
 

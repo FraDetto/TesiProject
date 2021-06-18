@@ -10,6 +10,7 @@ TagManager:
   - Bruiser
   - Healer
   - Ground
+  - Obstacles
   layers:
   - Default
   - TransparentFX
