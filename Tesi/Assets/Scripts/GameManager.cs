@@ -92,6 +92,16 @@ public class GameManager : MonoBehaviour
     public void stopRoutManager()
     {
         StopAllCoroutines();
+
+        if (null != refShieldObj)
+        {
+            Destroy(refShieldObj);
+        }
+
+        if (null != refObstacles)
+        {
+            Destroy(refObstacles);
+        }
     }
 
     public GameObject[] chooseTeam()
