@@ -22,7 +22,7 @@ public class shieldObj : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Boss"))
         {
-            other.gameObject.GetComponent<moreSpecificProfile>().shieldBar.setMaxShield(400);
+            other.gameObject.GetComponent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
             Destroy(this.transform.parent.gameObject);
         }

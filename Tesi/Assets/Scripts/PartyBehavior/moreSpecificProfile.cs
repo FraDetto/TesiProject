@@ -282,6 +282,12 @@ public class moreSpecificProfile : aProfile
         //Debug.Log("VITA DOPO ESSERE COLPITO " + currenthp +" DI " + transform.tag);
     }
 
+    public void setShieldForBoss(int s)
+    {
+        shield = s;
+        shieldBar.setMaxShield(shield);
+    }
+
     public void publicSetLifeAfterDamage(float damage)
     {
         setLifeAfterDamage(damage);
