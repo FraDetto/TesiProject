@@ -24,7 +24,7 @@ public class shieldObj : MonoBehaviour
         {
             other.gameObject.GetComponent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
-            Destroy(this.transform.parent.gameObject);
+            Destroy(this.gameObject);
         }
     }
 

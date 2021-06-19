@@ -559,6 +559,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8780630781810388029, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: shieldOb
+      value: 
+      objectReference: {fileID: 4777636597069998396, guid: 336d73275e6919a47b4794e9e3181aee, type: 3}
+    - target: {fileID: 8780630781810388029, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: obstaclesGO
       value: 
       objectReference: {fileID: 6879057499823031750, guid: 24ad6281acc1dcb4a8e1bcc17d405fd7, type: 3}

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] partyOnRun = new GameObject[4];
     public GameObject obstaclesGO;
     public GameObject refObstacles;
+    public GameObject shieldOb;
+    public GameObject refShieldObj;
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
     private int numb;
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
         float randomX = 0.0f;
         float randomZ = 0.0f;
 
-
+        
         //randomX = Random.Range(-35.0f, 35.0f);
         //randomZ = Random.Range(-10.0f, -60.0f);
         randomX = Random.Range(boss.transform.position.x - 80.0f, boss.transform.position.x + 80.0f);
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void ableRoutineForObstacles()
     {
+        Destroy(refObstacles);
         StartCoroutine(respawnObstacles());
     }
 
@@ -81,8 +84,14 @@ public class GameManager : MonoBehaviour
         Vector3 postObs = takePosForObstacles();
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refObstacles.GetComponentInChildren<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
-        refObstacles.GetComponentInChildren<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
+        refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
+        refShieldObj.GetComponent<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
+        refShieldObj.GetComponent<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
+    }
+
+    public void stopRoutManager()
+    {
+        StopAllCoroutines();
     }
 
     public GameObject[] chooseTeam()
@@ -90,8 +99,10 @@ public class GameManager : MonoBehaviour
         Vector3 postObs = takePosForObstacles();
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refObstacles.GetComponentInChildren<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
-        refObstacles.GetComponentInChildren<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
+        refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y-2, postObs.z+6), Quaternion.identity, transform.parent);
+        refShieldObj.GetComponent<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
+        refShieldObj.GetComponent<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
+        //sfera messa circa +6 della Z dell'ostacolo
 
         for (int n=0; n< partyOnRun.Length; n++)
         {
