@@ -139,6 +139,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37524ab46ea70af4885a51aae7e5303d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &360908172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2884577549024150187, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf074f68fb5ad654d95cf8551ec05c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &497616746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8780630782191091002, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
@@ -330,6 +341,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2719157080684598057, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
   m_PrefabInstance: {fileID: 8780630781457581019}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1088928804 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3481582084651631805, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0366fdf5b86287d459312bf52edbcc1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1578572134
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +564,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8292344473425167117, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: bossBehav
+      value: 
+      objectReference: {fileID: 360908172}
+    - target: {fileID: 8292344473425167117, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 295141805}
+    - target: {fileID: 8292344473425167117, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: bossAttackBehav
+      value: 
+      objectReference: {fileID: 1088928804}
     - target: {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 

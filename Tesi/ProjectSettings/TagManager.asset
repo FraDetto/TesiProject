@@ -11,6 +11,7 @@ TagManager:
   - Healer
   - Ground
   - Obstacles
+  - ShieldPower
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,13 @@ using Unity.MLAgents.Sensors;
 
 public class BossMovingBehavior : Agent
 {
+
+    public GameManager gameManager;
+    public BossAttackBehavior bossAttackBehav;
+    public BossBehavior bossBehav;
+    private GameObject shieldOb;
+
+
     public override void OnEpisodeBegin()
     {
     }
