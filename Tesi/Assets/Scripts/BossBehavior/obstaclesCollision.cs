@@ -16,6 +16,7 @@ public class obstaclesCollision : MonoBehaviour
         if (collision.collider.transform.tag.Equals("Boss"))
         {
             Debug.Log("HITTATO BOSS DOVREI FERMARE EPISODIO");
+            boss.GetComponentInChildren<BossMovingBehavior>().touchedOb();
         }
     }
 }
