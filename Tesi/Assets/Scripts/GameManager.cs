@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
         Vector3 postObs = takePosForObstacles();
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refObstacles.GetComponent<obstaclesCollision>().setBoss(boss);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
         refShieldObj.GetComponent<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
         refShieldObj.GetComponent<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
@@ -97,7 +96,6 @@ public class GameManager : MonoBehaviour
         Vector3 postObs = takePosForObstacles();
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refObstacles.GetComponent<obstaclesCollision>().setBoss(boss);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
         refShieldObj.GetComponent<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
         refShieldObj.GetComponent<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());

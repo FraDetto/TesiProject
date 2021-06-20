@@ -43,13 +43,24 @@ public class BossMovingBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
+        float moveX = vectorAction[0];
+        float moveZ = vectorAction[1];
+
+        if (null != shieldOb)
+        {
+            transform.parent.position += new Vector3(moveX, transform.parent.position.y, moveZ);  
+        }
     }
 
-
-    public void touchedOb()//when boss touched the obstacles and not the shield obj
+    private void OnCollisionEnter(Collision collision)//when boss touched the obstacles and not the shield obj
     {
-
+        if (collision.collider.transform.tag.Equals("Obstacles"))
+        {
+            Debug.Log("BOSS HA HITTATO OBSTACLES  DOVREI FERMARE EPISODIO");
+           
+        }
     }
+
 
     public void whenEpEnd()//when episode end because it or the party has lose
     {
