@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
     public GameObject boss;
     public GameObject[] poolOfCLasses;
     public GameObject[] partyOnRun = new GameObject[4];
-    public GameObject obstaclesGO;
-    public GameObject refObstacles;
-    public GameObject shieldOb;
-    public GameObject refShieldObj;
+    //public GameObject obstaclesGO;
+    //public GameObject refObstacles;
+    //public GameObject shieldOb;
+    //public GameObject refShieldObj;
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
     private int numb;
@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /*
     public void ableRoutineForObstacles()
     {
         Destroy(refObstacles);
@@ -116,11 +117,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(refObstacles);
         }
-    }
+    }*/
 
     public GameObject[] chooseTeam()
     {
-        StartCoroutine(generateFirstObstacle());
+        //StartCoroutine(generateFirstObstacle());
 
         for (int n=0; n< partyOnRun.Length; n++)
         {

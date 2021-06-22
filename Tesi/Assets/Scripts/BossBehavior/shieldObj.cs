@@ -23,7 +23,7 @@ public class shieldObj : MonoBehaviour
         if (other.gameObject.tag.Equals("Boss"))
         {
             other.gameObject.GetComponent<moreSpecificProfile>().setShieldForBoss(400);
-            gameManager.ableRoutineForObstacles();
+            //gameManager.ableRoutineForObstacles();
             Destroy(this.gameObject);
         }
     }
