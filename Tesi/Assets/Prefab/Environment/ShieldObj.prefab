@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2905076018384167296}
   - component: {fileID: 7505380248915261898}
   - component: {fileID: 1663456574614600947}
-  - component: {fileID: 6813824329927065298}
   m_Layer: 0
   m_Name: ShieldObj
   m_TagString: ShieldPower
@@ -96,17 +95,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6813824329927065298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4777636597069998396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b35300f6b37c53c4d804f301ee01b36f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossRef: {fileID: 0}
-  gameManager: {fileID: 0}

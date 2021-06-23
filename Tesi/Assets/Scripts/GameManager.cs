@@ -86,8 +86,6 @@ public class GameManager : MonoBehaviour
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
-        refShieldObj.GetComponent<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
-        refShieldObj.GetComponent<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
     }
 
     public IEnumerator generateFirstObstacle()
@@ -98,8 +96,6 @@ public class GameManager : MonoBehaviour
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
-        refShieldObj.GetComponent<shieldObj>().setBoss(boss.GetComponentInChildren<BossMovingBehavior>());
-        refShieldObj.GetComponent<shieldObj>().setGameManager(this.gameObject.GetComponent<GameManager>());
         //sfera messa circa +6 della Z dell'ostacolo
 
     }

@@ -57,10 +57,23 @@ public class BossMovingBehavior : Agent
         if (collision.collider.transform.tag.Equals("Obstacles"))
         {
             Debug.Log("BOSS HA HITTATO OBSTACLES  DOVREI FERMARE EPISODIO");
-           
+            this.AddReward(-0.5f);
+
+            //gestione dell'end episode delle altre due brain
+            this.EndEpisode();
+        }else if (collision.collider.transform.tag.Equals("ShieldPower"))
+        {
+            this.AddReward(+1f);
+            GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
+            //gameManager.ableRoutineForObstacles();
+            Destroy(collision.collider.gameObject);
         }
     }
 
+    public void hitAnShieldKeeper()
+    {
+        
+    }
 
     public void whenEpEnd()//when episode end because it or the party has lose
     {
