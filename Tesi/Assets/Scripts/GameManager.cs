@@ -8,13 +8,16 @@ public class GameManager : MonoBehaviour
     public GameObject boss;
     public GameObject[] poolOfCLasses;
     public GameObject[] partyOnRun = new GameObject[4];
-    //public GameObject obstaclesGO;
-    //public GameObject refObstacles;
-    //public GameObject shieldOb;
-    //public GameObject refShieldObj;
+    public GameObject obstaclesGO;
+    public GameObject refObstacles;
+    public GameObject shieldOb;
+    public GameObject refShieldObj;
+    public BossMovingBehavior movingBrain;
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
     private int numb;
+
+    private float lastXobj = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -64,15 +67,28 @@ public class GameManager : MonoBehaviour
         
         //randomX = Random.Range(-35.0f, 35.0f);
         //randomZ = Random.Range(-10.0f, -60.0f);
-        randomX = Random.Range(boss.transform.position.x - 80.0f, boss.transform.position.x + 80.0f);
-        randomZ = Random.Range(boss.transform.position.z - 10.0f, boss.transform.position.z + 40.0f);
+        if(lastXobj > 10f)
+        {
+            randomX = Random.Range(-60.0f, 0f);
+        }
+        else if (lastXobj < -10f)
+        {
+            randomX = Random.Range(0f, 60.0f);
+        }
+        else
+        {
+            randomX = Random.Range(-60.0f, 60.0f);
+        }
+
+        randomZ = Random.Range(-10.0f, +40.0f);
+
+
+        lastXobj = randomX;
 
         return new Vector3(randomX, 4.8f, randomZ);
-
-
     }
 
-    /*
+    
     public void ableRoutineForObstacles()
     {
         Destroy(refObstacles);
@@ -86,6 +102,8 @@ public class GameManager : MonoBehaviour
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
+
+        movingBrain.setShieldObj(refShieldObj);
     }
 
     public IEnumerator generateFirstObstacle()
@@ -97,6 +115,7 @@ public class GameManager : MonoBehaviour
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
         //sfera messa circa +6 della Z dell'ostacolo
+        movingBrain.setShieldObj(refShieldObj);
 
     }
 
@@ -113,11 +132,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(refObstacles);
         }
-    }*/
+    }
 
     public GameObject[] chooseTeam()
     {
-        //StartCoroutine(generateFirstObstacle());
+        StartCoroutine(generateFirstObstacle());
 
         for (int n=0; n< partyOnRun.Length; n++)
         {

@@ -70,9 +70,9 @@ public class BossMovingBehavior : Agent
         }
     }
 
-    public void hitAnShieldKeeper()
+    public void setShieldObj(GameObject sobj)
     {
-        
+        shieldOb = sobj;
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose
