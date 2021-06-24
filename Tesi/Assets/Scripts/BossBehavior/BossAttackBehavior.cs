@@ -106,6 +106,7 @@ public class BossAttackBehavior : Agent
             GetComponent<moreSpecificProfile>().resetBossStats();
         }
         previousTargetID = 0;
+        //isRunning = false;
 
         //targetBehavior.OnEpisodeBegin();
 
@@ -181,6 +182,7 @@ public class BossAttackBehavior : Agent
         //StartCoroutine(timeBeforeDamageTarget());
         float distanceFromTarget = (this.transform.position - targetPlayer.GetComponent<Rigidbody>().transform.position).magnitude;
 
+        //RICORDA: SE STA CORRENDO SETTARE IS ATTACKING A FALSE QUANDO NON ESEGUE L'ATTACCO
         switch (actionForBoss)
         {
             case 0: // RANGED
@@ -195,6 +197,8 @@ public class BossAttackBehavior : Agent
 
                 aheadPrevious = false; 
                 swingPrevious = false;
+
+                //if(!isRunning)
                 StartCoroutine(timeBeforeCastRangedAttack());
 
                 break;
@@ -212,6 +216,7 @@ public class BossAttackBehavior : Agent
                 aheadPrevious = false;
                 swingPrevious = false;
 
+                //if(!isRunning)
                 StartCoroutine(timeBeforeCastRayAttack());
 
                 break;
@@ -243,6 +248,7 @@ public class BossAttackBehavior : Agent
                     
                 }
 
+                //if(!isRunning)
                 isUsingAoE = true;
 
                 StartCoroutine(timeBeforeCastSwingAttk());
@@ -275,6 +281,7 @@ public class BossAttackBehavior : Agent
                    
                 }
 
+                //if(!isRunning)
                 StartCoroutine(timeBeforeCastAheadAttk());
 
                 break;
@@ -303,6 +310,8 @@ public class BossAttackBehavior : Agent
 
                     aheadPrevious = false;
                     swingPrevious = false;
+
+                    //if(!isRunning)
                     isUsingAoE = true;
 
                     StartCoroutine(timeBeforeCastAoEAttk());

@@ -392,7 +392,8 @@ public class BossBehavior : Agent
             Debug.Log("===== END EPISODE BOSS DEAD =======");
 
             attackBehavior.endEpStopAll();
-
+            //perche movingBrain non ha routines
+            //gameManager.stopRoutManager()
             endEpStopAll();
             setActionTargetNull();
 
@@ -435,7 +436,8 @@ public class BossBehavior : Agent
             Debug.Log("==== PARTY HA PERSO =====");
 
             attackBehavior.endEpStopAll();
-
+            //perche movingBrain non ha routines
+            //gameManager.stopRoutManager();
             endEpStopAll();
             setActionTargetNull();
 
@@ -469,8 +471,22 @@ public class BossBehavior : Agent
     }
 
 
+    /*
+    public void endHittedObstacle()
+    {
+        foreach (GameObject go in this.endArray)
+        {
+            if (!go.transform.tag.Equals("Boss"))
+            {
+                go.GetComponent<moreSpecificProfile>().detonation();
+            }
 
+        }
 
+        GetComponentInParent<moreSpecificProfile>().setFlaResetEpisode(true);
+
+        this.EndEpisode();
+    }*/
 
 
     public bool rangedChampAlive()

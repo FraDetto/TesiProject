@@ -60,6 +60,12 @@ public class BossMovingBehavior : Agent
             this.AddReward(-0.5f);
 
             //gestione dell'end episode delle altre due brain
+            //bossAttackBehav.endEpStopAll();
+            //targetBehavior.endEpStopAll();
+            //targetBehavior.setActionTargetNull();
+            //gameManager.stopRoutManager();
+            //bossAttackBehav.endEpAttkBe();
+            //targetBehavior.endHittedObstacle();
 
             this.EndEpisode();
         }else if (collision.collider.transform.tag.Equals("ShieldPower"))
@@ -72,6 +78,21 @@ public class BossMovingBehavior : Agent
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
             Destroy(collision.collider.gameObject);
+
+        }else if (collision.collider.gameObject.GetComponent<BorderCollisionScript>())
+        {
+            Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO");
+            this.AddReward(-0.8f);
+
+            //gestione dell'end episode delle altre due brain
+            //bossAttackBehav.endEpStopAll();
+            //targetBehavior.endEpStopAll();
+            //targetBehavior.setActionTargetNull();
+            //gameManager.stopRoutManager();
+            //bossAttackBehav.endEpAttkBe();
+            //targetBehavior.endHittedObstacle();
+
+            this.EndEpisode();
         }
     }
 
@@ -83,7 +104,7 @@ public class BossMovingBehavior : Agent
 
     public void whenEpEnd()//when episode end because it or the party has lose
     {
-
+        this.EndEpisode();
     }
 
 }
