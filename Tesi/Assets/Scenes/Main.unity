@@ -696,6 +696,10 @@ PrefabInstance:
       propertyPath: m_BehaviorType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9209897942082753726, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1307910370949602446, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
     - {fileID: 8780630781457580999, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}

@@ -64,24 +64,31 @@ public class GameManager : MonoBehaviour
         float randomX = 0.0f;
         float randomZ = 0.0f;
 
-        
-        //randomX = Random.Range(-35.0f, 35.0f);
-        //randomZ = Random.Range(-10.0f, -60.0f);
-        if(lastXobj > 10f)
+        //Primo addestramento solo con due posizioni
+        /*if(lastXobj > 10f)
         {
-            randomX = Random.Range(-60.0f, 0f);
+            randomX = Random.Range(-90.0f, 0f);
         }
         else if (lastXobj < -10f)
         {
-            randomX = Random.Range(0f, 60.0f);
+            randomX = Random.Range(0f, 90.0f);
         }
         else
         {
-            randomX = Random.Range(-60.0f, 60.0f);
+            randomX = Random.Range(-90.0f, 90.0f);
         }
 
-        randomZ = Random.Range(-10.0f, +40.0f);
+        randomZ = Random.Range(-10.0f, +55.0f);*/
 
+        if(lastXobj == 65f)
+        {
+            randomX = -65f;
+        }
+        else
+        {
+            randomX = 65f;
+        }
+        randomZ = 40f;
 
         lastXobj = randomX;
 
