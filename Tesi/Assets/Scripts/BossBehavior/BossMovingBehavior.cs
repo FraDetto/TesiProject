@@ -60,12 +60,17 @@ public class BossMovingBehavior : Agent
             this.AddReward(-0.5f);
 
             //gestione dell'end episode delle altre due brain
+
             this.EndEpisode();
         }else if (collision.collider.transform.tag.Equals("ShieldPower"))
         {
             this.AddReward(+1f);
+
+            //togliere nella brain di attacco che sta correndo
+            //bossAttackBehav.setIsRunning(false);
+
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
-            //gameManager.ableRoutineForObstacles();
+            gameManager.ableRoutineForObstacles();
             Destroy(collision.collider.gameObject);
         }
     }
@@ -73,6 +78,7 @@ public class BossMovingBehavior : Agent
     public void setShieldObj(GameObject sobj)
     {
         shieldOb = sobj;
+        //qua settare nella brain di attacco che sta correndo
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose

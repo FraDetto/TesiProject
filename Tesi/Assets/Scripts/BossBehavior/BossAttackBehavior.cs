@@ -85,6 +85,8 @@ public class BossAttackBehavior : Agent
     private int[] actionChoose = new int[1];
 
 
+    //private bool isRunning = false;
+
     void Start()
     {
         targetBehavior = GetComponentInChildren<BossBehavior>();
@@ -436,6 +438,11 @@ public class BossAttackBehavior : Agent
     }
 
 
+    /*
+     public void setIsRunning(bool flag){
+        isRunning = flag;
+     }
+     */
 
 
     private void FixedUpdate()
