@@ -113,6 +113,9 @@ public class GameManager : MonoBehaviour
             refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
             refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
 
+            refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
+            refShieldObj.GetComponent<shieldObjTrigger>().setBoss(boss);
+
             movingBrain.setShieldObj(refShieldObj);
 
             nOfShieldOb++;
@@ -129,6 +132,11 @@ public class GameManager : MonoBehaviour
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
+
+
+        refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
+        refShieldObj.GetComponent<shieldObjTrigger>().setBoss(boss);
+
         //sfera messa circa +6 della Z dell'ostacolo
         movingBrain.setShieldObj(refShieldObj);
 
