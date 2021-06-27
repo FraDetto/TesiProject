@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
     private int numb;
-    private int nOfShieldOb = 0;
+    private int nOfShieldOb;
 
     private float lastXobj = 0f;
 
@@ -162,6 +162,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] chooseTeam()
     {
+        nOfShieldOb = 0;
+
         StartCoroutine(generateFirstObstacle());
 
         for (int n=0; n< partyOnRun.Length; n++)
