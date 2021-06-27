@@ -85,7 +85,7 @@ public class BossAttackBehavior : Agent
     private int[] actionChoose = new int[1];
 
 
-    //private bool isRunning = false;
+    private bool isRunning = false;
 
     void Start()
     {
@@ -106,7 +106,7 @@ public class BossAttackBehavior : Agent
             GetComponent<moreSpecificProfile>().resetBossStats();
         }
         previousTargetID = 0;
-        //isRunning = false;
+        isRunning = false;
 
         //targetBehavior.OnEpisodeBegin();
 
@@ -198,8 +198,15 @@ public class BossAttackBehavior : Agent
                 aheadPrevious = false; 
                 swingPrevious = false;
 
-                //if(!isRunning)
-                StartCoroutine(timeBeforeCastRangedAttack());
+                //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
+                if (!isRunning)
+                {
+                    StartCoroutine(timeBeforeCastRangedAttack());
+                }
+                else
+                {
+                    isAttacking = false;
+                }
 
                 break;
             case 1: // RAY
@@ -216,8 +223,14 @@ public class BossAttackBehavior : Agent
                 aheadPrevious = false;
                 swingPrevious = false;
 
-                //if(!isRunning)
-                StartCoroutine(timeBeforeCastRayAttack());
+                //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
+                if (!isRunning) { 
+                    StartCoroutine(timeBeforeCastRayAttack());
+                }
+                else
+                {
+                    isAttacking = false;
+                }
 
                 break;
             case 2:// SWING
@@ -248,10 +261,18 @@ public class BossAttackBehavior : Agent
                     
                 }
 
-                //if(!isRunning)
-                isUsingAoE = true;
+                //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
+                if (!isRunning)
+                {
+                    isUsingAoE = true;
 
-                StartCoroutine(timeBeforeCastSwingAttk());
+                    StartCoroutine(timeBeforeCastSwingAttk());
+                }
+                else
+                {
+                    isAttacking = false;
+                }
+
                 break;
             case 3:// AHEAD
                 if (distanceFromTarget > 8)
@@ -281,8 +302,16 @@ public class BossAttackBehavior : Agent
                    
                 }
 
-                //if(!isRunning)
-                StartCoroutine(timeBeforeCastAheadAttk());
+                //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
+                if (!isRunning)
+                {
+                    StartCoroutine(timeBeforeCastAheadAttk());
+                }
+                else
+                {
+                    isAttacking = false;
+                }
+                
 
                 break;
             case 4:// AoE
@@ -311,10 +340,18 @@ public class BossAttackBehavior : Agent
                     aheadPrevious = false;
                     swingPrevious = false;
 
-                    //if(!isRunning)
-                    isUsingAoE = true;
+                    //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
+                    if (!isRunning)
+                    {
+                        isUsingAoE = true;
 
-                    StartCoroutine(timeBeforeCastAoEAttk());
+                        StartCoroutine(timeBeforeCastAoEAttk());
+                    }
+                    else
+                    {
+                        isAttacking = false;
+                    }
+
                 }
                
 
@@ -447,11 +484,11 @@ public class BossAttackBehavior : Agent
     }
 
 
-    /*
+    
      public void setIsRunning(bool flag){
         isRunning = flag;
      }
-     */
+     
 
 
     private void FixedUpdate()

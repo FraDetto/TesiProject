@@ -26,12 +26,15 @@ public class BossMovingBehavior : Agent
 
     public override void OnEpisodeBegin()
     {
+        Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
         transform.parent.position = new Vector3(0, 4.7f, 0);
         shieldOb = null;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        Debug.Log(" =====CollectObservations MOVING===== ");
+
         sensor.AddObservation(transform.position);
 
         if (null != shieldOb)
@@ -43,6 +46,8 @@ public class BossMovingBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
+        Debug.Log(" =====OnActionReceived===== " + " MOVING ");
+
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
 
@@ -56,7 +61,7 @@ public class BossMovingBehavior : Agent
     {
         if (collision.collider.transform.tag.Equals("Obstacles"))
         {
-            Debug.Log("BOSS HA HITTATO OBSTACLES  DOVREI FERMARE EPISODIO");
+            Debug.Log("BOSS HA HITTATO OBSTACLES");
             this.AddReward(-0.5f);
 
             //gestione dell'end episode delle altre due brain
@@ -67,13 +72,15 @@ public class BossMovingBehavior : Agent
             //bossAttackBehav.endEpAttkBe();
             //targetBehavior.endHittedObstacle();
 
-            this.EndEpisode();
+            //this.EndEpisode();
+
         }else if (collision.collider.transform.tag.Equals("ShieldPower"))
         {
+            Debug.Log("BOSS HA PRESO SCUDO");
             this.AddReward(+1f);
 
             //togliere nella brain di attacco che sta correndo
-            //bossAttackBehav.setIsRunning(false);
+            bossAttackBehav.setIsRunning(false);
 
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
@@ -85,12 +92,12 @@ public class BossMovingBehavior : Agent
             this.AddReward(-0.8f);
 
             //gestione dell'end episode delle altre due brain
-            //bossAttackBehav.endEpStopAll();
-            //targetBehavior.endEpStopAll();
-            //targetBehavior.setActionTargetNull();
-            //gameManager.stopRoutManager();
-            //bossAttackBehav.endEpAttkBe();
-            //targetBehavior.endHittedObstacle();
+            bossAttackBehav.endEpStopAll();
+            targetBehavior.endEpStopAll();
+            targetBehavior.setActionTargetNull();
+            gameManager.stopRoutManager();
+            bossAttackBehav.endEpAttkBe();
+            targetBehavior.endHittedObstacle();
 
             this.EndEpisode();
         }
@@ -100,6 +107,7 @@ public class BossMovingBehavior : Agent
     {
         shieldOb = sobj;
         //qua settare nella brain di attacco che sta correndo
+        bossAttackBehav.setIsRunning(true);
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose

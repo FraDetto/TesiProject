@@ -45,8 +45,9 @@ public class BossBehavior : Agent
     public int instanceIDtarget;
     public Transform swingAttackPosition;
 
-   // private float timeBeforeCastAttracting = 0.4f;
+    // private float timeBeforeCastAttracting = 0.4f;
 
+    public BossMovingBehavior movingBrain;
     private BossAttackBehavior attackBehavior;
 
 
@@ -392,8 +393,10 @@ public class BossBehavior : Agent
             Debug.Log("===== END EPISODE BOSS DEAD =======");
 
             attackBehavior.endEpStopAll();
+
             //perche movingBrain non ha routines
-            //gameManager.stopRoutManager()
+            gameManager.stopRoutManager();
+
             endEpStopAll();
             setActionTargetNull();
 
@@ -422,6 +425,10 @@ public class BossBehavior : Agent
             GetComponentInParent<moreSpecificProfile>().setFlaResetEpisode(true);
 
             attackBehavior.endEpAttkBe();
+
+            //qua moving brain fa end ep
+            movingBrain.whenEpEnd();
+
             //this.AddReward(-1.0f);
             EndEpisode();
         }
@@ -436,8 +443,10 @@ public class BossBehavior : Agent
             Debug.Log("==== PARTY HA PERSO =====");
 
             attackBehavior.endEpStopAll();
+
             //perche movingBrain non ha routines
-            //gameManager.stopRoutManager();
+            gameManager.stopRoutManager();
+
             endEpStopAll();
             setActionTargetNull();
 
@@ -465,13 +474,17 @@ public class BossBehavior : Agent
             GetComponentInParent<moreSpecificProfile>().setFlaResetEpisode(true);
 
             attackBehavior.endEpAttkBe();
+
+            //qua moving brain fa end ep
+            movingBrain.whenEpEnd();
+
             //this.AddReward(1.0f);
             EndEpisode();
         }
     }
 
 
-    /*
+    
     public void endHittedObstacle()
     {
         foreach (GameObject go in this.endArray)
@@ -486,7 +499,7 @@ public class BossBehavior : Agent
         GetComponentInParent<moreSpecificProfile>().setFlaResetEpisode(true);
 
         this.EndEpisode();
-    }*/
+    }
 
 
     public bool rangedChampAlive()
