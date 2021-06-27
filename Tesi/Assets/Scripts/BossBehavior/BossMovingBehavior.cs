@@ -8,9 +8,11 @@ public class BossMovingBehavior : Agent
 {
 
     public GameManager gameManager;
+    public int nOfObjShieldSpawned;
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
+    
     
 
     void Start()
@@ -59,9 +61,9 @@ public class BossMovingBehavior : Agent
         }
     }
 
-    private void OnCollisionEnter(Collision collision)//when boss touched the obstacles and not the shield obj
+    private void onTriggerEnter(Collider other)//when boss touched the obstacles and not the shield obj
     {
-        if (collision.collider.transform.tag.Equals("Obstacles"))
+        if (other.transform.tag.Equals("Obstacles"))
         {
             Debug.Log("BOSS HA HITTATO OBSTACLES");
             this.AddReward(-0.5f);
@@ -76,33 +78,51 @@ public class BossMovingBehavior : Agent
 
             //this.EndEpisode();
 
-        }else if (collision.collider.transform.tag.Equals("ShieldPower"))
+        }else if (other.transform.tag.Equals("ShieldPower"))
         {
             Debug.Log("BOSS HA PRESO SCUDO");
             this.AddReward(+1f);
 
-            //togliere nella brain di attacco che sta correndo
-            bossAttackBehav.setIsRunning(false);
+            if (nOfObjShieldSpawned < 2)
+            {
+                //togliere nella brain di attacco che sta correndo
+                bossAttackBehav.setIsRunning(false);
 
-            GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
-            gameManager.ableRoutineForObstacles();
-            Destroy(collision.collider.gameObject);
+                GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
+                gameManager.ableRoutineForObstacles();
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                bossAttackBehav.endEpStopAll();
+                targetBehavior.endEpStopAll();
+                targetBehavior.setActionTargetNull();
+                gameManager.stopRoutManager();
+                bossAttackBehav.endEpAttkBe();
+                targetBehavior.endHittedObstacle();
 
-        }else if (collision.collider.gameObject.GetComponent<BorderCollisionScript>())
-        {
-            Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO");
-            this.AddReward(-0.8f);
+                this.EndEpisode();
+            }
 
-            //gestione dell'end episode delle altre due brain
-            bossAttackBehav.endEpStopAll();
-            targetBehavior.endEpStopAll();
-            targetBehavior.setActionTargetNull();
-            gameManager.stopRoutManager();
-            bossAttackBehav.endEpAttkBe();
-            targetBehavior.endHittedObstacle();
 
-            this.EndEpisode();
         }
+    }
+
+
+    public void endEpEdges()
+    {
+        Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO 2");
+        this.AddReward(-0.8f);
+
+        //gestione dell'end episode delle altre due brain
+        bossAttackBehav.endEpStopAll();
+        targetBehavior.endEpStopAll();
+        targetBehavior.setActionTargetNull();
+        gameManager.stopRoutManager();
+        bossAttackBehav.endEpAttkBe();
+        targetBehavior.endHittedObstacle();
+
+        this.EndEpisode();
     }
 
     public void setShieldObj(GameObject sobj)

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
     private int numb;
+    private int nOfShieldOb = 0;
 
     private float lastXobj = 0f;
 
@@ -105,12 +106,19 @@ public class GameManager : MonoBehaviour
     public IEnumerator respawnObstacles()
     {
         yield return new WaitForSeconds(8.0f);
-        Vector3 postObs = takePosForObstacles();
+        if (nOfShieldOb < 2)
+        {
+            Vector3 postObs = takePosForObstacles();
 
-        refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
+            refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
+            refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
 
-        movingBrain.setShieldObj(refShieldObj);
+            movingBrain.setShieldObj(refShieldObj);
+
+            nOfShieldOb++;
+            movingBrain.nOfObjShieldSpawned = nOfShieldOb;
+        }
+
     }
 
     public IEnumerator generateFirstObstacle()
@@ -123,6 +131,9 @@ public class GameManager : MonoBehaviour
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
         //sfera messa circa +6 della Z dell'ostacolo
         movingBrain.setShieldObj(refShieldObj);
+
+        nOfShieldOb++;
+        movingBrain.nOfObjShieldSpawned = nOfShieldOb;
 
     }
 

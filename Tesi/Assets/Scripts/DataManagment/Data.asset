@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Data
   m_EditorClassIdentifier: 
   hpTank: 600
-  damageTank: 110
+  damageTank: 0
   armorTank: 80
   hpBruiser: 450
-  damageBruiser: 125
+  damageBruiser: 0
   armorBruiser: 60
   hpMage: 300
-  damageMage: 145
+  damageMage: 0
   armorMage: 45
   hpHealer: 380
-  damageHealer: 90
+  damageHealer: 0
   armorHealer: 53
   hpBoss: 4250
   damageBoss: 200

@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - Obstacles
   - ShieldPower
+  - Bordo
   layers:
   - Default
   - TransparentFX

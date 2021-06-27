@@ -765,7 +765,7 @@ public class BossAttackBehavior : Agent
             }
             else
             {
-                Destroy(goBreak.gameObject);
+               // Destroy(goBreak.gameObject);
             }
         }
     }
