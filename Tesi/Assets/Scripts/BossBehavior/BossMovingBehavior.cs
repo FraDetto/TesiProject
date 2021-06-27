@@ -11,6 +11,7 @@ public class BossMovingBehavior : Agent
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
+    
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class BossMovingBehavior : Agent
     {
         Debug.Log(" =====CollectObservations MOVING===== ");
 
-        sensor.AddObservation(transform.position);
+        sensor.AddObservation(transform.parent.position);
 
         if (null != shieldOb)
         {
@@ -50,10 +51,11 @@ public class BossMovingBehavior : Agent
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
+        float moveSpeed = 10f;
 
         if (null != shieldOb)
         {
-            transform.parent.position += new Vector3(moveX, transform.parent.position.y, moveZ);  
+            transform.parent.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;  
         }
     }
 

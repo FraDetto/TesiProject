@@ -150,6 +150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf074f68fb5ad654d95cf8551ec05c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &443869812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4786471385303323176, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+  m_PrefabInstance: {fileID: 8780630781457581019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0cefc60b8185c439923dab81084f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &497616746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8780630782191091002, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
@@ -448,6 +459,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1493715099845369947, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2068891505189918833, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Mass
       value: 50
@@ -464,6 +479,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 295141805}
+    - target: {fileID: 2884577549024150187, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: movingBrain
+      value: 
+      objectReference: {fileID: 443869812}
     - target: {fileID: 2884577549024150187, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: overcomeBattleSign
       value: 
@@ -520,6 +539,10 @@ PrefabInstance:
       propertyPath: rangedAttackPosition
       value: 
       objectReference: {fileID: 12917876}
+    - target: {fileID: 4786471385303323176, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 295141805}
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 
@@ -608,6 +631,10 @@ PrefabInstance:
       propertyPath: shieldOb
       value: 
       objectReference: {fileID: 4777636597069998396, guid: 336d73275e6919a47b4794e9e3181aee, type: 3}
+    - target: {fileID: 8780630781810388029, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: movingBrain
+      value: 
+      objectReference: {fileID: 443869812}
     - target: {fileID: 8780630781810388029, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: obstaclesGO
       value: 
