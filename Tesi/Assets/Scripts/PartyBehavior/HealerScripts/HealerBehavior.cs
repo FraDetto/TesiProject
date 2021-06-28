@@ -119,7 +119,7 @@ public class HealerBehavior : MonoBehaviour
         if ( ((boss.transform.position - rb.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - rb.transform.position).magnitude <= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<HealerMovement>().distanceFlag = false;
-            GetComponent<MageMovement>().chaseFlag = false;
+            GetComponent<HealerMovement>().chaseFlag = false;
             return true;
         }
         else
