@@ -13,6 +13,8 @@ public class BossMovingBehavior : Agent
 
     public float rewardOfEp;
 
+    public bool bossIsRunning;
+
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
@@ -38,7 +40,7 @@ public class BossMovingBehavior : Agent
         shieldOb = null;
         nOfObjShieldSpawned = 0;
         rewardOfEp = 0f;
-
+        bossIsRunning = false;
 
     }
 
@@ -79,6 +81,11 @@ public class BossMovingBehavior : Agent
         rewardOfEp += -0.8f;
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
 
+        bossAttackBehav.setIsRunning(false);
+        targetBehavior.setIsRunning(false);
+
+        bossIsRunning = false;
+
         //gestione dell'end episode delle altre due brain
         bossAttackBehav.endEpStopAll();
         targetBehavior.endEpStopAll();
@@ -96,12 +103,15 @@ public class BossMovingBehavior : Agent
         this.AddReward(+1f);
 
         rewardOfEp += 1f;
+        bossAttackBehav.setIsRunning(false);
+        targetBehavior.setIsRunning(false);
+
+        bossIsRunning = false;
 
         if (nOfObjShieldSpawned < 2)
         {
             //togliere nella brain di attacco che sta correndo
-            bossAttackBehav.setIsRunning(false);
-            targetBehavior.setIsRunning(false);
+
 
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
@@ -151,8 +161,9 @@ public class BossMovingBehavior : Agent
         shieldOb = sobj;
         //qua settare nella brain di attacco che sta correndo
         bossAttackBehav.setIsRunning(true);
-        targetBehavior.deRootPlayers();
+        //targetBehavior.deRootPlayers();
         targetBehavior.setShieldObj(sobj);
+        bossIsRunning = true;
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose

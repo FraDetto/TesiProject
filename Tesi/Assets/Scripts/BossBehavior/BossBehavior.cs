@@ -527,6 +527,7 @@ public class BossBehavior : Agent
         this.EndEpisode();
     }
 
+    /*
     public void deRootPlayers()
     {
         foreach (GameObject go in this.endArray)
@@ -537,7 +538,7 @@ public class BossBehavior : Agent
             }
 
         }
-    }
+    }*/
 
 
     public bool rangedChampAlive()

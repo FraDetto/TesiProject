@@ -69,6 +69,14 @@ public class HealerProfile : moreSpecificProfile
 
     private void FixedUpdate()
     {
+        if(GetComponent<moreSpecificProfile>().publicGetStatus() != 0)
+        {
+            if (boss.GetComponentInChildren<BossMovingBehavior>().bossIsRunning)
+            {
+                GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+            }
+        }
+
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
             if (GetComponent<moreSpecificProfile>().getShooting() && null!=go)

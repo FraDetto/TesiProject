@@ -49,7 +49,16 @@ public class BruiserProfile : moreSpecificProfile
         StartCoroutine(waitAfterUlti());
     }
 
-
+    private void FixedUpdate()
+    {
+        if (GetComponent<moreSpecificProfile>().publicGetStatus() != 0)
+        {
+            if (boss.GetComponentInChildren<BossMovingBehavior>().bossIsRunning)
+            {
+                GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+            }
+        }
+    }
 
     public bool lifeUnderSixty()
     {

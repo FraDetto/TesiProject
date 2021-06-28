@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator respawnObstacles()
     {
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(10.0f);
         if (nOfShieldOb < 2)
         {
             Vector3 postObs = takePosForObstacles();
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator generateFirstObstacle()
     {
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(10.0f);
 
         lastXobj = 0f;
 
