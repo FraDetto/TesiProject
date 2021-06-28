@@ -402,7 +402,7 @@ public class BossBehavior : Agent
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         
-            
+            /*
             if (countRewardRun > 24.5f)
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
@@ -411,7 +411,7 @@ public class BossBehavior : Agent
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
             }
-
+            */
 
             foreach (GameObject go in endArray)
             {
@@ -452,7 +452,7 @@ public class BossBehavior : Agent
 
             overcomeBattleSignEndRun.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
-            
+            /*
             if (countRewardRun > 24.5f)
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
@@ -461,6 +461,7 @@ public class BossBehavior : Agent
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
             }
+            */
 
             foreach (GameObject go in this.endArray)
             {

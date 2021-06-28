@@ -9,6 +9,10 @@ public class BossMovingBehavior : Agent
 
     public GameManager gameManager;
     public int nOfObjShieldSpawned;
+    public GameObject overcomeBattleSign;
+
+    public float rewardOfEp;
+
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
@@ -32,6 +36,10 @@ public class BossMovingBehavior : Agent
         Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
         transform.parent.position = new Vector3(0, 4.7f, 0);
         shieldOb = null;
+        nOfObjShieldSpawned = 0;
+        rewardOfEp = 0f;
+
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -53,7 +61,7 @@ public class BossMovingBehavior : Agent
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
-        float moveSpeed = 10f;
+        float moveSpeed = 15f;
 
         if (null != shieldOb)
         {
@@ -67,6 +75,9 @@ public class BossMovingBehavior : Agent
     {
         Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO 2");
         this.AddReward(-0.8f);
+
+        rewardOfEp += -0.8f;
+        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
 
         //gestione dell'end episode delle altre due brain
         bossAttackBehav.endEpStopAll();
@@ -84,6 +95,8 @@ public class BossMovingBehavior : Agent
         Debug.Log("BOSS HA PRESO SCUDO");
         this.AddReward(+1f);
 
+        rewardOfEp += 1f;
+
         if (nOfObjShieldSpawned < 2)
         {
             //togliere nella brain di attacco che sta correndo
@@ -95,6 +108,15 @@ public class BossMovingBehavior : Agent
         }
         else
         {
+            if (rewardOfEp == 2)
+            {
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            }
+            else
+            {
+                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+            }
+
             bossAttackBehav.endEpStopAll();
             targetBehavior.endEpStopAll();
             targetBehavior.setActionTargetNull();
@@ -110,6 +132,8 @@ public class BossMovingBehavior : Agent
     {
         Debug.Log("BOSS HA HITTATO OBSTACLES 2");
         this.AddReward(-0.5f);
+
+        rewardOfEp += -0.5f;
         //gestione dell'end episode delle altre due brain
         //bossAttackBehav.endEpStopAll();
         //targetBehavior.endEpStopAll();

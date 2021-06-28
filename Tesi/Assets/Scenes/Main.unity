@@ -543,6 +543,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 295141805}
+    - target: {fileID: 4786471385303323176, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: overcomeBattleSign
+      value: 
+      objectReference: {fileID: 497616746}
     - target: {fileID: 5488156635673801301, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 

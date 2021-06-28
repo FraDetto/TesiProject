@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int numb;
     private int nOfShieldOb;
 
-    private float lastXobj = 0f;
+    private float lastXobj;
 
     // Start is called before the first frame update
     void Start()
@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(8.0f);
 
+        lastXobj = 0f;
+
         Vector3 postObs = takePosForObstacles();
 
         refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
@@ -163,6 +165,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] chooseTeam()
     {
         nOfShieldOb = 0;
+        
 
         StartCoroutine(generateFirstObstacle());
 
