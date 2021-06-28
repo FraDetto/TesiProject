@@ -10,9 +10,9 @@ public class MageBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody rb;
 
-    public float reactionTime = 2.5f;
+    public float reactionTime = 1.2f;
     public float distanceRangeDown = 45.0f;
-    public float distanceRangeUp = 60.0f;
+    public float distanceRangeUp = 50.0f;
     public bool firstRush = true;
 
     
@@ -124,6 +124,7 @@ public class MageBehavior : MonoBehaviour
         if ( ((boss.transform.position - rb.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - rb.transform.position).magnitude<= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<MageMovement>().distanceFlag = false;
+            GetComponent<MageMovement>().chaseFlag = false;
             return true;
         }
         else
@@ -134,7 +135,7 @@ public class MageBehavior : MonoBehaviour
 
     public bool CombactToSafeSpot()
     {
-       
+        //Debug.Log(" COMABCT TO SAFE " + ((boss.transform.position - rb.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - rb.transform.position).magnitude <= distanceRangeUp)  + "  STATUS ROOT " + (GetComponent<moreSpecificProfile>().publicGetStatus() == 1) + " VALORE SAFESPOT " + !safeSpotToCombact());
         if (GetComponent<moreSpecificProfile>().publicGetStatus() == 0)//If status OK work normal, otherwise FALSE -> Rooted or stunned can't move
         {
             return !safeSpotToCombact();
@@ -151,6 +152,7 @@ public class MageBehavior : MonoBehaviour
 
     public void takSafeSpotFromBoss()//allontanati dal boss
     {
+        //Debug.Log("CONTROLLO DOVE DOVREBBE SETTARE MOVIMENTO DASHING " + GetComponent<MageProfile>().isDashing + " CHASE FLAG " + GetComponent<MageMovement>().chaseFlag);
         if (!GetComponent<MageProfile>().isDashing)
         {
             if ((boss.transform.position - rb.transform.position).magnitude < distanceRangeDown)
@@ -178,7 +180,7 @@ public class MageBehavior : MonoBehaviour
 
     public void combactFase()
     {
-        //Debug.Log("Combact Fase Mage");
+
         if (GetComponent<moreSpecificProfile>().publicGetStatus() != 2)//if 2 = stunned can't attack and move
         {
             fsmCombact.Update();

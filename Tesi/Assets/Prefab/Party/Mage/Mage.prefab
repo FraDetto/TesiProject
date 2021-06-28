@@ -341,9 +341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af2ce2b1bb365148aa90a3e9914e266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reactionTime: 2.5
+  reactionTime: 1.2
   distanceRangeDown: 45
-  distanceRangeUp: 60
+  distanceRangeUp: 50
   firstRush: 1
 --- !u!114 &2097305734944077522
 MonoBehaviour:

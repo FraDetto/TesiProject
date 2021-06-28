@@ -10,9 +10,9 @@ public class HealerBehavior : MonoBehaviour
     private GameObject boss;
     private Rigidbody rb;
 
-    public float reactionTime = 2.5f;
+    public float reactionTime = 1.2f;
     public float distanceRangeDown = 45.0f;
-    public float distanceRangeUp = 60.0f;
+    public float distanceRangeUp = 50.0f;
     public bool firstRush = true;
 
     public float m_HealRadius = 80f;
@@ -119,6 +119,7 @@ public class HealerBehavior : MonoBehaviour
         if ( ((boss.transform.position - rb.transform.position).magnitude >= distanceRangeDown && (boss.transform.position - rb.transform.position).magnitude <= distanceRangeUp && GetComponent<moreSpecificProfile>().publicGetStatus() != 2) || GetComponent<moreSpecificProfile>().publicGetStatus() == 1)
         {
             GetComponent<HealerMovement>().distanceFlag = false;
+            GetComponent<MageMovement>().chaseFlag = false;
             return true;
         }
         else
@@ -138,6 +139,8 @@ public class HealerBehavior : MonoBehaviour
             return false;
         }
     }
+
+
     // ACTIONS
 
     public void takSafeSpotFromBoss()//allontanati dal boss

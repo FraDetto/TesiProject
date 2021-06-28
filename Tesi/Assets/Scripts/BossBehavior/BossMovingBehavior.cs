@@ -61,7 +61,7 @@ public class BossMovingBehavior : Agent
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
-        float moveSpeed = 15f;
+        float moveSpeed = 20f;
 
         if (null != shieldOb)
         {
@@ -101,6 +101,7 @@ public class BossMovingBehavior : Agent
         {
             //togliere nella brain di attacco che sta correndo
             bossAttackBehav.setIsRunning(false);
+            targetBehavior.setIsRunning(false);
 
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
@@ -150,6 +151,8 @@ public class BossMovingBehavior : Agent
         shieldOb = sobj;
         //qua settare nella brain di attacco che sta correndo
         bossAttackBehav.setIsRunning(true);
+        targetBehavior.deRootPlayers();
+        targetBehavior.setShieldObj(sobj);
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose

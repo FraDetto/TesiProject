@@ -19,6 +19,8 @@ public class BossBehavior : Agent
 
     public float countRewardRun;
 
+    public bool isRunning;
+
     [SerializeField] private string partyList;
     //public BossProfile myProfile;
     private Vector3 startPosition;
@@ -54,6 +56,8 @@ public class BossBehavior : Agent
     public GameObject overcomeBattleSign;
     public GameObject overcomeBattleSignEndRun;
     private GameObject[] endArray;
+
+    private GameObject shieldOb;
 
     /*public bool isAttacking = false;
     public bool isUsingAoE = false;
@@ -91,6 +95,10 @@ public class BossBehavior : Agent
         champsKO = 0;
         previousTargetID = 0;
         countRewardRun = 0.0f;
+
+        isRunning = false;
+        shieldOb = null;
+
         endArray = playersParty;
         if (!firstRun)
         {          
@@ -158,10 +166,17 @@ public class BossBehavior : Agent
         //int actionForBoss = Mathf.FloorToInt(vectorAction[1]);
 
         //actionChoose[0] = actionForBoss;
-        
-        //Debug.Log("PLAYER PER PROSSIMO ATTACCO " + playersParty[target].tag + " CON ID "+ playersParty[target].GetInstanceID());
 
-        turnBossToTarget();
+        //Debug.Log("PLAYER PER PROSSIMO ATTACCO " + playersParty[target].tag + " CON ID "+ playersParty[target].GetInstanceID());
+        if (!isRunning)
+        {
+            turnBossToTarget();
+        }
+        else
+        {
+            turnBossToObjShield();
+        }
+   
 
 
         //0 TANK, 1 BRUISER, 2 MAGE, 3 HEALER
@@ -342,9 +357,19 @@ public class BossBehavior : Agent
 
 
 
+    public void setIsRunning(bool flag)
+    {
+        isRunning = flag;
+    }
+
+    public void setShieldObj(GameObject sobj)
+    {
+        shieldOb = sobj;
+        isRunning = true;
+        //qua settare nella brain di attacco che sta correndo
+    }
 
 
-   
 
     public void checkChampDieInFight()
     {
@@ -502,6 +527,18 @@ public class BossBehavior : Agent
         this.EndEpisode();
     }
 
+    public void deRootPlayers()
+    {
+        foreach (GameObject go in this.endArray)
+        {
+            if (!go.transform.tag.Equals("Boss"))
+            {
+                go.GetComponent<moreSpecificProfile>().publicSetPreviousStatus(0);
+            }
+
+        }
+    }
+
 
     public bool rangedChampAlive()
     {
@@ -589,6 +626,13 @@ public class BossBehavior : Agent
     public void turnBossToTarget()
     {
         Vector3 verticalAdj = new Vector3(playersParty[target].transform.position.x, transform.parent.transform.position.y, playersParty[target].transform.position.z);
+
+        transform.parent.transform.LookAt(verticalAdj);
+    }
+
+    public void turnBossToObjShield()
+    {
+        Vector3 verticalAdj = new Vector3(shieldOb.transform.position.x, transform.parent.transform.position.y, shieldOb.transform.position.z);
 
         transform.parent.transform.LookAt(verticalAdj);
     }
