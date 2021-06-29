@@ -38,6 +38,7 @@ public class BossMovingBehavior : Agent
         Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
         transform.parent.position = new Vector3(0, 4.7f, 0);
         shieldOb = null;
+        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
         rewardOfEp = 0f;
         bossIsRunning = false;
