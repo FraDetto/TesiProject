@@ -217,6 +217,12 @@ public class moreSpecificProfile : aProfile
     {
         float effectiveDamage = damage * (100 / (100 + armor)); //formula for scale damage with armor 
 
+        // only for Moving Training
+        if (this.gameObject.tag.Equals("Boss"))
+        {
+            effectiveDamage = 0;
+        }
+
         if(shield > 0)
         {
             // NEED TO SCALE DAMAGE BASE ON ARMOR (MUST THINK TO A FORMULA)

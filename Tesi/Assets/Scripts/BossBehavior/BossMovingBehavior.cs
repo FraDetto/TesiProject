@@ -18,6 +18,7 @@ public class BossMovingBehavior : Agent
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
+   // private GameObject obstacles;
     
     
 
@@ -38,6 +39,7 @@ public class BossMovingBehavior : Agent
         Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
         transform.parent.position = new Vector3(0, 4.7f, 0);
         shieldOb = null;
+        //obstacles = null;
         GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
         rewardOfEp = 0f;
@@ -50,6 +52,11 @@ public class BossMovingBehavior : Agent
         Debug.Log(" =====CollectObservations MOVING===== ");
 
         sensor.AddObservation(transform.parent.position);
+
+        /*if(null != obstacles)
+        {
+            sensor.AddObservation(obstacles.transform.position);
+        }*/
 
         if (null != shieldOb)
         {
@@ -146,20 +153,14 @@ public class BossMovingBehavior : Agent
         this.AddReward(-0.5f);
 
         rewardOfEp += -0.5f;
-        //gestione dell'end episode delle altre due brain
-        //bossAttackBehav.endEpStopAll();
-        //targetBehavior.endEpStopAll();
-        //targetBehavior.setActionTargetNull();
-        //gameManager.stopRoutManager();
-        //bossAttackBehav.endEpAttkBe();
-        //targetBehavior.endHittedObstacle();
 
-        //this.EndEpisode();
     }
 
     public void setShieldObj(GameObject sobj)
     {
+        //obstacles = ob;
         shieldOb = sobj;
+
         //qua settare nella brain di attacco che sta correndo
         bossAttackBehav.setIsRunning(true);
         //targetBehavior.deRootPlayers();

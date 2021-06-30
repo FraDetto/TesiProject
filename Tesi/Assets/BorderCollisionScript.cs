@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BorderCollisionScript : MonoBehaviour
 {
-    public GameObject boss;
+
     public float m_HealRadius = 6.0f;
     public LayerMask m_PlayerMask;
 
@@ -16,11 +16,7 @@ public class BorderCollisionScript : MonoBehaviour
             Debug.Log("COLLISIONEEE " + other.transform.position);
             other.transform.position = takeRandomPos();
         }
-        else
-        {
-            Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO 1");
-            boss.GetComponentInChildren<BossMovingBehavior>().endEpEdges();
-        }
+
     }
 
     public Vector3 takeRandomPos()
@@ -31,8 +27,8 @@ public class BorderCollisionScript : MonoBehaviour
 
         while (flag)
         {
-            randomX = Random.Range(boss.transform.position.x - 35.0f, boss.transform.position.x + 35.0f);
-            randomZ = Random.Range(boss.transform.position.z - 10.0f, boss.transform.position.z - 60.0f);
+            randomX = Random.Range(-35.0f, +35.0f);
+            randomZ = Random.Range(-10.0f, -60.0f);
 
             Collider[] colliders = Physics.OverlapSphere(new Vector3(randomX, 3.5f, randomZ), m_HealRadius, m_PlayerMask);
             if (colliders.Length == 0)
