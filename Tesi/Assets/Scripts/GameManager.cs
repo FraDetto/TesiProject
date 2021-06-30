@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
         {
             randomX = 65f;
         }
+
+        
         randomZ = 40f;
 
         lastXobj = randomX;
@@ -110,10 +112,10 @@ public class GameManager : MonoBehaviour
         {
             Vector3 postObs = takePosForObstacles();
 
-            refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
+            //refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
             refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
 
-            refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
+            //refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
             refShieldObj.GetComponent<shieldObjTrigger>().setBoss(boss);
 
             movingBrain.setShieldObj(refShieldObj);
@@ -132,11 +134,11 @@ public class GameManager : MonoBehaviour
 
         Vector3 postObs = takePosForObstacles();
 
-        refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
+        //refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
         refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
 
 
-        refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
+        //refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
         refShieldObj.GetComponent<shieldObjTrigger>().setBoss(boss);
 
         //sfera messa circa +6 della Z dell'ostacolo

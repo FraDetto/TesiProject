@@ -118,16 +118,14 @@ public class BossMovingBehavior : Agent
 
         if (nOfObjShieldSpawned < 2)
         {
-            //togliere nella brain di attacco che sta correndo
-
-
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
             
         }
         else
         {
-            if (rewardOfEp == 2)
+            
+            if (rewardOfEp == 1)
             {
                 overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
             }
