@@ -81,14 +81,14 @@ public class GameManager : MonoBehaviour
 
         randomZ = Random.Range(-10.0f, +55.0f);*/
 
-        if(lastXobj == 65f)
+        /*if(lastXobj == 65f)
         {
             randomX = -65f;
         }
         else
-        {
-            randomX = 65f;
-        }
+        { }*/
+        randomX = 65f;
+        
 
         
         randomZ = 40f;

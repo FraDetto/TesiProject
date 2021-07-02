@@ -2,17 +2,17 @@
     "MovingBrain": {
         "checkpoints": [
             {
-                "steps": 22624,
-                "file_path": "results\\MovBrnTwoPoint\\MovingBrain\\MovingBrain-22624.onnx",
-                "reward": -0.8163934525896291,
-                "creation_time": 1625053910.4966745
+                "steps": 55067,
+                "file_path": "results\\MovBrnTwoPoint\\MovingBrain\\MovingBrain-55067.onnx",
+                "reward": -0.546666677792867,
+                "creation_time": 1625152929.7303698
             }
         ],
         "final_checkpoint": {
-            "steps": 22624,
+            "steps": 55067,
             "file_path": "results\\MovBrnTwoPoint\\MovingBrain.onnx",
-            "reward": -0.8163934525896291,
-            "creation_time": 1625053910.4966745
+            "reward": -0.546666677792867,
+            "creation_time": 1625152929.7303698
         }
     },
     "metadata": {

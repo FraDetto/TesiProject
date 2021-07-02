@@ -18,6 +18,7 @@ public class BossMovingBehavior : Agent
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
+
    // private GameObject obstacles;
     
     
@@ -84,9 +85,9 @@ public class BossMovingBehavior : Agent
     public void endEpEdges()
     {
         Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO 2");
-        this.AddReward(-0.8f);
+        this.AddReward(-0.5f);
 
-        rewardOfEp += -0.8f;
+        rewardOfEp += -0.5f;
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
 
         bossAttackBehav.setIsRunning(false);
@@ -115,7 +116,7 @@ public class BossMovingBehavior : Agent
         targetBehavior.setIsRunning(false);
 
         bossIsRunning = false;
-
+        /*
         if (nOfObjShieldSpawned < 2)
         {
             GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
@@ -142,7 +143,21 @@ public class BossMovingBehavior : Agent
             targetBehavior.endHittedObstacle();
 
             this.EndEpisode();
-        }
+        }*/
+
+        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
+
+
+        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+
+        bossAttackBehav.endEpStopAll();
+        targetBehavior.endEpStopAll();
+        targetBehavior.setActionTargetNull();
+        gameManager.stopRoutManager();
+        bossAttackBehav.endEpAttkBe();
+        targetBehavior.endHittedObstacle();
+
+        this.EndEpisode();
     }
 
     public void hitObstaclesWall()
