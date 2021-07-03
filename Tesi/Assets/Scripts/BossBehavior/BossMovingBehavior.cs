@@ -19,14 +19,14 @@ public class BossMovingBehavior : Agent
     private BossBehavior targetBehavior;
     private GameObject shieldOb;
 
-   // private GameObject obstacles;
-    
-    
+    // private GameObject obstacles;
 
+
+    //BISOGNA RIMETTERLI
     void Start()
     {
-        targetBehavior = transform.parent.GetComponentInChildren<BossBehavior>();
-        bossAttackBehav = transform.parent.GetComponent<BossAttackBehavior>();
+        //targetBehavior = transform.parent.GetComponentInChildren<BossBehavior>();
+        //bossAttackBehav = transform.parent.GetComponent<BossAttackBehavior>();
     }
 
         //this.OnEpisodeBegin();
@@ -38,13 +38,14 @@ public class BossMovingBehavior : Agent
     public override void OnEpisodeBegin()
     {
         Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
-        transform.parent.position = new Vector3(0, 4.7f, 0);
+        transform.parent.position = new Vector3(30, 4.7f, 18);
         shieldOb = null;
-        //obstacles = null;
-        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
+        //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
         rewardOfEp = 0f;
         bossIsRunning = false;
+
+        gameManager.generateShieldObj();
 
     }
 
@@ -72,10 +73,15 @@ public class BossMovingBehavior : Agent
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
+
+
         float moveSpeed = 20f;
 
         if (null != shieldOb)
         {
+            Vector3 verticalAdj = new Vector3(shieldOb.transform.position.x, transform.parent.transform.position.y, shieldOb.transform.position.z);
+            transform.parent.transform.LookAt(verticalAdj);
+
             transform.parent.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;  
         }
     }
@@ -84,18 +90,19 @@ public class BossMovingBehavior : Agent
 
     public void endEpEdges()
     {
-        Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO 2");
+        Debug.Log("BOSS HA HITTATO BORDO  DOVREI FERMARE EPISODIO 1");
         this.AddReward(-0.5f);
 
         rewardOfEp += -0.5f;
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
 
+        /*
         bossAttackBehav.setIsRunning(false);
         targetBehavior.setIsRunning(false);
 
         bossIsRunning = false;
 
-        //gestione dell'end episode delle altre due brain
+ 
         bossAttackBehav.endEpStopAll();
         targetBehavior.endEpStopAll();
         targetBehavior.setActionTargetNull();
@@ -103,7 +110,12 @@ public class BossMovingBehavior : Agent
         bossAttackBehav.endEpAttkBe();
         targetBehavior.endHittedObstacle();
 
+        this.EndEpisode();*/
+        bossIsRunning = false;
+        gameManager.stopRoutManager();
+
         this.EndEpisode();
+
     }
 
     public void hitObjShield()
@@ -112,27 +124,34 @@ public class BossMovingBehavior : Agent
         this.AddReward(+1f);
 
         rewardOfEp += 1f;
-        bossAttackBehav.setIsRunning(false);
+
+        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+
+        /*bossAttackBehav.setIsRunning(false);
         targetBehavior.setIsRunning(false);
 
         bossIsRunning = false;
-        /*
+        */
         if (nOfObjShieldSpawned < 2)
         {
-            GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
+            //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
             
         }
         else
         {
-            
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+
+            gameManager.stopRoutManager();
+            this.EndEpisode();
+            /*
             if (rewardOfEp == 1)
             {
-                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
             }
             else
             {
-                overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
             }
 
             bossAttackBehav.endEpStopAll();
@@ -143,13 +162,14 @@ public class BossMovingBehavior : Agent
             targetBehavior.endHittedObstacle();
 
             this.EndEpisode();
-        }*/
-
+            */
+        }
+        /*
         GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
 
 
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
-
+        
         bossAttackBehav.endEpStopAll();
         targetBehavior.endEpStopAll();
         targetBehavior.setActionTargetNull();
@@ -157,7 +177,7 @@ public class BossMovingBehavior : Agent
         bossAttackBehav.endEpAttkBe();
         targetBehavior.endHittedObstacle();
 
-        this.EndEpisode();
+        this.EndEpisode();*/
     }
 
     public void hitObstaclesWall()
@@ -171,13 +191,12 @@ public class BossMovingBehavior : Agent
 
     public void setShieldObj(GameObject sobj)
     {
-        //obstacles = ob;
+
         shieldOb = sobj;
 
-        //qua settare nella brain di attacco che sta correndo
-        bossAttackBehav.setIsRunning(true);
-        //targetBehavior.deRootPlayers();
-        targetBehavior.setShieldObj(sobj);
+        //bossAttackBehav.setIsRunning(true);
+
+        //targetBehavior.setShieldObj(sobj);
         bossIsRunning = true;
     }
 

@@ -81,16 +81,15 @@ public class GameManager : MonoBehaviour
 
         randomZ = Random.Range(-10.0f, +55.0f);*/
 
-        /*if(lastXobj == 65f)
+        if(lastXobj == 65f)
         {
             randomX = -65f;
         }
         else
-        { }*/
-        randomX = 65f;
-        
-
-        
+        {
+            randomX = 65f;
+        }
+                      
         randomZ = 40f;
 
         lastXobj = randomX;
@@ -101,7 +100,7 @@ public class GameManager : MonoBehaviour
     
     public void ableRoutineForObstacles()
     {
-        Destroy(refObstacles);
+        //Destroy(refObstacles);
         StartCoroutine(respawnObstacles());
     }
 
@@ -113,7 +112,7 @@ public class GameManager : MonoBehaviour
             Vector3 postObs = takePosForObstacles();
 
             //refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-            refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
+            refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z), Quaternion.identity, transform.parent);
 
             //refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
             refShieldObj.GetComponent<shieldObjTrigger>().setBoss(boss);
@@ -128,6 +127,11 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator generateFirstObstacle()
     {
+        if(null != refShieldObj)
+        {
+            Destroy(refShieldObj.gameObject);
+        }
+
         yield return new WaitForSeconds(10.0f);
 
         lastXobj = 0f;
@@ -135,7 +139,7 @@ public class GameManager : MonoBehaviour
         Vector3 postObs = takePosForObstacles();
 
         //refObstacles = Instantiate(obstaclesGO, postObs, Quaternion.identity, transform.parent);
-        refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z + 6), Quaternion.identity, transform.parent);
+        refShieldObj = Instantiate(shieldOb, new Vector3(postObs.x, postObs.y - 2, postObs.z), Quaternion.identity, transform.parent);
 
 
         //refObstacles.GetComponent<obstaclesHitScript>().setBoss(boss);
@@ -162,6 +166,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(refObstacles);
         }
+    }
+
+
+    public void generateShieldObj()
+    {
+        nOfShieldOb = 0;
+        StartCoroutine(generateFirstObstacle());
     }
 
     public GameObject[] chooseTeam()
