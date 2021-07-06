@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class shieldObjTrigger : MonoBehaviour
 {
-    private GameObject boss;
+
+    public GameObject boss;
+
+    public void startTimeAbilitation()
+    {
+        gameObject.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.grey);
+        takePos();
+        StartCoroutine(abilitateShieldObj());
+    }
+    
+
 
     public void OnTriggerEnter(Collider other)
     {
@@ -13,7 +23,8 @@ public class shieldObjTrigger : MonoBehaviour
 
             Debug.Log("BOSS HA HITTATO SHHIELDOBJ");
             boss.GetComponentInChildren<BossMovingBehavior>().hitObjShield();
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            moveThisObj();
         }
     }
 
@@ -21,4 +32,30 @@ public class shieldObjTrigger : MonoBehaviour
     {
         boss = b;
     }
+
+    public IEnumerator abilitateShieldObj()
+    {
+        yield return new WaitForSeconds(10.0f);
+
+        gameObject.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        moveThisObj();
+
+    }
+
+    public void moveThisObj()
+    {
+        boss.GetComponentInChildren<BossMovingBehavior>().setActiveShieldObj(true);
+    }
+
+    public void takePos()
+    {
+        float randomX = 0.0f;
+        float randomZ = 0.0f;
+
+        randomX = Random.Range(15f, 75.0f);
+        randomZ = Random.Range(15.0f, +55.0f);
+
+        this.gameObject.transform.localPosition = new Vector3(randomX,3.83f, randomZ);
+    }
+
 }

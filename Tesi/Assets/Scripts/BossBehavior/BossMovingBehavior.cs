@@ -17,9 +17,12 @@ public class BossMovingBehavior : Agent
 
     private BossAttackBehavior bossAttackBehav;
     private BossBehavior targetBehavior;
-    private GameObject shieldOb;
+    public GameObject shieldOb;
 
     // private GameObject obstacles;
+
+    private bool shieldActive;
+    public float distance;
 
 
     //BISOGNA RIMETTERLI
@@ -37,39 +40,43 @@ public class BossMovingBehavior : Agent
 
     public override void OnEpisodeBegin()
     {
-        Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
-        transform.parent.position = new Vector3(30, 4.7f, 18);
-        shieldOb = null;
+        //Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
+        transform.parent.localPosition = new Vector3(0f, 4.7f, 0f);
+        //shieldOb = null;
         //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
         rewardOfEp = 0f;
         bossIsRunning = false;
 
-        gameManager.generateShieldObj();
+        shieldActive = false;
 
+        //gameManager.generateShieldObj();
+        shieldOb.GetComponent<shieldObjTrigger>().startTimeAbilitation();
+
+        distance = 0f;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Debug.Log(" =====CollectObservations MOVING===== ");
+        Debug.Log(" =====CollectObservations MOVING===== " + (transform.parent.localPosition - shieldOb.transform.localPosition).magnitude);
 
-        sensor.AddObservation(transform.parent.position);
+        sensor.AddObservation(transform.parent.localPosition);
 
-        /*if(null != obstacles)
+        sensor.AddObservation(shieldOb.transform.localPosition);
+
+        sensor.AddObservation((transform.parent.localPosition - shieldOb.transform.localPosition).magnitude);
+
+        sensor.AddObservation(distance);
+        /*if (null != shieldOb)
         {
-            sensor.AddObservation(obstacles.transform.position);
+            sensor.AddObservation(shieldOb.transform.position);
         }*/
-
-        if (null != shieldOb)
-        {
-          sensor.AddObservation(shieldOb.transform.position);
-        }
 
     }
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        Debug.Log(" =====OnActionReceived===== " + " MOVING ");
+        //Debug.Log(" =====OnActionReceived===== " + " MOVING ");
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
@@ -77,12 +84,30 @@ public class BossMovingBehavior : Agent
 
         float moveSpeed = 20f;
 
-        if (null != shieldOb)
+        //if (null != shieldOb)
+        if(shieldActive)
         {
-            Vector3 verticalAdj = new Vector3(shieldOb.transform.position.x, transform.parent.transform.position.y, shieldOb.transform.position.z);
+           
+
+            if ( ((transform.parent.localPosition - shieldOb.transform.localPosition).magnitude) < distance)
+            {
+                this.AddReward(+0.05f);
+                rewardOfEp += +0.05f;
+            }
+            else
+            {
+                this.AddReward(-0.05f);
+                rewardOfEp += -0.05f;
+            }
+
+            distance = (transform.parent.localPosition - shieldOb.transform.localPosition).magnitude;
+
+            Vector3 verticalAdj = new Vector3(shieldOb.transform.localPosition.x, transform.parent.transform.localPosition.y, shieldOb.transform.localPosition.z);
             transform.parent.transform.LookAt(verticalAdj);
 
-            transform.parent.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;  
+            transform.parent.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+
+
         }
     }
 
@@ -112,7 +137,7 @@ public class BossMovingBehavior : Agent
 
         this.EndEpisode();*/
         bossIsRunning = false;
-        gameManager.stopRoutManager();
+        //gameManager.stopRoutManager();
 
         this.EndEpisode();
 
@@ -123,23 +148,30 @@ public class BossMovingBehavior : Agent
         Debug.Log("BOSS HA PRESO SCUDO");
         this.AddReward(+1f);
 
+       
         rewardOfEp += 1f;
 
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
 
+
+        //gameManager.stopRoutManager();
+        this.EndEpisode();
         /*bossAttackBehav.setIsRunning(false);
         targetBehavior.setIsRunning(false);
 
         bossIsRunning = false;
         */
-        if (nOfObjShieldSpawned < 2)
+
+
+
+        /*if (nOfObjShieldSpawned < 2)
         {
             //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
             gameManager.ableRoutineForObstacles();
             
         }
         else
-        {
+        {/*
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
 
             gameManager.stopRoutManager();
@@ -163,7 +195,10 @@ public class BossMovingBehavior : Agent
 
             this.EndEpisode();
             */
-        }
+        //}
+
+
+
         /*
         GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
 
@@ -198,6 +233,11 @@ public class BossMovingBehavior : Agent
 
         //targetBehavior.setShieldObj(sobj);
         bossIsRunning = true;
+    }
+
+    public void setActiveShieldObj(bool flag)
+    {
+        shieldActive = flag;
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose
