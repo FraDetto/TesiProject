@@ -1,0 +1,23 @@
+{
+    "MovingBrain": {
+        "checkpoints": [
+            {
+                "steps": 303700,
+                "file_path": "results\\MovBrnSecondTwoPoints\\MovingBrain\\MovingBrain-303700.onnx",
+                "reward": 41.682142903762205,
+                "creation_time": 1625663127.1141174
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 303700,
+            "file_path": "results\\MovBrnSecondTwoPoints\\MovingBrain.onnx",
+            "reward": 41.682142903762205,
+            "creation_time": 1625663127.1141174
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

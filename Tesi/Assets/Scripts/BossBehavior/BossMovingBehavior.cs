@@ -52,6 +52,7 @@ public class BossMovingBehavior : Agent
         shieldActive = false;
 
         //gameManager.generateShieldObj();
+        shieldOb.SetActive(true);
         shieldOb.GetComponent<shieldObjTrigger>().startTimeAbilitation();
 
         distance = 0f;
@@ -154,15 +155,22 @@ public class BossMovingBehavior : Agent
        
         rewardOfEp += 1f;
 
-        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+       
 
         if (firstObj)
         {
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
             firstObj = false;
             shieldActive = false;
         }
         else
         {
+            overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+
+            shieldOb.SetActive(false);
+
+            bossIsRunning = false;
+            shieldActive = false;
             this.EndEpisode();
         }
 
