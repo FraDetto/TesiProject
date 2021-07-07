@@ -23,6 +23,7 @@ public class BossMovingBehavior : Agent
 
     private bool shieldActive;
     public float distance;
+    private bool firstObj;
 
 
     //BISOGNA RIMETTERLI
@@ -54,6 +55,8 @@ public class BossMovingBehavior : Agent
         shieldOb.GetComponent<shieldObjTrigger>().startTimeAbilitation();
 
         distance = 0f;
+
+        firstObj = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -153,9 +156,18 @@ public class BossMovingBehavior : Agent
 
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
 
+        if (firstObj)
+        {
+            firstObj = false;
+            shieldActive = false;
+        }
+        else
+        {
+            this.EndEpisode();
+        }
 
         //gameManager.stopRoutManager();
-        this.EndEpisode();
+
         /*bossAttackBehav.setIsRunning(false);
         targetBehavior.setIsRunning(false);
 
