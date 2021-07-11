@@ -42,7 +42,7 @@ public class BossMovingBehavior : Agent
     public override void OnEpisodeBegin()
     {
         //Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
-        transform.parent.localPosition = new Vector3(0f, 4.7f, 0f);
+        transform.parent.localPosition = new Vector3(30f, 4.7f, 20f);
         //shieldOb = null;
         //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
@@ -155,8 +155,12 @@ public class BossMovingBehavior : Agent
        
         rewardOfEp += 1f;
 
-       
+        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+        shieldActive = false;
+        bossIsRunning = false;
+        this.EndEpisode();
 
+        /*
         if (firstObj)
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
@@ -172,7 +176,13 @@ public class BossMovingBehavior : Agent
             bossIsRunning = false;
             shieldActive = false;
             this.EndEpisode();
-        }
+        }*/
+
+
+
+
+
+
 
         //gameManager.stopRoutManager();
 

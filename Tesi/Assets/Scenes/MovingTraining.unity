@@ -370,7 +370,11 @@ PrefabInstance:
     - target: {fileID: 6614174109568850469, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 9434152b077767e47be57c64fd121a55, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614174109568850469, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
+      propertyPath: m_BehaviorName
+      value: MovingBrainSac
+      objectReference: {fileID: 0}
     - target: {fileID: 6614174109568850469, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
       propertyPath: m_BehaviorType
       value: 0
@@ -389,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 1784565914}
     - target: {fileID: 6614174109605501604, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6614174109605501604, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
       propertyPath: m_LocalPosition.y
@@ -454,6 +458,14 @@ PrefabInstance:
     - target: {fileID: 6614174110167034978, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
       propertyPath: m_TagString
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614174110167034979, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614174110167034979, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6614174110511404696, guid: ccc16a20e29d70644a810a7dacb73897, type: 3}
       propertyPath: boss
