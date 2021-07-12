@@ -28,8 +28,8 @@ public class shieldObjTrigger : MonoBehaviour
             {
                 boss.GetComponentInChildren<BossMovingBehavior>().hitObjShield();
           
-                //moveThisObj();
-                //firstRun = false;
+               moveThisObj();
+               firstRun = false;
             }
             else
             {
@@ -68,7 +68,6 @@ public class shieldObjTrigger : MonoBehaviour
         randomZ = Random.Range(15.0f, +55.0f);
 
 
-
         this.gameObject.transform.localPosition = new Vector3(randomX,3.83f, randomZ);
     }
 
@@ -79,7 +78,7 @@ public class shieldObjTrigger : MonoBehaviour
 
         randomX = Random.Range(-15f, -75.0f);
         randomZ = Random.Range(15.0f, +55.0f);
-  
+
 
         this.gameObject.transform.localPosition = new Vector3(randomX, 3.83f, randomZ);
     }

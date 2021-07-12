@@ -155,12 +155,12 @@ public class BossMovingBehavior : Agent
        
         rewardOfEp += 1f;
 
-        overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+        /*overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
         shieldActive = false;
         bossIsRunning = false;
-        this.EndEpisode();
+        this.EndEpisode();*/
 
-        /*
+        
         if (firstObj)
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
@@ -176,7 +176,7 @@ public class BossMovingBehavior : Agent
             bossIsRunning = false;
             shieldActive = false;
             this.EndEpisode();
-        }*/
+        }
 
 
 
