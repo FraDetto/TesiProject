@@ -42,7 +42,7 @@ public class BossMovingBehavior : Agent
     public override void OnEpisodeBegin()
     {
         //Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
-        transform.parent.localPosition = new Vector3(30f, 4.7f, 20f);
+        transform.parent.localPosition = new Vector3(0f, 4.7f, 0f);
         //shieldOb = null;
         //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
@@ -95,8 +95,8 @@ public class BossMovingBehavior : Agent
 
             if ( ((transform.parent.localPosition - shieldOb.transform.localPosition).magnitude) < distance)
             {
-                this.AddReward(+0.05f);
-                rewardOfEp += +0.05f;
+                this.AddReward(+0.03f);
+                rewardOfEp += +0.03f;
             }
             else
             {
