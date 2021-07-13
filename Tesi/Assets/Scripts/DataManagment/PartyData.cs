@@ -11,7 +11,7 @@ public class PartyData : ScriptableObject
     ///
 
     public float hpTank = 600.0f;
-    public float damageTank = 0;
+    public float damageTank = 110.0f;
     public float armorTank = 80.0f;
 
     /// <summary>
@@ -19,7 +19,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpBruiser = 450.0f;
-    public float damageBruiser = 0;
+    public float damageBruiser = 125.0f;
     public float armorBruiser = 60.0f;
 
     /// <summary>
@@ -27,7 +27,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpMage = 300.0f;
-    public float damageMage = 0;
+    public float damageMage = 150.0f;
     public float armorMage = 45.0f;
 
     /// <summary>
@@ -35,7 +35,7 @@ public class PartyData : ScriptableObject
     /// </summary>
     /// 
     public float hpHealer = 380.0f;
-    public float damageHealer = 0;
+    public float damageHealer = 90.0f;
     public float armorHealer = 53.0f;
 
     /// <summary>

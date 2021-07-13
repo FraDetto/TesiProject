@@ -29,8 +29,8 @@ public class BossMovingBehavior : Agent
     //BISOGNA RIMETTERLI
     void Start()
     {
-        //targetBehavior = transform.parent.GetComponentInChildren<BossBehavior>();
-        //bossAttackBehav = transform.parent.GetComponent<BossAttackBehavior>();
+        targetBehavior = transform.parent.GetComponentInChildren<BossBehavior>();
+        bossAttackBehav = transform.parent.GetComponent<BossAttackBehavior>();
     }
 
         //this.OnEpisodeBegin();
@@ -41,10 +41,10 @@ public class BossMovingBehavior : Agent
 
     public override void OnEpisodeBegin()
     {
-        //Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
+        Debug.Log(" =====OnEPISODE BEGIN  MOVING=====  ");
         transform.parent.localPosition = new Vector3(0f, 4.7f, 0f);
         //shieldOb = null;
-        //GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
+        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(0);
         nOfObjShieldSpawned = 0;
         rewardOfEp = 0f;
         bossIsRunning = false;
@@ -62,7 +62,7 @@ public class BossMovingBehavior : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Debug.Log(" =====CollectObservations MOVING===== " + (transform.parent.localPosition - shieldOb.transform.localPosition).magnitude);
+        Debug.Log(" =====CollectObservations MOVING===== ");
 
         sensor.AddObservation(transform.parent.localPosition);
 
@@ -80,7 +80,7 @@ public class BossMovingBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        //Debug.Log(" =====OnActionReceived===== " + " MOVING ");
+        Debug.Log(" =====OnActionReceived===== " + " MOVING ");
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
@@ -106,8 +106,8 @@ public class BossMovingBehavior : Agent
 
             distance = (transform.parent.localPosition - shieldOb.transform.localPosition).magnitude;
 
-            Vector3 verticalAdj = new Vector3(shieldOb.transform.localPosition.x, transform.parent.transform.localPosition.y, shieldOb.transform.localPosition.z);
-            transform.parent.transform.LookAt(verticalAdj);
+            //Vector3 verticalAdj = new Vector3(shieldOb.transform.localPosition.x, transform.parent.transform.localPosition.y, shieldOb.transform.localPosition.z);
+            //transform.parent.transform.LookAt(verticalAdj);
 
             transform.parent.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
 
@@ -141,7 +141,15 @@ public class BossMovingBehavior : Agent
 
         this.EndEpisode();*/
         bossIsRunning = false;
-        //gameManager.stopRoutManager();
+
+        bossAttackBehav.setIsRunning(false);
+        targetBehavior.setIsRunning(false);
+        bossAttackBehav.endEpStopAll();
+        targetBehavior.endEpStopAll();
+        targetBehavior.setActionTargetNull();
+        bossAttackBehav.endEpAttkBe();
+        targetBehavior.endHittedObstacle();
+
 
         this.EndEpisode();
 
@@ -166,6 +174,11 @@ public class BossMovingBehavior : Agent
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
             firstObj = false;
             shieldActive = false;
+
+
+            bossAttackBehav.setIsRunning(false);
+            targetBehavior.setIsRunning(false);
+            targetBehavior.setShieldObj(null);
         }
         else
         {
@@ -175,10 +188,15 @@ public class BossMovingBehavior : Agent
 
             bossIsRunning = false;
             shieldActive = false;
-            this.EndEpisode();
+
+
+            bossAttackBehav.setIsRunning(false);
+            targetBehavior.setIsRunning(false);
+            targetBehavior.setShieldObj(null);
+
         }
 
-
+        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
 
 
 

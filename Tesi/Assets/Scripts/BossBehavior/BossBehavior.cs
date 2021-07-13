@@ -365,7 +365,6 @@ public class BossBehavior : Agent
     public void setShieldObj(GameObject sobj)
     {
         shieldOb = sobj;
-        isRunning = true;
         //qua settare nella brain di attacco che sta correndo
     }
 

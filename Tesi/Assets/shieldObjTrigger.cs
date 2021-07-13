@@ -27,14 +27,13 @@ public class shieldObjTrigger : MonoBehaviour
             if (firstRun)
             {
                 boss.GetComponentInChildren<BossMovingBehavior>().hitObjShield();
-          
-               moveThisObj();
+
+                moveThisObj();
                firstRun = false;
             }
             else
             {
                 boss.GetComponentInChildren<BossMovingBehavior>().hitObjShield();
-                
             }
 
         }
@@ -47,7 +46,7 @@ public class shieldObjTrigger : MonoBehaviour
 
     public IEnumerator abilitateShieldObj()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(12.0f);
 
         gameObject.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
         actThisObj();
@@ -57,6 +56,10 @@ public class shieldObjTrigger : MonoBehaviour
     public void actThisObj()
     {
         boss.GetComponentInChildren<BossMovingBehavior>().setActiveShieldObj(true);
+
+        boss.GetComponent<BossAttackBehavior>().setIsRunning(true);
+        boss.GetComponentInChildren<BossBehavior>().setShieldObj(this.gameObject);
+        boss.GetComponentInChildren<BossBehavior>().setIsRunning(true);
     }
 
     public void takePosR()

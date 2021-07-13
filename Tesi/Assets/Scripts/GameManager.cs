@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
         nOfShieldOb = 0;
         
 
-        StartCoroutine(generateFirstObstacle());
+        //StartCoroutine(generateFirstObstacle());
 
         for (int n=0; n< partyOnRun.Length; n++)
         {
