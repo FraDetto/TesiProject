@@ -55,11 +55,14 @@ public class shieldObjTrigger : MonoBehaviour
 
     public void actThisObj()
     {
-        boss.GetComponentInChildren<BossMovingBehavior>().setActiveShieldObj(true);
-
         boss.GetComponent<BossAttackBehavior>().setIsRunning(true);
         boss.GetComponentInChildren<BossBehavior>().setShieldObj(this.gameObject);
         boss.GetComponentInChildren<BossBehavior>().setIsRunning(true);
+
+
+        boss.GetComponentInChildren<BossMovingBehavior>().setActiveShieldObj(true);
+
+
     }
 
     public void takePosR()

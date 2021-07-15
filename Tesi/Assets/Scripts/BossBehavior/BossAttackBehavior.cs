@@ -360,8 +360,10 @@ public class BossAttackBehavior : Agent
                 Debug.Log("CHARACTER UNKNOWN");
                 break;
         }
-
-        StartCoroutine(timeBeforeAnOtherAction());
+        if (!isRunning)
+        {
+            StartCoroutine(timeBeforeAnOtherAction(2.4f));
+        }
         /*
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
@@ -425,6 +427,11 @@ public class BossAttackBehavior : Agent
         EndEpisode();
     }
 
+    public void reloadAttacks()
+    {
+        StartCoroutine(timeBeforeAnOtherAction( 1.2f));
+    }
+
     public IEnumerator timeBeforeDamageTarget()
     {
         Debug.Log(" =====DANNEGGIO TARGET ===== " + playersParty[target].tag);
@@ -436,10 +443,10 @@ public class BossAttackBehavior : Agent
         previousTargetID = targetPlayer.GetInstanceID();
     }
 
-    public IEnumerator timeBeforeAnOtherAction()
+    public IEnumerator timeBeforeAnOtherAction(float time)
     {
         Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE ATTACK===== ");
-        yield return new WaitForSeconds(2.4f);
+        yield return new WaitForSeconds(time);
 
         targetBehavior.actionForTarget();
     }
@@ -562,7 +569,7 @@ public class BossAttackBehavior : Agent
 
             }
 
-            if (isCastingAoE)
+            if (isCastingAoE & null!=goAoE)
             {
                 goAoE.transform.localScale += scaleChange * Time.deltaTime;
             }

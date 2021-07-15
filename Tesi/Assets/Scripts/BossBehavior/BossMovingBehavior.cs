@@ -140,6 +140,8 @@ public class BossMovingBehavior : Agent
         targetBehavior.endHittedObstacle();
 
         this.EndEpisode();*/
+
+
         bossIsRunning = false;
 
         bossAttackBehav.setIsRunning(false);
@@ -168,17 +170,24 @@ public class BossMovingBehavior : Agent
         bossIsRunning = false;
         this.EndEpisode();*/
 
+        //Academy.Instance.AutomaticSteppingEnabled = false;
         
+
+        
+
         if (firstObj)
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
             firstObj = false;
             shieldActive = false;
+            
 
 
             bossAttackBehav.setIsRunning(false);
             targetBehavior.setIsRunning(false);
             targetBehavior.setShieldObj(null);
+            bossAttackBehav.reloadAttacks();
+
         }
         else
         {
@@ -187,12 +196,14 @@ public class BossMovingBehavior : Agent
             shieldOb.SetActive(false);
 
             bossIsRunning = false;
-            shieldActive = false;
 
+            shieldActive = false;
+            bossAttackBehav.reloadAttacks();
 
             bossAttackBehav.setIsRunning(false);
             targetBehavior.setIsRunning(false);
             targetBehavior.setShieldObj(null);
+            bossAttackBehav.reloadAttacks();
 
         }
 
@@ -286,11 +297,23 @@ public class BossMovingBehavior : Agent
     public void setActiveShieldObj(bool flag)
     {
         shieldActive = flag;
+
+       
+
     }
 
     public void whenEpEnd()//when episode end because it or the party has lose
     {
         this.EndEpisode();
+    }
+
+    private void FixedUpdate()
+    {
+        if (shieldActive)
+        {
+            this.RequestDecision();
+            Academy.Instance.EnvironmentStep();
+        }
     }
 
 }

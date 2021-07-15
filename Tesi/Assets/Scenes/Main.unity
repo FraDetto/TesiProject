@@ -976,7 +976,11 @@ PrefabInstance:
     - target: {fileID: 1493715099845369947, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: b44b3a99eca30d2479a0cd21cf430b7d, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 5143e02b3fcb1654e9f66edd110c3215, type: 3}
+    - target: {fileID: 1493715099845369947, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
+      propertyPath: m_BehaviorName
+      value: MovingBrainSac
+      objectReference: {fileID: 0}
     - target: {fileID: 1493715099845369947, guid: 6531ee19a5de86d489c0387d8a3dffe6, type: 3}
       propertyPath: m_BehaviorType
       value: 2
