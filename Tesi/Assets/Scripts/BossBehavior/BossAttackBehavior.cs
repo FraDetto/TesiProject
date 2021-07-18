@@ -115,7 +115,7 @@ public class BossAttackBehavior : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Debug.Log(" =====CollectObservations ATTACK===== ");
+        //Debug.Log(" =====CollectObservations ATTACK===== ");
 
 
         sensor.AddObservation(transform.position);
@@ -151,13 +151,13 @@ public class BossAttackBehavior : Agent
     {
         if (!firstRun)
         {
-            Debug.Log(" =====SET MASK ACTION ATTACK===== " + actionChoose[0]);
+            //Debug.Log(" =====SET MASK ACTION ATTACK===== " + actionChoose[0]);
 
             actionMasker.SetMask(0, actionChoose);
         }
         else
         {
-            Debug.Log(" =====SET MASK FIRST RUN ATTACK===== ");
+            //Debug.Log(" =====SET MASK FIRST RUN ATTACK===== ");
             firstRun = false;
         }
     }
@@ -166,7 +166,7 @@ public class BossAttackBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        Debug.Log(" =====OnActionReceived===== " + " ATTACK " + vectorAction[0] + " =====ATTACK IL TARGET E===== " + target);
+        //Debug.Log(" =====OnActionReceived===== " + " ATTACK " + vectorAction[0] + " =====ATTACK IL TARGET E===== " + target);
         isAttacking = true;
 
         targetPlayer = playersParty[target];
@@ -429,7 +429,7 @@ public class BossAttackBehavior : Agent
 
     public void reloadAttacks()
     {
-        StartCoroutine(timeBeforeAnOtherAction( 1.2f));
+        StartCoroutine(timeBeforeAnOtherAction(2.4f));
     }
 
     public IEnumerator timeBeforeDamageTarget()

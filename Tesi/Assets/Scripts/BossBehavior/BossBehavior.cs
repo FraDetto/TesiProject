@@ -59,6 +59,10 @@ public class BossBehavior : Agent
 
     private GameObject shieldOb;
 
+    public int contLose = 0;
+    public int contWin = 0;
+    public int contRun = 0;
+
     /*public bool isAttacking = false;
     public bool isUsingAoE = false;
 
@@ -107,8 +111,9 @@ public class BossBehavior : Agent
             takeTheAction();            
         }
 
+        contRun++;
 
-        
+
 
 
     }
@@ -126,7 +131,7 @@ public class BossBehavior : Agent
         //For the best results when training, we should normalize the components of feature vector to the range [-1, +1] or [0, 1]. 
         //When we normalize the values the PPO neural network can often converge to a solution faster.
 
-        Debug.Log(" =====CollectObservations TARGET===== ");
+        //Debug.Log(" =====CollectObservations TARGET===== ");
 
         sensor.AddObservation(previousTargetID);
         sensor.AddObservation(rangedChampAlive());
@@ -156,7 +161,7 @@ public class BossBehavior : Agent
 
         //In detail for each attack of the boss (ideas)
         
-        Debug.Log(" =====OnActionReceived===== " + " TARGET " + vectorAction[0]);// + " AZIONE " + vectorAction[1]);
+        //Debug.Log(" =====OnActionReceived===== " + " TARGET " + vectorAction[0]);// + " AZIONE " + vectorAction[1]);
         /// Number of targets 
         target = Mathf.FloorToInt(vectorAction[0]);
 
@@ -343,13 +348,13 @@ public class BossBehavior : Agent
         {
             if (null != actionTarget)
             {
-                Debug.Log(" =====SET MASK TARGET===== " + actionTarget[0]);
+                //Debug.Log(" =====SET MASK TARGET===== " + actionTarget[0]);
                 actionMasker.SetMask(0, actionTarget);
             }       
         }
         else
         {
-            Debug.Log(" =====SET MASK FIRST RUN TARGET===== " );
+            //Debug.Log(" =====SET MASK FIRST RUN TARGET===== " );
             firstRun = false;
         }
        
@@ -415,6 +420,13 @@ public class BossBehavior : Agent
         if (GetComponentInParent<moreSpecificProfile>().publicGetCurrentLife() == 0 && GetComponentInParent<moreSpecificProfile>().getStatusLifeChamp() == 1 & champsKO < 4)
         {
             Debug.Log("===== END EPISODE BOSS DEAD =======");
+            contLose++;
+            if (!transform.parent.GetComponentInChildren<BossMovingBehavior>().contTakeTwoObj)
+            {
+                transform.parent.GetComponentInChildren<BossMovingBehavior>().contIntEdgeNotFin++;
+            }
+            Debug.Log("RESOCONTO: RUN# " + contRun + " Vittorie " + contWin + " Sconfitte " + contLose + " Interazione Env non a termine " + transform.parent.GetComponentInChildren<BossMovingBehavior>().contIntEdgeNotFin + " Crash contro Edges " + transform.parent.GetComponentInChildren<BossMovingBehavior>().contCrashInTheEdges);
+
 
             attackBehavior.endEpStopAll();
 
@@ -465,6 +477,10 @@ public class BossBehavior : Agent
         if (GetComponentInParent<moreSpecificProfile>().publicGetCurrentLife() >= 0 && GetComponentInParent<moreSpecificProfile>().getStatusLifeChamp() == 0)
         {
             Debug.Log("==== PARTY HA PERSO =====");
+            contWin++;
+            
+            Debug.Log("RESOCONTO: RUN# " + contRun + " Vittorie " + contWin + " Sconfitte " + contLose + " Interazione Env non a termine " + transform.parent.GetComponentInChildren<BossMovingBehavior>().contIntEdgeNotFin + " Crash contro Edges " + transform.parent.GetComponentInChildren<BossMovingBehavior>().contCrashInTheEdges);
+
 
             attackBehavior.endEpStopAll();
 

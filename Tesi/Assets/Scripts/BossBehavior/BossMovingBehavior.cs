@@ -25,6 +25,9 @@ public class BossMovingBehavior : Agent
     public float distance;
     private bool firstObj;
 
+    public bool contTakeTwoObj;
+    public int contCrashInTheEdges = 0;
+    public int contIntEdgeNotFin = 0;
 
     //BISOGNA RIMETTERLI
     void Start()
@@ -58,11 +61,13 @@ public class BossMovingBehavior : Agent
         distance = 0f;
 
         firstObj = true;
+
+        contTakeTwoObj = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Debug.Log(" =====CollectObservations MOVING===== ");
+        //Debug.Log(" =====CollectObservations MOVING===== ");
 
         sensor.AddObservation(transform.parent.localPosition);
 
@@ -80,7 +85,7 @@ public class BossMovingBehavior : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        Debug.Log(" =====OnActionReceived===== " + " MOVING ");
+        //Debug.Log(" =====OnActionReceived===== " + " MOVING ");
 
         float moveX = vectorAction[0];
         float moveZ = vectorAction[1];
@@ -124,22 +129,8 @@ public class BossMovingBehavior : Agent
 
         rewardOfEp += -0.5f;
         overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
-
-        /*
-        bossAttackBehav.setIsRunning(false);
-        targetBehavior.setIsRunning(false);
-
-        bossIsRunning = false;
-
- 
-        bossAttackBehav.endEpStopAll();
-        targetBehavior.endEpStopAll();
-        targetBehavior.setActionTargetNull();
-        gameManager.stopRoutManager();
-        bossAttackBehav.endEpAttkBe();
-        targetBehavior.endHittedObstacle();
-
-        this.EndEpisode();*/
+        contCrashInTheEdges++;
+        Debug.Log("RESOCONTO: RUN# " +targetBehavior.contRun +" Vittorie " + targetBehavior.contWin +" Sconfitte " + targetBehavior.contLose +" Interazione Env non a termine " + contIntEdgeNotFin  + " Crash contro Edges " + contCrashInTheEdges);
 
 
         bossIsRunning = false;
@@ -186,12 +177,17 @@ public class BossMovingBehavior : Agent
             bossAttackBehav.setIsRunning(false);
             targetBehavior.setIsRunning(false);
             targetBehavior.setShieldObj(null);
+
+            bossAttackBehav.endEpStopAll();
+            targetBehavior.endEpStopAll();
             bossAttackBehav.reloadAttacks();
 
         }
         else
         {
             overcomeBattleSign.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+
+            contTakeTwoObj = true;
 
             shieldOb.SetActive(false);
 
