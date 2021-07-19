@@ -79,11 +79,11 @@ public class HealerProfile : moreSpecificProfile
 
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            if (GetComponent<moreSpecificProfile>().getShooting() && null!=go)
+            /*if (GetComponent<moreSpecificProfile>().getShooting() && null!=go)
             {
                 go.transform.LookAt(boss.transform.position);
                 go.transform.position += go.transform.forward * speed * Time.deltaTime;
-            }
+            }*/
         }
         else
         {
@@ -93,18 +93,7 @@ public class HealerProfile : moreSpecificProfile
             }
         }
     }
-    /*
-    private void Update()
-    {
-        if (!cooldownDash)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                rollAway();
-            }
-        }
 
-    }*/
 
     public void attackWithMagic()
     {
@@ -115,6 +104,8 @@ public class HealerProfile : moreSpecificProfile
             {
                 GetComponent<moreSpecificProfile>().turnToBoss(boss);
                 go = Instantiate(windBall, pointSpawnWindBall.position, transform.rotation, gameObject.transform);
+                go.GetComponent<SpellsCollider>().boss = boss;
+                go.GetComponent<SpellsCollider>().codeAttack = 0;
                 //shooting = true;
                 GetComponent<moreSpecificProfile>().setShooting(true);
                 cooldownAttack = true;
@@ -209,7 +200,7 @@ public class HealerProfile : moreSpecificProfile
         chargingUlt = true;
 
         go = Instantiate(windBall, pointSpawnHealHealer.position, transform.rotation, gameObject.transform);
-
+        go.GetComponent<SpellsCollider>().codeAttack = 1;
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(timeSpecialActivation);
 

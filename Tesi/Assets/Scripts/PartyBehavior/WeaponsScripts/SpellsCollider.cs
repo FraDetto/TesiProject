@@ -5,7 +5,19 @@ using UnityEngine;
 public class SpellsCollider : MonoBehaviour
 {
     private float damageCharacter = 0.0f;
+    public int codeAttack;
+    public float speedSpells = 25.0f;
+    public GameObject boss;
 
+    private void FixedUpdate()
+    {
+        if(codeAttack == 0)
+        {
+            transform.LookAt(boss.transform.position);
+            transform.position += transform.forward * speedSpells * Time.deltaTime;
+        }
+
+    }
 
     public void OnTriggerEnter(Collider other)
     {

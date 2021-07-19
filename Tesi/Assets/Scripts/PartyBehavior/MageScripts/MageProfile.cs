@@ -73,7 +73,7 @@ public class MageProfile : moreSpecificProfile
 
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {
-            if (GetComponent<moreSpecificProfile>().getShooting())
+           /* if (GetComponent<moreSpecificProfile>().getShooting())
             {
                 if (null != go)
                 {
@@ -81,7 +81,7 @@ public class MageProfile : moreSpecificProfile
                     go.transform.position += go.transform.forward * speedSpells * Time.deltaTime;
                 }
 
-            }
+            }*/
 
             if (chargingUlt)
             {
@@ -113,11 +113,10 @@ public class MageProfile : moreSpecificProfile
             if (!GetComponent<moreSpecificProfile>().flagResetepisode)
             {
                 GetComponent<moreSpecificProfile>().turnToBoss(boss);
-                /*Debug.Log("MAGE ATTACK 1 FIREBALL " + fireBall);
-                Debug.Log("MAGE ATTACK 2 FIREBALL " + pointSpawnFireBall.position);
-                Debug.Log("MAGE ATTACK 3 FIREBALL " + transform.rotation);
-                Debug.Log("MAGE ATTACK 4 FIREBALL " + gameObject.transform);*/
+
                 go = Instantiate(fireBall, pointSpawnFireBall.position, transform.rotation, gameObject.transform);
+                go.GetComponent<SpellsCollider>().boss = boss;
+                go.GetComponent<SpellsCollider>().codeAttack = 0;
                 //shooting = true;
                 GetComponent<moreSpecificProfile>().setShooting(true);
                 cooldown = true;
@@ -187,6 +186,7 @@ public class MageProfile : moreSpecificProfile
     public IEnumerator chargingSpecialDuration()
     {
         go = Instantiate(fireBall, pointSpawnUlt.position, transform.rotation, gameObject.transform);
+        go.GetComponent<SpellsCollider>().codeAttack = 1;
         chargingUlt = true;
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(specialDuration);
