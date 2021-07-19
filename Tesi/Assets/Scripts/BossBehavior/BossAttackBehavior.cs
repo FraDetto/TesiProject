@@ -364,6 +364,7 @@ public class BossAttackBehavior : Agent
         {
             StartCoroutine(timeBeforeAnOtherAction(2.4f));
         }
+
         /*
         if (!GetComponent<moreSpecificProfile>().flagResetepisode)
         {

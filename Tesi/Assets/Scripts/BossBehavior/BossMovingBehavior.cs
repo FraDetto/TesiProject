@@ -162,9 +162,9 @@ public class BossMovingBehavior : Agent
         this.EndEpisode();*/
 
         //Academy.Instance.AutomaticSteppingEnabled = false;
-        
 
-        
+        bossIsRunning = false;
+
 
         if (firstObj)
         {
@@ -191,7 +191,7 @@ public class BossMovingBehavior : Agent
 
             shieldOb.SetActive(false);
 
-            bossIsRunning = false;
+            
 
             shieldActive = false;
             bossAttackBehav.reloadAttacks();
@@ -294,7 +294,7 @@ public class BossMovingBehavior : Agent
     {
         shieldActive = flag;
 
-       
+        bossIsRunning = true;
 
     }
 

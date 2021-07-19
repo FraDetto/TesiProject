@@ -46,7 +46,7 @@ public class shieldObjTrigger : MonoBehaviour
 
     public IEnumerator abilitateShieldObj()
     {
-        yield return new WaitForSeconds(12.0f);
+        yield return new WaitForSeconds(15.0f);
 
         gameObject.transform.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
         actThisObj();
