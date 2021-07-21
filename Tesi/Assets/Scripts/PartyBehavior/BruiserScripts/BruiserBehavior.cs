@@ -11,7 +11,7 @@ public class BruiserBehavior : MonoBehaviour
     private Rigidbody myRB;
 
     public float reactionTime = 1.2f;
-    public float distanceRange = 7.0f;
+    public float distanceRange = 8.0f;
     public bool firstRush = true;
 
     // Start is called before the first frame update

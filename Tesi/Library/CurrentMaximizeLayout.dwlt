@@ -22,8 +22,8 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 731
-  m_MinSize: {x: 709, y: 492}
-  m_MaxSize: {x: 18004, y: 14042}
+  m_MinSize: {x: 709, y: 471}
+  m_MaxSize: {x: 18004, y: 14021}
   vertical: 0
   controlID: -1
 --- !u!114 &2
@@ -136,8 +136,8 @@ MonoBehaviour:
     y: 0
     width: 896.8
     height: 731
-  m_MinSize: {x: 201, y: 342}
-  m_MaxSize: {x: 4001, y: 8042}
+  m_MinSize: {x: 201, y: 321}
+  m_MaxSize: {x: 4001, y: 8021}
   vertical: 1
   controlID: -1
 --- !u!114 &4
@@ -203,9 +203,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.271324, y: 3.0299935, z: 57.588768}
+    m_Target: {x: -28.755774, y: 3.5999796, z: 57.485634}
     speed: 2
-    m_Value: {x: 5.271324, y: 3.0299935, z: 57.588768}
+    m_Value: {x: -28.755774, y: 3.5999796, z: 57.485634}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -252,9 +252,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.04795622, y: 0.42680034, z: -0.022091009, w: 0.9031503}
+    m_Target: {x: 0.058788307, y: -0.002532097, z: 0.0006422552, w: 0.9985816}
     speed: 2
-    m_Value: {x: 0.04795622, y: 0.42680034, z: -0.022091009, w: 0.9031503}
+    m_Value: {x: 0.058769852, y: -0.0025313022, z: 0.00064205355, w: 0.9982681}
   m_Size:
     m_Target: 50.09553
     speed: 2
@@ -305,8 +305,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73.6
-    width: 895
-    height: 402
+    width: 895.8
+    height: 402.2
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &7
 MonoBehaviour:
@@ -327,8 +327,8 @@ MonoBehaviour:
     y: 423.2
     width: 896.8
     height: 307.8
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -355,10 +355,10 @@ MonoBehaviour:
     y: 0
     width: 361.6
     height: 731
-  m_MinSize: {x: 232, y: 492}
-  m_MaxSize: {x: 10002, y: 14042}
+  m_MinSize: {x: 232, y: 471}
+  m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
-  controlID: 832
+  controlID: 1486
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -378,8 +378,8 @@ MonoBehaviour:
     y: 0
     width: 361.6
     height: 363.2
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 10}
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: b6d4feff
-      m_LastClickedID: -76618
-      m_ExpandedIDs: 4afbffff56fbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 56fbffff7c3e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -503,22 +503,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/TrainingModels/ppoModelsTrained/SecondGoodTraining
+    - Assets/Scripts/BossBehavior
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/TrainingModels/ppoModelsTrained/SecondGoodTraining
+  - Assets/Scripts/BossBehavior
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\ProgettoTesi\Tesi
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: a6430000
-    m_LastClickedID: 17318
-    m_ExpandedIDs: 0000000070430000724300007443000076430000784300007a430000a243000000ca9a3b
+    m_SelectedIDs: 44440000
+    m_LastClickedID: 17476
+    m_ExpandedIDs: 0000000070430000724300007443000076430000784300007a4300009e43000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -571,8 +571,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: b6d4feff
-    m_LastClickedInstanceID: -76618
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300007e3a000000000000
     m_RenameOverlay:
@@ -598,7 +598,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 0.1000061}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 173

@@ -309,7 +309,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577165681488225219}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 8
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactionTime: 1.2
-  distanceRange: 7
+  distanceRange: 8
   firstRush: 1
 --- !u!114 &2247251424426795488
 MonoBehaviour:
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7419a19b1f79d56459db34fba1691488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRange: 7
+  distanceRange: 8
   speed: 15
   chaseFlag: 0
   directionRight: 0

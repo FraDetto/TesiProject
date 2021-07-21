@@ -8,7 +8,7 @@ public class TankMovement : MonoBehaviour
     private GameObject boss;
     private Rigidbody rb;
 
-    public float distanceRange = 7.0f;
+    public float distanceRange = 8.0f;
     public float speed = 15.0f;
     public bool chaseFlag = false;
 

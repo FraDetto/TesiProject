@@ -519,7 +519,7 @@ public class moreSpecificProfile : aProfile
 
         if (m_HitDetect_onRay_front)
         {
-            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(34.0f, bossRef.transform.position, 15.0f, 2.2F, ForceMode.Impulse);
+            m_Hit_onRay_front.collider.transform.GetComponent<Rigidbody>().AddExplosionForce(38.0f, bossRef.transform.position, 15.0f, 2.2F, ForceMode.Impulse);
         }
     }
 
