@@ -414,7 +414,6 @@ public class BossBehavior : Agent
 
 
 
-
     public void bossDeath()//BOSS DEAD END EPISODE
     {
         if (GetComponentInParent<moreSpecificProfile>().publicGetCurrentLife() == 0 && GetComponentInParent<moreSpecificProfile>().getStatusLifeChamp() == 1 & champsKO < 4)

@@ -430,7 +430,7 @@ public class BossAttackBehavior : Agent
 
     public void reloadAttacks()
     {
-        StartCoroutine(timeBeforeAnOtherAction(2.4f));
+        StartCoroutine(timeBeforeAnOtherAction(1.4f));
     }
 
     public IEnumerator timeBeforeDamageTarget()

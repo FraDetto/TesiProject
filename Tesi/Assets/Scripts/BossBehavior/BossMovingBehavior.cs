@@ -194,11 +194,14 @@ public class BossMovingBehavior : Agent
             
 
             shieldActive = false;
-            bossAttackBehav.reloadAttacks();
 
             bossAttackBehav.setIsRunning(false);
             targetBehavior.setIsRunning(false);
             targetBehavior.setShieldObj(null);
+
+
+            bossAttackBehav.endEpStopAll();
+            targetBehavior.endEpStopAll();
             bossAttackBehav.reloadAttacks();
 
         }
