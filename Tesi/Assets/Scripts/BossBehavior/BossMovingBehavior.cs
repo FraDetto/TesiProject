@@ -206,7 +206,7 @@ public class BossMovingBehavior : Agent
 
         }
 
-        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(500);
+        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
 
 
 

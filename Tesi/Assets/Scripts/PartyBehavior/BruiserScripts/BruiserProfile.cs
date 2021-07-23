@@ -29,7 +29,7 @@ public class BruiserProfile : moreSpecificProfile
     private float timeCoolDownSwordAttack = 2.5f;
     private float healingHimselfDuration = 1.2f;
     private float timeCoolDownheal = 10.0f;
-    private float specialDuration = 5.5f;
+    private float specialDuration = 5.0f;
     private float timeCoolDownSpecial = 25.0f;
 
     private float timeRollCooldown = 2.0f;
@@ -161,10 +161,12 @@ public class BruiserProfile : moreSpecificProfile
 
     public IEnumerator waitBeforeStopSpecial()
     {
+        GetComponent<moreSpecificProfile>().incrementAttackBruiserUlti();
         //Debug.Log("ULTI STA PERDURANDO");
         yield return new WaitForSeconds(specialDuration);
         ultiRunning = false;
-        
+
+        GetComponent<moreSpecificProfile>().resetAttackBruiserUlti();
         //Debug.Log("ULTI FINITA");
     }
 

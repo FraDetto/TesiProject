@@ -192,7 +192,7 @@ public class MageProfile : moreSpecificProfile
         yield return new WaitForSeconds(specialDuration);
         chargingUlt = false;
 
-        boss.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(200.0f);
+        boss.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(240.0f);
         Destroy(go);
         //Debug.Log("ULTI FINITA");
     }

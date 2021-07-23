@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7037773906dad164dae2ba435e34c85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpTank: 600
-  damageTank: 110
-  armorTank: 80
+  hpTank: 700
+  damageTank: 120
+  armorTank: 90
   hpBruiser: 450
   damageBruiser: 135
   armorBruiser: 70
@@ -22,8 +22,8 @@ MonoBehaviour:
   damageMage: 155
   armorMage: 45
   hpHealer: 380
-  damageHealer: 90
-  armorHealer: 53
+  damageHealer: 100
+  armorHealer: 55
   hpBoss: 4200
   damageBoss: 200
   armorBoss: 110

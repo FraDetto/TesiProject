@@ -421,6 +421,17 @@ public class moreSpecificProfile : aProfile
         armor -= 40f;
     }
 
+    public void incrementAttackBruiserUlti()
+    {
+        damage += 20f;
+    }
+
+    public void resetAttackBruiserUlti()
+    {
+        damage -= 20f;
+    }
+
+
     public void rollAwayChamp(Rigidbody rb, float m_MaxDistance, LayerMask m_PlayerMask, float dashForce)
     {
 
