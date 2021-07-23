@@ -397,7 +397,7 @@ public class moreSpecificProfile : aProfile
 
     public void incrementStatsUltiTank()
     {
-        float hpToAdd = (currenthp / 100) * 40;
+        /*float hpToAdd = (currenthp / 100) * 40;
 
         float armorToAdd = (armor / 100) * 50;
 
@@ -405,20 +405,20 @@ public class moreSpecificProfile : aProfile
         healthBar.setHealth(currenthp);
         healthBar.setMaxHealth(totalhp+hpToAdd);
 
-        armor += armorToAdd;
-        
-
+        armor += armorToAdd;*/
+        armor += 40f;
     }
 
     public void resetStatsTankUlti(float previousHp, float previousArmor)
     {
-        float armorToSubtract = (previousArmor / 100) * 50;
+        /*float armorToSubtract = (previousArmor / 100) * 50;
         armor -= armorToSubtract;
 
         float hpToSubtract = (previousHp / 100) * 40;
         currenthp -= hpToSubtract;
         healthBar.setHealth(currenthp);
-        healthBar.setMaxHealth(totalhp - hpToSubtract);
+        healthBar.setMaxHealth(totalhp - hpToSubtract);*/
+        armor -= 40f;
     }
 
     public void rollAwayChamp(Rigidbody rb, float m_MaxDistance, LayerMask m_PlayerMask, float dashForce)

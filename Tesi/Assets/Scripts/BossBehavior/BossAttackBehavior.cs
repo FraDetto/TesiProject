@@ -87,6 +87,8 @@ public class BossAttackBehavior : Agent
 
     private bool isRunning = false;
 
+    public bool controllAttck = false;
+
     void Start()
     {
         targetBehavior = GetComponentInChildren<BossBehavior>();
@@ -108,6 +110,7 @@ public class BossAttackBehavior : Agent
         previousTargetID = 0;
         isRunning = false;
 
+        controllAttck = false;
         //targetBehavior.OnEpisodeBegin();
 
     }
@@ -201,6 +204,7 @@ public class BossAttackBehavior : Agent
                 //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
                 if (!isRunning)
                 {
+                    controllAttck = true;
                     StartCoroutine(timeBeforeCastRangedAttack());
                 }
                 else
@@ -224,7 +228,8 @@ public class BossAttackBehavior : Agent
                 swingPrevious = false;
 
                 //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
-                if (!isRunning) { 
+                if (!isRunning) {
+                    controllAttck = true;
                     StartCoroutine(timeBeforeCastRayAttack());
                 }
                 else
@@ -266,6 +271,8 @@ public class BossAttackBehavior : Agent
                 {
                     isUsingAoE = true;
 
+                    controllAttck = true;
+
                     StartCoroutine(timeBeforeCastSwingAttk());
                 }
                 else
@@ -305,6 +312,8 @@ public class BossAttackBehavior : Agent
                 //CONTROLLO SE STA CORRENDO PER MOVING BRAIN
                 if (!isRunning)
                 {
+                    controllAttck = true;
+
                     StartCoroutine(timeBeforeCastAheadAttk());
                 }
                 else
@@ -344,6 +353,8 @@ public class BossAttackBehavior : Agent
                     if (!isRunning)
                     {
                         isUsingAoE = true;
+
+                        controllAttck = true;
 
                         StartCoroutine(timeBeforeCastAoEAttk());
                     }
@@ -448,6 +459,8 @@ public class BossAttackBehavior : Agent
     {
         Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE ATTACK===== ");
         yield return new WaitForSeconds(time);
+
+        controllAttck = false;
 
         targetBehavior.actionForTarget();
     }

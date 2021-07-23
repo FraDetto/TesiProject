@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7037773906dad164dae2ba435e34c85f, type: 3}
-  m_Name: Data
+  m_Name: 
   m_EditorClassIdentifier: 
   hpTank: 600
   damageTank: 110
   armorTank: 80
   hpBruiser: 450
-  damageBruiser: 125
-  armorBruiser: 60
+  damageBruiser: 135
+  armorBruiser: 70
   hpMage: 300
-  damageMage: 150
+  damageMage: 155
   armorMage: 45
   hpHealer: 380
   damageHealer: 90

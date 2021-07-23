@@ -173,7 +173,7 @@ public class BossBehavior : Agent
         //actionChoose[0] = actionForBoss;
 
         //Debug.Log("PLAYER PER PROSSIMO ATTACCO " + playersParty[target].tag + " CON ID "+ playersParty[target].GetInstanceID());
-        if (!isRunning)
+        if (!isRunning || attackBehavior.controllAttck)
         {
             turnBossToTarget();
         }
@@ -185,6 +185,10 @@ public class BossBehavior : Agent
 
 
         //0 TANK, 1 BRUISER, 2 MAGE, 3 HEALER
+        if(target >= playersParty.Length)
+        {
+            target = Random.Range(0, playersParty.Length);
+        }
 
         switch (playersParty[target].GetComponent<moreSpecificProfile>().getTypeCode())
         {

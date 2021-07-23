@@ -94,7 +94,7 @@ public class BossMovingBehavior : Agent
         float moveSpeed = 20f;
 
         //if (null != shieldOb)
-        if(shieldActive)
+        if(shieldActive && !bossAttackBehav.controllAttck)
         {
            
 
@@ -206,7 +206,7 @@ public class BossMovingBehavior : Agent
 
         }
 
-        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(400);
+        GetComponentInParent<moreSpecificProfile>().setShieldForBoss(500);
 
 
 

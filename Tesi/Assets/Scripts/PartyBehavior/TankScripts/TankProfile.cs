@@ -31,7 +31,7 @@ public class TankProfile : moreSpecificProfile
     private float timeCoolDownSwordAttack = 2.0f;
     private float shieldDuration = 2.0f;
     private float timeCoolDownShield = 12.0f;
-    private float specialDuration = 6.0f;
+    private float specialDuration = 5.0f;
     public float timeCoolDownSpecial = 22.0f;
 
     private float timeRollCooldown = 2.0f;
@@ -154,7 +154,7 @@ public class TankProfile : moreSpecificProfile
 
         StartCoroutine(waitBeforeStopSpecial());
 
-        StartCoroutine(waitAfterUlti());
+        
         //Debug.Log("ULTI FINITA");
     }
 
@@ -171,6 +171,8 @@ public class TankProfile : moreSpecificProfile
         previousUltiArmor = 0.0f;
 
         ultiRunning = false;
+
+        StartCoroutine(waitAfterUlti());
         //Debug.Log("ULTI FINITA");
     }
 
