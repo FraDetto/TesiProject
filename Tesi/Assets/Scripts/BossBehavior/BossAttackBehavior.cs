@@ -457,7 +457,7 @@ public class BossAttackBehavior : Agent
 
     public IEnumerator timeBeforeAnOtherAction(float time)
     {
-        Debug.Log(" =====DOVREBBE CHIAMARE ALTRA AZIONE ATTACK===== ");
+        Debug.Log(" =====ALTRA AZIONE ATTACK===== ");
         yield return new WaitForSeconds(time);
 
         controllAttck = false;
