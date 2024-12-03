@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1623828938",
+        "python_version": "3.8.6 (tags/v3.8.6:db45529, Sep 23 2020, 15:52:53) [MSC v.1927 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\ProgettoTesi\\Tesi\\venv\\Scripts\\mlagents-learn --run-id=Test29",
+        "mlagents_version": "0.25.0",
+        "mlagents_envs_version": "0.25.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.20.2",
+        "end_time_seconds": "1623829008"
+    },
+    "total": 70.29570090000001,
+    "count": 1,
+    "self": 0.005857400000024882,
+    "children": {
+        "run_training.setup": {
+            "total": 0.05103839999999593,
+            "count": 1,
+            "self": 0.05103839999999593
+        },
+        "TrainerController.start_learning": {
+            "total": 70.2388051,
+            "count": 1,
+            "self": 0.0005012999999820522,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 70.2381412,
+                    "count": 1,
+                    "self": 70.2381412
+                },
+                "trainer_threads": {
+                    "total": 8.000000093488779e-07,
+                    "count": 1,
+                    "self": 8.000000093488779e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 0.00016180000000076689,
+                    "count": 1,
+                    "self": 0.00016180000000076689
+                }
+            }
+        }
+    }
+}

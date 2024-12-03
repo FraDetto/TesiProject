@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7037773906dad164dae2ba435e34c85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpTank: 700
+  damageTank: 120
+  armorTank: 90
+  hpBruiser: 450
+  damageBruiser: 135
+  armorBruiser: 70
+  hpMage: 300
+  damageMage: 155
+  armorMage: 45
+  hpHealer: 380
+  damageHealer: 100
+  armorHealer: 55
+  hpBoss: 4200
+  damageBoss: 200
+  armorBoss: 110

@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpellsCollider : MonoBehaviour
+{
+    private float damageCharacter = 0.0f;
+    public int codeAttack;
+    public float speedSpells = 25.0f;
+    public GameObject boss;
+
+    private void FixedUpdate()
+    {
+        if(codeAttack == 0)
+        {
+            transform.LookAt(boss.transform.position);
+            transform.position += transform.forward * speedSpells * Time.deltaTime;
+        }
+
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Boss"))
+        {
+            string characterName = transform.parent.tag;
+            if(null != gameObject.GetComponentInParent<moreSpecificProfile>())
+            {
+                switch (characterName)
+                {
+                    case "Mage":
+                        damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                        //gameObject.GetComponentInParent<MageProfile>().shooting = false;
+                        break;
+
+                    default:
+                        damageCharacter = gameObject.GetComponentInParent<moreSpecificProfile>().publicGetDamageValue();
+                        //gameObject.GetComponentInParent<HealerProfile>().shooting = false;
+                        break;
+                }
+
+                other.transform.gameObject.GetComponent<moreSpecificProfile>().publicSetLifeAfterDamage(damageCharacter);
+            }
+            gameObject.GetComponentInParent<moreSpecificProfile>().setShooting(false);
+            Destroy(this.gameObject);
+        }
+
+        
+      
+
+    }
+}

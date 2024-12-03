@@ -1,0 +1,23 @@
+{
+    "BossCombact": {
+        "checkpoints": [
+            {
+                "steps": 256,
+                "file_path": "results\\Test15\\BossCombact\\BossCombact-256.onnx",
+                "reward": null,
+                "creation_time": 1622216470.5033252
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 256,
+            "file_path": "results\\Test15\\BossCombact.onnx",
+            "reward": null,
+            "creation_time": 1622216470.5033252
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

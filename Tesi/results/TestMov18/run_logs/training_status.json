@@ -1,0 +1,23 @@
+{
+    "MovingBrain": {
+        "checkpoints": [
+            {
+                "steps": 361,
+                "file_path": "results\\TestMov18\\MovingBrain\\MovingBrain-361.onnx",
+                "reward": -0.6792452931404114,
+                "creation_time": 1624895244.1558194
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 361,
+            "file_path": "results\\TestMov18\\MovingBrain.onnx",
+            "reward": -0.6792452931404114,
+            "creation_time": 1624895244.1558194
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.25.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
